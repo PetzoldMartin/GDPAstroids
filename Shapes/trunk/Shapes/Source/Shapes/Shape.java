@@ -16,8 +16,8 @@ import java.awt.Color;
  * @version (0.3)
  */
 public abstract class Shape extends Drawable {
-	private Color color = Color.GRAY;
-	private boolean solid = false;
+	protected Color color = Color.GRAY;
+	protected boolean solid = false;
 	private static WhiteBoard whiteBoard = new WhiteBoard();
 	protected Object representation;
 

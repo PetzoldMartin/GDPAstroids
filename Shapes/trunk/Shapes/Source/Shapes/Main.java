@@ -25,10 +25,10 @@ public class Main {
 		Figure test = Figure.ship();
 		Drawable show = new Circle(1, (test.getMiddle()));
 		for (;;) {
-			test.move(new Point(0, 10)).draw();
-			Thread.sleep(20);
 			test.rotate(5).draw();
-			Thread.sleep(20);
+			Thread.sleep(50);
+			test.move(new Point(0, 10)).draw();
+			Thread.sleep(50);
 		}
 	}
 }
