@@ -23,11 +23,31 @@ public class Main {
 				true);
 		background.draw();
 		Figure test = Figure.ship();
-		for (int i = 0;i<50;i++) {
-			test.rotate(5).draw();
-			Thread.sleep(10);
-			test.move(new Point(3, 10)).draw();
-			Thread.sleep(10);
+		for (;;) {
+			for (int i = 0; i < 25; i++) {
+				test.rotate(5).draw();
+				Thread.sleep(10);
+				test.move(new Point(0, i)).draw();
+				Thread.sleep(10);
+			}
+			for (int i = 0; i < 25; i++) {
+				test.rotate(5).draw();
+				Thread.sleep(10);
+				test.move(new Point(i, 0)).draw();
+				Thread.sleep(10);
+			}
+			for (int i = 0; i < 25; i++) {
+				test.rotate(5).draw();
+				Thread.sleep(10);
+				test.move(new Point(0, -i)).draw();
+				Thread.sleep(10);
+			}
+			for (int i = 0; i < 25; i++) {
+				test.rotate(5).draw();
+				Thread.sleep(10);
+				test.move(new Point(-i, 0)).draw();
+				Thread.sleep(10);
+			}
 		}
 	}
 }
