@@ -24,11 +24,13 @@ public class Main {
 		background.draw();
 		Figure test = Figure.ship();
 		Drawable show = new Circle(1, (test.getMiddle()));
-		for (;;) {
-			test.rotate(5).draw();
+		
+		while (true) {
+			
 			Thread.sleep(50);
-			test.move(new Point(0, 10)).draw();
+			test.move(new Point(0, 100)).draw();
 			Thread.sleep(50);
+			test.rotatem(45).draw();
 		}
 	}
 }
