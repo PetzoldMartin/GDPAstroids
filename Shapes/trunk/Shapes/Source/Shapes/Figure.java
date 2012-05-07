@@ -17,10 +17,12 @@ public class Figure extends Drawable {
 	 * Constructor for objects of class Figure
 	 */
 	public Figure() {
+		this.addShape(new Circle(1, this.getMiddle(), Color.RED, false));
 	}
 
 	public Figure(Point middlePoint) {
 		this.middlePoint = middlePoint;
+		this.addShape(new Circle(1, this.getMiddle(), Color.RED, false));
 	}
 
 	/**
@@ -55,7 +57,7 @@ public class Figure extends Drawable {
 		for (Drawable aDrawable : shapes) {
 			aDrawable.move(trans);
 		}
-		middlePoint.move(trans);
+		//middlePoint.move(trans);
 		return this;
 	}
 
@@ -69,7 +71,7 @@ public class Figure extends Drawable {
 	 */
 
 	public Drawable rotate(Point center, double phi) {
-		middlePoint.rotate(center, phi);
+		//middlePoint.rotate(center, phi);
 		for (Drawable aDrawable : shapes) {
 			aDrawable.rotate(center, phi);
 		}
@@ -83,12 +85,13 @@ public class Figure extends Drawable {
 	public static Figure ship() {
 		Figure ship = new Figure();
 		ArrayList<Point> shipList = new ArrayList<Point>();
-		shipList.add(new Point(-10, 0));
-		shipList.add(new Point(10, 0));
-		shipList.add(new Point(0, 25));
-		ship.addShape(new Polygon(shipList, Color.GRAY, true));
-		ship.setMiddle(new Point(0, 10));
+		shipList.add(new Point(-10, -10));
+		shipList.add(new Point(10, -10));
+		shipList.add(new Point(0, 15));
+		ship.addShape(new Polygon(shipList, Color.GRAY, false));
+		//ship.addShape(new Circle(1, ship.getMiddle(), Color.RED, false));
 		return ship;
+
 	}
 
 	/**

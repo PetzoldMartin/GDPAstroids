@@ -33,8 +33,8 @@ public class Point {
 	 *            point to translate with dx and dy
 	 */
 	public Point move(Point trans) {
-		x += trans.getX();
-		y += trans.getY();
+		this.x += trans.getX();
+		this.y += trans.getY();
 		return this;
 	}
 
@@ -47,12 +47,14 @@ public class Point {
 	 *            angel to rotate
 	 */
 	public void rotate(Point center, double phi) {
+		if (!center.equals(this)) {
 		phi = Math.toRadians(phi);
 		Point temp = this.copy().move(
 				new Point(-1 * center.getX(), -1 * center.getY()));
 		this.x = temp.getX() * Math.cos(phi) + temp.getY() * Math.sin(phi);
 		this.y = -1 * temp.getX() * Math.sin(phi) + temp.getY() * Math.cos(phi);
 		this.move(center);
+		} 
 	}
 
 	/**
