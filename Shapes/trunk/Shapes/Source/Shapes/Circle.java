@@ -6,7 +6,7 @@ import java.awt.Color;
  * class that manage a circle as an object subclass of Shape
  * 
  * @author (Markus Krummnacker)
- * @version (0.2)
+ * @version (0.3)
  */
 public class Circle extends Shape {
 	private int radius;
@@ -40,9 +40,7 @@ public class Circle extends Shape {
 	 */
 	@Override
 	public void draw() {
-		getWhiteBoard().removeShape(representation);
-		representation = getWhiteBoard().drawCircle(center.getX(),
-				center.getY(), radius, this.getColor(), this.isSolid());
+		this.draw(this.color,this.solid);
 	}
 
 	/**

@@ -50,8 +50,7 @@ public class Rectangle extends Polygon {
 	@Override
 	public Rectangle rotate(Point center, double phi) {
 		super.rotate(center, phi);
-		phi = Math.toRadians(phi);
-		this.phi -= phi;
+		this.phi -= Math.toRadians(phi);
 		return this;
 	}
 
