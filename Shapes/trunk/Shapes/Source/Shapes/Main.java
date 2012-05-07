@@ -10,17 +10,16 @@ import java.awt.Color;
  */
 public class Main {
 	public static int windowX = 380;
-	public static int WindowY = 275;
-	public static Point window = new Point(windowX, WindowY);
+	public static int windowY = 275;
+	public static Point window = new Point(windowX, windowY);
 
 	/**
 	 * @param args
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		Drawable background = new Rectangle(new Point(window.getX() / 2,
-				window.getY() / 2), window.getX(), window.getY(), Color.BLACK,
-				true);
+		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
+				window.getY(), Color.BLACK, true);
 		background.draw();
 		Figure test = Figure.ship();
 		for (;;) {

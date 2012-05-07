@@ -57,7 +57,6 @@ public class Figure extends Drawable {
 		for (Drawable aDrawable : shapes) {
 			aDrawable.move(trans);
 		}
-		//middlePoint.move(trans);
 		return this;
 	}
 
@@ -71,7 +70,6 @@ public class Figure extends Drawable {
 	 */
 
 	public Drawable rotate(Point center, double phi) {
-		//middlePoint.rotate(center, phi);
 		for (Drawable aDrawable : shapes) {
 			aDrawable.rotate(center, phi);
 		}
@@ -89,7 +87,6 @@ public class Figure extends Drawable {
 		shipList.add(new Point(10, -10));
 		shipList.add(new Point(0, 15));
 		ship.addShape(new Polygon(shipList, Color.GRAY, false));
-		//ship.addShape(new Circle(1, ship.getMiddle(), Color.RED, false));
 		return ship;
 
 	}
