@@ -25,12 +25,36 @@ public class Main {
 		Figure test = Figure.ship();
 		Drawable show = new Circle(1, (test.getMiddle()));
 		
-		while (true) {
-			
-			Thread.sleep(50);
-			test.move(new Point(0, 100)).draw();
-			Thread.sleep(50);
-			test.rotatem(45).draw();
+		for (int i = 0; i < 25; i++) {
+			test.rotate(45).draw();
+			Thread.sleep(10);
+			test.move(new Point(0, i)).draw();
+			Thread.sleep(10);
 		}
+		for (int i = 0; i < 25; i++) {
+			test.rotate(45).draw();
+			Thread.sleep(10);
+			test.move(new Point(i, 0)).draw();
+			Thread.sleep(10);
+		}
+		for (int i = 0; i < 25; i++) {
+			test.rotate(45).draw();
+			Thread.sleep(10);
+			test.move(new Point(0, -i)).draw();
+			Thread.sleep(10);
+		}
+		for (int i = 0; i < 25; i++) {
+			test.rotate(45).draw();
+			Thread.sleep(10);
+			test.move(new Point(-i, 0)).draw();
+			Thread.sleep(10);
+		
+//		while (true) {
+//			
+//			Thread.sleep(50);
+//			test.move(new Point(0, 100)).draw();
+//			Thread.sleep(50);
+//			test.rotate(45).draw();
+//		}
 	}
-}
+	}}
