@@ -11,7 +11,7 @@ import java.awt.Color;
  */
 public class Figure extends Drawable {
 	private static ArrayList<Drawable> shapes = new ArrayList<Drawable>();
-	private Point middle = new Point(0, 0);
+	private Point middlePoint = new Point(0, 0);
 
 	/**
 	 * Constructor for objects of class Figure
@@ -19,8 +19,8 @@ public class Figure extends Drawable {
 	public Figure() {
 	}
 
-	public Figure(Point middle) {
-		this.middle = middle;
+	public Figure(Point middlePoint) {
+		this.middlePoint = middlePoint;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Figure extends Drawable {
 		for (Drawable aDrawable : shapes) {
 			aDrawable.move(trans);
 		}
-		middle.move(trans);
+		middlePoint.move(trans);
 		return this;
 	}
 
@@ -69,7 +69,7 @@ public class Figure extends Drawable {
 	 */
 
 	public Drawable rotate(Point center, double phi) {
-		middle.rotate(center, phi);
+		middlePoint.rotate(center, phi);
 		for (Drawable aDrawable : shapes) {
 			aDrawable.rotate(center, phi);
 		}
@@ -77,7 +77,7 @@ public class Figure extends Drawable {
 	}
 
 	public Drawable rotate(double phi) {
-		return this.rotate(middle, phi);
+		return this.rotate(middlePoint, phi);
 	}
 
 	public static Figure ship() {
@@ -167,10 +167,10 @@ public class Figure extends Drawable {
 	}
 
 	public Point getMiddle() {
-		return middle;
+		return middlePoint;
 	}
 
 	public void setMiddle(Point middle) {
-		this.middle = middle;
+		this.middlePoint = middle;
 	}
 }
