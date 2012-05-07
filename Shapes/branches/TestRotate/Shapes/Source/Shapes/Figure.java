@@ -69,15 +69,22 @@ public class Figure extends Drawable {
 	 */
 
 	public Drawable rotate(Point center, double phi) {
-//		middlePoint.rotate(center, phi);
+		middlePoint.rotate(center, phi);
 		for (Drawable aDrawable : shapes) {
 			aDrawable.rotate(center, phi);
 		}
 		return this;
 	}
 
-	public Drawable rotatem(double phi) {
-		return this.rotate(middlePoint, phi);
+	public Drawable rotate(double phi) {
+		return this.rotateCenter(middlePoint, phi);
+	}
+	
+	public Drawable rotateCenter(Point center, double phi) {
+		for (Drawable aDrawable : shapes) {
+			aDrawable.rotate(center, phi);
+		}
+		return this;
 	}
 
 	public static Figure ship() {
