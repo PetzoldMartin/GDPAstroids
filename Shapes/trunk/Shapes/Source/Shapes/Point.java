@@ -11,7 +11,7 @@ package Shapes;
  * @version (0.3)
  */
 public class Point {
-	private double x, y;
+	protected double x, y;
 
 	/**
 	 * Constructor for objects of class Point

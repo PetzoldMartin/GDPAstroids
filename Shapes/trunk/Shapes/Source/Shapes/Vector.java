@@ -1,50 +1,111 @@
 package Shapes;
 
-public class Vector {
-	private Point vector;
+/**
+ * @author heliosana
+ * 
+ */
+public class Vector extends Point {
 	private double amount;
 	private double phi;
 
 	public Vector() {
-		vector = new Point(0, 0);
-		//super(0, 0);
-		amount = 0;
-		phi = 0;
+		super(0, 0);
+		this.amount = 0;
+		this.phi = 0;
 	}
 
+	/**
+	 * @param amount
+	 * @param phi
+	 */
 	public Vector(double amount, double phi) {
-		setVector(amount, phi);
+		super(amount * Math.cos(phi), amount * Math.sin(phi));
+		this.amount = amount;
+		this.phi = phi;
 	}
 
+	/**
+	 * @param vector
+	 */
 	public Vector(Point vector) {
-		setVector(vector);
+		super(vector.getX(), vector.getY());
+		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
+				+ Math.pow(this.getY(), 2.0));
+		this.phi = Math.atan(vector.getY() / vector.getX());
 	}
 
+	/**
+	 * @param vector
+	 */
 	private void setVector(Point vector) {
-		this.vector = vector;
-		amount = Math.sqrt(Math.pow(this.vector.getX(), 2.0)
-				+ Math.pow(this.vector.getY(), 2.0));
-		phi = Math.atan(vector.getY() / vector.getX());
+		this.x = vector.x;
+		this.y = vector.y;
+		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
+				+ Math.pow(this.getY(), 2.0));
+		this.phi = Math.atan(vector.getY() / vector.getX());
 	}
 
+	/**
+	 * @param amount
+	 * @param phi
+	 */
 	private void setVector(double amount, double phi) {
 		this.amount = amount;
 		this.phi = phi;
-		this.vector = new Point(amount * Math.cos(phi), amount * Math.sin(phi));
+		this.x = amount * Math.cos(phi);
+		this.y = amount * Math.sin(phi);
 	}
 
-	public Point changeVector(double amount, double phi) {
-		setVector(this.amount + amount, this.phi + phi);
-		return this.vector;
+	/**
+	 * @param amount
+	 * @param phi
+	 * @return
+	 */
+	public Vector changeVector(double amount, double phi) {
+		setVector(this.amount + amount, (this.phi + phi) % 360);
+		return this;
 	}
 
-	public Point changeVector(Point vector) {
-		setVector(this.vector.move(vector));
-		return this.vector;
+	/**
+	 * @param vector
+	 * @return
+	 */
+	public Vector changeVector(Point vector) {
+		setVector(this.move(vector));
+		return this;
 	}
 
-	public Point getVector() {
-		return vector;
+	/**
+	 * @param phi
+	 * @return
+	 */
+	public Vector changeDirection(double phi) {
+		changeVector(0, phi);
+		return this;
+	}
+
+	/**
+	 * @param amount
+	 * @return
+	 */
+	public Vector changeSpeed(double amount) {
+		changeVector(amount, 0);
+		return this;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof Vector) {
+			Point otherVector = (Vector) obj;
+			if (this.getX() == (otherVector.getX())
+					& this.getY() == (otherVector.getY())) {
+				return true;
+			} else
+				return false;
+		} else
+			return false;
 	}
 
 	public double getAmount() {
@@ -54,5 +115,4 @@ public class Vector {
 	public double getPhi() {
 		return phi;
 	}
-
 }
