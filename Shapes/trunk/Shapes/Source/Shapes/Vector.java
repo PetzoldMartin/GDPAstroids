@@ -26,7 +26,7 @@ public class Vector extends Point {
 	 *            angel of the vector
 	 */
 	public Vector(double amount, double phi) {
-		super(amount * Math.cos(phi), amount * Math.sin(phi));
+		super(amount * Math.cos(Math.toRadians(phi)), amount * Math.sin(Math.toRadians(phi)));
 		this.amount = amount;
 		this.phi = phi;
 	}
@@ -40,7 +40,7 @@ public class Vector extends Point {
 		super(vector.getX(), vector.getY());
 		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
 				+ Math.pow(this.getY(), 2.0));
-		this.phi = Math.atan(vector.getY() / vector.getX());
+		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class Vector extends Point {
 		this.y = vector.y;
 		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
 				+ Math.pow(this.getY(), 2.0));
-		this.phi = Math.atan(vector.getY() / vector.getX());
+		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class Vector extends Point {
 	private void setVector(double amount, double phi) {
 		this.amount = amount;
 		this.phi = phi;
-		this.x = amount * Math.cos(phi);
-		this.y = amount * Math.sin(phi);
+		this.x = amount * Math.cos(Math.toRadians(phi));
+		this.y = amount * Math.sin(Math.toRadians(phi));
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class Vector extends Point {
 	 * @return this
 	 */
 	public Vector changeVector(double amount, double phi) {
-		setVector(this.amount + amount, (this.phi + phi) % 360);
+		setVector(this.amount + amount, (this.phi - phi) % 360);
 		return this;
 	}
 
