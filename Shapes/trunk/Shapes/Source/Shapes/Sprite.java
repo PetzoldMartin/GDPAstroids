@@ -3,22 +3,26 @@ package Shapes;
 import java.util.ArrayList;
 import java.awt.Color;
 
-public class Sprite extends Figure{
-	Vector movement= new Vector(0,0);
+public class Sprite extends Figure { 		
+	// TODO Kommentierung!
+	// TODO instanz variablen erst im Konstuktor initialisieren!
+	Vector movement = new Vector(0, 0); 	
 	private Point middlePoint = new Point(0, 0);
-	
-	public Sprite(Point middlePoint) {
-		this.middlePoint = middlePoint;
-		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
-	}
-	
+
 	public Sprite() {
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
 	}
-	
+
+	public Sprite(Point middlePoint) {
+		// TODO use this();
+		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false)); 
+		this.middlePoint = middlePoint;
+	}
+
 	public Drawable rotate(double phi) {
 		return this.rotate(middlePoint, phi);
 	}
+
 	public Point getMiddlePoint() {
 		return middlePoint;
 	}
@@ -26,7 +30,7 @@ public class Sprite extends Figure{
 	public void setMiddlePoint(Point middle) {
 		this.middlePoint = middle;
 	}
-	
+
 	public static Sprite ship() {
 		Sprite ship = new Sprite();
 		ArrayList<Point> shipList = new ArrayList<Point>();
@@ -37,10 +41,9 @@ public class Sprite extends Figure{
 		return ship;
 
 	}
-	public void update()
-	{
+
+	public void update() {
 		this.draw();
 	}
-	
-	
+
 }

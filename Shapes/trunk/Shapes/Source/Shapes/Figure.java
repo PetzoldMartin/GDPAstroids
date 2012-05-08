@@ -11,14 +11,6 @@ import java.awt.Color;
  */
 public class Figure extends Drawable {
 	private static ArrayList<Drawable> shapes = new ArrayList<Drawable>();
-	
-
-	/**
-	 * Constructor for objects of class Figure
-	 */
-	
-
-	
 
 	/**
 	 * add aDrawable to the static ArrayList
@@ -70,10 +62,6 @@ public class Figure extends Drawable {
 		}
 		return this;
 	}
-
-	
-
-	
 
 	/**
 	 * generate a figure snowMan return itself as object
@@ -150,5 +138,4 @@ public class Figure extends Drawable {
 		return snowMan;
 	}
 
-	
 }

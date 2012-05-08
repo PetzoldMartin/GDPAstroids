@@ -1,6 +1,9 @@
 package Shapes;
 
 /**
+ * class that manage a Vector with x and y and also with amount as lenght and
+ * phi as angel
+ * 
  * @author heliosana
  * 
  */
@@ -15,8 +18,12 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Create Vector
+	 * 
 	 * @param amount
+	 *            lenght of the Vector
 	 * @param phi
+	 *            angel of the vector
 	 */
 	public Vector(double amount, double phi) {
 		super(amount * Math.cos(phi), amount * Math.sin(phi));
@@ -25,6 +32,8 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Create Vector
+	 * 
 	 * @param vector
 	 */
 	public Vector(Point vector) {
@@ -35,6 +44,8 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Set this Vector by a Point
+	 * 
 	 * @param vector
 	 */
 	private void setVector(Point vector) {
@@ -46,8 +57,12 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Set this Vector by amount and phi
+	 * 
 	 * @param amount
+	 *            lenght of the Vector
 	 * @param phi
+	 *            angel of the vector
 	 */
 	private void setVector(double amount, double phi) {
 		this.amount = amount;
@@ -57,9 +72,13 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Change this Vector by amount and phi
+	 * 
 	 * @param amount
+	 *            lenght of the Vector
 	 * @param phi
-	 * @return
+	 *            angel of the vector
+	 * @return this
 	 */
 	public Vector changeVector(double amount, double phi) {
 		setVector(this.amount + amount, (this.phi + phi) % 360);
@@ -67,8 +86,10 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Change this Vector by a Point
+	 * 
 	 * @param vector
-	 * @return
+	 * @return this
 	 */
 	public Vector changeVector(Point vector) {
 		setVector(this.move(vector));
@@ -76,22 +97,33 @@ public class Vector extends Point {
 	}
 
 	/**
+	 * Change only the phi of this Vector
+	 * 
 	 * @param phi
-	 * @return
+	 *            angel of the vector
+	 * @return this
 	 */
 	public Vector changeDirection(double phi) {
-		changeVector(0, phi);
-		return this;
+		return changeVector(0, phi);
+
 	}
 
 	/**
+	 * Change only the amount of this Vector
+	 * 
 	 * @param amount
-	 * @return
+	 *            lenght of the Vector
+	 * @return this
 	 */
 	public Vector changeSpeed(double amount) {
-		changeVector(amount, 0);
-		return this;
+		return changeVector(amount, 0);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Shapes.Point#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

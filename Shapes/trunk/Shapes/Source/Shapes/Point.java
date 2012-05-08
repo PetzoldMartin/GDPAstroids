@@ -48,13 +48,14 @@ public class Point {
 	 */
 	public void rotate(Point center, double phi) {
 		if (!center.equals(this)) {
-		phi = Math.toRadians(phi);
-		Point temp = this.copy().move(
-				new Point(-1 * center.getX(), -1 * center.getY()));
-		this.x = temp.getX() * Math.cos(phi) + temp.getY() * Math.sin(phi);
-		this.y = -1 * temp.getX() * Math.sin(phi) + temp.getY() * Math.cos(phi);
-		this.move(center);
-		} 
+			phi = Math.toRadians(phi);
+			Point temp = this.copy().move(
+					new Point(-1 * center.getX(), -1 * center.getY()));
+			this.x = temp.getX() * Math.cos(phi) + temp.getY() * Math.sin(phi);
+			this.y = -1 * temp.getX() * Math.sin(phi) + temp.getY()
+					* Math.cos(phi);
+			this.move(center);
+		}
 	}
 
 	/**
