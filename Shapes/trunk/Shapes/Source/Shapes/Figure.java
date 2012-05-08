@@ -10,7 +10,7 @@ import java.awt.Color;
  * @version (0.3)
  */
 public class Figure extends Drawable {
-	private static ArrayList<Drawable> shapes = new ArrayList<Drawable>();
+	private ArrayList<Drawable> shapes = new ArrayList<Drawable>();
 
 	/**
 	 * add aDrawable to the static ArrayList
