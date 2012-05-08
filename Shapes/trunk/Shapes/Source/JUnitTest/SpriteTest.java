@@ -8,13 +8,14 @@ import org.junit.Test;
 
 import Shapes.Figure;
 import Shapes.Point;
+import Shapes.Sprite;
 
-public class FigureTest {
-	Figure test;
+public class SpriteTest {
+	Sprite test;
 
 	@Before
 	public void setUp() throws Exception {
-		 test = Figure.ship();
+		 test = Sprite.ship();
 	}
 
 	@After
@@ -25,11 +26,11 @@ public class FigureTest {
 	public void test() {
 		
 		test.move(new Point(0, 100));
-		System.out.println(test.getMiddle().getX()+"  "+(test.getMiddle().getY()));
-		assertEquals(test.getMiddle(),new Point(0, 100));
+		System.out.println(test.getMiddlePoint().getX()+"  "+(test.getMiddlePoint().getY()));
+		assertEquals(test.getMiddlePoint(),new Point(0, 100));
 		test.rotate(45);
-		System.out.println(test.getMiddle().getX()+"  "+(test.getMiddle().getY()));
-		assertEquals(test.getMiddle(),new Point(0, 100));
+		System.out.println(test.getMiddlePoint().getX()+"  "+(test.getMiddlePoint().getY()));
+		assertEquals(test.getMiddlePoint(),new Point(0, 100));
 
 		
 	}

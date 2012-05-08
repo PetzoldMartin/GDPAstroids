@@ -11,19 +11,14 @@ import java.awt.Color;
  */
 public class Figure extends Drawable {
 	private static ArrayList<Drawable> shapes = new ArrayList<Drawable>();
-	private Point middlePoint = new Point(0, 0);
+	
 
 	/**
 	 * Constructor for objects of class Figure
 	 */
-	public Figure() {
-		this.addShape(new Circle(1, this.getMiddle(), Color.RED, false));
-	}
+	
 
-	public Figure(Point middlePoint) {
-		this.middlePoint = middlePoint;
-		this.addShape(new Circle(1, this.getMiddle(), Color.RED, false));
-	}
+	
 
 	/**
 	 * add aDrawable to the static ArrayList
@@ -76,20 +71,9 @@ public class Figure extends Drawable {
 		return this;
 	}
 
-	public Drawable rotate(double phi) {
-		return this.rotate(middlePoint, phi);
-	}
+	
 
-	public static Figure ship() {
-		Figure ship = new Figure();
-		ArrayList<Point> shipList = new ArrayList<Point>();
-		shipList.add(new Point(-10, -10));
-		shipList.add(new Point(10, -10));
-		shipList.add(new Point(0, 15));
-		ship.addShape(new Polygon(shipList, Color.GRAY, false));
-		return ship;
-
-	}
+	
 
 	/**
 	 * generate a figure snowMan return itself as object
@@ -166,11 +150,5 @@ public class Figure extends Drawable {
 		return snowMan;
 	}
 
-	public Point getMiddle() {
-		return middlePoint;
-	}
-
-	public void setMiddle(Point middle) {
-		this.middlePoint = middle;
-	}
+	
 }
