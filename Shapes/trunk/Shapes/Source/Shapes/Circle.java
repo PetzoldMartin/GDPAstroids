@@ -40,7 +40,7 @@ public class Circle extends Shape {
 	 */
 	@Override
 	public void draw() {
-		this.draw(this.color,this.solid);
+		this.draw(this.color, this.solid);
 	}
 
 	/**
