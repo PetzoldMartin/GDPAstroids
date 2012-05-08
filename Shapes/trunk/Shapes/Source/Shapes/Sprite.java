@@ -6,8 +6,7 @@ import java.awt.Color;
 public class Sprite extends Figure {
 	// TODO Kommentierung!
 	// TODO instanz variablen erst im Konstuktor initialisieren!
-	public Vector movement = new Vector(0, 0);
-	// TODO change name of movemnet to vector
+	public Vector vector = new Vector(0, 0);
 	private Point middlePoint = new Point(0, 0);
 
 	// TODO implement an variable for rotaion that control the self rotation and
@@ -24,7 +23,7 @@ public class Sprite extends Figure {
 	// TODO Constructor with middlePoint and movement
 	public void update() {
 		this.draw();
-		this.move(movement);
+		this.move(vector);
 	}
 	// TODO Wenn direction seit dem letztem Aufruf von update() verändert wurde, dann wird shape.rotate() aufgerufen. 
 	// Dies soll also nur bei einer Veränderung passieren damit die Shape nicht ständig rotiert. Zur Fortbewegung 
@@ -32,7 +31,7 @@ public class Sprite extends Figure {
 	// damit sich die Shape bei jedem update() fortbewegt (es sei denn, speed ist 0).
 	
 	public Sprite move() {
-		return (Sprite) super.move(movement);
+		return (Sprite) super.move(vector);
 	}
 
 	public Drawable rotate(double phi) {

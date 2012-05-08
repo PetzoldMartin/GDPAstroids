@@ -21,38 +21,48 @@ public class Main {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		Sprite test = Sprite.ship();
-		test.movement.changeSpeed(10);
+		Sprite test1 = Sprite.ship();
+		Sprite test2 = new SpaceShip();
+		test1.vector.changeSpeed(10);
+		test2.vector.changeSpeed(5);
 		long time =25;
 		for (;;) {
 			for (int i = 0; i < 25; i++) {
-				test.rotate(5).draw();
+				test1.rotate(5).draw();
 				Thread.sleep(time);
-				test.update();
+				test1.update();
+				test2.update();
 				Thread.sleep(time);
 			}
-			test.movement.changeDirection(90);
+			test1.vector.changeDirection(90);
+			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-				test.rotate(5).draw();
+				test1.rotate(5).draw();
 				Thread.sleep(time);
-				test.update();
+				test1.update();
+				test2.update();
 				Thread.sleep(time);
 			}
-			test.movement.changeDirection(90);
+			test1.vector.changeDirection(90);
+			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-				test.rotate(5).draw();
+				test1.rotate(5).draw();
 				Thread.sleep(time);
-				test.update();
+				test1.update();
+				test2.update();
 				Thread.sleep(time);
 			}
-			test.movement.changeDirection(90);
+			test1.vector.changeDirection(90);
+			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-				test.rotate(5).draw();
+				test1.rotate(5).draw();
 				Thread.sleep(time);
-				test.update();
+				test1.update();
+				test2.update();
 				Thread.sleep(time);
 			}
-			test.movement.changeDirection(90);
+			test1.vector.changeDirection(90);
+			test2.vector.changeDirection(90);
 		}
 	}
 }
