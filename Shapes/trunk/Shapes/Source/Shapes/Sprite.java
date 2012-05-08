@@ -6,7 +6,8 @@ import java.awt.Color;
 public class Sprite extends Figure { 		
 	// TODO Kommentierung!
 	// TODO instanz variablen erst im Konstuktor initialisieren!
-	private Vector movement = new Vector(0, 0); 	
+	public Vector movement = new Vector(0, 0); 	
+	// TODO change name of movemnet to vector
 	private Point middlePoint = new Point(0, 0);
 
 	public Sprite() {
@@ -17,17 +18,18 @@ public class Sprite extends Figure {
 		this();
 		this.middlePoint = middlePoint;
 	}
+	//TODO Constructor with middlePoint and movement
+	public void update() {
+		this.draw();
+		this.move(movement);
+	}
 
+	public Sprite move() {
+		return (Sprite) super.move(movement);
+	}
+	
 	public Drawable rotate(double phi) {
 		return this.rotate(middlePoint, phi);
-	}
-
-	public Point getMiddlePoint() {
-		return middlePoint;
-	}
-
-	public void setMiddlePoint(Point middle) {
-		this.middlePoint = middle;
 	}
 
 	public static Sprite ship() {
@@ -41,9 +43,12 @@ public class Sprite extends Figure {
 
 	}
 
-	public void update() {
-		this.draw();
-		this.move(movement);
+	public Point getMiddlePoint() {
+		return middlePoint;
+	}
+
+	public void setMiddlePoint(Point middle) {
+		this.middlePoint = middle;
 	}
 
 }

@@ -22,31 +22,37 @@ public class Main {
 				window.getY(), Color.BLACK, true);
 		background.draw();
 		Sprite test = Sprite.ship();
+		test.movement.changeSpeed(10);
+		long time =25;
 		for (;;) {
 			for (int i = 0; i < 25; i++) {
 				test.rotate(5).draw();
-				Thread.sleep(10);
-				test.move(new Point(0, i)).draw();
-				Thread.sleep(10);
+				Thread.sleep(time);
+				test.update();
+				Thread.sleep(time);
 			}
+			test.movement.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
 				test.rotate(5).draw();
-				Thread.sleep(10);
-				test.move(new Point(i, 0)).draw();
-				Thread.sleep(10);
+				Thread.sleep(time);
+				test.update();
+				Thread.sleep(time);
 			}
+			test.movement.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
 				test.rotate(5).draw();
-				Thread.sleep(10);
-				test.move(new Point(0, -i)).draw();
-				Thread.sleep(10);
+				Thread.sleep(time);
+				test.update();
+				Thread.sleep(time);
 			}
+			test.movement.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
 				test.rotate(5).draw();
-				Thread.sleep(10);
-				test.move(new Point(-i, 0)).draw();
-				Thread.sleep(10);
+				Thread.sleep(time);
+				test.update();
+				Thread.sleep(time);
 			}
+			test.movement.changeDirection(90);
 		}
 	}
 }
