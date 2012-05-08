@@ -11,7 +11,7 @@ public class SpaceShip extends Sprite {
 	shipList.add(new Point(-10, -10));
 	shipList.add(new Point(10, -10));
 	shipList.add(new Point(0, 15));
-	this.addShape(new Polygon(shipList, Color.RED, false));
+	this.addShape(new Polygon(shipList, Color.WHITE, false));
 	}
 	
 
