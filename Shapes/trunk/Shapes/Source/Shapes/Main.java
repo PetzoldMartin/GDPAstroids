@@ -21,7 +21,7 @@ public class Main {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		Figure test = Figure.ship();
+		Sprite test = Sprite.ship();
 		for (;;) {
 			for (int i = 0; i < 25; i++) {
 				test.rotate(5).draw();
