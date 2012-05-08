@@ -21,7 +21,7 @@ public class Vector extends Point {
 	 * Create Vector
 	 * 
 	 * @param amount
-	 *            lenght of the Vector
+	 *            lenght of the vector
 	 * @param phi
 	 *            angel of the vector
 	 */
@@ -42,7 +42,7 @@ public class Vector extends Point {
 				+ Math.pow(this.getY(), 2.0));
 		this.phi = Math.atan(vector.getY() / vector.getX());
 	}
-
+	
 	/**
 	 * Set this Vector by a Point
 	 * 
@@ -60,7 +60,7 @@ public class Vector extends Point {
 	 * Set this Vector by amount and phi
 	 * 
 	 * @param amount
-	 *            lenght of the Vector
+	 *            lenght of the vector
 	 * @param phi
 	 *            angel of the vector
 	 */
@@ -75,7 +75,7 @@ public class Vector extends Point {
 	 * Change this Vector by amount and phi
 	 * 
 	 * @param amount
-	 *            lenght of the Vector
+	 *            lenght of the vector
 	 * @param phi
 	 *            angel of the vector
 	 * @return this
@@ -97,7 +97,7 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * Change only the phi of this Vector
+	 * Change only the phi of this vector
 	 * 
 	 * @param phi
 	 *            angel of the vector
@@ -109,10 +109,10 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * Change only the amount of this Vector
+	 * Change only the amount of this vector
 	 * 
 	 * @param amount
-	 *            lenght of the Vector
+	 *            lenght of the vector
 	 * @return this
 	 */
 	public Vector changeSpeed(double amount) {

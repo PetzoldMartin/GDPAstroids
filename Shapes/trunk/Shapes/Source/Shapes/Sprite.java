@@ -6,7 +6,7 @@ import java.awt.Color;
 public class Sprite extends Figure { 		
 	// TODO Kommentierung!
 	// TODO instanz variablen erst im Konstuktor initialisieren!
-	Vector movement = new Vector(0, 0); 	
+	private Vector movement = new Vector(0, 0); 	
 	private Point middlePoint = new Point(0, 0);
 
 	public Sprite() {
@@ -14,8 +14,7 @@ public class Sprite extends Figure {
 	}
 
 	public Sprite(Point middlePoint) {
-		// TODO use this();
-		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false)); 
+		this();
 		this.middlePoint = middlePoint;
 	}
 
@@ -44,6 +43,7 @@ public class Sprite extends Figure {
 
 	public void update() {
 		this.draw();
+		this.move(movement);
 	}
 
 }
