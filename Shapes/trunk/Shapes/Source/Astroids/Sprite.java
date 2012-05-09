@@ -10,16 +10,14 @@ import Shapes.Point;
 
 public abstract class Sprite extends Figure {
 	// TODO Kommentierung!
-	// TODO make it abstract!
+	
 	public Vector vector ;
-	private Point middlePoint ;
-	private double rotationPhi;
+	protected Point middlePoint ;
+	protected double rotationPhi;
 
-	// TODO implement an variable for rotaion that control the self rotation and
-	// rotate in update() --> usefull for Astroids! also in ship! for rotate @update()!
 	public Sprite() {
 		this.middlePoint= new Point(0, 0);
-		this.vector=new Vector(0, 0);
+		this.vector=new Vector(0,0);
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
 		
 	}
