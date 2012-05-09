@@ -17,7 +17,7 @@ public class Main {
 	public static int windowX = 380/2;
 	public static int windowY = 275/2;
 	public static Point window = new Point(windowX*2, windowY*2);
-	public static long globalFrameTime= 20;
+	public static long globalFrameTime= 1000/30;
 
 	/**
 	 * @param args

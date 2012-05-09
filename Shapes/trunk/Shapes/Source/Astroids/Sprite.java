@@ -10,16 +10,25 @@ import Shapes.Point;
 
 public abstract class Sprite extends Figure {
 	// TODO Kommentierung!
-	
-	public Vector vector ;
-	protected Point middlePoint ;
+	//TODO make non abstract
+	public Vector vector;
+	protected Point middlePoint;
 	protected double rotationPhi;
 
+	/**
+	 * Constructor for objects of class Sprite - overloaded
+	 * 
+	 * @param middlePoint
+	 *            The middlePoint of the Sprite
+	 * 
+	 * @param vector
+	 *            The movement-speed and movement-direction of the Sprite
+	 */
 	public Sprite() {
-		this.middlePoint= new Point(0, 0);
-		this.vector=new Vector(0,0);
+		this.middlePoint = new Point(0, 0);
+		this.vector = new Vector(0, 0);
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
-		
+
 	}
 
 	public Sprite(Point middlePoint) {
@@ -27,15 +36,15 @@ public abstract class Sprite extends Figure {
 		this.middlePoint = middlePoint;
 		this.move(middlePoint);
 	}
-	
-	public Sprite(Point middlePoint, Vector vector){
+
+	public Sprite(Point middlePoint, Vector vector) {
 		this(middlePoint);
-		this.vector= vector;
+		this.vector = vector;
 	}
 
+	//TODO make non abstract
 	public abstract void update() throws InterruptedException;
 
-	
 	public Sprite move() {
 		return (Sprite) super.move(vector);
 	}
