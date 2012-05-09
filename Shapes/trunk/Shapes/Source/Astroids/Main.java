@@ -28,12 +28,12 @@ public class Main {
 		background.draw();
 		Sprite test1 = new SpaceShip();
 		Sprite test2 = new SpaceShip();
-		test1.vector.changeSpeed(10);
-		test2.vector.changeSpeed(5);
-		long time =20;
+		test1.vector.changeSpeed(8);
+		test2.vector.changeSpeed(4);
+		long time =10;
 		for (;;) {
-			test1.vector.changeDirection(90);
-			test2.vector.changeDirection(90);
+			test1.vector.changeDirection(-180);
+			test2.vector.changeDirection(-180);
 			for (int i = 0; i < 25; i++) {
 				//test1.rotate(5).draw();
 				Thread.sleep(time);
