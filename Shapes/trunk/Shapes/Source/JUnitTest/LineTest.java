@@ -1,6 +1,7 @@
 package JUnitTest;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +11,7 @@ import Shapes.Circle;
 import Shapes.Line;
 import Shapes.Point;
 
-public class LineTest {
+public class LineTest extends TestCase {
 	Line l1;
 
 	@Before

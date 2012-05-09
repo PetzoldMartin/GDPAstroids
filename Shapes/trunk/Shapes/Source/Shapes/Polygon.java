@@ -3,6 +3,8 @@ package Shapes;
 import java.util.ArrayList;
 import java.awt.Color;
 
+import ShapeExceptions.PolygoneShapeException;
+
 /**
  * class that manage a polygons as an object subclass of Shape
  * 
@@ -108,7 +110,11 @@ public class Polygon extends Shape {
 	 * @param solid
 	 *            choice is the polygon fullfilled
 	 */
-	public void setPoints(ArrayList<Point> points) {
+	public void setPoints(ArrayList<Point> points) throws PolygoneShapeException {
+		if(points.size()<=2)
+    	{
+    		throw new PolygoneShapeException();
+    	}
 		this.points = points;
 	}
 
