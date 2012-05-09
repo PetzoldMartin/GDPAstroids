@@ -30,7 +30,7 @@ public abstract class Sprite extends Figure {
 
 	public Sprite(Point middlePoint) {
 		this();
-		this.middlePoint = middlePoint;
+		this.move(middlePoint);
 	}
 
 	public Sprite(Point middlePoint, Vector vector) {
@@ -38,9 +38,12 @@ public abstract class Sprite extends Figure {
 		this.vector = vector;
 	}
 
+	
 	//TODO make non abstract
 	public abstract void update() throws InterruptedException;
-
+	
+	//TODO implement updateAll() update all Sprites in a static list
+	
 	public Sprite move() {
 		return (Sprite) super.move(vector);
 	}
@@ -49,12 +52,14 @@ public abstract class Sprite extends Figure {
 		return this.rotate(middlePoint, phi);
 	}
 
-	public Point getMiddlePoint() {
+	private Point getMiddlePoint() {
 		return middlePoint;
 	}
 
-	public void setMiddlePoint(Point middlePoint) {
-		this.middlePoint = middlePoint;
+	protected void setMiddlePoint(Point middlePoint) {
+		this.move(new Point(middlePoint.getX()-this.middlePoint.getX(),middlePoint.getY()-this.middlePoint.getY()));
+		//TODO setMiddlePoint must move the sprite to the right position
+		// for Astroids Constructor and corner warp
 	}
 
 }
