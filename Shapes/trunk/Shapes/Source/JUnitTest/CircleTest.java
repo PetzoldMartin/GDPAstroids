@@ -54,7 +54,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testCircle() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO test Construktor of Circle
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testGetWhiteBoard() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO Test getWhiteboard of Circle
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testSetColor() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO Test Set Color of Circle
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testSetSolid() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO Test Set Solid of Circle
 	}
 	@Test
 	public void testequals() {

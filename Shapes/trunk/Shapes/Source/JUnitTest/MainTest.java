@@ -16,7 +16,7 @@ public class MainTest extends TestSuite
 
   public static Test suite()
   {
-    TestSuite mySuite = new TestSuite( "Meine Test-Suite" );
+    TestSuite mySuite = new TestSuite( "Shapes Test-Suite" );
     mySuite.addTestSuite(CircleTest.class); 
     mySuite.addTestSuite(LineTest.class);
     mySuite.addTestSuite(PointTest.class);
