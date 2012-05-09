@@ -6,7 +6,7 @@ import Shapes.*;
 
 public abstract class Sprite extends Figure {
 	// TODO Kommentierung!
-	//TODO make non abstract
+	// TODO make non abstract
 	public Vector vector;
 	protected Point middlePoint;
 	protected double rotationPhi;
@@ -58,7 +58,7 @@ public abstract class Sprite extends Figure {
 
 	protected void setMiddlePoint(Point middlePoint) {
 		this.move(new Point(middlePoint.getX()-this.middlePoint.getX(),middlePoint.getY()-this.middlePoint.getY()));
-		//TODO setMiddlePoint must move the sprite to the right position
+		//FIXME setMiddlePoint must move the sprite to the right position
 		// for Astroids Constructor and corner warp
 	}
 
