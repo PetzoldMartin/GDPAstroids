@@ -13,6 +13,7 @@ public abstract class Sprite extends Figure {
 	// TODO make it abstract!
 	public Vector vector ;
 	private Point middlePoint ;
+	private double rotationPhi;
 
 	// TODO implement an variable for rotaion that control the self rotation and
 	// rotate in update() --> usefull for Astroids! also in ship! for rotate @update()!
@@ -35,10 +36,7 @@ public abstract class Sprite extends Figure {
 	}
 
 	public abstract void update();
-//	{
-//		this.draw();
-//		this.move(vector);
-//	}
+
 	// TODO Wenn direction seit dem letztem Aufruf von update() veraendert wurde, dann wird shape.rotate() aufgerufen. 
 	// Dies soll also nur bei einer Veraenderung passieren damit die Shape nicht st�ndig rotiert. Zur Fortbewegung 
 	// werden das Delta-x und -y berechnet und in shape.move() verwendet. Diese Methode wird immer aufgerufen, 
