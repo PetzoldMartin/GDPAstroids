@@ -52,7 +52,7 @@ public abstract class Sprite extends Figure {
 		return this.rotate(middlePoint, phi);
 	}
 
-	private Point getMiddlePoint() {
+	public Point getMiddlePoint() {
 		return middlePoint;
 	}
 

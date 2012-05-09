@@ -1,51 +1,93 @@
+/**
+ * 
+ */
 package JUnitTest;
 
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
-import Shapes.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Shapes.Circle;
+import Shapes.Point;
+
+/**
+ * @author Aismael
+ *
+ */
 public class CircleTest extends TestCase {
-
-	Circle c1;
-
+	Circle x,y,z;
 	@Before
 	public void setUp() throws Exception {
-		c1 = new Circle(10, new Point(10, 10));
+		x =new Circle(1,new Point(1,1));
+		y =new Circle(1,new Point(1,1));
+		z =new Circle(1,new Point(1,1));
 	}
 
+
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@After
-	public void tearDown() {
-		c1 = null;
+	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testDraw() {
-		try {
-			c1.draw();
-		} catch (Exception e) {
-			assertTrue(false);
-		}
-
-	}
-
+	/**
+	 * Test method for {@link Shapes.Circle#move(int, int)}.
+	 */
 	@Test
 	public void testMove() {
-		c1.move(new Point(10, 10));
-		assertTrue(c1.getCenter().equals(new Point(20, 20)));
-		c1.move(new Point(-20, -20));
-		assertTrue(c1.getCenter().equals(new Point(0, 0)));
-
+		assertTrue("Vortest vor move Fehlgeschlagen",x.equals(z));
+		assertEquals("der Kreismittelpunkt wird falsch übergeben",z.getCenter(), new Point(1,1));
+		assertEquals("der Kreisradius wird falsch übergeben",z.getRadius(), 1,0);
+		z.move(new Point (10,10));
+		assertEquals("der Kreismittelpunkt wird falsch verschoben",z.getCenter(), new Point(11,11));
+		assertEquals("der Kreisradius ist inkonsistent",z.getRadius(), 1,0);
+		assertFalse("Die kreismittelpunkte sind nicht unabhängig",x.equals(z));
+		
 	}
 
+	/**
+	 * Test method for {@link Shapes.Circle#Circle(int, Shapes.Point)}.
+	 */
 	@Test
-	public void testCircleIntPoint() {
-		assertTrue(new Circle(10, new Point(10, 10)).equals(c1));
-		assertFalse(new Circle(10, new Point(10, 10)) == (c1));
-		assertFalse(new Circle(11, new Point(10, 10)).equals(c1));
-		assertFalse(new Circle(10, new Point(11, 10)).equals(c1));
-		assertFalse(new Circle(10, new Point(10, 11)).equals(c1));
+	public void testCircle() {
+		fail("Not yet implemented"); // TODO
 	}
+
+	/**
+	 * Test method for {@link Shapes.Shape#getWhiteBoard()}.
+	 */
+	@Test
+	public void testGetWhiteBoard() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link Shapes.Shape#setColor(java.awt.Color)}.
+	 */
+	@Test
+	public void testSetColor() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link Shapes.Shape#setSolid(boolean)}.
+	 */
+	@Test
+	public void testSetSolid() {
+		fail("Not yet implemented"); // TODO
+	}
+	@Test
+	public void testequals() {
+		assertTrue("Die equals Methode testet nicht auf Reflexivität",x.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Symetrie",x.equals(y)&&y.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Transitivität",x.equals(y)&&y.equals(z)&&x.equals(z));
+		y = new Circle (2,new Point(2, 2));
+		assertFalse("Die equals Methode testet nicht auf Konsistenz",x.equals(y));
+		assertFalse(x.equals(null));
+	}
+
 }

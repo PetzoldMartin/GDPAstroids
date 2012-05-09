@@ -1,46 +1,85 @@
+/**
+ * 
+ */
 package JUnitTest;
 
 import static org.junit.Assert.*;
-import Shapes.*;
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PointTest {
+import Shapes.Point;
 
-	Point testA, testB, testC;
+/**
+ * @author Aismael
+ *
+ */
+public class PointTest extends TestCase {
 
+	private Point x;
+	private Point y;
+	private Point z,u, center;
 	@Before
 	public void setUp() throws Exception {
-		testA = new Point(1, 1);
-		testB = new Point(2, 2);
-		testC = new Point(1, 1);
+		x =new Point(1,1);
+		y =new Point(1,1);
+		z =new Point(1,1);
+		u = new Point(1000,1000);
+		center = new Point(0,0);
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
-		testA = null;
-		testB = null;
-		testC = null;
 	}
 
+	/**
+	 * Test method for {@link Shapes.Point#Point(int, int)}.
+	 */
 	@Test
 	public void testPoint() {
-		assertFalse(testA.equals(testB));
-		assertEquals(testA, testA);
-		assertTrue(testB.equals(testB));
+		fail("Not yet implemented"); // TODO
 	}
 
+	/**
+	 * Test method for {@link Shapes.Point#move(int, int)}.
+	 */
 	@Test
 	public void testMove() {
-		System.out.println(testA.getX() + testB.getX());
-		assertTrue(testA.move(new Point(0, 0)).equals(testA));
-		assertTrue(testA.move(new Point(0, 0)).equals(testC));
-		double a = testA.getX() + testB.getX();
-		double b = testA.getY() + testB.getY();
-		assertTrue(testA.move(testB).equals(new Point(a, b)));
-		assertTrue((new Point(testA.getX() + testB.getX(), testA.getY()
-				+ testB.getY())).equals(testA.move(testB)));
+		assertTrue("Vortest vor move Fehlgeschlagen",x.equals(z));
+		assertEquals("Die X Koordinate wird falsch übergeben",z.getX(), 1,0);
+		assertEquals("Die Y Koordinate wird falsch übergeben",z.getY(), 1,0);
+		z.move(new Point (10,10));
+		assertEquals("Die X Koordinate wird falsch verschoben",z.getX(), 11,0);
+		assertEquals("Die Y Koordinate wird falsch verschoben",z.getY(), 11,0);
+		assertEquals("der punkt wird falsch verschoben",z, new Point(11,11));
+		assertFalse("Die punkte sind nicht unabhängig",x.equals(z));
+		
+	}
+	@Test
+	public void testequals() {
+		assertTrue("Die equals Methode testet nicht auf Reflexivität",x.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Symetrie",x.equals(y)&&y.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Transitivität",x.equals(y)&&y.equals(z)&&x.equals(z));
+		y = new Point (2,2);
+		assertFalse("Die equals Methode testet nicht auf Konsistenz",x.equals(y));
+		assertFalse(x.equals(null));
+	}
+	@Test
+	public void rotate(){
+		u.rotate(center, 45);
+		assertEquals(u.getX(), 1414,0.4);
+		assertEquals(u.getY(), 0,0.4);
+		for(int i=1;i<=15;i++)
+		{
+			u.rotate(center, 15);
+		}
+		assertEquals(u.getX(), -1000,0.4);
+		assertEquals(u.getY(), 1000,0.4);
 	}
 
 }

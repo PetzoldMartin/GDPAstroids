@@ -1,6 +1,7 @@
 package JUnitTest;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +12,7 @@ import Astroids.Sprite;
 import Shapes.Figure;
 import Shapes.Point;
 
-public class SpriteTest {
+public class SpriteTest extends TestCase {
 	Sprite test;
 
 	@Before
