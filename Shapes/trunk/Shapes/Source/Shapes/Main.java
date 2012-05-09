@@ -9,9 +9,9 @@ import java.awt.Color;
  * @version (0.3)
  */
 public class Main {
-	public static int windowX = 380;
-	public static int windowY = 275;
-	public static Point window = new Point(windowX, windowY);
+	public static int windowX = 380/2;
+	public static int windowY = 275/2;
+	public static Point window = new Point(windowX*2, windowY*2);
 
 	/**
 	 * @param args
