@@ -35,7 +35,7 @@ public class Main {
 			test1.vector.changeDirection(90);
 			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-//				test1.rotate(5).draw();
+				//test1.rotate(5).draw();
 				Thread.sleep(time);
 				test1.update();
 				test2.update();
@@ -44,7 +44,7 @@ public class Main {
 			test1.vector.changeDirection(90);
 			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-//				test1.rotate(5).draw();
+				//test1.rotate(5).draw();
 				Thread.sleep(time);
 				test1.update();
 				test2.update();
@@ -53,7 +53,7 @@ public class Main {
 			test1.vector.changeDirection(90);
 			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-//				test1.rotate(5).draw();
+				//test1.rotate(5).draw();
 				Thread.sleep(time);
 				test1.update();
 				test2.update();
@@ -62,7 +62,7 @@ public class Main {
 			test1.vector.changeDirection(90);
 			test2.vector.changeDirection(90);
 			for (int i = 0; i < 25; i++) {
-//				test1.rotate(5).draw();
+				//test1.rotate(5).draw();
 				Thread.sleep(time);
 				test1.update();
 				test2.update();

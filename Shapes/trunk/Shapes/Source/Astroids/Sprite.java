@@ -25,11 +25,11 @@ public abstract class Sprite extends Figure {
 	public Sprite(Point middlePoint) {
 		this();
 		this.middlePoint = middlePoint;
+		this.move(middlePoint);
 	}
 	
 	public Sprite(Point middlePoint, Vector vector){
-		this();
-		this.middlePoint= middlePoint;
+		this(middlePoint);
 		this.vector= vector;
 	}
 
@@ -47,7 +47,6 @@ public abstract class Sprite extends Figure {
 	public Drawable rotate(double phi) {
 		return this.rotate(middlePoint, phi);
 	}
-
 
 	public Point getMiddlePoint() {
 		return middlePoint;
