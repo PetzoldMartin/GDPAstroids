@@ -1,4 +1,4 @@
-package JUnitTest;
+package Astroids;
 
 import static org.junit.Assert.*;
 

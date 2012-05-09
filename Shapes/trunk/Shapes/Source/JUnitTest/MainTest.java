@@ -13,6 +13,10 @@ public class MainTest extends TestSuite
 //	    Full Coverage → Farbe anpassen
 //	    Partial Coverage→Farbe anpassen
 //	    No Coverage→Farbe anpassen
+//	
+//	Coverage Window einfügen
+//	Window=>Show view=> others------ Java=>Coverage
+//	wenn bunt stört dort remove all sessions auswählen
 
   public static Test suite()
   {
