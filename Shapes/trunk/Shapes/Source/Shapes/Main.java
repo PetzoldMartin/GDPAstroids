@@ -21,11 +21,11 @@ public class Main {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		Sprite test1 = Sprite.ship();
+		Sprite test1 = new SpaceShip();
 		Sprite test2 = new SpaceShip();
 		test1.vector.changeSpeed(10);
 		test2.vector.changeSpeed(5);
-		long time =25;
+		long time =20;
 		for (;;) {
 			for (int i = 0; i < 25; i++) {
 				test1.rotate(5).draw();

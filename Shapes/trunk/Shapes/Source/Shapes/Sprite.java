@@ -54,8 +54,8 @@ public class Sprite extends Figure {
 		return middlePoint;
 	}
 
-	public void setMiddlePoint(Point middle) {
-		this.middlePoint = middle;
+	public void setMiddlePoint(Point middlePoint) {
+		this.middlePoint = middlePoint;
 	}
 
 }
