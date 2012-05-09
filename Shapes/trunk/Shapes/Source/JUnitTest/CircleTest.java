@@ -1,12 +1,13 @@
 package JUnitTest;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 import Shapes.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CircleTest {
+public class CircleTest extends TestCase {
 
 	Circle c1;
 
