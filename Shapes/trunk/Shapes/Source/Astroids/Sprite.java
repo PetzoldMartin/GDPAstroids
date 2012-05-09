@@ -1,12 +1,8 @@
 package Astroids;
 
-import java.util.ArrayList;
 import java.awt.Color;
 
-import Shapes.Circle;
-import Shapes.Drawable;
-import Shapes.Figure;
-import Shapes.Point;
+import Shapes.*;
 
 public abstract class Sprite extends Figure {
 	// TODO Kommentierung!
@@ -27,6 +23,7 @@ public abstract class Sprite extends Figure {
 	public Sprite() {
 		this.middlePoint = new Point(0, 0);
 		this.vector = new Vector(0, 0);
+		this.rotationPhi=0;
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
 
 	}
@@ -34,7 +31,6 @@ public abstract class Sprite extends Figure {
 	public Sprite(Point middlePoint) {
 		this();
 		this.middlePoint = middlePoint;
-		this.move(middlePoint);
 	}
 
 	public Sprite(Point middlePoint, Vector vector) {
