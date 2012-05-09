@@ -42,7 +42,7 @@ public class PointTest extends TestCase {
 	 */
 	@Test
 	public void testPoint() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO Test construktor of point
 	}
 
 	/**
@@ -60,6 +60,9 @@ public class PointTest extends TestCase {
 		assertFalse("Die punkte sind nicht unabhängig",x.equals(z));
 		
 	}
+	/**
+	 * 
+	 */
 	@Test
 	public void testequals() {
 		assertTrue("Die equals Methode testet nicht auf Reflexivität",x.equals(x));
@@ -69,6 +72,10 @@ public class PointTest extends TestCase {
 		assertFalse("Die equals Methode testet nicht auf Konsistenz",x.equals(y));
 		assertFalse(x.equals(null));
 	}
+	
+	/**
+	 * 
+	 */
 	@Test
 	public void rotate(){
 		u.rotate(center, 45);
@@ -82,4 +89,5 @@ public class PointTest extends TestCase {
 		assertEquals(u.getY(), 1000,0.4);
 	}
 
+	
 }

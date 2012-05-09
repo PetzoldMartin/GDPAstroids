@@ -80,6 +80,9 @@ public class CircleTest extends TestCase {
 	public void testSetSolid() {
 		fail("Not yet implemented"); // TODO Test Set Solid of Circle
 	}
+	/**
+	 * 
+	 */
 	@Test
 	public void testequals() {
 		assertTrue("Die equals Methode testet nicht auf Reflexivität",x.equals(x));
