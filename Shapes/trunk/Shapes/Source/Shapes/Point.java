@@ -1,5 +1,7 @@
 package Shapes;
 
+import Astroids.Main;
+
 /**
  * class that manage x and y cordinates of points as an object
  * 
@@ -109,5 +111,13 @@ public class Point {
 
 	public double getY() {
 		return y;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 }
