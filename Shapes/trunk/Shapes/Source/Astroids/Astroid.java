@@ -20,7 +20,7 @@ public class Astroid extends Sprite {
 	}
 	private void building(Point middlePoint) {
 		this.addShape(new Rectangle(middlePoint, 10, 10, Color.WHITE, false));
-		this.addShape(new Circle(10, middlePoint, Color.RED, false));
+		this.addShape(new Circle( Math.round(15), middlePoint, Color.RED, false));
 	}
 	@Override
 	public void update() throws InterruptedException {
