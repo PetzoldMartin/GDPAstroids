@@ -33,12 +33,8 @@ public abstract class Sprite extends Figure {
 		this.vector= vector;
 	}
 
-	public abstract void update();
+	public abstract void update() throws InterruptedException;
 
-	// TODO Wenn direction seit dem letztem Aufruf von update() veraendert wurde, dann wird shape.rotate() aufgerufen. 
-	// Dies soll also nur bei einer Veraenderung passieren damit die Shape nicht st�ndig rotiert. Zur Fortbewegung 
-	// werden das Delta-x und -y berechnet und in shape.move() verwendet. Diese Methode wird immer aufgerufen, 
-	// damit sich die Shape bei jedem update() fortbewegt (es sei denn, speed ist 0).
 	
 	public Sprite move() {
 		return (Sprite) super.move(vector);

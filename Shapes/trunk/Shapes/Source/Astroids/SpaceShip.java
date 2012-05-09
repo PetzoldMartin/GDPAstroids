@@ -8,31 +8,40 @@ import Shapes.Polygon;
 
 public class SpaceShip extends Sprite {
 
-	public SpaceShip()
-	//TODO multiple Constuctors with middle point and vector input with uses super Constructor 
-	{
-	super();
-	ArrayList<Point> shipList = new ArrayList<Point>();
-	shipList.add(new Point(-10, -10));
-	shipList.add(new Point(-10, 10));
-	shipList.add(new Point(15, 0));
-	this.addShape(new Polygon(shipList, Color.WHITE, false));
+	public SpaceShip() {
+		super();
+		ArrayList<Point> shipList = new ArrayList<Point>();
+		shipList.add(new Point(-10, -10));
+		shipList.add(new Point(-10, 10));
+		shipList.add(new Point(15, 0));
+		this.addShape(new Polygon(shipList, Color.WHITE, false));
 	}
 
 	@Override
-	public void update() {
+	public void update() throws InterruptedException {
 		{
-			this.draw();
-			if(rotationPhi!=vector.getPhi()){
-			this.rotate(rotationPhi-vector.getPhi());
+			Long runTime = (long) 0;
+			synchronized (runTime) {
+				runTime = System.currentTimeMillis();
 			}
-			rotationPhi=this.vector.getPhi();
+			this.draw();
+			if (rotationPhi != vector.getPhi()) {
+				this.rotate(rotationPhi - vector.getPhi());
+			}
+			rotationPhi = this.vector.getPhi();
 			this.move(vector);
-			
-		}
-		
-	}
-	
+			synchronized (runTime) {
+				runTime = System.currentTimeMillis() - runTime;
+			}
+			try {
+				Thread.sleep(Main.globalFrameTime - runTime);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Time Overload");
+				// e.printStackTrace();
+			}
 
-	
+		}
+
+	}
+
 }
