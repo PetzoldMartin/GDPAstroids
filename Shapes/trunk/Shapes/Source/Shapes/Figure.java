@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 /**
- * class that manage a static figure as an object
+ * class that manage a figure as an object
  * 
  * @author (Markus Krummnacker)
  * @version (0.3)
@@ -61,80 +61,4 @@ public class Figure extends Drawable {
 		}
 		return this;
 	}
-
-	/**
-	 * generate a figure snowMan return itself as object
-	 */
-	public static Figure snowMan() {
-		int a = 3; // count usefull min 3
-		int h = -1; // handedness -1 left | 1 right
-		int x = 200; // x-start
-		Figure snowMan = new Figure();
-		for (int s = 3; s <= 3; s++) { // size loop
-			int y = -250 + 40 * (5 - s); // y-position
-			for (int i = 0; i < a; i++) {
-				snowMan.addShape(new Circle(s * 10 * (a - i), new Point(x,
-						y += s * 10 * (a + 1 - i) + s * 10 * (a - i)),
-						Color.BLACK, false)); // balls
-				for (int j = 0; j < a - i; j++) {
-					snowMan.addShape(new Circle(2 * s, new Point(x, y - (a - i)
-							* s * 6 + j * s * 20), Color.BLACK, true)); // knobs
-				}
-				if (i == (a - 2)) {
-					for (int k = -1; k < 2; k += 2) {
-						snowMan.addShape(new Circle(5 * s, new Point(k * s * 24
-								+ x, y + 5 * s), Color.BLACK, false)); // hands
-						if (k == h) {
-							ArrayList<Point> broomStickList = new ArrayList<Point>();
-							broomStickList.add(new Point(k * s * 20 + x - k * s
-									- k * s * 40, y + 2 * s - s * 52)); // bottom
-																		// edge
-							broomStickList.add(new Point(k * s * 20 + x + k * s
-									- k * s * 40, y - s * 52));
-							broomStickList.add(new Point(k * s * 20 + x + k * s
-									+ k * s * 40, y + s * 52)); // top edge
-							broomStickList.add(new Point(k * s * 20 + x - k * s
-									+ k * s * 40, y + 2 * s + s * 52));
-							Polygon broomStick = new Polygon();
-							broomStick.setPoints(broomStickList, Color.ORANGE
-									.darker().darker(), true); // broomStick
-							snowMan.addShape(broomStick);
-							ArrayList<Point> broomList = new ArrayList<Point>();
-							for (int l = 0; l < 10 * s; l++) {
-								broomList.add(new Point(k * s * 20 + x + k * s
-										+ k * s * 40, y + s * 52));
-								broomList.add(new Point(k * s * 20 + x - k * s
-										+ k * s * 40, y + 2 * s + s * 52));
-								broomList.add(new Point(k * s * 10 + x + k * s
-										* 40 + (l + 1 * a) * k * s, y + s * 75
-										+ s * (s * 1 - l))); // peak
-							}
-							Polygon broom = new Polygon();
-							broom.setPoints(broomList, Color.ORANGE.darker(),
-									false); // broom end
-							snowMan.addShape(broom);
-						}
-					}
-				}
-				if (i == (a - 1)) {
-					for (int k = -1; k < 2; k += 2) {
-						snowMan.addShape(new Circle(2 * s, new Point(k * s * 4
-								+ x, y + 4 * s), Color.BLACK, true)); // eyes
-						snowMan.addShape(new Circle(1 * s, new Point(k * s * 3
-								+ x, y - 5 * s), Color.BLACK, true)); // mouth
-					}
-					snowMan.addShape(new Circle(2 * s, new Point(x, y),
-							Color.ORANGE, true)); // nose
-
-					snowMan.addShape(new Rectangle(new Point(x, y + s * 16),
-							8 * s, 8 * s, Color.BLACK, true)); // hat
-					snowMan.addShape(new Rectangle(new Point(x, y + s * 8),
-							15 * s, s, Color.BLACK, true));
-				}
-			}
-			x += 400;
-		}
-		return snowMan;
-	}
-
 }

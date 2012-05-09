@@ -2,11 +2,7 @@ package Shapes;
 
 /**
  * class that manage x and y cordinates of points as an object
-<<<<<<< .mine
  * 
-=======
- *
->>>>>>> .r25
  * @author Markus Krummnacker
  * @version (0.3)
  */
