@@ -9,6 +9,8 @@ import Shapes.Sprite.*;
  * @author (Martin Petzold)
  * @version (0.3)
  */
+//TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt. Diese Klasse verfügt über einen 
+//Thread zum Aktualisieren aller Sprite-Grafiken. Dieser Thread fordert alle Sprites auf, sich bei Bedarf zu aktualisieren.
 public class GameController {
 	public static int windowX = 380;
 	public static int windowY = 275;

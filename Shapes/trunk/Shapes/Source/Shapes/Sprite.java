@@ -5,12 +5,13 @@ import java.awt.Color;
 
 public class Sprite extends Figure {
 	// TODO Kommentierung!
+	// TODO make it abstract!
 	// TODO instanz variablen erst im Konstuktor initialisieren!
 	public Vector vector = new Vector(0, 0);
 	private Point middlePoint = new Point(0, 0);
 
 	// TODO implement an variable for rotaion that control the self rotation and
-	// rotate in update() --> usefull for Astroids!
+	// rotate in update() --> usefull for Astroids! also in ship! for rotate @update()!
 	public Sprite() {
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
 	}
