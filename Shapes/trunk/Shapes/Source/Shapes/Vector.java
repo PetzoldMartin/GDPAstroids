@@ -7,7 +7,6 @@ package Shapes;
  * @author Markus Krummnacker
  * @version (0.1)
  * 
->>>>>>> .r25
  */
 public class Vector extends Point {
 	private double amount;
