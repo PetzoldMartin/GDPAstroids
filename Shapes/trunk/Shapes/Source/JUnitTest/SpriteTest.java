@@ -6,10 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Astroids.SpaceShip;
+import Astroids.Sprite;
 import Shapes.Figure;
 import Shapes.Point;
-import Shapes.SpaceShip;
-import Shapes.Sprite;
 
 public class SpriteTest {
 	Sprite test;
