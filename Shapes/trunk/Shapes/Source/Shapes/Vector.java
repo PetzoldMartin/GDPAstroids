@@ -4,8 +4,10 @@ package Shapes;
  * class that manage a Vector with x and y and also with amount as lenght and
  * phi as angel
  * 
- * @author heliosana
+ * @author Markus Krummnacker
+ * @version (0.1)
  * 
+>>>>>>> .r25
  */
 public class Vector extends Point {
 	private double amount;

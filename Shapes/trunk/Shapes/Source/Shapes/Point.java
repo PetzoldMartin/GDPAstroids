@@ -2,7 +2,11 @@ package Shapes;
 
 /**
  * class that manage x and y cordinates of points as an object
+<<<<<<< .mine
+ * 
+=======
  *
+>>>>>>> .r25
  * @author Markus Krummnacker
  * @version (0.3)
  */
@@ -80,6 +84,27 @@ public class Point {
 				return false;
 		} else
 			return false;
+	}
+
+	/**
+	 * @return
+	 */
+	public Point checkCorner() {
+		if (Math.abs(this.x) >= Main.windowX) {
+			if (this.x >= Main.windowX) {
+				return new Point(-Main.windowX,0);
+			} else {
+				return new Point(Main.windowX,0);
+			}
+		}
+		if (Math.abs(this.y) >= Main.windowY) {
+			if (this.y >= Main.windowY) {
+				return new Point(0,-Main.windowY);
+			} else {
+				return new Point(0,Main.windowY);
+			}
+		}
+		return new Point(0, 0);
 	}
 
 	public double getX() {

@@ -25,8 +25,8 @@ public class Sprite extends Figure {
 		this.draw();
 		this.move(vector);
 	}
-	// TODO Wenn direction seit dem letztem Aufruf von update() verändert wurde, dann wird shape.rotate() aufgerufen. 
-	// Dies soll also nur bei einer Veränderung passieren damit die Shape nicht ständig rotiert. Zur Fortbewegung 
+	// TODO Wenn direction seit dem letztem Aufruf von update() verï¿½ndert wurde, dann wird shape.rotate() aufgerufen. 
+	// Dies soll also nur bei einer Verï¿½nderung passieren damit die Shape nicht stï¿½ndig rotiert. Zur Fortbewegung 
 	// werden das Delta-x und -y berechnet und in shape.move() verwendet. Diese Methode wird immer aufgerufen, 
 	// damit sich die Shape bei jedem update() fortbewegt (es sei denn, speed ist 0).
 	
