@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * class that manage a circle as an object subclass of Shape
  * 
- * @author (Markus Krummnacker)
+ * @author (Markus Krummnacker, Martin Petzold)
  * @version (0.3)
  */
 public class Circle extends Shape {
