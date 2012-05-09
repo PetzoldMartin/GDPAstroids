@@ -14,6 +14,16 @@ public class SpaceShip extends Sprite {
 	shipList.add(new Point(0, 15));
 	this.addShape(new Polygon(shipList, Color.WHITE, false));
 	}
+
+	@Override
+	public void update() {
+		{
+			this.draw();
+			this.move(vector);
+		}
+		
+	}
 	
 
+	
 }

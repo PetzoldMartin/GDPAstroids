@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import Shapes.Figure;
 import Shapes.Point;
+import Shapes.SpaceShip;
 import Shapes.Sprite;
 
 public class SpriteTest {
@@ -15,7 +16,7 @@ public class SpriteTest {
 
 	@Before
 	public void setUp() throws Exception {
-		 test = Sprite.ship();
+		 test = new SpaceShip();
 	}
 
 	@After
