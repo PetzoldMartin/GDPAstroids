@@ -99,7 +99,7 @@ public class PolygonTest extends TestCase{
 	
 
 	@Test
-	public void testEqualsPolygon() {
+	public void testEqualsPolygon()  {
 		assertTrue("Die equals Methode testet nicht auf Reflexivität", x.equals(x));
 		assertTrue("Die equals Methode testet nicht auf Symetrie",x.equals(y)&&y.equals(x));
 	    assertTrue("Die equals Methode testet nicht auf Transitivität",x.equals(y)&&y.equals(z)&&x.equals(z));
@@ -109,7 +109,6 @@ public class PolygonTest extends TestCase{
 			z.setPoints(A4);
 		} catch (PolygoneShapeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		z.setSolid(true);
 		z.setColor(Color.BLUE);

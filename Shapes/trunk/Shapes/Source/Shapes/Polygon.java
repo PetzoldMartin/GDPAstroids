@@ -109,6 +109,9 @@ public class Polygon extends Shape {
 	 *            color of the polygon
 	 * @param solid
 	 *            choice is the polygon fullfilled
+	 *            
+	 * @throws PolygoneShapeException
+	 * 				this exeption throws if the Shape has less then 2 Points
 	 */
 	public void setPoints(ArrayList<Point> points) throws PolygoneShapeException {
 		if(points.size()<=2)

@@ -32,5 +32,6 @@ public class LineTest extends TestCase {
 		assertFalse(new Line(new Point(1, 2), new Point(2, 2)).equals(l1));
 		assertFalse(new Line(new Point(1, 1), new Point(1, 2)).equals(l1));
 		assertFalse(new Line(new Point(1, 1), new Point(2, 1)).equals(l1));
+		//TODO Test second Construktor of Line
 	}
 }
