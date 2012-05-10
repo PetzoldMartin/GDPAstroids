@@ -11,8 +11,8 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-
-public class InputKeyController extends GameController {
+//TODO make it to thread!!!
+public class InputKeyController extends GameController implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private InputListener InputListener;
 	static Sprite test1 = new SpaceShip();
@@ -21,7 +21,7 @@ public class InputKeyController extends GameController {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
-		this.setSize(40, 40);
+		this.setSize(200, 200);
 		InputListener = new InputListener() {
 
 			@Override
@@ -30,33 +30,34 @@ public class InputKeyController extends GameController {
 				{
 
 					if (left == true) {
-						test1.vector.changeDirection(-6);
+						test1.vector.changeDirection(-keyRotationAngel);
 						System.out.println("left");
 						
 
 					}
 					if (right == true) {
-						test1.vector.changeDirection(6);
+						test1.vector.changeDirection(keyRotationAngel);
 						System.out.println("right");
 						
 
 					}
 					if (up == true) {
-						test1.vector.changeSpeed(0.1);
+						test1.vector.changeSpeed(keyAcelleration);
 						System.out.println("up");
 						
 
 					}
 					if (down == true) {
-						test1.vector.changeSpeed(-0.1);
+						test1.vector.changeSpeed(-keyAcelleration);
 						System.out.println("down");
 						
 
 					}
 
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+					javax.swing.SwingUtilities.invokeLater(new Thread() {
 						public void run() {
-							test1.update();
+//							test1.update();
+							Sprite.updateAll();
 							try {
 								Thread.sleep(GameController.globalFrameTime);
 							} catch (InterruptedException e) {
@@ -101,6 +102,12 @@ public class InputKeyController extends GameController {
 				}
 		});
 		
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO check keys and change direktion and speed of SpaceShip
 		
 	}
 

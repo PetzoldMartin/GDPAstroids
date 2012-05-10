@@ -12,8 +12,13 @@ import Shapes.Rectangle;
  * @author (Martin Petzold)
  * @version (0.1)
  */
+@SuppressWarnings("serial")
 public class GameController extends javax.swing.JFrame {
-	// TODO implemets setup
+	// TODO implement setup
+	//[setup]
+	public static double keyRotationAngel = 3;
+	public static double keyAcelleration = 0.1;
+	//[setup/]
 	public static int windowX = 380 / 2;
 	public static int windowY = 275 / 2;
 	public static Point window = new Point(windowX * 2, windowY * 2);

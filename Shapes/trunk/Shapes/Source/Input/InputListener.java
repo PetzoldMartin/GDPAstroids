@@ -2,9 +2,11 @@ package Input;
 
 import java.awt.event.*;
 
+import Astroids.GameController;
+
 public abstract class InputListener extends Thread implements
 		java.awt.event.KeyListener {
-	public long timeSlice = 50; // Millisekunden, wie oft soll die Bewegung
+	public long timeSlice = GameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
 	// abgefragt werden
 	private boolean left = false;
 	private boolean right = false;
@@ -17,24 +19,24 @@ public abstract class InputListener extends Thread implements
 	}
 
 	public void keyPressed(java.awt.event.KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if (e.getKeyCode() == KeyEvent.VK_LEFT | e.getKeyCode() == KeyEvent.VK_A)
 			left = true;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT | e.getKeyCode() == KeyEvent.VK_D)
 			right = true;
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+		if (e.getKeyCode() == KeyEvent.VK_UP | e.getKeyCode() == KeyEvent.VK_W)
 			up = true;
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		if (e.getKeyCode() == KeyEvent.VK_DOWN | e.getKeyCode() == KeyEvent.VK_S)
 			down = true;
 	}
 
 	public void keyReleased(java.awt.event.KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if (e.getKeyCode() == KeyEvent.VK_LEFT | e.getKeyCode() == KeyEvent.VK_A)
 			left = false;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT | e.getKeyCode() == KeyEvent.VK_D)
 			right = false;
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+		if (e.getKeyCode() == KeyEvent.VK_UP | e.getKeyCode() == KeyEvent.VK_W)
 			up = false;
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		if (e.getKeyCode() == KeyEvent.VK_DOWN | e.getKeyCode() == KeyEvent.VK_S)
 			down = false;
 	}
 
