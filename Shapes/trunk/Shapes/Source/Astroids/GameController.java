@@ -6,7 +6,6 @@ import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
 
-
 /**
  * class that manage the program
  * 
@@ -14,16 +13,18 @@ import Shapes.Rectangle;
  * @version (0.1)
  */
 public class GameController {
-	public static int windowX = 380/2;
-	public static int windowY = 275/2;
-	public static Point window = new Point(windowX*2, windowY*2);
-	public static long globalFrameTime= 1000/50;
+	public static int windowX = 380 / 2;
+	public static int windowY = 275 / 2;
+	public static Point window = new Point(windowX * 2, windowY * 2);
+	public static long globalFrameTime = 1000 / 50;
 
-	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt. Diese
+	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
+	// Diese
 	// Klasse verfügt über einen
-	// Thread zum Aktualisieren aller Sprite-Grafiken. Dieser Thread fordert alle
+	// Thread zum Aktualisieren aller Sprite-Grafiken. Dieser Thread fordert
+	// alle
 	// Sprites auf, sich bei Bedarf zu aktualisieren.
-	
+
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -50,7 +51,6 @@ public class GameController {
 				test1.vector.changeDirection(90);
 				test2.vector.changeDirection(90);
 			}
-
 		}
 	}
 }
