@@ -1,8 +1,6 @@
 package Shapes;
 
 import java.awt.Color;
-import junit.*;
-import junit.framework.TestSuite;
 
 /**
  * class that manage a circle as an object subclass of Shape

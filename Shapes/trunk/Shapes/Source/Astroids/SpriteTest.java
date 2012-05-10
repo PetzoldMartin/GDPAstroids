@@ -9,7 +9,7 @@ import org.junit.Test;
 import Astroids.SpaceShip;
 import Astroids.Sprite;
 import Shapes.Point;
-
+//TODO move to JUnit Package
 public class SpriteTest {
 	Sprite test;
 

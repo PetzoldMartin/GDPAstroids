@@ -1,7 +1,8 @@
 package Shapes;
 
-import teaching.*;
 import java.awt.Color;
+
+import teaching.WhiteBoard;
 
 /**
  * class that manage shapes color's and solid's and allocate whiteboard subclass

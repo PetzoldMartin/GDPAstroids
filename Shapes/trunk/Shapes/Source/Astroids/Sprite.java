@@ -1,15 +1,30 @@
 package Astroids;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import Shapes.*;
 
-public abstract class Sprite extends Figure {
+public class Sprite extends Figure {
 	// TODO Kommentierung!
-	// TODO make non abstract
 	public Vector vector;
 	protected Point middlePoint;
 	protected double rotationPhi;
+	protected static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+
+	public static void updateAll() {
+		//FIXME interrates all sprites and update() them
+//		Long runTime = System.currentTimeMillis();
+		for (Sprite sprite : sprites) {
+			sprite.update();
+		}
+//		try {
+//			 Thread.sleep(GameController.globalFrameTime - System.currentTimeMillis() - runTime);
+//			 } catch (IllegalArgumentException e) {
+//			 System.out.println("Time Overload");
+//			 }
+//		System.out.println(runTime / GameController.globalFrameTime);
+	}
 
 	/**
 	 * Constructor for objects of class Sprite - overloaded
@@ -21,6 +36,7 @@ public abstract class Sprite extends Figure {
 	 *            The movement-speed and movement-direction of the Sprite
 	 */
 	public Sprite() {
+		sprites.add(this);
 		this.middlePoint = new Point(0, 0);
 		this.vector = new Vector(0, 0);
 		this.rotationPhi = 0;
@@ -38,10 +54,12 @@ public abstract class Sprite extends Figure {
 		this.vector = vector;
 	}
 
-	// TODO make non abstract
-	public abstract void update() throws InterruptedException;
-
-	// TODO implement updateAll() update all Sprites in a static list
+	public void update() {
+//		Long runTime = System.currentTimeMillis();
+		this.draw();
+		this.move(vector);
+//		return System.currentTimeMillis() - runTime;
+	}
 
 	public Sprite move() {
 		return (Sprite) super.move(vector);

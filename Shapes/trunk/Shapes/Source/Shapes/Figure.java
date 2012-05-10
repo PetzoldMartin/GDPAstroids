@@ -1,7 +1,6 @@
 package Shapes;
 
 import java.util.ArrayList;
-import java.awt.Color;
 
 /**
  * class that manage a figure as an object
@@ -11,6 +10,7 @@ import java.awt.Color;
  */
 public class Figure extends Drawable {
 	private ArrayList<Drawable> shapes = new ArrayList<Drawable>();
+
 	/**
 	 * add aDrawable to the static ArrayList
 	 * 
@@ -55,6 +55,7 @@ public class Figure extends Drawable {
 	 *            angel to rotate
 	 */
 
+	@Override
 	public Drawable rotate(Point center, double phi) {
 		for (Drawable aDrawable : shapes) {
 			aDrawable.rotate(center, phi);

@@ -1,7 +1,5 @@
 package Shapes;
 
-import Astroids.GameController;
-
 /**
  * class that manage x and y cordinates of points as an object
  * 
@@ -27,13 +25,25 @@ public class Point {
 	/**
 	 * move the point by dx & dy on Whiteboard
 	 * 
+	 * @param dX
+	 *            delta x to translate
+	 * @param dY
+	 *            y to translate
+	 */
+	public Point move(double dX, double dY) {
+		this.x += dX;
+		this.y += dY;
+		return this;
+	}
+
+	/**
+	 * move the point by Point(delta x , delta y) on Whiteboard
+	 * 
 	 * @param trans
 	 *            point to translate with dx and dy
 	 */
 	public Point move(Point trans) {
-		this.x += trans.getX();
-		this.y += trans.getY();
-		return this;
+		return this.move(trans.getX(), trans.getY());
 	}
 
 	/**
@@ -57,8 +67,16 @@ public class Point {
 	}
 
 	/**
-	 * @return return a new point that is a copy of this one
+	 * @return an inverted Point of this Point
 	 */
+	public Point invert() {
+		return new Point(-getX(), -getY());
+	}
+
+	/**
+	 * @return a new point that is a copy of this one
+	 */
+
 	public Point copy() {
 		return new Point(getX(), getY());
 	}
@@ -83,7 +101,7 @@ public class Point {
 		} else
 			return false;
 	}
-	
+
 	public double getX() {
 		return x;
 	}

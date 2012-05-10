@@ -16,7 +16,7 @@ public class GameController {
 	public static int windowX = 380 / 2;
 	public static int windowY = 275 / 2;
 	public static Point window = new Point(windowX * 2, windowY * 2);
-	public static long globalFrameTime = 1000 / 50;
+	public static long globalFrameTime = 1000 / 30;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese
@@ -43,9 +43,10 @@ public class GameController {
 			test2.vector.changeDirection(-90);
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 25; i++) {
-					astro.update();
+					//astro.update();
 					test1.update();
-					test2.update();
+					test2.update();					
+					Thread.sleep(globalFrameTime);
 				}
 				astro.setMiddlePoint(new Point(0, 0));
 				test1.vector.changeDirection(90);
