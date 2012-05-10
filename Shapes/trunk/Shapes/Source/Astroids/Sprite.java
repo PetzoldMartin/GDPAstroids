@@ -23,7 +23,7 @@ public abstract class Sprite extends Figure {
 	public Sprite() {
 		this.middlePoint = new Point(0, 0);
 		this.vector = new Vector(0, 0);
-		this.rotationPhi=0;
+		this.rotationPhi = 0;
 		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
 
 	}
@@ -38,12 +38,11 @@ public abstract class Sprite extends Figure {
 		this.vector = vector;
 	}
 
-	
-	//TODO make non abstract
+	// TODO make non abstract
 	public abstract void update() throws InterruptedException;
-	
-	//TODO implement updateAll() update all Sprites in a static list
-	
+
+	// TODO implement updateAll() update all Sprites in a static list
+
 	public Sprite move() {
 		return (Sprite) super.move(vector);
 	}
@@ -52,34 +51,35 @@ public abstract class Sprite extends Figure {
 		return this.rotate(middlePoint, phi);
 	}
 
-	public Point getMiddlePoint() {
-		return middlePoint;
-	}
-
-	protected void setMiddlePoint(Point middlePoint) {
-		this.move(new Point(middlePoint.getX()-this.middlePoint.getX(),middlePoint.getY()-this.middlePoint.getY()));
-		//FIXME setMiddlePoint must move the sprite to the right position
-		// for Astroids Constructor and corner warp
-	}
 	/**
-	 * @return
-	 * Point to move to the other corner
+	 * @return Point to move to the other corner
 	 */
-	public Point checkCorner() {
+	protected Point checkCorner() {
 		if (Math.abs(this.middlePoint.getX()) >= GameController.windowX) {
 			if (this.middlePoint.getX() >= GameController.windowX) {
-				return new Point(-GameController.windowX,0);
+				return new Point(-GameController.windowX, 0);
 			} else {
-				return new Point(GameController.windowX,0);
+				return new Point(GameController.windowX, 0);
 			}
 		}
 		if (Math.abs(this.middlePoint.getY()) >= GameController.windowY) {
 			if (this.middlePoint.getY() >= GameController.windowY) {
-				return new Point(0,-GameController.windowY);
+				return new Point(0, -GameController.windowY);
 			} else {
-				return new Point(0,GameController.windowY);
+				return new Point(0, GameController.windowY);
 			}
 		}
 		return new Point(0, 0);
+	}
+
+	protected void setMiddlePoint(Point middlePoint) {
+		this.move(new Point(middlePoint.getX() - this.middlePoint.getX(),
+				middlePoint.getY() - this.middlePoint.getY()));
+		// FIXME setMiddlePoint must move the sprite to the right position
+		// for Astroids Constructor and corner warp
+	}
+
+	public Point getMiddlePoint() {
+		return middlePoint;
 	}
 }

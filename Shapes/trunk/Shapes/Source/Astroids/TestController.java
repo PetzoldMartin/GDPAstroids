@@ -11,7 +11,7 @@ import Shapes.*;
  * @version (0.1)
  */
 
-public class TestController extends GameController{
+public class TestController extends GameController {
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -30,7 +30,7 @@ public class TestController extends GameController{
 			test2.vector.changeDirection(-90);
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 25; i++) {
-					//astro.update();
+					// astro.update();
 					test1.update();
 					test2.update();
 				}
@@ -38,7 +38,6 @@ public class TestController extends GameController{
 				test1.vector.changeDirection(90);
 				test2.vector.changeDirection(90);
 			}
-
 		}
 	}
 }

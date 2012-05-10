@@ -40,12 +40,7 @@ public class SpaceShip extends Sprite {
 				Thread.sleep(GameController.globalFrameTime - runTime);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Time Overload");
-				// e.printStackTrace();
 			}
-			//
-
 		}
-
 	}
-
 }
