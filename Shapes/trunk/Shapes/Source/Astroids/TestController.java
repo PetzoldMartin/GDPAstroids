@@ -30,9 +30,7 @@ public class TestController extends GameController {
 			test2.vector.changeDirection(-90);
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 25; i++) {
-					// astro.update();
-					test1.update();
-					test2.update();
+					Sprite.updateAll();
 				}
 				astro.setMiddlePoint(new Point(0, 0));
 				test1.vector.changeDirection(90);

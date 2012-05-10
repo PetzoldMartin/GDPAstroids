@@ -18,29 +18,24 @@ public class SpaceShip extends Sprite {
 	}
 
 	@Override
-	public void update() throws InterruptedException {
-		{
-			//TODO implement this in Gamecontroller and delete here
-			Long runTime = (long) 0;
-			synchronized (runTime) {
-				runTime = System.currentTimeMillis();
-			}
-			//
-			this.draw();
-			if (rotationPhi != vector.getPhi()) {
-				this.rotate(rotationPhi - vector.getPhi());
-			}
-			rotationPhi = this.vector.getPhi();
-			this.move(vector);
-			//TODO implement this in Gamecontroller and Delete here
-			synchronized (runTime) {
-				runTime = System.currentTimeMillis() - runTime;
-			}
-			try {
-				Thread.sleep(GameController.globalFrameTime - runTime);
-			} catch (IllegalArgumentException e) {
-				System.out.println("Time Overload");
-			}
+	public void update() {
+		// Long runTime = 
+		super.update();
+		// synchronized (runTime) {
+		// runTime = System.currentTimeMillis();
+		// }
+		if (rotationPhi != vector.getPhi()) {
+			this.rotate(rotationPhi - vector.getPhi());
 		}
+		rotationPhi = this.vector.getPhi();
+		// synchronized (runTime) {
+		// runTime = System.currentTimeMillis() - runTime;
+		// }
+		// try {
+		// Thread.sleep(GameController.globalFrameTime - runTime);
+		// } catch (IllegalArgumentException e) {
+		// System.out.println("Time Overload");
+		// }
+		// return System.currentTimeMillis() - runTime;
 	}
 }
