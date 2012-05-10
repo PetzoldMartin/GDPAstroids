@@ -37,5 +37,6 @@ public class SpaceShip extends Sprite {
 		// System.out.println("Time Overload");
 		// }
 		// return System.currentTimeMillis() - runTime;
+
 	}
 }
