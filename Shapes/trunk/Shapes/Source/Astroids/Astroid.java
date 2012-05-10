@@ -8,7 +8,7 @@ public class Astroid extends Sprite {
 	//TODO multiple Constuctors with middle point and vector input with uses super Constructor 
 
 	public Astroid() {
-		super(new Point(Math.random()*Main.windowX-Main.windowX/2,Math.random()*Main.windowY-Main.windowY/2),new Vector(Math.random()*10,Math.random()*360));	
+		super(new Point(Math.random()*GameController.windowX-GameController.windowX/2,Math.random()*GameController.windowY-GameController.windowY/2),new Vector(Math.random()*10,Math.random()*360));	
 		this.rotationPhi=Math.random()*45;
 		building(middlePoint);
 	}
@@ -28,7 +28,7 @@ public class Astroid extends Sprite {
 			this.draw();
 			this.move(vector);
 			rotate(this.rotationPhi);
-			Thread.sleep(Main.globalFrameTime);
+			Thread.sleep(GameController.globalFrameTime);
 		}
 	}
 }

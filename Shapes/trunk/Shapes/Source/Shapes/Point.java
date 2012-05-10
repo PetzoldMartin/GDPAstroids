@@ -1,6 +1,6 @@
 package Shapes;
 
-import Astroids.Main;
+import Astroids.GameController;
 
 /**
  * class that manage x and y cordinates of points as an object
@@ -83,28 +83,7 @@ public class Point {
 		} else
 			return false;
 	}
-
-	/**
-	 * @return
-	 */
-	public Point checkCorner() {
-		if (Math.abs(this.x) >= Main.windowX) {
-			if (this.x >= Main.windowX) {
-				return new Point(-Main.windowX,0);
-			} else {
-				return new Point(Main.windowX,0);
-			}
-		}
-		if (Math.abs(this.y) >= Main.windowY) {
-			if (this.y >= Main.windowY) {
-				return new Point(0,-Main.windowY);
-			} else {
-				return new Point(0,Main.windowY);
-			}
-		}
-		return new Point(0, 0);
-	}
-
+	
 	public double getX() {
 		return x;
 	}

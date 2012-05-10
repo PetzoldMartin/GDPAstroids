@@ -61,5 +61,25 @@ public abstract class Sprite extends Figure {
 		//FIXME setMiddlePoint must move the sprite to the right position
 		// for Astroids Constructor and corner warp
 	}
-
+	/**
+	 * @return
+	 * Point to move to the other corner
+	 */
+	public Point checkCorner() {
+		if (Math.abs(this.middlePoint.getX()) >= GameController.windowX) {
+			if (this.middlePoint.getX() >= GameController.windowX) {
+				return new Point(-GameController.windowX,0);
+			} else {
+				return new Point(GameController.windowX,0);
+			}
+		}
+		if (Math.abs(this.middlePoint.getY()) >= GameController.windowY) {
+			if (this.middlePoint.getY() >= GameController.windowY) {
+				return new Point(0,-GameController.windowY);
+			} else {
+				return new Point(0,GameController.windowY);
+			}
+		}
+		return new Point(0, 0);
+	}
 }
