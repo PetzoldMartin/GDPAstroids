@@ -6,18 +6,18 @@ import Input.InputListener;
 import Shapes.*;
 
 /**
- * class to test controller funktions
+ * class to control the inputs
  * 
  * @author (Martin Petzold)
  * @version (0.1)
  */
 
-public class TestController extends GameController {
+public class InputKeyController extends GameController {
 	private static final long serialVersionUID = 1L;
 	private InputListener InputListener;
 	static Sprite test1 = new SpaceShip();
 
-	public TestController() {
+	public InputKeyController() {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
@@ -94,15 +94,11 @@ public class TestController extends GameController {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-
-
-		final TestController AstroidsInput = new TestController();
+		final InputKeyController AstroidsInput = new InputKeyController();
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				AstroidsInput.setVisible(true);
-					
-
-			}
+				}
 		});
 		
 		

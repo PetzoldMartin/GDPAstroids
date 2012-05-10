@@ -29,7 +29,8 @@ public class Vector extends Shapes.Point {
 	 *            angel of the vector
 	 */
 	public Vector(double amount, double phi) {
-		super(amount * Math.cos(Math.toRadians(phi)), amount * Math.sin(Math.toRadians(phi)));
+		super(amount * Math.cos(Math.toRadians(phi)), amount
+				* Math.sin(Math.toRadians(phi)));
 		this.amount = amount;
 		this.phi = phi;
 	}
@@ -45,7 +46,7 @@ public class Vector extends Shapes.Point {
 				+ Math.pow(this.getY(), 2.0));
 		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
 	}
-	
+
 	/**
 	 * Set this Vector by a Point
 	 * 
@@ -108,7 +109,6 @@ public class Vector extends Shapes.Point {
 	 */
 	public Vector changeDirection(double phi) {
 		return changeVector(0, phi);
-
 	}
 
 	/**
@@ -118,6 +118,7 @@ public class Vector extends Shapes.Point {
 	 *            lenght of the vector
 	 * @return this
 	 */
+	// TODO implement a max speed
 	public Vector changeSpeed(double amount) {
 		return changeVector(amount, 0);
 	}

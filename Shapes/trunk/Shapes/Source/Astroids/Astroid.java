@@ -5,9 +5,7 @@ import java.awt.Color;
 import Shapes.*;
 
 public class Astroid extends Sprite {
-	// TODO multiple Constuctors with middle point and vector input with uses
-	// super Constructor
-
+	
 	public Astroid() {
 		super(new Point(Math.random() * GameController.windowX
 				- GameController.windowX / 2, Math.random()
