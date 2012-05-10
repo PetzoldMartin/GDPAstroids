@@ -32,30 +32,37 @@ public class TestController extends GameController {
 					if (left == true) {
 						test1.vector.changeDirection(-6);
 						System.out.println("left");
-						test1.update();
+						
 
 					}
 					if (right == true) {
 						test1.vector.changeDirection(6);
 						System.out.println("right");
-						test1.update();
+						
 
 					}
 					if (up == true) {
 						test1.vector.changeSpeed(0.1);
 						System.out.println("up");
-						test1.update();
+						
 
 					}
 					if (down == true) {
 						test1.vector.changeSpeed(-0.1);
 						System.out.println("down");
-						test1.update();
+						
 
 					}
 
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
+							test1.update();
+							try {
+								Thread.sleep(GameController.globalFrameTime);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
 						}
 					});
