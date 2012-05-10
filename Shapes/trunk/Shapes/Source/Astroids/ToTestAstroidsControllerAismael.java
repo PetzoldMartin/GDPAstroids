@@ -12,7 +12,7 @@ import Shapes.Rectangle;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-public class ToTestAstroidsControllerHelio extends GameController {
+public class ToTestAstroidsControllerAismael extends GameController {
 	/**
 	 * @param args
 	 * @throws InterruptedException
