@@ -12,6 +12,7 @@ import Shapes.Rectangle;
  * @author (Martin Petzold)
  * @version (0.1)
  */
+@SuppressWarnings("serial")
 public class ToTestAstroidsControllerAismael extends GameController {
 	/**
 	 * @param args

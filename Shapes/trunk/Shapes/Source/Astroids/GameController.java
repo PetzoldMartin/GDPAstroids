@@ -2,9 +2,7 @@ package Astroids;
 
 import java.awt.Color;
 
-import Shapes.Drawable;
-import Shapes.Point;
-import Shapes.Rectangle;
+import Shapes.*;
 
 /**
  * class that manage the program
@@ -18,11 +16,12 @@ public class GameController extends javax.swing.JFrame {
 	//[setup]
 	public static double keyRotationAngel = 3;
 	public static double keyAcelleration = 0.1;
-	//[setup/]
 	public static int windowX = 380 / 2;
 	public static int windowY = 275 / 2;
+	public static int frames = 30;
+	//[setup/]
+	public static long globalFrameTime = 1000 / frames;
 	public static Point window = new Point(windowX * 2, windowY * 2);
-	public static long globalFrameTime = 1000 / 30;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
