@@ -5,7 +5,7 @@ import java.awt.event.*;
 import Astroids.GameController;
 import Astroids.OldGameController;
 import Astroids.Vector;
-
+//FIXME recombine with the right classes !!! try to comment out the Old classes!!!
 //TODO COMMIT INPUTLISTNERANDCONTROLLER
 public class InputListenerAndController extends javax.swing.JFrame implements
 		java.awt.event.KeyListener,Runnable {
