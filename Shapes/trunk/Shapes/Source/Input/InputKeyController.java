@@ -13,12 +13,13 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-//TODO make it to thread!!!
+// TODO make it to thread!!!
 public class InputKeyController extends javax.swing.JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private InputListener InputListener;
 	static Sprite test1 = new SpaceShip();
-	//TODO Spaceship Singled in Gamecontroller
+
+	// TODO Spaceship Singled in Gamecontroller
 
 	public InputKeyController() {
 		super();
@@ -33,43 +34,42 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 				{
 
 					if (left == true) {
-						GameController.spaceShip.vector.changeDirection(-GameController.keyRotationAngel);
+						GameController.spaceShip.vector
+								.changeDirection(-GameController.keyRotationAngel);
 						System.out.println("left");
-						
 
 					}
 					if (right == true) {
-						GameController.spaceShip.vector.changeDirection(GameController.keyRotationAngel);
+						GameController.spaceShip.vector
+								.changeDirection(GameController.keyRotationAngel);
 						System.out.println("right");
-						
 
 					}
 					if (up == true) {
-						GameController.spaceShip.vector.changeSpeed(GameController.keyAcelleration);
+						GameController.spaceShip.vector
+								.changeSpeed(GameController.keyAcelleration);
 						System.out.println("up");
-						
 
 					}
 					if (down == true) {
-						GameController.spaceShip.vector.changeSpeed(-GameController.keyAcelleration);
+						GameController.spaceShip.vector
+								.changeSpeed(-GameController.keyAcelleration);
 						System.out.println("down");
-						
 
 					}
-					
 
-//					javax.swing.SwingUtilities.invokeLater(new Thread() {
-//						public void run() {
-//							Sprite.updateAll();
-//							try {
-//								Thread.sleep(GameController.globalFrameTime);
-//							} catch (InterruptedException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//
-//						}
-//					});
+					// javax.swing.SwingUtilities.invokeLater(new Thread() {
+					// public void run() {
+					// Sprite.updateAll();
+					// try {
+					// Thread.sleep(GameController.globalFrameTime);
+					// } catch (InterruptedException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
+					//
+					// }
+					// });
 				}
 
 			}
@@ -80,16 +80,16 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 
 	@Override
 	public void setVisible(boolean value) {
-//		if (value == true) {
-//			this.addKeyListener(InputListener);
-//			InputListener.start();
-//		} else {
-//			InputListener.end();
-//			this.removeKeyListener(InputListener);
-//		}
+		// if (value == true) {
+		// this.addKeyListener(InputListener);
+		// InputListener.start();
+		// } else {
+		// InputListener.end();
+		// this.removeKeyListener(InputListener);
+		// }
 		this.addKeyListener(InputListener);
 		InputListener.start();
-		
+
 		super.setVisible(value);
 	}
 
@@ -97,39 +97,37 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 	 * @param args
 	 * @throws InterruptedException
 	 */
-//	public static void main(String[] args) throws InterruptedException {
-//		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
-//				window.getY(), Color.BLACK, true);
-//		background.draw();
-//		
-//		final InputKeyController AstroidsInput = new InputKeyController();
-//		AstroidsInput.setVisible(true);
-//		
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				AstroidsInput.setVisible(true);
-//				}
-//		});
-		
-		
-		
-//	}
+	// public static void main(String[] args) throws InterruptedException {
+	// Drawable background = new Rectangle(new Point(0, 0), window.getX(),
+	// window.getY(), Color.BLACK, true);
+	// background.draw();
+	//
+	// final InputKeyController AstroidsInput = new InputKeyController();
+	// AstroidsInput.setVisible(true);
+	//
+	// javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	// public void run() {
+	// AstroidsInput.setVisible(true);
+	// }
+	// });
+
+	// }
 
 	@Override
 	public void run() {
 		// TODO check keys and change direktion and speed of SpaceShip
 		final InputKeyController AstroidsInput = new InputKeyController();
 		AstroidsInput.setVisible(true);
-		while(true){
-		GameController.update();
-		try {
-			Thread.sleep(GameController.globalFrameTime);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while (true) {
+			GameController.update();
+			try {
+				Thread.sleep(GameController.globalFrameTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		
-	}
 	}
 
 }
