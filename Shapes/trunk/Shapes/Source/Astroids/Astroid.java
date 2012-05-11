@@ -7,9 +7,9 @@ import Shapes.*;
 public class Astroid extends Sprite {
 	//TODO commenting
 	public Astroid() {
-		super(new Point(Math.random() * GameController.windowX
-				- GameController.windowX / 2, Math.random()
-				* GameController.windowY - GameController.windowY / 2),
+		super(new Point(Math.random() * OldGameController.windowX
+				- OldGameController.windowX / 2, Math.random()
+				* OldGameController.windowY - OldGameController.windowY / 2),
 				new Vector(Math.random() * 10, Math.random() * 360));
 		this.rotationPhi = Math.random() * 45;
 		building(middlePoint);

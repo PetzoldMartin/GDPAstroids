@@ -3,8 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import Input.CopyOfInputListener;
-import Input.InputKeyController;
+import Input.OldInputKeyController;
 import Shapes.*;
 
 /**
@@ -13,14 +12,14 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-public class CopyOfGameControllerAismael {
+public class OldGameController extends Thread{
 	// TODO implement setup
 	//[setup]
 	public static double keyRotationAngel = 3;
 	public static double keyAcelleration = 0.1;
 	public static int windowX = 380 / 2;
 	public static int windowY = 275 / 2;
-	public static int frames = 25;
+	public static int frames = 50;
 	//[setup/]
 	public static long globalFrameTime = 1000 / frames;
 	public static Point window = new Point(windowX * 2, windowY * 2);
@@ -36,30 +35,28 @@ public class CopyOfGameControllerAismael {
 	 * @param args
 	 * @throws InterruptedException
 	 */
-	public CopyOfGameControllerAismael() {
+	public OldGameController() {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		spaceShip =new SpaceShip();
+		new SpaceShip();
 		//new Astroid();
 		//new Astroid();
-		Thread inputKeyController= new Thread(new CopyOfInputListener() {
-		});
+		Thread inputKeyController= new Thread(new OldInputKeyController());
 		inputKeyController.start();
 		}
 	
-	public static void update() {
-		//FIXME interrates all sprites and update() them
-//		Long runTime = System.currentTimeMillis();
+	public static void update() throws InterruptedException {
+		Long runTime = System.nanoTime();
 		spaceShip.update();
 		for (Sprite sprite : sprites) {
 			sprite.update();
 		}
-//		try {
-//			 Thread.sleep(GameController.globalFrameTime - System.currentTimeMillis() - runTime);
-//			 } catch (IllegalArgumentException e) {
-//			 System.out.println("Time Overload");
-//			 }
-//		System.out.println(runTime / GameController.globalFrameTime);
+		try {
+			 Thread.sleep(runTime=globalFrameTime - (System.nanoTime() - runTime)/1000000);
+			 } catch (IllegalArgumentException e) {
+			 System.out.println("Time Overload: " + (runTime-globalFrameTime));
+			}
+		//System.out.println(runTime);
 	}
 }

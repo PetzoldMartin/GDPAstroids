@@ -2,7 +2,7 @@ package Astroids;
 
 import java.awt.Color;
 
-import Input.InputKeyController;
+import Input.OldInputKeyController;
 import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
@@ -13,7 +13,7 @@ import Shapes.Rectangle;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-public class ToTestAstroidsControllerAismael extends GameController {
+public class ToTestAstroidsControllerAismael extends OldGameController {
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -22,7 +22,7 @@ public class ToTestAstroidsControllerAismael extends GameController {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		Thread inputKeyController= new Thread(new InputKeyController());
+		Thread inputKeyController= new Thread(new OldInputKeyController());
 		inputKeyController.start();
 			
 		
