@@ -56,17 +56,7 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 
 					}
 
-					// javax.swing.SwingUtilities.invokeLater(new Thread() {
-					// public void run() {
-					// Sprite.updateAll();
-					// try {
-					// Thread.sleep(GameController.globalFrameTime);
-					// } catch (InterruptedException e) {
-					// e.printStackTrace();
-					// }
-					//
-					// }
-					// });
+
 				}
 
 			}
@@ -77,38 +67,14 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 
 	@Override
 	public void setVisible(boolean value) {
-		// if (value == true) {
-		// this.addKeyListener(InputListener);
-		// InputListener.start();
-		// } else {
-		// InputListener.end();
-		// this.removeKeyListener(InputListener);
-		// }
+		
 		this.addKeyListener(InputListener);
 		InputListener.start();
 
 		super.setVisible(value);
 	}
 
-	/**
-	 * @param args
-	 * @throws InterruptedException
-	 */
-	// public static void main(String[] args) throws InterruptedException {
-	// Drawable background = new Rectangle(new Point(0, 0), window.getX(),
-	// window.getY(), Color.BLACK, true);
-	// background.draw();
-	//
-	// final InputKeyController AstroidsInput = new InputKeyController();
-	// AstroidsInput.setVisible(true);
-	//
-	// javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	// public void run() {
-	// AstroidsInput.setVisible(true);
-	// }
-	// });
-
-	// }
+	
 
 	@Override
 	public void run() {
