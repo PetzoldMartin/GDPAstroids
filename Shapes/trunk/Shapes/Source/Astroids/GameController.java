@@ -2,6 +2,7 @@ package Astroids;
 
 import java.awt.Color;
 
+import Input.InputKeyController;
 import Shapes.*;
 
 /**
@@ -18,7 +19,7 @@ public class GameController extends javax.swing.JFrame {
 	public static double keyAcelleration = 0.1;
 	public static int windowX = 380 / 2;
 	public static int windowY = 275 / 2;
-	public static int frames = 30;
+	public static int frames = 50;
 	//[setup/]
 	public static long globalFrameTime = 1000 / frames;
 	public static Point window = new Point(windowX * 2, windowY * 2);
@@ -39,6 +40,8 @@ public class GameController extends javax.swing.JFrame {
 		Sprite test1 = new SpaceShip();
 		Sprite test2 = new SpaceShip();
 		Sprite astro = new Astroid();
+		Thread inputKeyController= new Thread(new InputKeyController());
+		inputKeyController.start();
 		test1.vector.changeSpeed(8);
 		test2.vector.changeSpeed(4);
 		for (;;) {
@@ -46,7 +49,7 @@ public class GameController extends javax.swing.JFrame {
 			test2.vector.changeDirection(-90);
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 25; i++) {
-					// astro.update();
+					 astro.update();
 					test1.update();
 					test2.update();
 					Thread.sleep(globalFrameTime);
@@ -57,4 +60,6 @@ public class GameController extends javax.swing.JFrame {
 			}
 		}
 	}
+	
+	
 }

@@ -45,6 +45,7 @@ public abstract class InputListener extends Thread implements
 	 */
 	@Override
 	public void run() {
+		//TODO Synchronise with Framecontroller
 		stopFlag = false;
 		long lastRunTime = System.currentTimeMillis();
 		while (!stopFlag) {
