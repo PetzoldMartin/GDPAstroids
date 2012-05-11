@@ -39,7 +39,7 @@ public class GameController {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		spaceShip = new SpaceShip();
+		new SpaceShip();
 		//new Astroid();
 		//new Astroid();
 		Thread inputKeyController= new Thread(new InputKeyController());

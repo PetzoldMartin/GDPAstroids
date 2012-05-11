@@ -60,7 +60,7 @@ public abstract class InputListener extends Thread implements
 	}
 
 	/*
-	 * Halte den Thread bei nächster Gelgenheit an
+	 * Halte den Thread bei nï¿½chster Gelgenheit an
 	 */
 	public void end() {
 		stopFlag = true;
