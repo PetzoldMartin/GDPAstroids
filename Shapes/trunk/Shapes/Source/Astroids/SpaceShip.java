@@ -21,24 +21,10 @@ public class SpaceShip extends Sprite {
 
 	@Override
 	public void update() {
-		// Long runTime = 
 		super.update();
-		// synchronized (runTime) {
-		// runTime = System.currentTimeMillis();
-		// }
 		if (rotationPhi != vector.getPhi()) {
 			this.rotate(rotationPhi - vector.getPhi());
 		}
 		rotationPhi = this.vector.getPhi();
-		// synchronized (runTime) {
-		// runTime = System.currentTimeMillis() - runTime;
-		// }
-		// try {
-		// Thread.sleep(GameController.globalFrameTime - runTime);
-		// } catch (IllegalArgumentException e) {
-		// System.out.println("Time Overload");
-		// }
-		// return System.currentTimeMillis() - runTime;
-
 	}
 }

@@ -5,7 +5,7 @@ import java.awt.Color;
 import Shapes.*;
 
 public class Astroid extends Sprite {
-	
+	//TODO commenting
 	public Astroid() {
 		super(new Point(Math.random() * GameController.windowX
 				- GameController.windowX / 2, Math.random()
@@ -29,10 +29,7 @@ public class Astroid extends Sprite {
 
 	@Override
 	public void update() {
-		// Long runTime = 
 		super.update();
 		rotate(this.rotationPhi);
-		// return System.currentTimeMillis() - runTime;
-
 	}
 }
