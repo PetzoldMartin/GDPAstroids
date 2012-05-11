@@ -2,11 +2,11 @@ package Input;
 
 import java.awt.event.*;
 
-import Astroids.GameController;
+import Astroids.OldGameController;
 
-public abstract class InputListener extends Thread implements
+public abstract class OldInputListener extends Thread implements
 		java.awt.event.KeyListener {
-	public long timeSlice = GameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
+	public long timeSlice = OldGameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
 	// abgefragt werden
 	private boolean left = false;
 	private boolean right = false;

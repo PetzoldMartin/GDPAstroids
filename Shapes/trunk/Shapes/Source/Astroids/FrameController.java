@@ -1,12 +1,18 @@
 package Astroids;
 
-public class FrameController extends GameController implements Runnable{
+import Input.InputListenerAndController;
+
+
+public class FrameController extends OldGameController implements Runnable{
 
 	@Override
 	public void run() {
-		// TODO Sprites.updateAll()		
-		// TODO InputKeyController.refresh()
+		try {
+			OldGameController.update();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-	}
-
-}
+	}}
+	

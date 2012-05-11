@@ -2,21 +2,23 @@ package Input;
 
 import java.awt.event.*;
 
-import Astroids.CopyOfGameControllerAismael;
-import Astroids.GameController;
+import Astroids.OldGameController;
+import Astroids.Vector;
 
-public abstract class CopyOfInputListener extends javax.swing.JFrame implements
+
+public class InputListenerAndController extends javax.swing.JFrame implements
 		java.awt.event.KeyListener,Runnable {
 	private static final long serialVersionUID = 1L;
 	//	private InputListener InputListener;
-	public long timeSlice = GameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
+	public long timeSlice = OldGameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
 	// abgefragt werden
-	private boolean left = false;
-	private boolean right = false;
-	private boolean up = false;
-	private boolean down = false;
+	private static boolean left = false;
+	private static  boolean right = false;
+	private static  boolean up = false;
+	private static  boolean down = false;
+	public static Vector Movement = new Vector(0,0);
 //	private boolean stopFlag = false;
-	public CopyOfInputListener() {
+	public InputListenerAndController() {
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
@@ -35,11 +37,7 @@ public abstract class CopyOfInputListener extends javax.swing.JFrame implements
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT | e.getKeyCode() == KeyEvent.VK_D)
 			right = true;
 		if (e.getKeyCode() == KeyEvent.VK_UP | e.getKeyCode() == KeyEvent.VK_W)
-			{GameController.spaceShip.vector
-			.changeSpeed(GameController.keyAcelleration);
-	System.out.println("up");
-	
-	}
+			up=true;
 		if (e.getKeyCode() == KeyEvent.VK_DOWN | e.getKeyCode() == KeyEvent.VK_S)
 			down = true;
 	}
@@ -60,7 +58,7 @@ public abstract class CopyOfInputListener extends javax.swing.JFrame implements
 	 */
 	@Override
 	public void run() {
-		CopyOfInputListener proggi = new CopyOfInputListener() {
+		InputListenerAndController proggi = new InputListenerAndController() {
 		};
         WindowListener wl = new WindowAdapter () {
                 public void windowClosing(WindowEvent we) {
@@ -72,33 +70,31 @@ public abstract class CopyOfInputListener extends javax.swing.JFrame implements
 			}
 
 
-	public  void doMovement(boolean left, boolean right, boolean up, boolean down)
+	public static   Vector doMovement()
 	{
 
 		if (left == true) {
-			GameController.spaceShip.vector
-					.changeDirection(-GameController.keyRotationAngel);
+			Movement.changeDirection(6);
 			System.out.println("left");
 
 		}
 		if (right == true) {
-			GameController.spaceShip.vector
-					.changeDirection(GameController.keyRotationAngel);
+			Movement.changeDirection(-6);
 			System.out.println("right");
 
 		}
 		if (up == true) {
-			GameController.spaceShip.vector
-					.changeSpeed(GameController.keyAcelleration);
+			Movement.changeSpeed(0.1);
 			System.out.println("up");
 
 		}
 		if (down == true) {
-			GameController.spaceShip.vector
-					.changeSpeed(-GameController.keyAcelleration);
+			Movement.changeSpeed(-0.1);
 			System.out.println("down");
 
 		}
+		return Movement;
 	}
+
 }
 
