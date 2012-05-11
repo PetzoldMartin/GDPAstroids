@@ -41,7 +41,7 @@ public class GameController extends Thread{
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		new SpaceShip();
+		spaceShip = new SpaceShip();
 		
 		//Input, ShipMovement and Whiteboard Refresh
 		Input=new InputListenerAndController();
