@@ -12,7 +12,7 @@ import Shapes.Rectangle;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-@SuppressWarnings("serial")
+
 public class ToTestAstroidsControllerHelio extends GameController {
 	/**
 	 * @param args

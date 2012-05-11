@@ -14,7 +14,7 @@ import Shapes.*;
  * @version (0.1)
  */
 //TODO make it to thread!!!
-public class InputKeyController extends GameController implements Runnable {
+public class InputKeyController extends javax.swing.JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private InputListener InputListener;
 	static Sprite test1 = new SpaceShip();
@@ -33,25 +33,25 @@ public class InputKeyController extends GameController implements Runnable {
 				{
 
 					if (left == true) {
-						test1.vector.changeDirection(-keyRotationAngel);
+						GameController.spaceShip.vector.changeDirection(-GameController.keyRotationAngel);
 						System.out.println("left");
 						
 
 					}
 					if (right == true) {
-						test1.vector.changeDirection(keyRotationAngel);
+						GameController.spaceShip.vector.changeDirection(GameController.keyRotationAngel);
 						System.out.println("right");
 						
 
 					}
 					if (up == true) {
-						test1.vector.changeSpeed(keyAcelleration);
+						GameController.spaceShip.vector.changeSpeed(GameController.keyAcelleration);
 						System.out.println("up");
 						
 
 					}
 					if (down == true) {
-						test1.vector.changeSpeed(-keyAcelleration);
+						GameController.spaceShip.vector.changeSpeed(-GameController.keyAcelleration);
 						System.out.println("down");
 						
 
@@ -121,7 +121,7 @@ public class InputKeyController extends GameController implements Runnable {
 		final InputKeyController AstroidsInput = new InputKeyController();
 		AstroidsInput.setVisible(true);
 		while(true){
-		Sprite.updateAll();
+		GameController.update();
 		try {
 			Thread.sleep(GameController.globalFrameTime);
 		} catch (InterruptedException e) {

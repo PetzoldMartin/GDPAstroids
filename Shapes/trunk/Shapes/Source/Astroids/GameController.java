@@ -1,6 +1,7 @@
 package Astroids;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import Input.InputKeyController;
 import Shapes.*;
@@ -11,8 +12,7 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-@SuppressWarnings("serial")
-public class GameController extends javax.swing.JFrame {
+public class GameController {
 	// TODO implement setup
 	//[setup]
 	public static double keyRotationAngel = 3;
@@ -23,6 +23,8 @@ public class GameController extends javax.swing.JFrame {
 	//[setup/]
 	public static long globalFrameTime = 1000 / frames;
 	public static Point window = new Point(windowX * 2, windowY * 2);
+	public static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+	public static SpaceShip spaceShip;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
@@ -33,33 +35,29 @@ public class GameController extends javax.swing.JFrame {
 	 * @param args
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] args) throws InterruptedException {
+	public GameController() {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		Sprite test1 = new SpaceShip();
-		Sprite test2 = new SpaceShip();
-		Sprite astro = new Astroid();
+		spaceShip = new SpaceShip();
+		//new Astroid();
+		//new Astroid();
 		Thread inputKeyController= new Thread(new InputKeyController());
 		inputKeyController.start();
-		test1.vector.changeSpeed(8);
-		test2.vector.changeSpeed(4);
-		for (;;) {
-			test1.vector.changeDirection(-90);
-			test2.vector.changeDirection(-90);
-			for (int j = 0; j < 4; j++) {
-				for (int i = 0; i < 25; i++) {
-					 astro.update();
-					test1.update();
-					test2.update();
-					Thread.sleep(globalFrameTime);
-				}
-				astro.setMiddlePoint(new Point(0, 0));
-				test1.vector.changeDirection(90);
-				test2.vector.changeDirection(90);
-			}
 		}
+	
+	public static void update() {
+		//FIXME interrates all sprites and update() them
+//		Long runTime = System.currentTimeMillis();
+		spaceShip.update();
+		for (Sprite sprite : sprites) {
+			sprite.update();
+		}
+//		try {
+//			 Thread.sleep(GameController.globalFrameTime - System.currentTimeMillis() - runTime);
+//			 } catch (IllegalArgumentException e) {
+//			 System.out.println("Time Overload");
+//			 }
+//		System.out.println(runTime / GameController.globalFrameTime);
 	}
-	
-	
 }
