@@ -2,21 +2,22 @@ package Input;
 
 import java.awt.event.*;
 
+import Astroids.GameController;
 import Astroids.OldGameController;
 import Astroids.Vector;
 
-
+//TODO COMMIT INPUTLISTNERANDCONTROLLER
 public class InputListenerAndController extends javax.swing.JFrame implements
 		java.awt.event.KeyListener,Runnable {
 	private static final long serialVersionUID = 1L;
 	//	private InputListener InputListener;
 	public long timeSlice = OldGameController.globalFrameTime; // Millisekunden, wie oft soll die Bewegung
 	// abgefragt werden
-	private static boolean left = false;
-	private static  boolean right = false;
-	private static  boolean up = false;
-	private static  boolean down = false;
-	public static Vector Movement = new Vector(0,0);
+	private  boolean left = false;
+	private  boolean right = false;
+	private  boolean up = false;
+	private  boolean down = false;
+	public  Vector Movement = new Vector(0,0);
 //	private boolean stopFlag = false;
 	public InputListenerAndController() {
 		super();
@@ -70,26 +71,26 @@ public class InputListenerAndController extends javax.swing.JFrame implements
 			}
 
 
-	public static   Vector doMovement()
+	public Vector doMovement()
 	{
 
 		if (left == true) {
-			Movement.changeDirection(6);
+			Movement.changeDirection(GameController.keyRotationAngel);
 			System.out.println("left");
 
 		}
 		if (right == true) {
-			Movement.changeDirection(-6);
+			Movement.changeDirection(-GameController.keyRotationAngel);
 			System.out.println("right");
 
 		}
 		if (up == true) {
-			Movement.changeSpeed(0.1);
+			Movement.changeSpeed(GameController.keyAcelleration);
 			System.out.println("up");
 
 		}
 		if (down == true) {
-			Movement.changeSpeed(-0.1);
+			Movement.changeSpeed(-GameController.keyAcelleration);
 			System.out.println("down");
 
 		}

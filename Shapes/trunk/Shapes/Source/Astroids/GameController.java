@@ -13,7 +13,7 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-public class GameController {
+public class GameController extends Thread{
 	// TODO implement setup
 	//[setup]
 	public static double keyRotationAngel = 3;
@@ -26,6 +26,7 @@ public class GameController {
 	public static Point window = new Point(windowX * 2, windowY * 2);
 	public static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	public static SpaceShip spaceShip;
+	private InputListenerAndController Input;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
@@ -40,15 +41,18 @@ public class GameController {
 		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
 				window.getY(), Color.BLACK, true);
 		background.draw();
-		spaceShip =new SpaceShip();
-		spaceShip.vector.changeVector(InputListenerAndController.doMovement());
-		//new Astroid();
-		//new Astroid();
-		Thread inputKeyController= new Thread(new InputListenerAndController() {
-		});
+		new SpaceShip();
+		
+		//Input, ShipMovement and Whiteboard Refresh
+		Input=new InputListenerAndController();
+		spaceShip.vector.changeVector(Input.doMovement());
+		Thread inputKeyController= new Thread(Input);
 		inputKeyController.start();
 		Thread frameController =new Thread(new FrameController());
 		frameController.start();
+		
+		//new Astroid();
+		//new Astroid();
 		}
 	
 	public static void update() {
