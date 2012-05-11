@@ -13,11 +13,9 @@ import Shapes.*;
  * @author (Martin Petzold)
  * @version (0.1)
  */
-// TODO make it to thread!!!
 public class InputKeyController extends javax.swing.JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private InputListener InputListener;
-	static Sprite test1 = new SpaceShip();
 
 	// TODO Spaceship Singled in Gamecontroller
 
@@ -64,7 +62,6 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 					// try {
 					// Thread.sleep(GameController.globalFrameTime);
 					// } catch (InterruptedException e) {
-					// // TODO Auto-generated catch block
 					// e.printStackTrace();
 					// }
 					//
@@ -116,17 +113,15 @@ public class InputKeyController extends javax.swing.JFrame implements Runnable {
 	@Override
 	public void run() {
 		// TODO check keys and change direktion and speed of SpaceShip
+		// TODO implemt in FrameController
 		final InputKeyController AstroidsInput = new InputKeyController();
 		AstroidsInput.setVisible(true);
 		while (true) {
-			GameController.update();
 			try {
-				Thread.sleep(GameController.globalFrameTime);
+				GameController.update();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 	}
 

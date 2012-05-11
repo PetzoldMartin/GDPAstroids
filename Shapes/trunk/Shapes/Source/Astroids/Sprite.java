@@ -42,10 +42,8 @@ public class Sprite extends Figure {
 	}
 
 	public void update() {
-//		Long runTime = System.currentTimeMillis();
 		this.draw();
 		this.move(vector);
-//		return System.currentTimeMillis() - runTime;
 	}
 
 	public Sprite move() {
@@ -78,8 +76,9 @@ public class Sprite extends Figure {
 	}
 
 	protected void setMiddlePoint(Point middlePoint) {
-		this.move(new Point(middlePoint.getX() - this.middlePoint.getX(),
-				middlePoint.getY() - this.middlePoint.getY()));
+		this.move(this.middlePoint.invert());
+		this.move(middlePoint.copy());
+		//		middlePoint.getY() - this.middlePoint.getY()));
 		// FIXME setMiddlePoint must move the sprite to the right position
 		// for Astroids Constructor and corner warp
 	}
