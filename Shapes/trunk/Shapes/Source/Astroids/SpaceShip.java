@@ -11,7 +11,7 @@ public class SpaceShip extends Sprite {
 	public SpaceShip() {
 		super();
 		//TODO make SpaceShip "Singel"
-		OldGameController.spaceShip=this;
+		GameController.spaceShip=this;
 		ArrayList<Point> shipList = new ArrayList<Point>();
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
