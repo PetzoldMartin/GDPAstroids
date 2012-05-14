@@ -3,7 +3,6 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import Input.InputKeyController;
 import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
@@ -16,23 +15,26 @@ import Shapes.Rectangle;
  */
 public class GameController extends Thread {
 	public static void main(String[] args) {
-		new GameController();
+		itself=new GameController();
 	}
-
+	public static GameController itself;
+	
 	// TODO implement setup
 	// TODO make non static!!!
 	// [setup]
-	public  double keyRotationAngel = 3;
-	public  double keyAcelleration = 0.1;
-	public static int windowX = 380 / 2;
-	public static int windowY = 275 / 2;
+	public double keyRotationAngel = 3;
+	public double keyAcelleration = 0.1;
+	public int windowX = 380 ;
+	public int windowY = 275 ;
 	public int frames = 50;
 	public double maxSpeed = 10;
 	// [setup/]
 	public long globalFrameTime = 1000 / frames;
-	public static Point window = new Point(windowX * 2, windowY * 2);
-	public static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-	public static SpaceShip spaceShip;
+	public ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+	public SpaceShip spaceShip;
+	public FrameController frameController;
+	public Input input;
+	
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
@@ -44,16 +46,15 @@ public class GameController extends Thread {
 	 * @throws InterruptedException
 	 */
 	public GameController() {
-		Drawable background = new Rectangle(new Point(0, 0), window.getX(),
-				window.getY(), Color.BLACK, true);
+		Drawable background = new Rectangle(new Point(0, 0), windowX, windowY,
+				Color.BLACK, true);
 		background.draw();
-		new SpaceShip();
-//		new Astroid();
-//		new Astroid();
-		Thread inputKeyController = new Thread(new InputKeyController(keyAcelleration,keyRotationAngel));
-		Thread frameController = new FrameController(globalFrameTime,maxSpeed,this,inputKeyController);
+		new SpaceShip(this);
+//		 new Astroid();
+//		 new Astroid();
+		input = new Input(this);
+		frameController = new FrameController(this);
 		frameController.start();
-		inputKeyController.start();
 	}
 
 	public void update(long frameTime) throws InterruptedException {
@@ -63,12 +64,28 @@ public class GameController extends Thread {
 			sprite.update();
 		}
 		try {
-			Thread.sleep(runTime = frameTime
-					- (System.nanoTime() - runTime) / 1000000);
+			Thread.sleep(runTime = frameTime - (System.nanoTime() - runTime)
+					/ 1000000);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Time Overload: " + (runTime - frameTime));
 		}
 		// System.out.println(runTime);
+	}
+
+	public int getWindowX() {
+		return windowX;
+	}
+
+	public int getWindowY() {
+		return windowY;
+	}
+
+	public double getKeyRotationAngel() {
+		return keyRotationAngel;
+	}
+
+	public double getKeyAcelleration() {
+		return keyAcelleration;
 	}
 
 }

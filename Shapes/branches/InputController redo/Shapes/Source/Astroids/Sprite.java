@@ -24,7 +24,7 @@ public class Sprite extends Figure {
 	 */
 	public Sprite() {
 		if (!(this instanceof SpaceShip)) {
-			GameController.sprites.add(this);
+			GameController.itself.sprites.add(this);
 		}
 		this.middlePoint = new Point(0, 0);
 		this.vector = new Vector(0, 0);
@@ -60,18 +60,18 @@ public class Sprite extends Figure {
 	 * @return Point to move to the other corner
 	 */
 	protected Point checkCorner() {
-		if (Math.abs(this.middlePoint.getX()) >= GameController.windowX) {
-			if (this.middlePoint.getX() >= GameController.windowX) {
-				return new Point(-GameController.windowX, 0);
+		if (Math.abs(this.middlePoint.getX()) >= GameController.itself.windowX) {
+			if (this.middlePoint.getX() >= GameController.itself.windowX) {
+				return new Point(-GameController.itself.windowX, 0);
 			} else {
-				return new Point(GameController.windowX, 0);
+				return new Point(GameController.itself.windowX, 0);
 			}
 		}
-		if (Math.abs(this.middlePoint.getY()) >= GameController.windowY) {
-			if (this.middlePoint.getY() >= GameController.windowY) {
-				return new Point(0, -GameController.windowY);
+		if (Math.abs(this.middlePoint.getY()) >= GameController.itself.windowY) {
+			if (this.middlePoint.getY() >= GameController.itself.windowY) {
+				return new Point(0, -GameController.itself.windowY);
 			} else {
-				return new Point(0, GameController.windowY);
+				return new Point(0, GameController.itself.windowY);
 			}
 		}
 		return new Point(0, 0);
