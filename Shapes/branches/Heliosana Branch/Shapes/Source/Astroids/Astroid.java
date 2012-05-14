@@ -1,37 +1,35 @@
 package Astroids;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import Shapes.Circle;
 import Shapes.Point;
+import Shapes.Polygon;
 import Shapes.Rectangle;
 
 public class Astroid extends Sprite {
 	// TODO commenting
+	// FIXME 2 Circle in one sprite collide!!!
 	public Astroid() {
-		super(new Point(Math.random() * GameController.itself.windowX
-				- GameController.itself.windowX / 2, Math.random()
-				* GameController.itself.windowY - GameController.itself.windowY / 2),
-				new Vector(Math.random() * 10, Math.random() * 360));
-		this.rotationPhi = Math.random() * 45;
-		building(middlePoint);
-	}
-
-	public Astroid(Point middlePoint, Vector vector, double rotationPhi) {
-		super(middlePoint, vector);
-		// TODO setMiddlePoint must move the sprite to the right position
-		this.rotationPhi = rotationPhi;
-		building(middlePoint);
-	}
-
-	private void building(Point middlePoint) {
-		this.addShape(new Rectangle(middlePoint, 10, 10, Color.WHITE, false));
-		this.addShape(new Circle(Math.round(15), middlePoint, Color.RED, false));
+		super();
+//		this.addShape(new Circle(15, this.getCenterPoint(), Color.RED, false));
+		ArrayList<Point> astroList = new ArrayList<Point>();
+		astroList.add(new Point(-10, -10));
+		astroList.add(new Point(-10, 10));
+		astroList.add(new Point(10, 10));
+		astroList.add(new Point(10, -10));
+		this.addShape(new Polygon(astroList, Color.WHITE, false));
+		this.vector = new Vector(1, Math.random() * 360);
+		this.rotationPhi = Math.random() * 12;
+		this.move(new Point(Math.random() * gameController.getWindowX() * 2
+				- gameController.getWindowX(), Math.random()
+				* gameController.getWindowY() * 2 - gameController.getWindowY()));
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		rotate(this.rotationPhi);
+		this.rotate(this.rotationPhi);
 	}
 }

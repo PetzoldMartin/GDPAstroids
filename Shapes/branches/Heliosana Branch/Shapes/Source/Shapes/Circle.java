@@ -67,7 +67,7 @@ public class Circle extends Shape {
 	 */
 	@Override
 	public Drawable move(Point trans) {
-		center.move(trans);
+		center.move(trans.copy());
 		return this;
 	}
 
