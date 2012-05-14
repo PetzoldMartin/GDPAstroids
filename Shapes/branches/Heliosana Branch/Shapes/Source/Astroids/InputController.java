@@ -3,11 +3,10 @@ package Astroids;
 import java.awt.Frame;
 import java.awt.event.*;
 
-
-public class InputController implements KeyListener {
+public class InputController extends Thread implements KeyListener {
 	private Frame inputWindow;
-	private double keyAmount=0;
-	private double keyPhi=0;
+	private double keyAmount = 0;
+	private double keyPhi = 0;
 	private GameController gameController;
 
 	public InputController(GameController gameController) {
@@ -40,6 +39,8 @@ public class InputController implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN
 				| e.getKeyCode() == KeyEvent.VK_S)
 			keyAmount = -gameController.getKeyAcelleration();
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+			gameController.makeTest();
 	}
 
 	// events beim Tastenloslassen

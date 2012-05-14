@@ -27,13 +27,13 @@ public class SpriteTest extends TestCase {
 	@Test
 	public void testSprite() {
 		test.move(new Point(0, 100));
-		System.out.println(test.getMiddlePoint().getX() + "  "
-				+ (test.getMiddlePoint().getY()));
-		assertEquals(test.getMiddlePoint(), new Point(0, 100));
+		System.out.println(test.getCenterPoint().getX() + "  "
+				+ (test.getCenterPoint().getY()));
+		assertEquals(test.getCenterPoint(), new Point(0, 100));
 		test.rotate(45);
-		System.out.println(test.getMiddlePoint().getX() + "  "
-				+ (test.getMiddlePoint().getY()));
-		assertEquals(test.getMiddlePoint(), new Point(0, 100));
+		System.out.println(test.getCenterPoint().getX() + "  "
+				+ (test.getCenterPoint().getY()));
+		assertEquals(test.getCenterPoint(), new Point(0, 100));
 		fail("Not yet implemented");
 	}
 

@@ -9,9 +9,10 @@ import Shapes.Point;
 
 public class Sprite extends Figure {
 	// TODO Kommentierung!
-	public Vector vector;
-	protected Point middlePoint;
+	protected Vector vector;
+	protected Point centerPoint;
 	protected double rotationPhi;
+	protected static GameController gameController;
 
 	/**
 	 * Constructor for objects of class Sprite - overloaded
@@ -24,68 +25,64 @@ public class Sprite extends Figure {
 	 */
 	public Sprite() {
 		if (!(this instanceof SpaceShip)) {
-			GameController.itself.sprites.add(this);
+			gameController.addSprites(this);
 		}
-		this.middlePoint = new Point(0, 0);
-		this.vector = new Vector(0, 0);
+		this.centerPoint = new Point(0, 0);
+		this.vector = new Vector(0, 90);
 		this.rotationPhi = 0;
-		this.addShape(new Circle(1, this.getMiddlePoint(), Color.RED, false));
-
-	}
-
-	public Sprite(Point middlePoint) {
-		this();
-		this.move(middlePoint);
-	}
-
-	public Sprite(Point middlePoint, Vector vector) {
-		this(middlePoint);
-		this.vector = vector;
+		this.addShape(new Circle(1, this.getCenterPoint(), Color.RED, false));
 	}
 
 	public void update() {
 		this.draw();
 		this.move(vector);
+		Point cornerWarp = getCornerWarp();
+		if (!cornerWarp.equals(new Point(0, 0))) {
+//			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
+			move(cornerWarp);
+		}
 	}
 
 	public Sprite move() {
-		return (Sprite) super.move(vector);
+		return (Sprite) super.move(vector.copy());
 	}
 
 	public Drawable rotate(double phi) {
-		return this.rotate(middlePoint, phi);
+		return this.rotate(centerPoint, phi);
 	}
 
 	/**
 	 * @return Point to move to the other corner
 	 */
-	protected Point checkCorner() {
-		if (Math.abs(this.middlePoint.getX()) >= GameController.itself.windowX) {
-			if (this.middlePoint.getX() >= GameController.itself.windowX) {
-				return new Point(-GameController.itself.windowX, 0);
+	protected Point getCornerWarp() {
+		Point returnPoint = new Point(0, 0);
+		if (Math.abs(this.centerPoint.getX()) >= gameController.getWindowX()) {
+			if (this.centerPoint.getX() >= gameController.getWindowX()) {
+				returnPoint.move(-gameController.getWindowX() * 2, 0); // right
 			} else {
-				return new Point(GameController.itself.windowX, 0);
+				returnPoint.move(gameController.getWindowX() * 2, 0); // left
 			}
 		}
-		if (Math.abs(this.middlePoint.getY()) >= GameController.itself.windowY) {
-			if (this.middlePoint.getY() >= GameController.itself.windowY) {
-				return new Point(0, -GameController.itself.windowY);
+		if (Math.abs(this.centerPoint.getY()) >= gameController.getWindowY()) {
+			if (this.centerPoint.getY() >= gameController.getWindowY()) {
+				returnPoint.move(0, -gameController.getWindowY() * 2); // upper
 			} else {
-				return new Point(0, GameController.itself.windowY);
+				returnPoint.move(0, gameController.getWindowY() * 2); // bottom
 			}
 		}
-		return new Point(0, 0);
+		return returnPoint;
 	}
 
-	protected void setMiddlePoint(Point middlePoint) {
-		this.move(this.middlePoint.invert());
-		this.move(middlePoint.copy());
-		// middlePoint.getY() - this.middlePoint.getY()));
-		// FIXME setMiddlePoint must move the sprite to the right position
-		// for Astroids Constructor and corner warp
+	protected void setCenterPoint(Point centerPoint) {
+		this.move(this.centerPoint.invert());
+		this.move(centerPoint);
 	}
 
-	public Point getMiddlePoint() {
-		return middlePoint;
+	public Point getCenterPoint() {
+		return centerPoint;
+	}
+
+	public void setGameController(GameController gameController) {
+		Sprite.gameController = gameController;
 	}
 }
