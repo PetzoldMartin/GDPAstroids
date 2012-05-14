@@ -8,10 +8,10 @@ import Shapes.Polygon;
 
 public class SpaceShip extends Sprite {
 
-	public SpaceShip() {
+	public SpaceShip(GameController gameController) {
 		super();
 		// TODO make SpaceShip "Singel"
-		GameController.spaceShip = this;
+		gameController.spaceShip = this;
 		ArrayList<Point> shipList = new ArrayList<Point>();
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
@@ -27,12 +27,13 @@ public class SpaceShip extends Sprite {
 		}
 		rotationPhi = this.vector.getPhi();
 	}
-	public void changeSpeed(double amount,double maxSpeed) {
+	public void changeVector(double amount,double phi,double maxSpeed) {
 		if (this.vector.getAmount() < maxSpeed && amount > 0) {
 			vector.changeSpeed(amount);
 		}
 		if (this.vector.getAmount() > -maxSpeed/2 && amount < 0) {
 			vector.changeSpeed(amount);
 		}
+		this.vector.changeDirection(phi);
 	}
 }
