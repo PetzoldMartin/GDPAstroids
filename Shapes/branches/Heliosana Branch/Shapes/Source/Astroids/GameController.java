@@ -22,8 +22,12 @@ public class GameController extends Thread implements Runnable {
 	// [setup]
 	private double keyRotationAngel = 6;
 	private double keyAcelleration = 0.2;
-	private int windowX = 389 - 15; // max std 389
-	private int windowY = 278 - 15; // max std 278
+	
+	private int astroCount=30;
+	private int astroSize=20;
+
+	private int windowX = 389 - astroSize; // max std 389
+	private int windowY = 278 - astroSize; // max std 278
 	private int frames = 30;
 	private double maxSpeed = 10;
 	// [setup/]
@@ -44,14 +48,14 @@ public class GameController extends Thread implements Runnable {
 	 */
 	public void run() {
 		new SpaceShip(this);
-		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX + 15,
-				windowY + 15, Color.WHITE, true);
+		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX + astroSize,
+				windowY + astroSize, Color.WHITE, true);
 		Drawable background = new Rectangle(new Point(0, 0), windowX, windowY,
 				Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
-		for (int i = 0; i < 20; i++) {
-			new Astroid();
+		for (int i = 0; i < astroCount; i++) {
+			new Astroid(24,astroSize);
 		}
 		setInputController(new InputController(this));
 		frameController = new FrameController(this);
