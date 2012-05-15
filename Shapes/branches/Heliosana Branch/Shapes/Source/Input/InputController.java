@@ -69,7 +69,7 @@ public class InputController extends Thread implements KeyListener, WindowListen
 			gameController.makeTest();
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 			gameController.spaceKey();
-		inputWindow.repaint();
+		
 	}
 
 	// events beim Tastenloslassen
@@ -94,6 +94,10 @@ public class InputController extends Thread implements KeyListener, WindowListen
 
 	public double getKeyPhi() {
 		return keyPhi;
+	}
+	public void Interfacerefresh()
+	{
+		inputWindow.repaint();
 	}
 
 	@Override

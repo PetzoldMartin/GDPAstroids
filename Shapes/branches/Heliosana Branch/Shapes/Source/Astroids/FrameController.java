@@ -20,6 +20,7 @@ public class FrameController extends Thread {
 					gameController.getInputController().getKeyAmount(),
 					gameController.getInputController().getKeyPhi(), maxSpeed);
 			gameController.update();
+			gameController.getInputController().Interfacerefresh();
 			try {
 				Thread.sleep(runTime = frameTime
 						- (System.nanoTime() - runTime) / 1000000);
