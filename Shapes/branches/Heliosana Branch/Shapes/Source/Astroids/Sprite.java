@@ -91,4 +91,8 @@ public class Sprite extends Figure {
 		this.vector.changeSpeed(this.vector.getAmount());
 		
 	}
+
+	public Vector getVector() {
+		return vector;
+	}
 }
