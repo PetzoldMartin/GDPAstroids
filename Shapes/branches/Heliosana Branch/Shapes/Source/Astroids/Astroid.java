@@ -14,16 +14,16 @@ public class Astroid extends Sprite {
 	private int edge;
 	private int radius;
 	public Astroid() {
-		this(20,30);
+		this(24,30);
 	}
 	public Astroid(int edge, int radius) {
 		super();
  		this.edge=edge;
  		this.radius=radius;
-		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));
+//		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));
 		ArrayList<Point> astroList = new ArrayList<Point>();
 		for (int phi =0; phi < 360; phi+=360/edge) {
-				astroList.add(new Vector(radius-radius/2*Math.random(), phi));				
+				astroList.add(new Vector(radius-radius/edge*8*Math.random(), phi));				
 		}
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
 		this.vector = new Vector(1, Math.random() * 360);

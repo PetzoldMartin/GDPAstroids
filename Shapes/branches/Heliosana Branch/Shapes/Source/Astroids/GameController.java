@@ -3,6 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
@@ -126,6 +127,11 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void spaceKey() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void pause(boolean b) {
 		// TODO Auto-generated method stub
 		
 	}
