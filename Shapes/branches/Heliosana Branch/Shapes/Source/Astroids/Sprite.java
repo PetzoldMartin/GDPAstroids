@@ -44,7 +44,7 @@ public class Sprite extends Figure {
 	}
 
 	public Sprite move() {
-		return (Sprite) super.move(vector.copy());
+		return (Sprite) super.move(vector);
 	}
 
 	public Drawable rotate(double phi) {
@@ -84,5 +84,11 @@ public class Sprite extends Figure {
 
 	public void setGameController(GameController gameController) {
 		Sprite.gameController = gameController;
+	}
+
+	public void rocket(SpaceShip spaceship) {
+		this.vector= spaceship.vector;
+		this.vector.changeSpeed(this.vector.getAmount());
+		
 	}
 }

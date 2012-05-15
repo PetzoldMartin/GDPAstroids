@@ -3,7 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import Shapes.Point;
+import Shapes.*;
 import Shapes.Polygon;
 
 public class SpaceShip extends Sprite {
@@ -13,6 +13,8 @@ public class SpaceShip extends Sprite {
 		super();
 		gameController.setSpaceShip(this);
 		this.setGameController(gameController);
+ 		this.addShape(new Circle(15, this.getCenterPoint().copy(), Color.RED, false));
+		// FIXME 2 Circle in one sprite collide!!!
 		ArrayList<Point> shipList = new ArrayList<Point>();
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));

@@ -13,6 +13,7 @@ public class FrameController extends Thread {
 
 	@Override
 	public void run() {
+		System.out.println("FrameController started:\t" + this.getId());
 		for (;;) {
 			Long runTime = System.nanoTime();
 			gameController.getSpaceShip().changeVector(
@@ -24,7 +25,7 @@ public class FrameController extends Thread {
 						- (System.nanoTime() - runTime) / 1000000);
 			} catch (IllegalArgumentException e) {
 				System.out.println("FrameTime overrun:\t "
-						+ (runTime - frameTime));
+						+ (-runTime));
 			} catch (InterruptedException e) {
 				System.out.println("Frame interuppted");
 				e.printStackTrace();

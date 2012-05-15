@@ -3,6 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import Shapes.Circle;
 import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
@@ -26,10 +27,11 @@ public class GameController extends Thread {
 	private int windowY = 278 - 15; // max std 278
 	private int frames = 30;
 	private double maxSpeed = 10;
+	private int aastroCount=30;
 	// [setup/]
 	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-	private SpaceShip spaceShip;
+	private SpaceShip spaceShip;	
 	private FrameController frameController;
 	private InputController inputController;
 
@@ -50,18 +52,18 @@ public class GameController extends Thread {
 				Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < aastroCount; i++) {
 			new Astroid();
 		}
-		setInputController(new InputController(this));
+		inputController = new InputController(this);
+		inputController.start();
 		frameController = new FrameController(this);
-		// inputController.start();
 		frameController.start();
-
 	}
 
 	public void makeTest() {
-		spaceShip.setCenterPoint(new Point(0, 0));
+//		spaceShip.setCenterPoint(new Point(0, 0));
+		new Sprite().rocket(spaceShip);
 	}
 
 	public void update() {
