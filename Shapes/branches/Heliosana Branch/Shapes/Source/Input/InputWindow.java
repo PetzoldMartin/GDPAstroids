@@ -40,11 +40,16 @@ public class InputWindow extends java.awt.Frame {
 	        String  yString="Y:"+ycoord.toString();
 	       
 	        g.setColor(new Color(255, 255, 255));
-	        g.drawLine(150, 0, 150, 300);
-	        g.drawLine(0, 150, 300, 150);
-	        g.drawString(speedString, 160, 140);
-	        g.drawString(accelerationString, 10, 140);
+	        g.drawLine(0, 130, 300, 130);
+	        g.drawLine(0, 170, 300, 170);
+	        g.drawString(speedString, 160, 50);
+	        g.drawString(accelerationString, 10, 50);
 	        g.drawString(xString, 10, 280);
 	        g.drawString(yString, 160, 280);
+//	        g.drawOval(130, 130, 40, 40);
+	        g.setColor(new Color(255, 0, 0));
+	        g.fillOval(130, 130, 40, 40);
+	        g.drawLine(0, 150, 300, 150);
+	        g.drawLine(150, 0, 150, 300);
 	    }
 }
