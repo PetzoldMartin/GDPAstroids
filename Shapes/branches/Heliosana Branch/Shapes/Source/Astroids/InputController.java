@@ -25,7 +25,8 @@ public class InputController extends Thread implements KeyListener {
 
 	// events wenn eine taste Gedrückt wird
 	public void keyPressed(KeyEvent e) {
-		//
+		//TODO Stop with Windowclose
+		//TODO Doubblekeysfail
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 			System.exit(0);
 		if (e.getKeyCode() == KeyEvent.VK_LEFT
@@ -39,8 +40,10 @@ public class InputController extends Thread implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN
 				| e.getKeyCode() == KeyEvent.VK_S)
 			keyAmount = -gameController.getKeyAcelleration();
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 			gameController.makeTest();
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+			gameController.spaceKey();
 	}
 
 	// events beim Tastenloslassen
@@ -56,6 +59,7 @@ public class InputController extends Thread implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN
 				| e.getKeyCode() == KeyEvent.VK_S)
 			keyAmount = 0;
+		
 	}
 
 	public double getKeyAmount() {
