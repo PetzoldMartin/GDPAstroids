@@ -150,8 +150,4 @@ public class Vector extends Shapes.Point {
 	public double getPhi() {
 		return phi;
 	}
-	public Point getPoint() {
-		return new Point(x,y);
-	}
-	
 }
