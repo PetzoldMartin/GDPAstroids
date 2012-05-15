@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
@@ -16,7 +17,7 @@ import java.awt.event.WindowListener;
 import Astroids.GameController;
 
 
-public class InputController extends Thread implements KeyListener, WindowListener,MouseWheelListener,MouseListener {
+public class InputController extends Thread implements KeyListener, WindowListener,MouseWheelListener,MouseListener, MouseMotionListener {
 	private Frame inputWindow;
 	private double keyAmount = 0;
 	private double keyPhi = 0;
@@ -26,7 +27,7 @@ public class InputController extends Thread implements KeyListener, WindowListen
 
 		this.gameController = gameController;
 		inputWindow = new InputWindow("Tasteninput",this.gameController);
-		Font l = new Font("Arial", Font.BOLD, 40);
+		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
 		inputWindow.setLocation(900, 100);
 		inputWindow.setVisible(true);
@@ -35,6 +36,7 @@ public class InputController extends Thread implements KeyListener, WindowListen
 		inputWindow.addWindowListener(this);
 		inputWindow.addMouseWheelListener(this);
 		inputWindow.addMouseListener(this);
+		inputWindow.addMouseMotionListener(this);
 		inputWindow.setBackground(Color.BLACK);
 		inputWindow.setFont(l);
 		
@@ -144,11 +146,12 @@ public class InputController extends Thread implements KeyListener, WindowListen
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
-		if(arg0.getWheelRotation()==-1)
+			
+		if(arg0.getUnitsToScroll()==-3)
 		{
 			keyAmount = gameController.getKeyAcelleration();
 		}
-		if(arg0.getWheelRotation()==1)
+		if(arg0.getUnitsToScroll()==3)
 		{
 			keyAmount = -gameController.getKeyAcelleration();
 		}
@@ -188,5 +191,27 @@ public class InputController extends Thread implements KeyListener, WindowListen
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		if(arg0.getX()>150){
+		keyPhi = +gameController.getKeyRotationAngel();
+	}
+	if(arg0.getX()<150){
+		keyPhi = -gameController.getKeyRotationAngel();
+	}
+	if(arg0.getY()>150){
+		keyAmount = -gameController.getKeyAcelleration();
+	}
+	if(arg0.getY()<150){
+		keyAmount = +gameController.getKeyAcelleration();
+	}
 	}
 }
