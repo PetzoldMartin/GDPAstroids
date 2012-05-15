@@ -14,19 +14,23 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import Shapes.Point;
+
 import Astroids.GameController;
+import Astroids.Vector;
 
-
-public class InputController extends Thread implements KeyListener, WindowListener,MouseWheelListener,MouseListener, MouseMotionListener {
+public class InputController extends Thread implements KeyListener,
+		WindowListener, MouseWheelListener, MouseListener, MouseMotionListener {
 	private Frame inputWindow;
 	private double keyAmount = 0;
 	private double keyPhi = 0;
+	private double pendel = 0.21;
 	static GameController gameController;
 
 	public InputController(GameController gameController) {
 
 		this.gameController = gameController;
-		inputWindow = new InputWindow("Tasteninput",this.gameController);
+		inputWindow = new InputWindow("Tasteninput", this.gameController);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
 		inputWindow.setLocation(900, 100);
@@ -39,21 +43,20 @@ public class InputController extends Thread implements KeyListener, WindowListen
 		inputWindow.addMouseMotionListener(this);
 		inputWindow.setBackground(Color.BLACK);
 		inputWindow.setFont(l);
-		
+
 	}
-	
-	void paint(Graphics g)
-	{
-		g.drawOval(1,1,100,100);
+
+	void paint(Graphics g) {
+		g.drawOval(1, 1, 100, 100);
 	}
-	
+
 	public void keyTyped(KeyEvent e) {
 	}
 
 	// events wenn eine taste Gedrückt wird
 	public void keyPressed(KeyEvent e) {
-		//TODO Stop with Windowclose
-		//TODO Doubblekeysfail
+		// TODO Stop with Windowclose
+		// TODO Doubblekeysfail
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 			System.exit(0);
 		if (e.getKeyCode() == KeyEvent.VK_LEFT
@@ -71,7 +74,7 @@ public class InputController extends Thread implements KeyListener, WindowListen
 			gameController.makeTest();
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 			gameController.spaceKey();
-		
+
 	}
 
 	// events beim Tastenloslassen
@@ -87,7 +90,7 @@ public class InputController extends Thread implements KeyListener, WindowListen
 		if (e.getKeyCode() == KeyEvent.VK_DOWN
 				| e.getKeyCode() == KeyEvent.VK_S)
 			keyAmount = 0;
-		
+
 	}
 
 	public double getKeyAmount() {
@@ -97,62 +100,60 @@ public class InputController extends Thread implements KeyListener, WindowListen
 	public double getKeyPhi() {
 		return keyPhi;
 	}
-	public void Interfacerefresh()
-	{
+
+	public void Interfacerefresh() {
 		inputWindow.repaint();
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
 		gameController.pause(false);
-		
+
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
-		
+
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 		gameController.pause(true);
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
-			
-		if(arg0.getUnitsToScroll()==-3)
-		{
+
+		if (arg0.getUnitsToScroll() == -3) {
 			keyAmount = gameController.getKeyAcelleration();
 		}
-		if(arg0.getUnitsToScroll()==3)
-		{
+		if (arg0.getUnitsToScroll() == 3) {
 			keyAmount = -gameController.getKeyAcelleration();
 		}
 	}
@@ -160,58 +161,72 @@ public class InputController extends Thread implements KeyListener, WindowListen
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-//		if(arg0.getX()>150){
-//			keyPhi = -gameController.getKeyRotationAngel();
-//		}
-//		if(arg0.getX()<150){
-//			keyPhi = +gameController.getKeyRotationAngel();
-//		}
-//		System.out.println(arg0);
-		
+		// if(arg0.getX()>150){
+		// keyPhi = -gameController.getKeyRotationAngel();
+		// }
+		// if(arg0.getX()<150){
+		// keyPhi = +gameController.getKeyRotationAngel();
+		// }
+		// System.out.println(arg0);
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		if(arg0.getX()>150){
-		keyPhi = +gameController.getKeyRotationAngel();
+		Vector silence = new Vector(new Point(arg0.getX() - 150,
+				arg0.getY() - 150));
+		if (silence.getAmount() < 20) {
+			keyPhi = 0;
+			keyAmount = 0;
+		} else {
+			if(arg0.getY() < 170&&arg0.getY() > 130)
+			{
+				keyAmount = 0;
+			}
+			if (arg0.getY() > 170) {
+				keyAmount = -gameController.getKeyAcelleration();
+			}
+			if (arg0.getY() < 130) {
+				keyAmount = +gameController.getKeyAcelleration();
+			}
+			if (arg0.getX() > 150) {
+				keyPhi = +gameController.getKeyRotationAngel();
+			}
+			if (arg0.getX() < 150) {
+				keyPhi = -gameController.getKeyRotationAngel();
+			}
+
+		}
+
 	}
-	if(arg0.getX()<150){
-		keyPhi = -gameController.getKeyRotationAngel();
-	}
-	if(arg0.getY()>150){
-		keyAmount = -gameController.getKeyAcelleration();
-	}
-	if(arg0.getY()<150){
-		keyAmount = +gameController.getKeyAcelleration();
-	}
-	}
+
 }
