@@ -68,7 +68,7 @@ public class Vector extends Shapes.Point {
 	 * @param phi
 	 *            angel of the vector
 	 */
-	private void setVector(double amount, double phi) {
+	public void setVector(double amount, double phi) {
 		this.amount = amount;
 		this.phi = phi;
 		this.x = amount * Math.cos(Math.toRadians(phi));
