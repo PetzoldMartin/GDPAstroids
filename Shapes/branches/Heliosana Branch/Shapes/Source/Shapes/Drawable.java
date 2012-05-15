@@ -23,7 +23,7 @@ public abstract class Drawable extends Object {
 	public abstract Drawable move(Point trans);
 
 	/**
-	 * rotate the point around a center point
+	 * rotate the Drawable around a center point
 	 * 
 	 * @param center
 	 *            point to rotate around
@@ -31,4 +31,10 @@ public abstract class Drawable extends Object {
 	 *            angel to rotate
 	 */
 	public abstract Drawable rotate(Point center, double phi);
+
+	/**
+	 * remove the Drawable from Whiteboard
+	 */
+//	public abstract boolean remove();
+	//TODO implement the remove() in all subclasses
 }
