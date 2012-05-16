@@ -61,7 +61,7 @@ public class GameController extends Thread implements Runnable {
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge,astroSize);
 		}
-		Astroid test = new Astroid(astroEdge,astroSize);
+		test = new Astroid(astroEdge,astroSize);
 		inputController = new InputController(this);
 		frameController = new FrameController(this);
 		// inputController.start();
@@ -74,7 +74,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void spaceKey() {
-	spaceShip.fire();		
+		spaceShip.fire();		
 	}
 
 	public void update() {
@@ -127,7 +127,9 @@ public class GameController extends Thread implements Runnable {
 	public void addSprites(Sprite sprite) {
 		this.sprites.add(sprite);
 	}
-
+	public void removeSprites(Sprite sprite) {
+		this.sprites.remove(sprite);
+	}
 	public SpaceShip getSpaceShip() {
 		return spaceShip;
 	}
@@ -142,5 +144,9 @@ public class GameController extends Thread implements Runnable {
 
 	public void setInputController(InputController inputController) {
 		this.inputController = inputController;
+	}
+
+	public void setTestflag(boolean testFlag) {
+		frameController.testFlag = testFlag;
 	}
 }
