@@ -105,7 +105,7 @@ public class Sprite extends Figure {
 	protected void changeSpeed(double amount) {
 		vector.changeSpeed(amount);
 	}
-	protected void setVector(Vector vector) {
+	public void setVector(Vector vector) {
 		this.vector = vector;
 	}
 }
