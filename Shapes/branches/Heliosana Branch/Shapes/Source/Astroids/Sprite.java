@@ -72,6 +72,9 @@ public class Sprite extends Figure {
 		}
 		return returnPoint;
 	}
+	public void collide() {
+		//TODO implemets destroy astro and create 2 new smaller halt of radius and edges
+	}
 
 	protected void setCenterPoint(Point centerPoint) {
 		this.move(this.centerPoint.invert());
