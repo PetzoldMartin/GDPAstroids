@@ -36,8 +36,5 @@ public class Astroid extends Sprite {
 	public void update() {
 		super.update();
 		this.rotate(this.rotationPhi);
-	}public void collide() {
-		//TODO implemets destroy astro and create 2 new smaller halt of radius and edges
-	}
-	
+	}	
 }

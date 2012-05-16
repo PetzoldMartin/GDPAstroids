@@ -19,7 +19,6 @@ public class GameController extends Thread implements Runnable {
 	public static void main(String[] args) {
 		new GameController().start();
 	}
-
 	// [setup]
 	private double keyRotationAngel = 6;
 	private double keyAcelleration = 0.2;
