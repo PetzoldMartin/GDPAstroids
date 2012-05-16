@@ -42,7 +42,7 @@ public class Vector extends Shapes.Point {
 	 */
 	public Vector(Point vector) {
 		super(vector.getX(), vector.getY());
-//		setVector(vector);
+		setVector(vector);
 	}
 
 	/**
