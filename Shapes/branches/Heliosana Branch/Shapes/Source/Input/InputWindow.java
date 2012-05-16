@@ -31,9 +31,10 @@ public class InputWindow extends Frame {
 	public void paint(Graphics g) {
 		super.paint(g);
 		// FIXME Waum Statische referenz aus dem inputcontroller????
-		Integer speed = (int) InputController.gameController.getSpaceShip()
+		Double speed = InputController.gameController.getSpaceShip()
 				.getVector().getAmount();
-		String speedString = "Speed: " + speed.toString();
+		String speedString0 = "Speed: " + speed.toString();
+		String speedString = speedString0.  substring  ( 0, 10 );
 		int ac2 = (int) InputController.gameController.getSpaceShip()
 				.getVector().getPhi() - 90;
 		Integer acceleration = Math.abs(ac2 % 360);
