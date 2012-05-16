@@ -23,18 +23,23 @@ public class InputWindow extends Frame {
 	public InputWindow(String name, GameController gameController) {
 		super(name);
 		gameController = this.gameController;
-		
 
 	}
-	
 
 	public void paint(Graphics g) {
 		super.paint(g);
 		// FIXME Waum Statische referenz aus dem inputcontroller????
 		Double speed = InputController.gameController.getSpaceShip()
 				.getVector().getAmount();
-		String speedString0 = "Speed: " + speed.toString();
-		String speedString = speedString0.  substring  ( 0, 10 );
+		String speedString = "0";
+		if (speed < 0) {
+			String speedString0 = "Speed: " + speed.toString();
+			speedString = speedString0.substring(0, 11);
+		}
+		if (speed >= 0) {
+			String speedString0 = "Speed: " + speed.toString();
+			speedString = speedString0.substring(0, 10);
+		}
 		int ac2 = (int) InputController.gameController.getSpaceShip()
 				.getVector().getPhi() - 90;
 		Integer acceleration = Math.abs(ac2 % 360);
@@ -51,7 +56,6 @@ public class InputWindow extends Frame {
 		g.drawString(accelerationString, 10, 50);
 		g.drawString(xString, 10, 280);
 		g.drawString(yString, 160, 280);
-		// g.drawOval(130, 130, 40, 40);
 		g.setColor(new Color(0, 0, 255));
 		g.fillOval(70, 70, 160, 160);
 		g.setColor(new Color(255, 0, 0));
@@ -59,25 +63,25 @@ public class InputWindow extends Frame {
 		g.drawLine(150, 0, 150, 300);
 	}
 
-public void update(Graphics g){
-        
-        int w = this.getSize().width;
-        int h = this.getSize().height;
- 
-        if(bufImage == null){
-              bufImage = this.createImage(w,h);
-              bufG = bufImage.getGraphics();
-        }
-        
-        bufG.setColor(this.getBackground());
-        bufG.fillRect(0,0,w,h);
-        
-        bufG.setColor(this.getForeground());
-        
-        paint(bufG);
- 
-        g.drawImage(bufImage,0,0,this);
- 
-}
+	public void update(Graphics g) {
+
+		int w = this.getSize().width;
+		int h = this.getSize().height;
+
+		if (bufImage == null) {
+			bufImage = this.createImage(w, h);
+			bufG = bufImage.getGraphics();
+		}
+
+		bufG.setColor(this.getBackground());
+		bufG.fillRect(0, 0, w, h);
+
+		bufG.setColor(this.getForeground());
+
+		paint(bufG);
+
+		g.drawImage(bufImage, 0, 0, this);
+
+	}
 
 }
