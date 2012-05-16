@@ -27,7 +27,7 @@ public class Astroid extends Sprite {
 		}
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
 		this.vector = new Vector(1, Math.random() * 360);
-		this.rotationPhi = Math.random() * 6;
+		this.rotationPhi = Math.random() * 12-6;
 		this.move(new Point(Math.random() * gameController.getWindowX() * 2
 				- gameController.getWindowX(), Math.random()
 				* gameController.getWindowY() * 2 - gameController.getWindowY()));

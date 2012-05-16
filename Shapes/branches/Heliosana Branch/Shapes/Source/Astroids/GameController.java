@@ -133,6 +133,12 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void pause(boolean pause) {
-		// TODO implements pause()
+		this.frameController.setPause(pause);
+	}
+	public void pause() {
+		if (this.frameController.getPause()==false) {
+			this.frameController.setPause(true);			
+		}
+		else this.frameController.setPause(false);
 	}
 }
