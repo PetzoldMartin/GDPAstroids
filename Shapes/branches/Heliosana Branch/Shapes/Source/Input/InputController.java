@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -28,8 +29,10 @@ public class InputController extends Thread implements KeyListener,
 	static GameController gameController;
 
 	public InputController(GameController gameController) {
+		
 		System.out.println("InputController started:\t" + this.getId());
 		this.gameController = gameController;
+		
 		inputWindow = new InputWindow("TastenInput", this.gameController);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
@@ -103,10 +106,6 @@ public class InputController extends Thread implements KeyListener,
 		return keyPhi;
 	}
 
-	public void Interfacerefresh() {
-		inputWindow.repaint();
-	}
-
 	@Override
 	public void windowActivated(WindowEvent e) {
 		gameController.pause();
@@ -115,7 +114,7 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -134,63 +133,12 @@ public class InputController extends Thread implements KeyListener,
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
 
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-
-	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent arg0) {
-
-		if (arg0.getUnitsToScroll() == -3) {
-			keyAmount = gameController.getKeyAcelleration();
-		}
-		if (arg0.getUnitsToScroll() == 3) {
-			keyAmount = -gameController.getKeyAcelleration();
-		}
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// if(arg0.getX()>150){
-		// keyPhi = -gameController.getKeyRotationAngel();
-		// }
-		// if(arg0.getX()<150){
-		// keyPhi = +gameController.getKeyRotationAngel();
-		// }
-		// System.out.println(arg0);
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
 
 	}
 
@@ -221,6 +169,58 @@ public class InputController extends Thread implements KeyListener,
 
 		}
 
+	}
+
+	public void Interfacerefresh() {
+		inputWindow.repaint();
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
