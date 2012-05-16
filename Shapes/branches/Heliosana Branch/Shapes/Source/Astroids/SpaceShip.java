@@ -40,4 +40,8 @@ public class SpaceShip extends Sprite {
 		}
 		this.vector.changeDirection(phi);
 	}
+
+	public void fire() {
+		new Rocket(this);
+	}
 }

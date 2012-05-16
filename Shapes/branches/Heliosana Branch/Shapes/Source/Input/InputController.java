@@ -28,9 +28,9 @@ public class InputController extends Thread implements KeyListener,
 	static GameController gameController;
 
 	public InputController(GameController gameController) {
-
+		System.out.println("InputController started:\t" + this.getId());
 		this.gameController = gameController;
-		inputWindow = new InputWindow("Tasteninput", this.gameController);
+		inputWindow = new InputWindow("TastenInput", this.gameController);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
 		inputWindow.setLocation(900, 100);
@@ -53,7 +53,7 @@ public class InputController extends Thread implements KeyListener,
 	public void keyTyped(KeyEvent e) {
 	}
 
-	// events wenn eine taste Gedrückt wird
+	// events wenn eine taste Gedrï¿½ckt wird
 	public void keyPressed(KeyEvent e) {
 		// TODO Stop with Windowclose
 		// TODO Doubblekeysfail

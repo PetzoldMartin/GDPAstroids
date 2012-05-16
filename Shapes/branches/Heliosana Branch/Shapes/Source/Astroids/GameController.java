@@ -23,13 +23,15 @@ public class GameController extends Thread implements Runnable {
 	// [setup]
 	private double keyRotationAngel = 6;
 	private double keyAcelleration = 0.2;
-	
-	private int astroCount=30;
+	// Astro
+	private int astroCount=10;
 	private int astroSize=20;
-
+	private int astroEdge=24;
+	//Window
 	private int windowX = 389 - astroSize; // max std 389
 	private int windowY = 278 - astroSize; // max std 278
 	private int frames = 30;
+	//Ship
 	private double maxSpeed = 10;
 	// [setup/]
 	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
@@ -48,6 +50,7 @@ public class GameController extends Thread implements Runnable {
 	 * @throws InterruptedException
 	 */
 	public void run() {
+		System.out.println("GameController started:\t" + this.getId());
 		new SpaceShip(this);
 		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX + astroSize,
 				windowY + astroSize, Color.WHITE, true);
@@ -56,9 +59,9 @@ public class GameController extends Thread implements Runnable {
 		backgroundFrame.draw();
 		background.draw();
 		for (int i = 0; i < astroCount; i++) {
-			new Astroid(24,astroSize);
+			new Astroid(astroEdge,astroSize);
 		}
-		setInputController(new InputController(this));
+		inputController = new InputController(this);
 		frameController = new FrameController(this);
 		// inputController.start();
 		frameController.start();
@@ -67,6 +70,10 @@ public class GameController extends Thread implements Runnable {
 
 	public void makeTest() {
 		spaceShip.setCenterPoint(new Point(0, 0));
+	}
+
+	public void spaceKey() {
+	spaceShip.fire();		
 	}
 
 	public void update() {
@@ -126,13 +133,7 @@ public class GameController extends Thread implements Runnable {
 		this.inputController = inputController;
 	}
 
-	public void spaceKey() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void pause(boolean b) {
-		// TODO Auto-generated method stub
-		
+	public void pause(boolean pause) {
+		// TODO implements pause()
 	}
 }

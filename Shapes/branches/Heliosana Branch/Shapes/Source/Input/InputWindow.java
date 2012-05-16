@@ -21,7 +21,7 @@ public class InputWindow extends java.awt.Frame {
 	public InputWindow(String name,GameController gameController)
 	{
 		super(name);
-		 gameController=this.gameController ;
+		gameController=this.gameController ;
 	}
 	 
 	 
