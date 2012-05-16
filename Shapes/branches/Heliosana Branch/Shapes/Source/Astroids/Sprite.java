@@ -9,8 +9,9 @@ import Shapes.Point;
 
 public class Sprite extends Figure {
 	// TODO Kommentierung!
-	protected Vector vector;
-	protected Point centerPoint;
+	protected int radius=1;
+	private Vector vector;
+	private Point centerPoint;
 	protected double rotationPhi;
 	protected static GameController gameController;
 
@@ -30,7 +31,7 @@ public class Sprite extends Figure {
 		this.centerPoint = new Point(0, 0);
 		this.vector = new Vector(0, 90);
 		this.rotationPhi = 0;
-		this.addShape(new Circle(1, this.getCenterPoint(), Color.RED, false));
+		this.addShape(new Circle(radius, this.centerPoint, Color.RED, false));
 	}
 
 	public void update() {
@@ -82,7 +83,7 @@ public class Sprite extends Figure {
 	}
 
 	public Point getCenterPoint() {
-		return centerPoint;
+		return this.centerPoint.copy();
 	}
 
 	public void setGameController(GameController gameController) {
@@ -91,5 +92,20 @@ public class Sprite extends Figure {
 
 	public Vector getVector() {
 		return vector;
+	}
+	public double getAmount() {
+		return vector.getAmount();
+	}
+	protected double getPhi() {
+		return vector.getPhi();
+	}
+	protected void changeDirection(double phi) {
+		vector.changeDirection(phi);
+	}
+	protected void changeSpeed(double amount) {
+		vector.changeSpeed(amount);
+	}
+	protected void setVector(Vector vector) {
+		this.vector = vector;
 	}
 }

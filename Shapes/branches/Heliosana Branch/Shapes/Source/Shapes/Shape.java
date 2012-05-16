@@ -20,7 +20,16 @@ public abstract class Shape extends Drawable {
 	protected Color color = Color.GRAY;
 	protected boolean solid = false;
 	private static WhiteBoard whiteBoard = new WhiteBoard();
+	
+	public void remove() {
+		getWhiteBoard().removeShape(representation);
+	}
+
 	protected Object representation;
+
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+	}
 
 	public WhiteBoard getWhiteBoard() {
 		return whiteBoard;
@@ -36,9 +45,5 @@ public abstract class Shape extends Drawable {
 
 	public void setColor(Color color) {
 		this.color = color;
-	}
-
-	public void setSolid(boolean solid) {
-		this.solid = solid;
 	}
 }

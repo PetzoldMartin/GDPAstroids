@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import Shapes.*;
-import Shapes.Polygon;
 
 public class SpaceShip extends Sprite {
 
@@ -13,31 +12,34 @@ public class SpaceShip extends Sprite {
 		super();
 		gameController.setSpaceShip(this);
 		this.setGameController(gameController);
- 		this.addShape(new Circle(15, this.getCenterPoint().copy(), Color.RED, false));
 		ArrayList<Point> shipList = new ArrayList<Point>();
+		this.radius=15;
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
 		shipList.add(new Point(15, 0));
 		this.addShape(new Polygon(shipList, Color.WHITE, false));
+//		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));
+
+		
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		if (rotationPhi != vector.getPhi()) {
-			this.rotate(rotationPhi - vector.getPhi());
+		if (rotationPhi != getPhi()) {
+			this.rotate(rotationPhi - getPhi());
 		}
-		rotationPhi = this.vector.getPhi();
+		rotationPhi = this.getPhi();
 	}
 
 	public void changeVector(double amount, double phi, double maxSpeed) {
-		if (this.vector.getAmount() < maxSpeed && amount > 0) {
-			vector.changeSpeed(amount);
+		if (this.getAmount() < maxSpeed && amount > 0) {
+			this.changeSpeed(amount);
 		}
-		if (this.vector.getAmount() > -maxSpeed / 2 && amount < 0) {
-			vector.changeSpeed(amount);
+		if (this.getAmount() > -maxSpeed / 2 && amount < 0) {
+			this.changeSpeed(amount);
 		}
-		this.vector.changeDirection(phi);
+		this.changeDirection(phi);
 	}
 
 	public void fire() {

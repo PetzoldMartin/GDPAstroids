@@ -32,6 +32,14 @@ public class Figure extends Drawable {
 		}
 	}
 
+	@Override
+	public void remove() {
+		for (Drawable aDrawable : shapes) {
+			aDrawable.remove();
+		}
+		this.shapes=null;
+	}
+
 	/**
 	 * move all shapes in the static ArrayList and draw the moved figure
 	 * 
