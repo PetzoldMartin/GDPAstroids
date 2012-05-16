@@ -86,6 +86,16 @@ public class GameController extends Thread implements Runnable {
 		}
 	}
 
+	public void pause() {
+		if (this.frameController.getPause()==false) {
+			this.frameController.setPause(true);			
+		}
+		else this.frameController.setPause(false);
+	}
+
+	public void setWindowActivated(boolean windowActivated) {
+		frameController.setWindowActivated(windowActivated);
+	}
 	public int getWindowX() {
 		return windowX;
 	}
@@ -132,15 +142,5 @@ public class GameController extends Thread implements Runnable {
 
 	public void setInputController(InputController inputController) {
 		this.inputController = inputController;
-	}
-
-	public void pause(boolean pause) {
-		this.frameController.setPause(pause);
-	}
-	public void pause() {
-		if (this.frameController.getPause()==false) {
-			this.frameController.setPause(true);			
-		}
-		else this.frameController.setPause(false);
 	}
 }
