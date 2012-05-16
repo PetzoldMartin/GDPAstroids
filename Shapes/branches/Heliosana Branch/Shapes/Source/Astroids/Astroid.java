@@ -23,7 +23,7 @@ public class Astroid extends Sprite {
 //		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));
 		ArrayList<Point> astroList = new ArrayList<Point>();
 		for (int phi =0; phi < 360; phi+=360/edge) {
-				astroList.add(new Vector(radius-radius/edge*8*Math.random(), phi));				
+				astroList.add(new Vector(radius-radius/(radius/6)*Math.random(), phi));				
 		}
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
 		this.vector = new Vector(1, Math.random() * 360);

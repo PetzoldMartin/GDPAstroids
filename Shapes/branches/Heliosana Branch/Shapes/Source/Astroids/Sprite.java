@@ -86,12 +86,6 @@ public class Sprite extends Figure {
 		Sprite.gameController = gameController;
 	}
 
-	public void rocket(SpaceShip spaceship) {
-		this.vector= spaceship.vector;
-		this.vector.changeSpeed(this.vector.getAmount());
-		
-	}
-
 	public Vector getVector() {
 		return vector;
 	}
