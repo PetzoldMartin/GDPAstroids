@@ -141,33 +141,27 @@ public class InputController extends Thread implements KeyListener,
 
 
 	}
-
+//	180+silence.getPhi()
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		Vector silence = new Vector(new Point(arg0.getX() - 150,
 				arg0.getY() - 150));
-		if (silence.getAmount() < 20) {
-			keyPhi = 0;
-			keyAmount = 0;
-		} else {
-			if(arg0.getY() < 170&&arg0.getY() > 130)
-			{
-				keyAmount = 0;
+		Vector s2= new Vector(new Point(0,0));
+		if (silence.getAmount() < 80) {
+			if(arg0.getX()>=150){
+			s2 =new Vector (silence.getAmount()/8,-silence.getPhi());
 			}
-			if (arg0.getY() > 170) {
-				keyAmount = -gameController.getKeyAcelleration();
+			if(arg0.getX()<150){
+				s2 =new Vector (silence.getAmount()/8,(180-silence.getPhi()));
+				}
 			}
-			if (arg0.getY() < 130) {
-				keyAmount = +gameController.getKeyAcelleration();
-			}
-			if (arg0.getX() > 150) {
-				keyPhi = +gameController.getKeyRotationAngel();
-			}
-			if (arg0.getX() < 150) {
-				keyPhi = -gameController.getKeyRotationAngel();
-			}
-
+		else{
+			s2 =new Vector (0.0,90.0);
 		}
+		
+				
+		gameController.getSpaceShip().setVector(s2);
+//		System.out.println(s2.getAmount()+" * "+s2.getPhi());
 
 	}
 
