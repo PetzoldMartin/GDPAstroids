@@ -108,7 +108,7 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		gameController.pause();
+		gameController.setWindowActivated(true);
 
 	}
 
@@ -126,7 +126,7 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		gameController.pause(true);
+		gameController.setWindowActivated(false);
 
 	}
 
