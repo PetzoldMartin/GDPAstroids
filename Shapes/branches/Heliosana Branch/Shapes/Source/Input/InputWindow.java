@@ -17,6 +17,8 @@ public class InputWindow extends Frame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static GameController gameController;
+	Image bufImage;
+	Graphics bufG;
 
 	public InputWindow(String name, GameController gameController) {
 		super(name);
@@ -57,9 +59,25 @@ public class InputWindow extends Frame {
 		g.drawLine(150, 0, 150, 300);
 	}
 
-//	public void paint(Graphics g) {
-//		if (offscreenImage != null)
-//			g.drawImage(offscreenImage, 0, 0, this);
-//	}
+public void update(Graphics g){
+        
+        int w = this.getSize().width;
+        int h = this.getSize().height;
+ 
+        if(bufImage == null){
+              bufImage = this.createImage(w,h);
+              bufG = bufImage.getGraphics();
+        }
+        
+        bufG.setColor(this.getBackground());
+        bufG.fillRect(0,0,w,h);
+        
+        bufG.setColor(this.getForeground());
+        
+        paint(bufG);
+ 
+        g.drawImage(bufImage,0,0,this);
+ 
+}
 
 }
