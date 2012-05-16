@@ -151,12 +151,12 @@ public class InputController extends Thread implements KeyListener,
 			if(arg0.getX()>=150){
 			s2 =new Vector (silence.getAmount()/8,-silence.getPhi());
 			}
-			if(arg0.getX()<150){
+			if(arg0.getX()<=150){
 				s2 =new Vector (silence.getAmount()/8,(180-silence.getPhi()));
 				}
 			}
 		else{
-			s2 =new Vector (0.0,90.0);
+			s2 =new Vector (0.0,gameController.getSpaceShip().getVector().getPhi());
 		}
 		
 				
