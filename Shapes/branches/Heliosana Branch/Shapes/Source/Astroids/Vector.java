@@ -2,6 +2,7 @@ package Astroids;
 
 import Shapes.Point;
 
+
 /**
  * class that manage a Vector with x and y and also with amount as lenght and
  * phi as angel

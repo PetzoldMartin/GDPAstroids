@@ -12,6 +12,7 @@ public class Astroid extends Sprite {
 	// TODO commenting
 	// TODO create Astroide with max radius & edge count! 
 	private int edge;
+	
 	public Astroid() {
 		this(24,30);
 	}
