@@ -32,13 +32,14 @@ public class GameController extends Thread implements Runnable {
 	private int frames = 30;
 	//Ship
 	private double maxSpeed = 10;
+	private int framesPerShot = 10;
 	// [setup/]
 	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
 	private FrameController frameController;
 	private InputController inputController;
-	Astroid test;
+	Sprite test;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller

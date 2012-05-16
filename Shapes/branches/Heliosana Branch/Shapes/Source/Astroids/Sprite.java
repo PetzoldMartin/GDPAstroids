@@ -33,7 +33,6 @@ public class Sprite extends Figure {
 		this.rotationPhi = 0;
 		this.addShape(new Circle(radius, this.centerPoint, Color.RED, false));
 	}
-
 	public void update() {
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
@@ -42,7 +41,7 @@ public class Sprite extends Figure {
 //				this.remove();
 				//FIXME changes during calcing make ConcurrentModificationException
 //			} else {
-//			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
+			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
 			move(cornerWarp);
 //			}
 		}
