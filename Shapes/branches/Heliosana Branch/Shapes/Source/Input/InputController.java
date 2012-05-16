@@ -74,6 +74,8 @@ public class InputController extends Thread implements KeyListener,
 			gameController.makeTest();
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 			gameController.spaceKey();
+		if (e.getKeyCode() == KeyEvent.VK_PAUSE)
+			gameController.pause();
 
 	}
 
@@ -107,7 +109,7 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		gameController.pause(false);
+		gameController.pause();
 
 	}
 
@@ -131,19 +133,16 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -160,7 +159,6 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -178,25 +176,21 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

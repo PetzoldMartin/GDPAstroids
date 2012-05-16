@@ -28,7 +28,7 @@ public class InputWindow extends java.awt.Frame {
 
 	public synchronized void paint(Graphics g) {
 	        super.paint(g);
-	        //FIXME Waum Statische referenz aus dem inputcontroller????
+	        //TODO Statische referenz aus dem inputcontroller????
 	        Integer speed = (int) InputController.gameController.getSpaceShip().getVector().getAmount();
 	        String speedString = "Speed: "+speed.toString();
 	        int ac2=(int) InputController.gameController.getSpaceShip().getVector().getPhi()-90;
