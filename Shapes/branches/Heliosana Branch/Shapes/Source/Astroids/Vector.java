@@ -42,9 +42,7 @@ public class Vector extends Shapes.Point {
 	 */
 	public Vector(Point vector) {
 		super(vector.getX(), vector.getY());
-		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
-				+ Math.pow(this.getY(), 2.0));
-		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
+//		setVector(vector);
 	}
 
 	/**
@@ -58,6 +56,9 @@ public class Vector extends Shapes.Point {
 		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
 				+ Math.pow(this.getY(), 2.0));
 		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
+		if (Double.isNaN(phi)) {
+			phi = 0;
+		}
 	}
 
 	/**
