@@ -5,4 +5,7 @@ public class ObjectController {
 	//count of Astroids
 	//one SpaceShip
 	//...
+	public void check() {
+		
+	}
 }

@@ -23,7 +23,7 @@ public class GameController extends Thread implements Runnable {
 	private double keyRotationAngel = 6;
 	private double keyAcelleration = 0.2;
 	// Astro
-	private int astroCount=10;
+	private int astroCount=0;
 	private int astroSize=20;
 	private int astroEdge=24;
 	//Window
@@ -38,6 +38,7 @@ public class GameController extends Thread implements Runnable {
 	private SpaceShip spaceShip;
 	private FrameController frameController;
 	private InputController inputController;
+	Astroid test;
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
@@ -60,6 +61,7 @@ public class GameController extends Thread implements Runnable {
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge,astroSize);
 		}
+		Astroid test = new Astroid(astroEdge,astroSize);
 		inputController = new InputController(this);
 		frameController = new FrameController(this);
 		// inputController.start();
@@ -68,7 +70,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
-		spaceShip.setCenterPoint(new Point(0, 0));
+		test.remove();
 	}
 
 	public void spaceKey() {

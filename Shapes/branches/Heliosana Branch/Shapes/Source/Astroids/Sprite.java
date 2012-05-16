@@ -9,7 +9,7 @@ import Shapes.Point;
 
 public class Sprite extends Figure {
 	// TODO Kommentierung!
-	protected int radius=1;
+	protected int radius=0;
 	private Vector vector;
 	private Point centerPoint;
 	protected double rotationPhi;
@@ -37,7 +37,7 @@ public class Sprite extends Figure {
 	public void update() {
 		this.draw();
 		this.move(vector);
-		Point cornerWarp = getCornerWarp();
+		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
 //			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
 			move(cornerWarp);
@@ -55,7 +55,7 @@ public class Sprite extends Figure {
 	/**
 	 * @return Point to move to the other corner
 	 */
-	protected Point getCornerWarp() {
+	protected Point getEdgeWarp() {
 		Point returnPoint = new Point(0, 0);
 		if (Math.abs(this.centerPoint.getX()) >= gameController.getWindowX()) {
 			if (this.centerPoint.getX() >= gameController.getWindowX()) {

@@ -10,17 +10,15 @@ public class SpaceShip extends Sprite {
 	// TODO make SpaceShip "Singel"
 	public SpaceShip(GameController gameController) {
 		super();
+		this.radius=15;
 		gameController.setSpaceShip(this);
 		this.setGameController(gameController);
 		ArrayList<Point> shipList = new ArrayList<Point>();
-		this.radius=15;
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
 		shipList.add(new Point(15, 0));
 		this.addShape(new Polygon(shipList, Color.WHITE, false));
-//		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));
-
-		
+//		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));	
 	}
 
 	@Override

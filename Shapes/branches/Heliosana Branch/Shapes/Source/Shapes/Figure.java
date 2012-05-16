@@ -36,8 +36,8 @@ public class Figure extends Drawable {
 	public void remove() {
 		for (Drawable aDrawable : shapes) {
 			aDrawable.remove();
+			shapes.remove(aDrawable);
 		}
-		this.shapes=null;
 	}
 
 	/**
