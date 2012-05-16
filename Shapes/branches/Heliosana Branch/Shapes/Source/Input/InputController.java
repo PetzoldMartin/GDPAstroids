@@ -74,7 +74,7 @@ public class InputController extends Thread implements KeyListener,
 				| e.getKeyCode() == KeyEvent.VK_S)
 			keyAmount = -gameController.getKeyAcelleration();
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-			gameController.makeTest();
+			gameController.setTestflag(true);
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 			gameController.spaceKey();
 		if (e.getKeyCode() == KeyEvent.VK_PAUSE)

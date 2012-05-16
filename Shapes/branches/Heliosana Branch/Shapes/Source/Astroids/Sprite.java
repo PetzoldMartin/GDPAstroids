@@ -35,19 +35,29 @@ public class Sprite extends Figure {
 	}
 
 	public void update() {
-		this.draw();
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
+//			if (this instanceof Rocket) {
+//				this.remove();
+				//FIXME changes during calcing make ConcurrentModificationException
+//			} else {
 //			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
 			move(cornerWarp);
+//			}
 		}
+		this.draw();
 	}
 
 	public Sprite move() {
 		return (Sprite) super.move(vector);
 	}
-
+	
+	public void remove() {
+		gameController.removeSprites(this);
+		super.remove();
+	}
+	
 	public Drawable rotate(double phi) {
 		return this.rotate(centerPoint, phi);
 	}
