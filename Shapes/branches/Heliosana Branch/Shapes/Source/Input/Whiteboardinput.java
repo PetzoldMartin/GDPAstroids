@@ -50,10 +50,10 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 		Vector silence = new Vector(
 				new Point(
 						arg0.getX()
-								- 389
+								- gameController.getWindowX()
 								- gameController.getSpaceShip()
 										.getCenterPoint().getX(), arg0.getY()
-								+(- 278
+								+(- gameController.getWindowY()
 								+ gameController.getSpaceShip()
 										.getCenterPoint().getY())));
 		Vector s2 = new Vector(new Point(0, 0));
