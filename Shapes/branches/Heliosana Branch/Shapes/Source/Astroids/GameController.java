@@ -96,6 +96,7 @@ public class GameController extends Thread implements Runnable {
 
 	public void setWindowActivated(boolean windowActivated) {
 		frameController.setWindowActivated(windowActivated);
+		//FIXME Null Pointer exception at starting
 	}
 	public int getWindowX() {
 		return windowX;

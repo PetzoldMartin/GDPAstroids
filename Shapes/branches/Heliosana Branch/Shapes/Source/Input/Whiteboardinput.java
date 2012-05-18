@@ -23,7 +23,7 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 		mousy = Shape.getWhiteBoard().getScrollPane();
 		WhiteBoard = Shape.getWhiteBoard().getFrame();
-		mousy.setCursor(new Cursor(1));
+		mousy.setCursor(new Cursor(0));
 		WhiteBoard.addKeyListener(inputController);
 		WhiteBoard.addWindowListener(inputController);
 		mousy.addMouseWheelListener(inputController);
@@ -34,7 +34,7 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		gameController.getSpaceShip().setVector(MouseControl(arg0));
 
 	}
 
@@ -57,12 +57,12 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 								+ gameController.getSpaceShip()
 										.getCenterPoint().getY())));
 		Vector s2 = new Vector(new Point(0, 0));
-		if (silence.getAmount() < 80) {
+		if (silence.getAmount() < 160) {
 			if (silence.getX() > 0) {
-				s2 = new Vector(silence.getAmount() / 8, -silence.getPhi());
+				s2 = new Vector(silence.getAmount() / 16, -silence.getPhi());
 			}
 			if (silence.getX() < 0) {
-				s2 = new Vector(silence.getAmount() / 8,
+				s2 = new Vector(silence.getAmount() / 16,
 						(180 - silence.getPhi()));
 			}
 		} else {

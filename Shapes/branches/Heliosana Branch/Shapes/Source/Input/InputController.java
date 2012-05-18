@@ -139,7 +139,7 @@ public class InputController extends Thread implements KeyListener,
 	}
 
 	@Override
-	public void windowActivated(WindowEvent e) {
+	public synchronized void windowActivated(WindowEvent e) {
 		gameController.setWindowActivated(true);
 
 	}
@@ -179,13 +179,13 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-	
+		gameController.getSpaceShip().setVector(MouseControl(arg0));
 
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
+		gameController.spaceKey();
 
 	}
 
@@ -201,6 +201,7 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		gameController.spaceKey();
 		
 		
 	}

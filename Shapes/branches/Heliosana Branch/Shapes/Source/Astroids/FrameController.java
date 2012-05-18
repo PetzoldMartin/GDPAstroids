@@ -43,11 +43,11 @@ public class FrameController extends Thread {
 		}
 	}
 
-	public void setPause(boolean pause) {
+	public synchronized void setPause(boolean pause) {
 		this.pause = pause;
 	}
 
-	public  boolean getPause() {
+	public synchronized boolean getPause() {
 		return pause;
 	}
 
