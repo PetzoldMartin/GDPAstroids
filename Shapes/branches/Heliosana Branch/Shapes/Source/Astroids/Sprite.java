@@ -41,7 +41,7 @@ public class Sprite extends Figure {
 //				this.remove();
 				//FIXME changes during calcing make ConcurrentModificationException
 //			} else {
-			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
+//			System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
 			move(cornerWarp);
 //			}
 		}

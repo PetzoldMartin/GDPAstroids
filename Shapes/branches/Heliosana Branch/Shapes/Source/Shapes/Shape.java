@@ -31,7 +31,7 @@ public abstract class Shape extends Drawable {
 		this.solid = solid;
 	}
 
-	public WhiteBoard getWhiteBoard() {
+	public static WhiteBoard getWhiteBoard() {
 		return whiteBoard;
 	}
 

@@ -16,21 +16,22 @@ public class InputWindow extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static GameController gameController;
+	private GameController gameController;
 	Image bufImage;
 	Graphics bufG;
+	Image offscreenImage;
+	Graphics offscreenGraphics;
 
 	public InputWindow(String name, GameController gameController) {
 		super(name);
-		gameController = this.gameController;
+		this.gameController = gameController ;
+
 
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		// FIXME Waum Statische referenz aus dem inputcontroller????
-		Double speed = InputController.gameController.getSpaceShip()
-				.getVector().getAmount();
+		Double speed = gameController.getSpaceShip().getVector().getAmount();
 		String speedString = "0";
 		if (speed < 0) {
 			String speedString0 = "Speed: " + speed.toString();
@@ -40,14 +41,13 @@ public class InputWindow extends Frame {
 			String speedString0 = "Speed: " + speed.toString();
 			speedString = speedString0.substring(0, 10);
 		}
-		int ac2 = (int) InputController.gameController.getSpaceShip()
-				.getVector().getPhi() - 90;
+		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 90;
 		Integer acceleration = Math.abs(ac2 % 360);
 		String accelerationString = "Angle: " + acceleration.toString();
-		Integer xcoord = (int) InputController.gameController.getSpaceShip()
-				.getCenterPoint().getX();
-		Integer ycoord = (int) InputController.gameController.getSpaceShip()
-				.getCenterPoint().getY();
+		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
+				.getX();
+		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
+				.getY();
 		String xString = "X:" + xcoord.toString();
 		String yString = "Y:" + ycoord.toString();
 
@@ -61,6 +61,7 @@ public class InputWindow extends Frame {
 		g.setColor(new Color(255, 0, 0));
 		g.drawLine(0, 150, 300, 150);
 		g.drawLine(150, 0, 150, 300);
+
 	}
 
 	public void update(Graphics g) {
