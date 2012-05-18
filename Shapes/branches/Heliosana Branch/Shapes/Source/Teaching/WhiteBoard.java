@@ -33,6 +33,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
+
+
 import java.util.*;
 
 /** Eine grafische Zeichenflaeche, auf der einfache
@@ -615,4 +617,12 @@ public class WhiteBoard {
             return new Dimension((int) (maxX - minX + 3), (int) (maxY - minY + 3));
         }
     }
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
 }
