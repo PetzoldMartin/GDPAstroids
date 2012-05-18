@@ -9,13 +9,13 @@ import java.awt.Color;
  * @version (0.3)
  */
 public class Circle extends Shape {
-	private int radius;
+	private double radius;
 	private Point center;
 
 	/**
 	 * Constructor for objects of class Circle - overloaded
 	 * 
-	 * @param radius
+	 * @param d
 	 *            radius of the circle
 	 * @param center
 	 *            center point of the circle
@@ -24,8 +24,8 @@ public class Circle extends Shape {
 	 * @param solid
 	 *            choice is the circle fullfilled
 	 */
-	public Circle(int radius, Point center) {
-		this.radius = radius;
+	public Circle(double d, Point center) {
+		this.radius = d;
 		this.center = center;
 	}
 
@@ -110,7 +110,7 @@ public class Circle extends Shape {
 		return center;
 	}
 
-	public int getRadius() {
+	public double getRadius() {
 		return radius;
 	}
 }

@@ -47,15 +47,15 @@ public class FrameController extends Thread {
 		this.pause = pause;
 	}
 
-	public boolean getPause() {
+	public  boolean getPause() {
 		return pause;
 	}
 
-	public boolean isWindowActivated() {
+	public synchronized boolean isWindowActivated() {
 		return windowActivated;
 	}
 
-	public void setWindowActivated(boolean windowActivated) {
+	public synchronized void setWindowActivated(boolean windowActivated) {
 		this.windowActivated = windowActivated;
 	}
 }
