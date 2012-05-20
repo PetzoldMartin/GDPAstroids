@@ -2,9 +2,6 @@ package Input;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,16 +12,9 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-
-import Shapes.Point;
-import Shapes.Shape;
-import Teaching.WhiteBoard;
-
 import Astroids.GameController;
 import Astroids.Vector;
+import Shapes.Point;
 
 public class InputController extends Thread implements KeyListener,
 		WindowListener, MouseWheelListener, MouseListener, MouseMotionListener {
@@ -202,7 +192,6 @@ public class InputController extends Thread implements KeyListener,
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		gameController.spaceKey();
-		
 		
 	}
 
