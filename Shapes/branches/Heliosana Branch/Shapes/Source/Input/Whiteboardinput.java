@@ -34,18 +34,17 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		gameController.getSpaceShip().setVector(MouseControl(arg0));
+		gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		gameController.getSpaceShip().setVector(MouseControl(arg0));
-//		MouseControl(arg0);
+		gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));
 
 	}
 
-	private Vector MouseControl(MouseEvent arg0) {
+	private Vector MouseControlWhiteboard(MouseEvent arg0) {
 
 		Vector silence = new Vector(
 				new Point(
