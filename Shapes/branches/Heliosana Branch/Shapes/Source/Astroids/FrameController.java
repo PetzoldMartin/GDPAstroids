@@ -29,6 +29,7 @@ public class FrameController extends Thread {
 				if (testFlag == true) {
 					gameController.makeTest();
 				}
+//				System.out.println((double)(System.nanoTime() - runTime) /1000000);
 			}
 			try {
 				Thread.sleep(runTime = frameTime

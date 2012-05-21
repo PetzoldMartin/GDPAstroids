@@ -1,7 +1,7 @@
 package Astroids;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.*;
 
 import Input.InputController;
 import Shapes.Drawable;
@@ -39,7 +39,8 @@ public class GameController extends Thread implements Runnable {
 	private SpaceShip spaceShip;
 	private FrameController frameController;
 	private InputController inputController;
-	Sprite test;
+	public Sprite test;
+	
 
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
