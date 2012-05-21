@@ -14,21 +14,23 @@ import Shapes.Shape;
 
 public class Whiteboardinput extends Thread implements MouseMotionListener {
 	private JFrame WhiteBoard;
-	private JScrollPane mousy;
+	private JScrollPane WhiteboardInlet;
 	private GameController gameController;
 
 	public Whiteboardinput(GameController gameController,
 			InputController inputController) {
 		this.gameController = gameController;
 		System.out.println("Whiteboardinput started:\t" + this.getId());
-		mousy = Shape.getWhiteBoard().getScrollPane();
+		WhiteboardInlet = Shape.getWhiteBoard().getScrollPane();
 		WhiteBoard = Shape.getWhiteBoard().getFrame();
-		mousy.setCursor(new Cursor(0));
+		WhiteboardInlet.setCursor(new Cursor(0));
 		WhiteBoard.addKeyListener(inputController);
 		WhiteBoard.addWindowListener(inputController);
-		mousy.addMouseWheelListener(inputController);
-		mousy.addMouseListener(inputController);
-		mousy.addMouseMotionListener(this);
+		WhiteboardInlet.addMouseWheelListener(inputController);
+		WhiteboardInlet.addMouseListener(inputController);
+		WhiteboardInlet.addMouseMotionListener(this);
+		WhiteBoard.setSize(gameController.getWindowX()*2+88, gameController.getWindowY()*2+88);
+
 
 	}
 

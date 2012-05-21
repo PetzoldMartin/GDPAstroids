@@ -27,7 +27,7 @@ public class GameController extends Thread implements Runnable {
 	private int astroSize=20;
 	private int astroEdge=24;
 	//Window
-	private int windowX = 389 - astroSize; // max std 389
+	private int windowX = 689 - astroSize; // max std 389
 	private int windowY = 278 - astroSize; // max std 278
 	private int frames = 30;
 	//Ship
