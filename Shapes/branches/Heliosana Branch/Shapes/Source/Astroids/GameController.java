@@ -27,8 +27,10 @@ public class GameController extends Thread implements Runnable {
 	private int astroSize=20;
 	private int astroEdge=24;
 	//Window
-	private int windowX = 689 - astroSize; // max std 389
-	private int windowY = 278 - astroSize; // max std 278
+	private int windowX = 600; // max std 389
+	private int windowY = 400; // max std 278
+	private int gameScreenX = windowX -astroSize;
+	private int gameScreenY = windowY -astroSize;
 	private int frames = 30;
 	//Ship
 	private double maxSpeed = 10;
@@ -54,9 +56,9 @@ public class GameController extends Thread implements Runnable {
 	public void run() {
 		System.out.println("GameController started:\t" + this.getId());
 		new SpaceShip(this);
-		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX + astroSize,
-				windowY + astroSize, Color.WHITE, true);
-		Drawable background = new Rectangle(new Point(0, 0), windowX, windowY,
+		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX,
+				windowY, Color.WHITE, true);
+		Drawable background = new Rectangle(new Point(0, 0), gameScreenX, gameScreenY,
 				Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
@@ -151,5 +153,17 @@ public class GameController extends Thread implements Runnable {
 
 	public void setTestflag(boolean testFlag) {
 		frameController.testFlag = testFlag;
+	}
+
+	public int getAstroSize() {
+		return astroSize;
+	}
+
+	public int getGameScreenX() {
+		return gameScreenX;
+	}
+
+	public int getGameScreenY() {
+		return gameScreenY;
 	}
 }

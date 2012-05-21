@@ -29,9 +29,9 @@ public class Astroid extends Sprite {
 		this.setVector(new Vector(1, Math.random() * 360));
 		this.rotationPhi = Math.random() * 12-6;
 		//TODO places Astroids only at the corners!
-		this.move(new Point(Math.random() * gameController.getWindowX() * 2
-				- gameController.getWindowX(), Math.random()
-				* gameController.getWindowY() * 2 - gameController.getWindowY()));
+		this.move(new Point(Math.random() * gameController.getGameScreenX() * 2
+				- gameController.getGameScreenX(), Math.random()
+				* gameController.getGameScreenY() * 2 - gameController.getGameScreenY()));
 	}
 	@Override
 	public void update() {
