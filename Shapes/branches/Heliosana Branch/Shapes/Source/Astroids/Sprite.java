@@ -7,8 +7,15 @@ import Shapes.Drawable;
 import Shapes.Figure;
 import Shapes.Point;
 
+/**
+ * abstract class that manage moveable objects with a Vector & a CenterPoint
+ * (for self-rotation)
+ * 
+ * @author Markus Krummnacker, Martin Petzold
+ * @version (0.3)
+ * 
+ */
 public abstract class Sprite extends Figure {
-	// TODO commenting
 	protected int radius = 0;
 	private Vector vector;
 	private Point centerPoint;
@@ -24,6 +31,7 @@ public abstract class Sprite extends Figure {
 	 * @param vector
 	 *            The movement-speed and movement-direction of the Sprite
 	 */
+	// TODO multiple Constructor!
 	public Sprite() {
 		gameController.addSprites(this);
 		this.centerPoint = new Point(0, 0);
@@ -32,6 +40,10 @@ public abstract class Sprite extends Figure {
 		this.addShape(new Circle(radius, this.centerPoint, Color.RED, false));
 	}
 
+	/**
+	 * Update the Sprite by one tact (frame) move the Sprite, checks corner
+	 * collision and warp to the other corner then draw the changes
+	 */
 	public void update() {
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
@@ -41,23 +53,49 @@ public abstract class Sprite extends Figure {
 		this.draw();
 	}
 
+	/**
+	 * move the Sprite by the Vector around the drawboard
+	 * 
+	 * @return this Sprite
+	 */
 	public Sprite move() {
 		return (Sprite) super.move(vector);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Shapes.Figure#remove()
+	 */
 	@Override
 	public void remove() {
 		gameController.deleteSprite(this);
 		super.remove();
 	}
 
-	public abstract void destroy();
+	/**
+	 * destroy the Object
+	 */
+	public abstract void destroy(Vector vector);
 
-	public Drawable rotate(double phi) {
+	// TODO implemets destroy astro and create 2 new smaller halt of radius and
+	// edges
+
+	/**
+	 * rotate the Sprite around his CenterPoint
+	 * 
+	 * @param phi
+	 *            Angel to rotate
+	 * @return
+	 */
+	protected Drawable rotate(double phi) {
 		return this.rotate(centerPoint, phi);
 	}
 
 	/**
+	 * check the Sprite position and if it is out of GameScreen return the right
+	 * warping point to move
+	 * 
 	 * @return Point to move to the other corner
 	 */
 	protected Point getEdgeWarp() {
@@ -82,20 +120,28 @@ public abstract class Sprite extends Figure {
 		return returnPoint;
 	}
 
-	public void collide() {
-		// TODO implemets destroy astro and create 2 new smaller halt of radius
-		// and edges
-	}
-
+	/**
+	 * move the Sprite to a new position on drawboard
+	 * 
+	 * @param centerPoint
+	 *            new CenterPoint of the Sprite
+	 */
 	protected void setCenterPoint(Point centerPoint) {
 		this.move(this.centerPoint.invert());
 		this.move(centerPoint);
 	}
 
+	/**
+	 * @return a copy of the CenterPoint of this Sprite
+	 */
 	public Point getCenterPoint() {
 		return this.centerPoint.copy();
 	}
 
+	/**
+	 * @param gameController
+	 *            GameController to set
+	 */
 	public static void setGameController(GameController gameController) {
 		Sprite.gameController = gameController;
 	}
@@ -104,7 +150,7 @@ public abstract class Sprite extends Figure {
 		return vector;
 	}
 
-	public double getAmount() {
+	protected double getAmount() {
 		return vector.getAmount();
 	}
 

@@ -3,8 +3,8 @@ package Astroids;
 import Shapes.Point;
 
 /**
- * class that manage a Vector with x and y and also with amount as lenght and
- * phi as angel
+ * class that manage a Vector with x and y and also with amount as lenght & phi
+ * as angel
  * 
  * @author Markus Krummnacker
  * @version (0.1)

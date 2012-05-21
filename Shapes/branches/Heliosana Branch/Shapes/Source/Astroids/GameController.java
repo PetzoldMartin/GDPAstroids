@@ -11,8 +11,8 @@ import Shapes.Rectangle;
 /**
  * class that manage the program
  * 
- * @author (Martin Petzold)
- * @version (0.1)
+ * @author (Martin Petzold , Markus Krummnacker)
+ * @version (0.3)
  */
 public class GameController extends Thread implements Runnable {
 	// TODO commenting
@@ -44,13 +44,8 @@ public class GameController extends Thread implements Runnable {
 	private SpaceShip spaceShip;
 	private FrameController frameController;
 	private InputController inputController;
-
+	// testing
 	private Sprite test;
-
-	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
-	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
-	// Sprite-Grafiken. Dieser Thread fordert alle Sprites auf, sich bei Bedarf
-	// zu aktualisieren.
 
 	/**
 	 * @param args
@@ -79,7 +74,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
-		test.destroy();
+		test.destroy(null);
 	}
 
 	public void spaceKey() {
