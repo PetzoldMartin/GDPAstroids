@@ -116,7 +116,6 @@ public class PolygonTest extends TestCase {
 		assertFalse("Die equals Methode testet nicht auf Konsistenz",
 				x.equals(z));
 		assertFalse(x.equals(null));
-		System.out.println(z.getPoints().size());
 
 	}
 
