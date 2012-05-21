@@ -66,18 +66,18 @@ public class Sprite extends Figure {
 	 */
 	protected Point getEdgeWarp() {
 		Point returnPoint = new Point(0, 0);
-		if (Math.abs(this.centerPoint.getX()) >= gameController.getWindowX()) {
-			if (this.centerPoint.getX() >= gameController.getWindowX()) {
-				returnPoint.move(-gameController.getWindowX() * 2, 0); // right
+		if (Math.abs(this.centerPoint.getX()) >= gameController.getGameScreenX()) {
+			if (this.centerPoint.getX() >= gameController.getGameScreenX()-gameController.getAstroSize()) {
+				returnPoint.move(-gameController.getGameScreenX() * 2, 0); // right
 			} else {
-				returnPoint.move(gameController.getWindowX() * 2, 0); // left
+				returnPoint.move(gameController.getGameScreenX() * 2, 0); // left
 			}
 		}
-		if (Math.abs(this.centerPoint.getY()) >= gameController.getWindowY()) {
-			if (this.centerPoint.getY() >= gameController.getWindowY()) {
-				returnPoint.move(0, -gameController.getWindowY() * 2); // upper
+		if (Math.abs(this.centerPoint.getY()) >= gameController.getGameScreenY()) {
+			if (this.centerPoint.getY() >= gameController.getGameScreenY()) {
+				returnPoint.move(0, -gameController.getGameScreenY() * 2); // upper
 			} else {
-				returnPoint.move(0, gameController.getWindowY() * 2); // bottom
+				returnPoint.move(0, gameController.getGameScreenY() * 2); // bottom
 			}
 		}
 		return returnPoint;

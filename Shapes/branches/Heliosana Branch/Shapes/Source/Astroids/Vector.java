@@ -11,6 +11,7 @@ import Shapes.Point;
  * @version (0.1)
  * 
  */
+//TODO bei negativen x und y coordinaten falsches phi
 public class Vector extends Shapes.Point {
 	private double amount;
 	private double phi;
