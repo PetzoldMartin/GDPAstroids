@@ -3,6 +3,8 @@ package Astroids;
 import java.awt.Color;
 import java.util.*;
 
+import javax.swing.plaf.synth.SynthViewportUI;
+
 import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
@@ -23,7 +25,7 @@ public class GameController extends Thread implements Runnable {
 	private double keyRotationAngel = 6;
 	private double keyAcelleration = 0.2;
 	// Astro
-	private int astroCount=0;
+	private int astroCount=25;
 	private int astroSize=20;
 	private int astroEdge=24;
 	//Window
@@ -34,7 +36,7 @@ public class GameController extends Thread implements Runnable {
 	private int frames = 30;
 	//Ship
 	private double maxSpeed = 10;
-	private int framesPerShot = 10;
+	private int framesPerShot = 10; //how many frames between the shots!
 	// [setup/]
 	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -42,10 +44,10 @@ public class GameController extends Thread implements Runnable {
 	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
 	private FrameController frameController;
-	private InputController inputController;
-	public Sprite test;
-	
+	private InputController inputController;	
 
+	private Sprite test;
+	
 	// TODO Entwickeln Sie eine Klasse GameController, die alle Sprites kennt.
 	// Diese Klasse verfügt über einen Thread zum Aktualisieren aller
 	// Sprite-Grafiken. Dieser Thread fordert alle Sprites auf, sich bei Bedarf
@@ -56,40 +58,41 @@ public class GameController extends Thread implements Runnable {
 	 * @throws InterruptedException
 	 */
 	public void run() {
+		Sprite.setGameController(this);
 		System.out.println("GameController started:\t" + this.getId());
-		new SpaceShip(this);
 		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX,
 				windowY, Color.WHITE, true);
 		Drawable background = new Rectangle(new Point(0, 0), gameScreenX, gameScreenY,
 				Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
+		frameController = new FrameController(this);
+		inputController = new InputController(this);
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge,astroSize);
 		}
-		test = new Astroid(astroEdge,astroSize);
-		frameController = new FrameController(this);
-		inputController = new InputController(this);
-		// inputController.start();
+		new SpaceShip();
 		frameController.start();
+		// inputController.start();
 
 	}
 
 	public void makeTest() {
-		test.remove();
 	}
 
 	public void spaceKey() {
-		spaceShip.fire();		
+		spaceShip.fire(framesPerShot);	
 	}
 
 	public void update() {
-		for (Sprite remove : removals) {
-//			System.out.println(sprite.centerPoint.getX() + "\t" + sprite.centerPoint.getY());
-			remove.remove();
+		for (Sprite toRemove : removals) {
+			toRemove.remove();
 		}
 		removals.clear();
-		getSpaceShip().update();
+		for (Sprite toAdd : adds) {
+			this.sprites.add(toAdd);
+		}
+		adds.clear();
 //		 System.out.println(getSpaceShip().getMiddlePoint().getX() + "\t" + getSpaceShip().getMiddlePoint().getY());
 		for (Sprite sprite : sprites) {
 //			System.out.println(sprite.centerPoint.getX() + "\t" + sprite.centerPoint.getY());
@@ -105,19 +108,15 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void addSprites(Sprite sprite) {
-		this.sprites.add(sprite);
+		this.adds.add(sprite);
 	}
 
 	public void removeSprites(Sprite sprite) {
+		this.removals.add(sprite);
+	}
+
+	public void deleteSprite(Sprite sprite) {
 		this.sprites.remove(sprite);
-	}
-
-	public void addRemovals(Sprite removals) {
-		this.removals.add(removals);
-	}
-
-	public void addAdds(Sprite adds) {
-		this.removals.add(adds);
 	}
 
 	public void setInputController(InputController inputController) {
