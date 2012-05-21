@@ -7,7 +7,7 @@ import Shapes.Drawable;
 import Shapes.Figure;
 import Shapes.Point;
 
-public class Sprite extends Figure {
+public abstract class Sprite extends Figure {
 	// TODO Kommentierung!
 	protected int radius = 0;
 	private Vector vector;
@@ -36,12 +36,6 @@ public class Sprite extends Figure {
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
-//			if (this instanceof Rocket) {
-//				gameController.removeSprites(this);
-//				// FIXME changes during calcing make
-//				// ConcurrentModificationException
-//			}
-			// System.out.println(cornerWarp.getX() + "\t" + cornerWarp.getY());
 			move(cornerWarp);
 		}
 		this.draw();
@@ -55,7 +49,8 @@ public class Sprite extends Figure {
 		gameController.deleteSprite(this);
 		super.remove();
 	}
-
+	public abstract void destroy();
+	
 	public Drawable rotate(double phi) {
 		return this.rotate(centerPoint, phi);
 	}

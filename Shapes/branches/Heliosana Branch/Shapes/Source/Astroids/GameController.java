@@ -1,9 +1,7 @@
 package Astroids;
 
 import java.awt.Color;
-import java.util.*;
-
-
+import java.util.ArrayList;
 import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
@@ -70,6 +68,7 @@ public class GameController extends Thread implements Runnable {
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge,astroSize);
 		}
+		test = new Astroid();
 		new SpaceShip();
 		frameController.start();
 		// inputController.start();
@@ -77,6 +76,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
+		test.destroy();
 	}
 
 	public void spaceKey() {
