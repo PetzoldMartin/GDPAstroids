@@ -23,11 +23,11 @@ public class SpaceShip extends Sprite {
 
 	@Override
 	public void update() {
-		super.update();
 		if (rotationPhi != getPhi()) {
 			this.rotate(rotationPhi - getPhi());
 		}
 		rotationPhi = this.getPhi();
+		super.update();
 		fireCounter--;
 	}
 
@@ -41,13 +41,17 @@ public class SpaceShip extends Sprite {
 		this.changeDirection(phi);
 	}
 
-	public void fire(int frames) {
+	public void fire(int framesPerShot) {
 		if (fireCounter <=0) {
 			new Rocket(this);
-			fireCounter= frames;
+			fireCounter= framesPerShot;
 		} else {
 			System.out.println("not ready!!! "+fireCounter);
 		}
 			
+	}
+	@Override
+	public void destroy() {
+		//TODO Player die event
 	}
 }

@@ -22,4 +22,9 @@ public class Rocket extends Sprite {
 		}
 		lifeTimeFrame--;
 	}
+
+	@Override
+	public void destroy() {
+		gameController.removeSprites(this);
+	}
 }
