@@ -29,7 +29,7 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 		WhiteboardInlet.addMouseWheelListener(inputController);
 		WhiteboardInlet.addMouseListener(inputController);
 		WhiteboardInlet.addMouseMotionListener(this);
-		WhiteBoard.setSize(gameController.getWindowX()*2+88, gameController.getWindowY()*2+88);
+		WhiteBoard.setSize(gameController.getWindowX()*2+gameController.getAstroSize()*2-16, gameController.getWindowY()*2+gameController.getAstroSize()*2+4);
 
 
 	}
