@@ -94,43 +94,87 @@ public class InputController extends Thread implements KeyListener,
 	// events wenn eine taste Gedr�ckt wird
 	public void keyPressed(KeyEvent e) {
 		// TODO Doubblekeysfail
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_ESCAPE:
 			System.exit(0);
-		if (e.getKeyCode() == KeyEvent.VK_LEFT
-				| e.getKeyCode() == KeyEvent.VK_A)
+			break;
+		case KeyEvent.VK_LEFT:
 			keyPhi = -gameController.getKeyRotationAngel();
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT
-				| e.getKeyCode() == KeyEvent.VK_D)
+			break;
+		case KeyEvent.VK_A:
+			keyPhi = -gameController.getKeyRotationAngel();
+			break;
+		case KeyEvent.VK_RIGHT:
 			keyPhi = +gameController.getKeyRotationAngel();
-		if (e.getKeyCode() == KeyEvent.VK_UP | e.getKeyCode() == KeyEvent.VK_W)
+			break;
+		case KeyEvent.VK_D:
+			keyPhi = +gameController.getKeyRotationAngel();
+			break;
+		case KeyEvent.VK_UP:
 			keyAmount = gameController.getKeyAcelleration();
-		if (e.getKeyCode() == KeyEvent.VK_DOWN
-				| e.getKeyCode() == KeyEvent.VK_S)
+			break;
+		case KeyEvent.VK_W:
+			keyAmount = gameController.getKeyAcelleration();
+			break;
+		case KeyEvent.VK_DOWN:
 			keyAmount = -gameController.getKeyAcelleration();
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+			break;
+		case KeyEvent.VK_S:
+			keyAmount = -gameController.getKeyAcelleration();
+			break;
+		case KeyEvent.VK_ENTER:
 			gameController.setTestflag(true);
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-			gameController.spaceKey();
-		if (e.getKeyCode() == KeyEvent.VK_PAUSE)
+			break;
+		case KeyEvent.VK_PAUSE:
 			gameController.pause();
-		if (e.getKeyCode() == KeyEvent.VK_F1)
+			break;
+		case KeyEvent.VK_F1:
 			OutPutVisible();
+			break;
+		case KeyEvent.VK_SPACE:
+			gameController.spaceKey();
+		default:
+			break;
+		}
 
 	}
 
 	// events beim Tastenloslassen
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT
-				| e.getKeyCode() == KeyEvent.VK_A)
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_ESCAPE:
+			System.exit(0);
+			break;
+		case KeyEvent.VK_LEFT:
 			keyPhi = 0;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT
-				| e.getKeyCode() == KeyEvent.VK_D)
+			break;
+		case KeyEvent.VK_A:
 			keyPhi = 0;
-		if (e.getKeyCode() == KeyEvent.VK_UP | e.getKeyCode() == KeyEvent.VK_W)
+			break;
+		case KeyEvent.VK_RIGHT:
+			keyPhi = 0;
+			break;
+		case KeyEvent.VK_D:
+			keyPhi = 0;
+			break;
+		case KeyEvent.VK_UP:
 			keyAmount = 0;
-		if (e.getKeyCode() == KeyEvent.VK_DOWN
-				| e.getKeyCode() == KeyEvent.VK_S)
+			break;
+		case KeyEvent.VK_W:
 			keyAmount = 0;
+			break;
+		case KeyEvent.VK_DOWN:
+			keyAmount = 0;
+			break;
+		case KeyEvent.VK_S:
+			keyAmount = 0;
+			break;
+		case KeyEvent.VK_ENTER:
+			gameController.setTestflag(false);
+			break;
+		default:
+			break;
+		}
 
 	}
 
