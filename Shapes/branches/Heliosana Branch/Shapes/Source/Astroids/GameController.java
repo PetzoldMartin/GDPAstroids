@@ -3,7 +3,6 @@ package Astroids;
 import java.awt.Color;
 import java.util.*;
 
-import javax.swing.plaf.synth.SynthViewportUI;
 
 import Input.InputController;
 import Shapes.Drawable;
