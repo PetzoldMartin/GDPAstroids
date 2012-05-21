@@ -8,7 +8,7 @@ import Shapes.Figure;
 import Shapes.Point;
 
 public abstract class Sprite extends Figure {
-	// TODO Kommentierung!
+	// TODO commenting
 	protected int radius = 0;
 	private Vector vector;
 	private Point centerPoint;
@@ -45,12 +45,14 @@ public abstract class Sprite extends Figure {
 		return (Sprite) super.move(vector);
 	}
 
+	@Override
 	public void remove() {
 		gameController.deleteSprite(this);
 		super.remove();
 	}
+
 	public abstract void destroy();
-	
+
 	public Drawable rotate(double phi) {
 		return this.rotate(centerPoint, phi);
 	}

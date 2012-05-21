@@ -1,6 +1,7 @@
 package Astroids;
 
 public class FrameController extends Thread {
+	// TODO commenting
 	private double maxSpeed;
 	private long frameTime;
 	private GameController gameController;
@@ -29,7 +30,8 @@ public class FrameController extends Thread {
 				if (testFlag == true) {
 					gameController.makeTest();
 				}
-//				System.out.println((double)(System.nanoTime() - runTime) /1000000);
+				// System.out.println((double)(System.nanoTime() - runTime)
+				// /1000000);
 			}
 			try {
 				Thread.sleep(runTime = frameTime
@@ -42,6 +44,13 @@ public class FrameController extends Thread {
 			}
 			// System.out.println(runTime);
 		}
+	}
+
+	public void checkObjects() {
+		// TODO implemts the controlling of all object:
+		// count of Astroids
+		// one SpaceShip
+		// ...
 	}
 
 	public synchronized void setPause(boolean pause) {

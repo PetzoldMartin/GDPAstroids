@@ -2,7 +2,6 @@ package Astroids;
 
 import Shapes.Point;
 
-
 /**
  * class that manage a Vector with x and y and also with amount as lenght and
  * phi as angel
@@ -11,7 +10,6 @@ import Shapes.Point;
  * @version (0.1)
  * 
  */
-//TODO bei negativen x und y coordinaten falsches phi
 public class Vector extends Shapes.Point {
 	private double amount;
 	private double phi;
@@ -45,6 +43,7 @@ public class Vector extends Shapes.Point {
 	public Vector(Point vector) {
 		super(vector.getX(), vector.getY());
 		setVector(vector);
+		// FIXME angel collision
 	}
 
 	/**

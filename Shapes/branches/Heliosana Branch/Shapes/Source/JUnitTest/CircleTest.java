@@ -17,6 +17,7 @@ import Shapes.Point;
  * 
  */
 public class CircleTest extends TestCase {
+	// TODO CircleTest
 	Circle x, y, z;
 
 	@Override
@@ -58,7 +59,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testCircle() {
-		fail("Not yet implemented"); // TODO test Construktor of Circle
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testGetWhiteBoard() {
-		fail("Not yet implemented"); // TODO Test getWhiteboard of Circle
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testSetColor() {
-		fail("Not yet implemented"); // TODO Test Set Color of Circle
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class CircleTest extends TestCase {
 	 */
 	@Test
 	public void testSetSolid() {
-		fail("Not yet implemented"); // TODO Test Set Solid of Circle
+		fail("Not yet implemented");
 	}
 
 	/**

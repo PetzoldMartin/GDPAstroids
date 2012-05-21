@@ -44,7 +44,8 @@ public class CollisionDetectorTests {
 		}
 
 		{
-			// special case (lines are both points and coincidental (overlapping))
+			// special case (lines are both points and coincidental
+			// (overlapping))
 			Line l1 = new Line(new Point(1, 1), new Point(1, 1));
 			Line l2 = new Line(new Point(1, 1), new Point(1, 1));
 
