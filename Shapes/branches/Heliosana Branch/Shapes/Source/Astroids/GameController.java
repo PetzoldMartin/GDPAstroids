@@ -64,8 +64,8 @@ public class GameController extends Thread implements Runnable {
 			new Astroid(astroEdge,astroSize);
 		}
 		test = new Astroid(astroEdge,astroSize);
-		inputController = new InputController(this);
 		frameController = new FrameController(this);
+		inputController = new InputController(this);
 		// inputController.start();
 		frameController.start();
 
