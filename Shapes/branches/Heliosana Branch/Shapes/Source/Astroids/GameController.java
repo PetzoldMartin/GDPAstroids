@@ -17,7 +17,7 @@ import Shapes.Rectangle;
 public class GameController extends Thread implements Runnable {
 	// TODO commenting
 	public static void main(String[] args) {
-		new GameController().start();
+		new GameController();
 	}
 
 	// [setup]
@@ -37,42 +37,79 @@ public class GameController extends Thread implements Runnable {
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// [setup/]
-	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
+	private long frameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private ArrayList<Sprite> removals = new ArrayList<Sprite>();
 	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
-	private FrameController frameController;
 	private InputController inputController;
 	// testing
 	private Sprite test;
+	private boolean pause = false;
+	private boolean windowActivated = true;
+	public boolean testFlag;
 
 	/**
 	 * @param args
 	 * @throws InterruptedException
 	 */
-	@Override
-	public void run() {
+
+	public GameController() {
 		Sprite.setGameController(this);
-		System.out.println("GameController started:\t" + this.getId());
+		System.out.println("GameController initialisiert:\t" + this.getId());
 		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX,
 				windowY, Color.WHITE, true);
 		Drawable background = new Rectangle(new Point(0, 0), gameScreenX,
 				gameScreenY, Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
-		frameController = new FrameController(this);
 		inputController = new InputController(this);
+		inputController.start();
+		checkObjects();
+		this.start();
+	}
+
+	public void run() {
+		System.out.println("GameController started:\t" + this.getId());
+		for (;;) {
+			Long runTime = System.nanoTime();
+			if (pause == false && windowActivated == true) {
+				spaceShip.changeVector(
+						inputController.getKeyAmount(),
+						inputController.getKeyPhi(),
+						maxSpeed);
+				update();
+				inputController.Interfacerefresh();
+				if (testFlag == true) {
+					makeTest();
+				}
+				// System.out.println((double)(System.nanoTime() - runTime)
+				// /1000000);
+			}
+			try {
+				Thread.sleep(runTime = frameTime
+						- (System.nanoTime() - runTime) / 1000000);
+			} catch (IllegalArgumentException e) {
+				System.out.println("FrameTime overrun:\t " + (-runTime));
+			} catch (InterruptedException e) {
+				System.out.println("Frame interuppted");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void checkObjects() {
+		// TODO implemts the controlling of all object:
+		// count of Astroids
+		// one SpaceShip
+		// ...
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge, astroSize);
 		}
 		test = new Astroid();
 		new SpaceShip();
-		frameController.start();
-		// inputController.start();
-
 	}
-
+	
 	public void makeTest() {
 		test.destroy(null);
 	}
@@ -100,10 +137,10 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void pause() {
-		if (this.frameController.getPause() == false) {
-			this.frameController.setPause(true);
+		if (this.pause == false) {
+			this.pause=true;
 		} else
-			this.frameController.setPause(false);
+			this.pause=false;
 	}
 
 	public void addSprites(Sprite sprite) {
@@ -123,7 +160,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void setWindowActivated(boolean windowActivated) {
-		frameController.setWindowActivated(windowActivated);
+		this.windowActivated=windowActivated;
 	}
 
 	public void setSpaceShip(SpaceShip spaceShip) {
@@ -131,7 +168,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void setTestflag(boolean testFlag) {
-		frameController.testFlag = testFlag;
+		this.testFlag = testFlag;
 	}
 
 	public int getWindowX() {
@@ -155,7 +192,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public long getGlobalFrameTime() {
-		return globalFrameTime;
+		return frameTime;
 	}
 
 	public ArrayList<Sprite> getSprites() {
