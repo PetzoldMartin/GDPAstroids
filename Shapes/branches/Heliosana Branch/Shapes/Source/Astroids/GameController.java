@@ -38,6 +38,8 @@ public class GameController extends Thread implements Runnable {
 	// [setup/]
 	private long globalFrameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+	private ArrayList<Sprite> removals = new ArrayList<Sprite>();
+	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
 	private FrameController frameController;
 	private InputController inputController;
@@ -82,6 +84,11 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void update() {
+		for (Sprite remove : removals) {
+//			System.out.println(sprite.centerPoint.getX() + "\t" + sprite.centerPoint.getY());
+			remove.remove();
+		}
+		removals.clear();
 		getSpaceShip().update();
 //		 System.out.println(getSpaceShip().getMiddlePoint().getX() + "\t" + getSpaceShip().getMiddlePoint().getY());
 		for (Sprite sprite : sprites) {
@@ -97,10 +104,37 @@ public class GameController extends Thread implements Runnable {
 		else this.frameController.setPause(false);
 	}
 
+	public void addSprites(Sprite sprite) {
+		this.sprites.add(sprite);
+	}
+
+	public void removeSprites(Sprite sprite) {
+		this.sprites.remove(sprite);
+	}
+
+	public void addRemovals(Sprite removals) {
+		this.removals.add(removals);
+	}
+
+	public void addAdds(Sprite adds) {
+		this.removals.add(adds);
+	}
+
+	public void setInputController(InputController inputController) {
+		this.inputController = inputController;
+	}
+
 	public void setWindowActivated(boolean windowActivated) {
 		frameController.setWindowActivated(windowActivated);
-		//FIXME Null Pointer exception at starting
 	}
+	public void setSpaceShip(SpaceShip spaceShip) {
+		this.spaceShip = spaceShip;
+	}
+
+	public void setTestflag(boolean testFlag) {
+		frameController.testFlag = testFlag;
+	}
+
 	public int getWindowX() {
 		return windowX;
 	}
@@ -129,30 +163,12 @@ public class GameController extends Thread implements Runnable {
 		return sprites;
 	}
 
-	public void addSprites(Sprite sprite) {
-		this.sprites.add(sprite);
-	}
-	public void removeSprites(Sprite sprite) {
-		this.sprites.remove(sprite);
-	}
 	public SpaceShip getSpaceShip() {
 		return spaceShip;
 	}
 
-	public void setSpaceShip(SpaceShip spaceShip) {
-		this.spaceShip = spaceShip;
-	}
-
 	public InputController getInputController() {
 		return inputController;
-	}
-
-	public void setInputController(InputController inputController) {
-		this.inputController = inputController;
-	}
-
-	public void setTestflag(boolean testFlag) {
-		frameController.testFlag = testFlag;
 	}
 
 	public int getAstroSize() {
