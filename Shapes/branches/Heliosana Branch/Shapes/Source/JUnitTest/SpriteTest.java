@@ -31,7 +31,6 @@ public class SpriteTest extends TestCase {
 		System.out.println(test.getCenterPoint().getX() + "  "
 				+ (test.getCenterPoint().getY()));
 		assertEquals(test.getCenterPoint(), new Point(0, 100));
-		test.rotate(45);
 		System.out.println(test.getCenterPoint().getX() + "  "
 				+ (test.getCenterPoint().getY()));
 		assertEquals(test.getCenterPoint(), new Point(0, 100));

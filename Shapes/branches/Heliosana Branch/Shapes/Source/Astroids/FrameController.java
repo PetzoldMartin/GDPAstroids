@@ -2,6 +2,7 @@ package Astroids;
 
 public class FrameController extends Thread {
 	// TODO commenting
+	// TODO put it into GameController
 	private double maxSpeed;
 	private long frameTime;
 	private GameController gameController;

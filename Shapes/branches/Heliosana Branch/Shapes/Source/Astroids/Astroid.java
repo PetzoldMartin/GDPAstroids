@@ -43,7 +43,7 @@ public class Astroid extends Sprite {
 	}
 
 	@Override
-	public void destroy() {
+	public void destroy(Vector vector) {
 		split();
 		gameController.removeSprites(this);
 	}
