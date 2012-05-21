@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import Shapes.*;
 
 public class SpaceShip extends Sprite {
+	private int fireCounter=0;
 
 	// TODO make SpaceShip "Singel"
-	public SpaceShip(GameController gameController) {
+	public SpaceShip() {
 		super();
 		this.radius=15;
 		gameController.setSpaceShip(this);
-		this.setGameController(gameController);
 		ArrayList<Point> shipList = new ArrayList<Point>();
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
@@ -28,6 +28,7 @@ public class SpaceShip extends Sprite {
 			this.rotate(rotationPhi - getPhi());
 		}
 		rotationPhi = this.getPhi();
+		fireCounter--;
 	}
 
 	public void changeVector(double amount, double phi, double maxSpeed) {
@@ -40,7 +41,13 @@ public class SpaceShip extends Sprite {
 		this.changeDirection(phi);
 	}
 
-	public void fire() {
-		new Rocket(this);
+	public void fire(int frames) {
+		if (fireCounter <=0) {
+			new Rocket(this);
+			fireCounter= frames;
+		} else {
+			System.out.println("not ready!!! "+fireCounter);
+		}
+			
 	}
 }

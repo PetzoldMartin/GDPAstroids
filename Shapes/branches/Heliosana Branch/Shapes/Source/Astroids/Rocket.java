@@ -18,7 +18,7 @@ public class Rocket extends Sprite {
 	public void update() {
 		super.update();
 		if (lifeTimeFrame <=0) {
-			gameController.addRemovals(this);
+			gameController.removeSprites(this);
 		}
 		lifeTimeFrame--;
 	}

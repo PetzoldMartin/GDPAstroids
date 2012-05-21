@@ -25,9 +25,7 @@ public class Sprite extends Figure {
 	 *            The movement-speed and movement-direction of the Sprite
 	 */
 	public Sprite() {
-		if (!(this instanceof SpaceShip)) {
-			gameController.addSprites(this);
-		}
+		gameController.addSprites(this);
 		this.centerPoint = new Point(0, 0);
 		this.vector = new Vector(0, 90);
 		this.rotationPhi = 0;
@@ -39,7 +37,7 @@ public class Sprite extends Figure {
 		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
 //			if (this instanceof Rocket) {
-//				gameController.addRemovals(this);
+//				gameController.removeSprites(this);
 //				// FIXME changes during calcing make
 //				// ConcurrentModificationException
 //			}
@@ -54,7 +52,7 @@ public class Sprite extends Figure {
 	}
 
 	public void remove() {
-		gameController.removeSprites(this);
+		gameController.deleteSprite(this);
 		super.remove();
 	}
 
@@ -101,7 +99,7 @@ public class Sprite extends Figure {
 		return this.centerPoint.copy();
 	}
 
-	public void setGameController(GameController gameController) {
+	public static void setGameController(GameController gameController) {
 		Sprite.gameController = gameController;
 	}
 

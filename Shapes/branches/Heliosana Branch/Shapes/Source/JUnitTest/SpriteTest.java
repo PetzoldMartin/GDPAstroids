@@ -16,7 +16,7 @@ public class SpriteTest extends TestCase {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		test = new SpaceShip(null);
+		test = new SpaceShip();
 	}
 
 	@Override
