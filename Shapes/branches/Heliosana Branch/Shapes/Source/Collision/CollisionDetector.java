@@ -11,18 +11,20 @@ import Shapes.Polygon;
 import Shapes.Shape;
 
 /**
- * Die {@link CollisionDetector#collide}-Methoden sind Beispiele fuer multiple dispatch (darf nicht mit Polymorphismus
- * verwechselt werden!).
+ * Die {@link CollisionDetector#collide}-Methoden sind Beispiele fuer multiple
+ * dispatch (darf nicht mit Polymorphismus verwechselt werden!).
  * 
- * Für einige Kollisionserkennungen gibt es zwei Implementierungen; sie sind austauschbar.
+ * Für einige Kollisionserkennungen gibt es zwei Implementierungen; sie sind
+ * austauschbar.
  * 
- * Methode {@link CollisionDetector#lineIntersectsLine2} zeigt ein Beispiel für den Umgang mit Rundungsfehlern (siehe
- * Variable epsilon).
+ * Methode {@link CollisionDetector#lineIntersectsLine2} zeigt ein Beispiel für
+ * den Umgang mit Rundungsfehlern (siehe Variable epsilon).
  * 
- * Die Klasse Vector2D stammt aus der Apache Commons Math Bibliothek (Version 3) (siehe
- * http://commons.apache.org/math/).
+ * Die Klasse Vector2D stammt aus der Apache Commons Math Bibliothek (Version 3)
+ * (siehe http://commons.apache.org/math/).
  * 
- * @author Frank Grimm, Mai 2012 (unter Verwendung von Quellen von http://paulbourke.net/geometry/)
+ * @author Frank Grimm, Mai 2012 (unter Verwendung von Quellen von
+ *         http://paulbourke.net/geometry/)
  */
 public final class CollisionDetector {
 	public boolean collide(Shape s1, Shape s2) {
@@ -119,13 +121,17 @@ public final class CollisionDetector {
 		double l2y2 = l2p2.getY();
 
 		// Denominator for ua and ub are the same
-		double d = (l2y2 - l2y1) * (l1x2 - l1x1) - (l2x2 - l2x1) * (l1y2 - l1y1);
+		double d = (l2y2 - l2y1) * (l1x2 - l1x1) - (l2x2 - l2x1)
+				* (l1y2 - l1y1);
 
 		// n_a and n_b are calculated as separate values for readability.
-		double na = (l2x2 - l2x1) * (l1y1 - l2y1) - (l2y2 - l2y1) * (l1x1 - l2x1);
-		double nb = (l1x2 - l1x1) * (l1y1 - l2y1) - (l1y2 - l1y1) * (l1x1 - l2x1);
+		double na = (l2x2 - l2x1) * (l1y1 - l2y1) - (l2y2 - l2y1)
+				* (l1x1 - l2x1);
+		double nb = (l1x2 - l1x1) * (l1y1 - l2y1) - (l1y2 - l1y1)
+				* (l1x1 - l2x1);
 
-		// If na and nb are both equal to zero the lines are on top of each other (coincidental).
+		// If na and nb are both equal to zero the lines are on top of each
+		// other (coincidental).
 		if (na == 0 && nb == 0)
 			return true;
 
@@ -133,21 +139,26 @@ public final class CollisionDetector {
 		if (d == 0)
 			return false;
 
-		// Calculate the intermediate fractional point that the lines potentially intersect.
+		// Calculate the intermediate fractional point that the lines
+		// potentially intersect.
 		double ua = na / d;
 		double ub = nb / d;
 
-		// The fractional point will be between 0 and 1 inclusive if the lines intersect. If the fractional calculation
-		// is larger than 1 or smaller than 0 the lines would need to be longer to intersect.
+		// The fractional point will be between 0 and 1 inclusive if the lines
+		// intersect. If the fractional calculation
+		// is larger than 1 or smaller than 0 the lines would need to be longer
+		// to intersect.
 		return ua >= 0d && ua <= 1d && ub >= 0d && ub <= 1d;
 	}
 
 	/**
-	 * Beispiel für den Umgang mit Rundungsfehlern; siehe Variable epsilon. Hier im Beispiel ist epsilon = 10^-6.
+	 * Beispiel für den Umgang mit Rundungsfehlern; siehe Variable epsilon. Hier
+	 * im Beispiel ist epsilon = 10^-6.
 	 * 
-	 * Will man bei Berechnungen auf Rundungsfehler eingehen, so ist ein berechneter und eventuell durch Rundungsfehler
-	 * ungenauer Wert a ist gleich einem anderen Wert b, wenn sich a im Bereich [b-e; b+e] befindet; also: a >= (b-e) &&
-	 * a <= (b+e).
+	 * Will man bei Berechnungen auf Rundungsfehler eingehen, so ist ein
+	 * berechneter und eventuell durch Rundungsfehler ungenauer Wert a ist
+	 * gleich einem anderen Wert b, wenn sich a im Bereich [b-e; b+e] befindet;
+	 * also: a >= (b-e) && a <= (b+e).
 	 * 
 	 * 
 	 * @see http://paulbourke.net/geometry/lineline2d/
@@ -211,11 +222,15 @@ public final class CollisionDetector {
 			// no intersection
 			return false;
 
-		// line and circle might intersect. we are just interested in whether they do intersect, not the actual
-		// solutions. so, it is sufficient to determine the first solution (if any).
+		// line and circle might intersect. we are just interested in whether
+		// they do intersect, not the actual
+		// solutions. so, it is sufficient to determine the first solution (if
+		// any).
 		discriminant = Math.sqrt(discriminant);
-		double t1 = (-b + discriminant) / (2 * a); // first solution (intersection point)
-		// double t2 = (-b - discriminant) / (2 * a); // second solution (intersection point)
+		double t1 = (-b + discriminant) / (2 * a); // first solution
+													// (intersection point)
+		// double t2 = (-b - discriminant) / (2 * a); // second solution
+		// (intersection point)
 
 		// line intersects with circle if 0 <= t1 <= 1.
 		return t1 >= 0 && t1 <= 1;
@@ -248,7 +263,8 @@ public final class CollisionDetector {
 
 		double a = square(lx2 - lx1) + square(ly2 - ly1);
 		double b = 2 * ((lx2 - lx1) * (lx1 - cx) + (ly2 - ly1) * (ly1 - cy));
-		double c = square(cx) + square(cy) + square(lx1) + square(ly1) - 2 * (cx * lx1 + cy * ly1) - square(r);
+		double c = square(cx) + square(cy) + square(lx1) + square(ly1) - 2
+				* (cx * lx1 + cy * ly1) - square(r);
 
 		double i = b * b - 4.0 * a * c;
 
@@ -260,8 +276,10 @@ public final class CollisionDetector {
 	public boolean circleIntersectsCircle(Circle c1, Circle c2) {
 		{
 			// Calculate distance between centres of circles
-			Vector2D cv1 = new Vector2D(c1.getCenter().getX(), c1.getCenter().getY());
-			Vector2D cv2 = new Vector2D(c2.getCenter().getX(), c2.getCenter().getY());
+			Vector2D cv1 = new Vector2D(c1.getCenter().getX(), c1.getCenter()
+					.getY());
+			Vector2D cv2 = new Vector2D(c2.getCenter().getX(), c2.getCenter()
+					.getY());
 			double d = cv1.distance(cv2);
 
 			double c1r = c1.getRadius();

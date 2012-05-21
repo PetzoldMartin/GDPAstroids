@@ -21,11 +21,11 @@ public class InputWindow extends Frame {
 
 	public InputWindow(String name, GameController gameController) {
 		super(name);
-		this.gameController = gameController ;
-
+		this.gameController = gameController;
 
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(new Color(255, 255, 255));
@@ -41,6 +41,7 @@ public class InputWindow extends Frame {
 
 	}
 
+	@Override
 	public void update(Graphics g) {
 
 		int w = this.getSize().width;
@@ -62,7 +63,7 @@ public class InputWindow extends Frame {
 
 	}
 
-	private String speedToString(){
+	private String speedToString() {
 		Double speed = gameController.getSpaceShip().getVector().getAmount();
 		String speedString = "0";
 		if (speed < 0) {
@@ -72,27 +73,27 @@ public class InputWindow extends Frame {
 		if (speed >= 0) {
 			String speedString0 = "Speed: " + speed.toString();
 			speedString = speedString0.substring(0, 10);
-			
+
 		}
 		return speedString;
 	}
-	
-	private String accelerationToString(){
+
+	private String accelerationToString() {
 		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 90;
 		Integer acceleration = Math.abs(ac2 % 360);
 		String accelerationString = "Angle: " + acceleration.toString();
 		return accelerationString;
 	}
-	
-	private String xToString(){
+
+	private String xToString() {
 		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
 				.getX();
 		String xString = "X:" + xcoord.toString();
 		return xString;
-		
+
 	}
-	
-	private String yToString(){
+
+	private String yToString() {
 		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
 				.getY();
 		String yString = "Y:" + ycoord.toString();

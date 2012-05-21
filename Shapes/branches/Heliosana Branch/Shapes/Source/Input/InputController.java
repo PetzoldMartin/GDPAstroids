@@ -23,18 +23,19 @@ public class InputController extends Thread implements KeyListener,
 	private double keyPhi = 0;
 	private GameController gameController;
 	private Whiteboardinput whiteboardinput;
-	boolean output =false;
+	boolean output = false;
 
 	public InputController(GameController gameController) {
 
-		this.gameController=gameController;
-		System.out.println("InputController started:\t" + this.getId());		
+		this.gameController = gameController;
+		System.out.println("InputController started:\t" + this.getId());
 		inputWindow = new InputWindow("TastenInput", gameController);
-		whiteboardinput = new Whiteboardinput(gameController,this);
+		whiteboardinput = new Whiteboardinput(gameController, this);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
-		inputWindow.setLocation(this.gameController.getWindowX()*2+140, 100);
-		
+		inputWindow
+				.setLocation(this.gameController.getWindowX() * 2 + 140, 100);
+
 		inputWindow.requestFocus();
 		inputWindow.addKeyListener(this);
 		inputWindow.addWindowListener(this);
@@ -46,9 +47,8 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
-	private Vector MouseControl (MouseEvent arg0)
-	{
-		
+	private Vector MouseControl(MouseEvent arg0) {
+
 		Vector silence = new Vector(new Point(arg0.getX() - 150,
 				arg0.getY() - 150));
 		Vector s2 = new Vector(new Point(0, 0));
@@ -65,33 +65,33 @@ public class InputController extends Thread implements KeyListener,
 				s2 = new Vector(10, -silence.getPhi());
 			}
 			if (arg0.getX() < 150) {
-				s2 = new Vector(10,
-						(180 - silence.getPhi()));
+				s2 = new Vector(10, (180 - silence.getPhi()));
 			}
-			
+
 		}
 		return s2;
 	}
-	public void OutPutVisible()
-	{
-		if(output){
-		inputWindow.setVisible(false);
-		output=false;
-		}
-		else{
+
+	public void OutPutVisible() {
+		if (output) {
+			inputWindow.setVisible(false);
+			output = false;
+		} else {
 			inputWindow.setVisible(true);
-			output=true;
+			output = true;
 		}
 	}
 
 	public void Interfacerefresh() {
-			inputWindow.repaint();
-		}
+		inputWindow.repaint();
+	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 
 	// events wenn eine taste Gedr�ckt wird
+	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Doubblekeysfail
 		switch (e.getKeyCode()) {
@@ -140,6 +140,7 @@ public class InputController extends Thread implements KeyListener,
 	}
 
 	// events beim Tastenloslassen
+	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
@@ -217,6 +218,7 @@ public class InputController extends Thread implements KeyListener,
 	public void windowIconified(WindowEvent e) {
 
 	}
+
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 
@@ -238,28 +240,28 @@ public class InputController extends Thread implements KeyListener,
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		gameController.spaceKey();
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
-		
+
 	}
 
 	@Override
@@ -270,7 +272,5 @@ public class InputController extends Thread implements KeyListener,
 	public boolean isOutput() {
 		return output;
 	}
-
-
 
 }

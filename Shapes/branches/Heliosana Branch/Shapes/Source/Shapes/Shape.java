@@ -20,7 +20,8 @@ public abstract class Shape extends Drawable {
 	protected Color color = Color.GRAY;
 	protected boolean solid = false;
 	private static WhiteBoard whiteBoard = new WhiteBoard();
-	
+
+	@Override
 	public void remove() {
 		getWhiteBoard().removeShape(representation);
 	}

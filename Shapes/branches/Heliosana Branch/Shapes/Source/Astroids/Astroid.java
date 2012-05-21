@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import Shapes.Circle;
 import Shapes.Point;
 import Shapes.Polygon;
-import Shapes.Rectangle;
 
 public class Astroid extends Sprite {
 	// TODO commenting
@@ -43,6 +42,7 @@ public class Astroid extends Sprite {
 		super.update();
 	}
 
+	@Override
 	public void destroy() {
 		split();
 		gameController.removeSprites(this);

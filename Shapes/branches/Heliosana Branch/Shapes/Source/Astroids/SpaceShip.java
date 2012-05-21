@@ -3,22 +3,25 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import Shapes.*;
+import Shapes.Point;
+import Shapes.Polygon;
 
 public class SpaceShip extends Sprite {
-	private int fireCounter=0;
+	private int fireCounter = 0;
 
-	// TODO make SpaceShip "Singel"
+	// TODO commenting
+	// TODO make SpaceShip "Singelton"
 	public SpaceShip() {
 		super();
-		this.radius=15;
+		this.radius = 15;
 		gameController.setSpaceShip(this);
 		ArrayList<Point> shipList = new ArrayList<Point>();
 		shipList.add(new Point(-10, -10));
 		shipList.add(new Point(-10, 10));
 		shipList.add(new Point(15, 0));
 		this.addShape(new Polygon(shipList, Color.WHITE, false));
-//		this.addShape(new Circle(radius, this.getCenterPoint().copy(), Color.RED, false));	
+		// this.addShape(new Circle(radius, this.getCenterPoint().copy(),
+		// Color.RED, false));
 	}
 
 	@Override
@@ -42,16 +45,17 @@ public class SpaceShip extends Sprite {
 	}
 
 	public void fire(int framesPerShot) {
-		if (fireCounter <=0) {
+		if (fireCounter <= 0) {
 			new Rocket(this);
-			fireCounter= framesPerShot;
+			fireCounter = framesPerShot;
 		} else {
-			System.out.println("not ready!!! "+fireCounter);
+			System.out.println("not ready!!! " + fireCounter);
 		}
-			
+
 	}
+
 	@Override
 	public void destroy() {
-		//TODO Player die event
+		// TODO Player die event
 	}
 }

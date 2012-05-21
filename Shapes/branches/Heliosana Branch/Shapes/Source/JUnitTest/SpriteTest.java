@@ -11,6 +11,7 @@ import Astroids.Sprite;
 import Shapes.Point;
 
 public class SpriteTest extends TestCase {
+	// TODO SpriteTest
 	Sprite test;
 
 	@Override
@@ -40,67 +41,56 @@ public class SpriteTest extends TestCase {
 	@Test
 	public void testSpritePoint() {
 		fail("Not yet implemented");
-		// TODO SpritePoint Test
 	}
 
 	@Test
 	public void testSpritePointVector() {
 		fail("Not yet implemented");
-		// TODO SpritePointVector Test
 	}
 
 	@Test
 	public void testUpdate() {
 		fail("Not yet implemented");
-		// TODO SpriteUpdate Test
 	}
 
 	@Test
 	public void testMove() {
 		fail("Not yet implemented");
-		// TODO SpriteMove Test
 	}
 
 	@Test
 	public void testRotateDouble() {
 		fail("Not yet implemented");
-		// TODO SpriteRotate Test
 	}
 
 	@Test
 	public void testGetMiddlePoint() {
 		fail("Not yet implemented");
-		// TODO SpriteGetMiddlePoint Test
 	}
 
 	@Test
 	public void testSetMiddlePoint() {
 		fail("Not yet implemented");
-		// TODO SetMiddlePoint Test
 	}
 
 	@Test
 	public void testDraw() {
 		fail("Not yet implemented");
-		// TODO SpriteDraw Test
 	}
 
 	@Test
 	public void testMovePoint() {
 		fail("Not yet implemented");
-		// TODO SpriteMovePoint Test
 	}
 
 	@Test
 	public void testRotatePointDouble() {
 		fail("Not yet implemented");
-		// TODO SpriteRotatePoint Test
 	}
 
 	@Test
 	public void testAddShape() {
 		fail("Not yet implemented");
-		// TODO SpriteAddShape Test
 	}
 
 }
