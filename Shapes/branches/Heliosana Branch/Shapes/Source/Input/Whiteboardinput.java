@@ -13,13 +13,16 @@ import Shapes.Point;
 import Shapes.Shape;
 
 public class Whiteboardinput extends Thread implements MouseMotionListener {
+	
 	private JFrame WhiteBoard;
 	private JScrollPane WhiteboardInlet;
 	private GameController gameController;
+	private InputController inputController;
 
 	public Whiteboardinput(GameController gameController,
 			InputController inputController) {
 		this.gameController = gameController;
+		this.inputController= inputController;
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 		WhiteboardInlet = Shape.getWhiteBoard().getScrollPane();
 		WhiteBoard = Shape.getWhiteBoard().getFrame();
@@ -36,13 +39,17 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));
+		if(this.inputController.isOutput()){
+		gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));}
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));
+		if(this.inputController.isOutput()){
+			gameController.getSpaceShip().setVector(MouseControlWhiteboard(arg0));}
+
+		
 
 	}
 

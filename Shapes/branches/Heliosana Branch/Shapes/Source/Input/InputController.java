@@ -33,7 +33,7 @@ public class InputController extends Thread implements KeyListener,
 		whiteboardinput = new Whiteboardinput(gameController,this);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
-		inputWindow.setLocation(this.gameController.getWindowX()*2, 100);
+		inputWindow.setLocation(this.gameController.getWindowX()*2+140, 100);
 		
 		inputWindow.requestFocus();
 		inputWindow.addKeyListener(this);
@@ -222,6 +222,10 @@ public class InputController extends Thread implements KeyListener,
 	@Override
 	public void windowOpened(WindowEvent arg0) {
 
+	}
+
+	public boolean isOutput() {
+		return output;
 	}
 
 
