@@ -23,6 +23,7 @@ public class InputController extends Thread implements KeyListener,
 	private double keyPhi = 0;
 	private GameController gameController;
 	private Whiteboardinput whiteboardinput;
+	boolean output =false;
 
 	public InputController(GameController gameController) {
 
@@ -33,7 +34,7 @@ public class InputController extends Thread implements KeyListener,
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
 		inputWindow.setLocation(900, 100);
-		inputWindow.setVisible(true);
+		
 		inputWindow.requestFocus();
 		inputWindow.addKeyListener(this);
 		inputWindow.addWindowListener(this);
@@ -71,6 +72,17 @@ public class InputController extends Thread implements KeyListener,
 		}
 		return s2;
 	}
+	public void OutPutVisible()
+	{
+		if(output){
+		inputWindow.setVisible(false);
+		output=false;
+		}
+		else{
+			inputWindow.setVisible(true);
+			output=true;
+		}
+	}
 
 	public void Interfacerefresh() {
 			inputWindow.repaint();
@@ -101,6 +113,8 @@ public class InputController extends Thread implements KeyListener,
 			gameController.spaceKey();
 		if (e.getKeyCode() == KeyEvent.VK_PAUSE)
 			gameController.pause();
+		if (e.getKeyCode() == KeyEvent.VK_F1)
+			OutPutVisible();
 
 	}
 
