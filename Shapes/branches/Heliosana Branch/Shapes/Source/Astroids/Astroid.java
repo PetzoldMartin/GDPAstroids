@@ -54,12 +54,13 @@ public class Astroid extends Sprite {
 	}
 
 	public void split(Vector vector) {
-		for (int i = -1; i <= 1; i+=2) {
-			double deltaPhi=this.getPhi()-vector.getPhi();
+		for (int i = -1; i <= 1; i += 2) {
+			double deltaPhi = this.getPhi() - vector.getPhi();
 			new Astroid(edge / 2, radius * 2 / 3,
-					//TODO physikaly pulse
-					new Vector(this.getVector().changeDirection(deltaPhi-90*i)),
-					this.getCenterPoint().move(new Vector(radius*2/3,vector.getPhi()+90*i)));
+					new Vector(this.getVector().move(
+							new Vector(this.getVector().getAmount() / 2, 90 * i
+									+ vector.getPhi()))), this.getCenterPoint().move(
+									new Vector(radius * 2 / 3, vector.getPhi()+ 90 * i)));
 		}
 	}
 }

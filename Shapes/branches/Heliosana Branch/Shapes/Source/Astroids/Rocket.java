@@ -11,7 +11,7 @@ public class Rocket extends Sprite {
 	public Rocket(SpaceShip spaceShip) {
 		double speed = (spaceShip.getAmount() + gameController.getMaxSpeed()
 				/ 2 + 1);
-		lifeTimeFrame = (int) (gameController.getGameScreenX() / (speed / 2) + 1);
+		lifeTimeFrame = (int) (gameController.getGameScreenX() /gameController.getMaxSpeed());
 		this.setVector(new Vector(spaceShip.getAmount()
 				+ gameController.getMaxSpeed() / 2 + 1, spaceShip.getPhi()));
 		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(
@@ -22,6 +22,9 @@ public class Rocket extends Sprite {
 	@Override
 	public void update() {
 		super.update();
+		if (this.getAmount() < gameController.getMaxSpeed()*2) {
+			this.changeSpeed(gameController.getKeyAcelleration());
+		}
 		if (lifeTimeFrame <= 0) {
 			gameController.removeSprites(this);
 		}

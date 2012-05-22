@@ -13,7 +13,7 @@ import Shapes.Point;
 public class Vector extends Shapes.Point {
 	private double amount;
 	private double phi;
-	//FIXME move methode @overide!!!
+
 	public Vector() {
 		super(0, 0);
 		this.amount = 0;
@@ -44,6 +44,18 @@ public class Vector extends Shapes.Point {
 		super(vector.getX(), vector.getY());
 		setVector(vector);
 		// FIXME angel collision
+	}
+
+	public Vector move(Point point) {
+		super.move(point);
+		setVector(this);
+		return this;
+	}
+
+	public Vector move(double dX, double dY) {
+		super.move(dX, dY);
+		setVector(this);
+		return this;
 	}
 
 	/**
@@ -98,7 +110,7 @@ public class Vector extends Shapes.Point {
 	 * @return this
 	 */
 	public Vector changeVector(Point vector) {
-		setVector(this.move(vector));
+		this.move(vector);
 		return this;
 	}
 
@@ -134,15 +146,19 @@ public class Vector extends Shapes.Point {
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof Vector) {
-			Point otherVector = (Vector) obj;
-			if (this.getX() == (otherVector.getX())
-					& this.getY() == (otherVector.getY())) {
-				return true;
-			} else
-				return false;
-		} else
-			return false;
+		if (obj instanceof Point) {
+			Point otherVector = (Point) obj;
+			if (otherVector.equals(this)) {
+				if (obj instanceof Vector) {
+					otherVector = (Vector) obj;
+					if (this.getX() == (otherVector.getX())
+							& this.getY() == (otherVector.getY())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public double getAmount() {

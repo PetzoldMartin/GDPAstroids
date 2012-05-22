@@ -26,7 +26,7 @@ public class Whiteboardinput extends Thread implements MouseMotionListener {
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 		WhiteboardInlet = Shape.getWhiteBoard().getScrollPane();
 		WhiteBoard = Shape.getWhiteBoard().getFrame();
-		WhiteboardInlet.setCursor(new Cursor(0));
+		WhiteboardInlet.setCursor(new Cursor(1));
 		WhiteBoard.addKeyListener(inputController);
 		WhiteBoard.addWindowListener(inputController);
 		WhiteboardInlet.addMouseWheelListener(inputController);
