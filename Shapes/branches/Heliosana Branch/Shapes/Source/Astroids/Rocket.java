@@ -33,6 +33,8 @@ public class Rocket extends Sprite {
 
 	@Override
 	public void destroy(Sprite collider) {
-		gameController.removeSprites(this);
+		if (!(collider instanceof SpaceShip)) {
+			gameController.removeSprites(this);
+		}
 	}
 }

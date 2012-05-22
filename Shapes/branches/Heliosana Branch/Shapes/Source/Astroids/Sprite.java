@@ -52,7 +52,13 @@ public abstract class Sprite extends Figure {
 		}
 		this.draw();
 	}
-
+	public void radiusCollison(Sprite otherSprite) {
+		double distance =new Vector(this.getCenterPoint().invert().move(otherSprite.getCenterPoint())).getAmount();
+		if (distance < (this.radius + otherSprite.radius)) {
+			otherSprite.destroy(this);
+//			this.destroy(otherSprite);
+		}
+	}
 	/**
 	 * move the Sprite by the Vector around the drawboard
 	 * 
