@@ -36,5 +36,4 @@ public abstract class Drawable extends Object {
 	 * remove the Drawable from Whiteboard
 	 */
 	public abstract void remove();
-	// TODO implement the remove() in all subclasses
 }

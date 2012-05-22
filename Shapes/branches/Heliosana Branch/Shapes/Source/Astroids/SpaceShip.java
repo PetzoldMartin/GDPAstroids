@@ -55,7 +55,7 @@ public class SpaceShip extends Sprite {
 	}
 
 	@Override
-	public void destroy(Vector vector) {
+	public void destroy(Sprite collider) {
 		// TODO Player die event
 	}
 }

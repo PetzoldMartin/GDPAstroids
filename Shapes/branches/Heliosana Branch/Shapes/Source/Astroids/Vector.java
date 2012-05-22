@@ -13,7 +13,7 @@ import Shapes.Point;
 public class Vector extends Shapes.Point {
 	private double amount;
 	private double phi;
-
+	//FIXME move methode @overide!!!
 	public Vector() {
 		super(0, 0);
 		this.amount = 0;

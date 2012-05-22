@@ -29,7 +29,7 @@ public class Rocket extends Sprite {
 	}
 
 	@Override
-	public void destroy(Vector vector) {
+	public void destroy(Sprite collider) {
 		gameController.removeSprites(this);
 	}
 }

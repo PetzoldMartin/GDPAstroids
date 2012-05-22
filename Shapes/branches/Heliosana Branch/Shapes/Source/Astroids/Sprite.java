@@ -76,7 +76,7 @@ public abstract class Sprite extends Figure {
 	/**
 	 * destroy the Object
 	 */
-	public abstract void destroy(Vector vector);
+	public abstract void destroy(Sprite collider);
 
 	// TODO implemets destroy astro and create 2 new smaller halt of radius and
 	// edges
