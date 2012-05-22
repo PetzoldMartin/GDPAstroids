@@ -44,7 +44,8 @@ public class PointTest extends TestCase {
 	 */
 	@Test
 	public void testPoint() {
-		fail("Not yet implemented"); // TODO Test construktor of point
+		fail("Not yet implemented");
+		// TODO Test construktor of point
 	}
 
 	/**
@@ -53,13 +54,13 @@ public class PointTest extends TestCase {
 	@Test
 	public void testMove() {
 		assertTrue("Vortest vor move Fehlgeschlagen", x.equals(z));
-		assertEquals("Die X Koordinate wird falsch übergeben", z.getX(), 1, 0);
-		assertEquals("Die Y Koordinate wird falsch übergeben", z.getY(), 1, 0);
+		assertEquals("Die X Koordinate wird falsch ï¿½bergeben", z.getX(), 1, 0);
+		assertEquals("Die Y Koordinate wird falsch ï¿½bergeben", z.getY(), 1, 0);
 		z.move(new Point(10, 10));
 		assertEquals("Die X Koordinate wird falsch verschoben", z.getX(), 11, 0);
 		assertEquals("Die Y Koordinate wird falsch verschoben", z.getY(), 11, 0);
 		assertEquals("der punkt wird falsch verschoben", z, new Point(11, 11));
-		assertFalse("Die punkte sind nicht unabhängig", x.equals(z));
+		assertFalse("Die punkte sind nicht unabhï¿½ngig", x.equals(z));
 
 	}
 
@@ -68,11 +69,11 @@ public class PointTest extends TestCase {
 	 */
 	@Test
 	public void testequals() {
-		assertTrue("Die equals Methode testet nicht auf Reflexivität",
+		assertTrue("Die equals Methode testet nicht auf Reflexivitï¿½t",
 				x.equals(x));
 		assertTrue("Die equals Methode testet nicht auf Symetrie", x.equals(y)
 				&& y.equals(x));
-		assertTrue("Die equals Methode testet nicht auf Transitivität",
+		assertTrue("Die equals Methode testet nicht auf Transitivitï¿½t",
 				x.equals(y) && y.equals(z) && x.equals(z));
 		y = new Point(2, 2);
 		assertFalse("Die equals Methode testet nicht auf Konsistenz",

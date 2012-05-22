@@ -21,33 +21,34 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	// [setup]
-	private double keyRotationAngel = 6;
-	private double keyAcelleration = 0.2;
-	// Astro
-	private int astroCount = 25;
-	private int astroSize = 20;
-	private int astroEdge = 24;
 	// Window
 	private int windowX = 600; // max std 389
 	private int windowY = 400; // max std 278
-	private int gameScreenX = windowX - astroSize;
-	private int gameScreenY = windowY - astroSize;
 	private int frames = 30;
 	// Ship
+	private double keyAcelleration = 0.2;
+	private double keyRotationAngel = 6;
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
+	// Astro
+	private int astroCount = 10;
+	private int astroSize = 20;
+	private int astroEdge = 24;
 	// [setup/]
+	private int gameScreenX = windowX - astroSize;
+	private int gameScreenY = windowY - astroSize;
 	private long frameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private ArrayList<Sprite> removals = new ArrayList<Sprite>();
 	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
-	// testing
-	private Sprite test;
+	//flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
 	public boolean testFlag;
+	// testing
+	private Sprite test;
 
 	/**
 	 * @param args
@@ -73,7 +74,7 @@ public class GameController extends Thread implements Runnable {
 		System.out.println("GameController started:\t" + this.getId());
 		for (;;) {
 			Long runTime = System.nanoTime();
-			if (pause == false && windowActivated == true) {
+			if (!pause && windowActivated) {
 				spaceShip.changeVector(
 						inputController.getKeyAmount(),
 						inputController.getKeyPhi(),
@@ -111,7 +112,7 @@ public class GameController extends Thread implements Runnable {
 	}
 	
 	public void makeTest() {
-		test.destroy(null);
+		test.destroy(spaceShip);
 	}
 
 	public void spaceKey() {
