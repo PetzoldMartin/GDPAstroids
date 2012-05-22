@@ -32,7 +32,7 @@ public class GameController extends Thread implements Runnable {
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
 	private int astroCount = 10;
-	private int astroSize = 20;
+	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
 	private int gameScreenX = windowX - astroSize;
@@ -43,7 +43,7 @@ public class GameController extends Thread implements Runnable {
 	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
-	//flags
+	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
 	public boolean testFlag;
@@ -75,10 +75,8 @@ public class GameController extends Thread implements Runnable {
 		for (;;) {
 			Long runTime = System.nanoTime();
 			if (!pause && windowActivated) {
-				spaceShip.changeVector(
-						inputController.getKeyAmount(),
-						inputController.getKeyPhi(),
-						maxSpeed);
+				spaceShip.changeVector(inputController.getKeyAmount(),
+						inputController.getKeyPhi(), maxSpeed);
 				update();
 				inputController.Interfacerefresh();
 				if (testFlag == true) {
@@ -107,12 +105,11 @@ public class GameController extends Thread implements Runnable {
 		for (int i = 0; i < astroCount; i++) {
 			new Astroid(astroEdge, astroSize);
 		}
-		test = new Astroid();
 		new SpaceShip();
 	}
-	
+
 	public void makeTest() {
-		test.destroy(spaceShip);
+		new Astroid(astroEdge, astroSize);
 	}
 
 	public void spaceKey() {
@@ -120,28 +117,37 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void update() {
+		// remove
 		for (Sprite toRemove : removals) {
 			toRemove.remove();
 		}
 		removals.clear();
+		// add
 		for (Sprite toAdd : adds) {
 			this.sprites.add(toAdd);
 		}
 		adds.clear();
 		// System.out.println(getSpaceShip().getMiddlePoint().getX() + "\t" +
 		// getSpaceShip().getMiddlePoint().getY());
+		// update
 		for (Sprite sprite : sprites) {
 			// System.out.println(sprite.centerPoint.getX() + "\t" +
 			// sprite.centerPoint.getY());
 			sprite.update();
 		}
+		for (Sprite spriteA : sprites) {
+			for (Sprite spriteB : sprites) {
+				if (spriteA != spriteB)
+				spriteA.radiusCollison(spriteB);
+			}
+		}
 	}
 
 	public void pause() {
 		if (this.pause == false) {
-			this.pause=true;
+			this.pause = true;
 		} else
-			this.pause=false;
+			this.pause = false;
 	}
 
 	public void addSprites(Sprite sprite) {
@@ -161,7 +167,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void setWindowActivated(boolean windowActivated) {
-		this.windowActivated=windowActivated;
+		this.windowActivated = windowActivated;
 	}
 
 	public void setSpaceShip(SpaceShip spaceShip) {

@@ -9,18 +9,16 @@ import Shapes.Polygon;
 
 public class Astroid extends Sprite {
 	// TODO commenting
+	// FIXME astroid generation scaling!!!
 	private int edge;
 
-	public Astroid() {
-		this(24, 30);
-	}
 
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
-		this.edge = edge;
-		this.radius = radius;
-		// this.addShape(new Circle(radius, this.getCenterPoint(), Color.RED,
-		// false));
+		this.edge = (int) (edge+edge/2-Math.random()*edge);
+		this.radius = this.edge-edge+radius;
+		this.addShape(new Circle(radius, this.getCenterPoint(), Color.RED,
+				false));
 		ArrayList<Point> astroList = new ArrayList<Point>();
 		for (int phi = 0; phi < 360; phi += 360 / edge) {
 			astroList.add(new Vector(radius - radius / (radius / 6)
@@ -40,6 +38,9 @@ public class Astroid extends Sprite {
 						* gameController.getGameScreenY() * 2
 						- gameController.getGameScreenY()));
 	}
+	public Astroid() {
+		this(24, 30);
+	}
 
 	@Override
 	public void update() {
@@ -54,13 +55,18 @@ public class Astroid extends Sprite {
 	}
 
 	public void split(Vector vector) {
-		for (int i = -1; i <= 1; i += 2) {
-			double deltaPhi = this.getPhi() - vector.getPhi();
-			new Astroid(edge / 2, radius * 2 / 3,
-					new Vector(this.getVector().move(
-							new Vector(this.getVector().getAmount() / 2, 90 * i
-									+ vector.getPhi()))), this.getCenterPoint().move(
-									new Vector(radius * 2 / 3, vector.getPhi()+ 90 * i)));
+		//TODO redo vector of new Astroids!!!
+		if (this.edge > 12) {
+			for (int i = -1; i <= 1; i += 2) {
+				double deltaPhi = this.getPhi() - vector.getPhi();
+				new Astroid(edge *2 / 4, radius * 2 / 3, new Vector(this
+						.getVector().move(
+								new Vector(this.getVector().getAmount() / -2, 90
+										* i + vector.getPhi()))), this
+						.getCenterPoint().move(
+								new Vector(radius * 2/3, vector.getPhi() + 90
+										* i)));
+			}
 		}
 	}
 }
