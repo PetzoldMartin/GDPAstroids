@@ -22,8 +22,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 600; // max std 389
-	private int windowY = 400; // max std 278
+	private int windowX = 400; // max std 389
+	private int windowY = 300; // max std 278
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
