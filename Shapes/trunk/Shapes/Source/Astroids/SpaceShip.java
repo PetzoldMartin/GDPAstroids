@@ -45,17 +45,19 @@ public class SpaceShip extends Sprite {
 	}
 
 	public void fire(int framesPerShot) {
-		if (fireCounter <= 0) {
+		if ((fireCounter <= 0) || gameController.cheat) {
 			new Rocket(this);
 			fireCounter = framesPerShot;
 		} else {
-			System.out.println("not ready!!! " + fireCounter);
+			System.out.println("Gun not ready!!! " + fireCounter);
 		}
 
 	}
 
 	@Override
 	public void destroy(Sprite collider) {
+		if (!gameController.cheat) {
 		// TODO Player die event
+		}
 	}
 }

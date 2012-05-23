@@ -14,7 +14,7 @@ import Shapes.Shape;
  * (for self-rotation)
  * 
  * @author Markus Krummnacker, Martin Petzold
- * @version (0.3)
+ * @version (0.4)
  * 
  */
 public abstract class Sprite extends Figure {
@@ -48,7 +48,6 @@ public abstract class Sprite extends Figure {
 	 * collision and warp to the other corner then draw the changes
 	 */
 	public void update() {
-		this.draw();
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
@@ -56,17 +55,47 @@ public abstract class Sprite extends Figure {
 		}
 	}
 
-	public void radiusCollison(Sprite otherSprite) {
-		double distance = new Vector(this.getCenterPoint().invert()
-				.move(otherSprite.getCenterPoint())).getAmount();
-		if (distance < (this.radius + otherSprite.radius)) {
-			if(realCollision(otherSprite)){
+	/**
+	 * checks collision of this sprite
+	 * 
+	 * @param otherSprite
+	 *            sprite to check
+	 */
+	public void collision(Sprite otherSprite) {
+		if (radiusCollision(otherSprite)) {
+			if (realCollision(otherSprite)) {
 				otherSprite.destroy(this);
 			}
 		}
 	}
-	// TODO make it Threaded
-	public boolean realCollision(Sprite otherSprite) {
+
+	/**
+	 * checks collision of this sprite by max radius (level1)
+	 * 
+	 * @param otherSprite
+	 *            sprite to check
+	 * @return true if collide
+	 */
+	private boolean radiusCollision(Sprite otherSprite) {
+		double distance = new Vector(this.getCenterPoint().invert()
+				.move(otherSprite.getCenterPoint())).getAmount();
+		if (distance < (this.radius + otherSprite.radius)) {
+			if (realCollision(otherSprite)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * checks collision of this sprite by the real shapes (level2)
+	 * 
+	 * @param otherSprite
+	 *            sprite to check
+	 * @return true if collide
+	 */
+	private boolean realCollision(Sprite otherSprite) {
+		// TODO make it Threaded
 		for (Drawable s1 : this.getShapes()) {
 			for (Drawable s2 : otherSprite.getShapes()) {
 				if (collisionDetector.collide((Shape) s1, (Shape) s2)) {
@@ -76,6 +105,12 @@ public abstract class Sprite extends Figure {
 		}
 		return false;
 	}
+
+	/**
+	 * destroy the Object
+	 */
+	public abstract void destroy(Sprite collider);
+	// TODO implemts effects
 
 	/**
 	 * move the Sprite by the Vector around the drawboard
@@ -96,14 +131,6 @@ public abstract class Sprite extends Figure {
 		gameController.deleteSprite(this);
 		super.remove();
 	}
-
-	/**
-	 * destroy the Object
-	 */
-	public abstract void destroy(Sprite collider);
-
-	// TODO implemets destroy astro and create 2 new smaller halt of radius and
-	// edges
 
 	/**
 	 * rotate the Sprite around his CenterPoint

@@ -22,16 +22,16 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 400; //  std 800
-	private int windowY = 300; //  std 600
-	private int frames = 10;
+	private int windowX = 400; // std 800
+	private int windowY = 300; // std 600
+	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
 	private double keyRotationAngel = 6;
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
-	private int astroCount = 10;
+	private int astroCount = 20;
 	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
@@ -46,18 +46,18 @@ public class GameController extends Thread implements Runnable {
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
+	public boolean cheat= true;
 	public boolean testFlag;
+
 	// testing
-	private Sprite test;
+	// private Sprite test;
 
 	/**
-	 * @param args
-	 * @throws InterruptedException
+	 * generates ab window with a drawboard starts itself as Thread
 	 */
-
 	public GameController() {
-		Sprite.setGameController(this);
 		System.out.println("GameController initialisiert:\t" + this.getId());
+		Sprite.setGameController(this);
 		Drawable backgroundFrame = new Rectangle(new Point(0, 0), windowX,
 				windowY, Color.WHITE, true);
 		Drawable background = new Rectangle(new Point(0, 0), gameScreenX,
@@ -66,10 +66,14 @@ public class GameController extends Thread implements Runnable {
 		background.draw();
 		inputController = new InputController(this);
 		inputController.start();
-		checkObjects();
+		new SpaceShip();
 		this.start();
 	}
 
+	/*
+	 * control the framerate with pause mode
+	 */
+	@Override
 	public void run() {
 		System.out.println("GameController started:\t" + this.getId());
 		for (;;) {
@@ -97,15 +101,46 @@ public class GameController extends Thread implements Runnable {
 		}
 	}
 
-	public void checkObjects() {
-		// TODO implemts the controlling of all object:
-		// count of Astroids
-		// one SpaceShip
-		// ...
-		for (int i = 0; i < astroCount; i++) {
+	/**
+	 * updates all Sprites in sprites
+	 */
+	public void update() {
+		// check
+		checkObjects(astroCount);
+		// add
+		for (Sprite toAdd : adds) {
+			this.sprites.add(toAdd);
+		}
+		adds.clear();
+		// update
+		for (Sprite sprite : sprites) {
+			sprite.update();
+		}
+		// collision
+		for (Sprite spriteA : sprites) {
+			for (Sprite spriteB : sprites) {
+				if (spriteA != spriteB)
+					spriteA.collision(spriteB);
+			}
+		}
+		// remove
+		for (Sprite toRemove : removals) {
+			toRemove.remove();
+		}
+		removals.clear();
+		// draw
+		for (Sprite sprite : sprites) {
+			sprite.draw();
+		}
+	}
+
+	/**
+	 * check how many Astroids @ drawboard and generating new Astroids
+	 */
+	public void checkObjects(int astroCount) {
+		if (sprites.size() < (astroCount+1)) {
 			new Astroid(astroEdge, astroSize);
 		}
-		new SpaceShip();
 	}
 
 	public void makeTest() {
@@ -114,33 +149,6 @@ public class GameController extends Thread implements Runnable {
 
 	public void spaceKey() {
 		spaceShip.fire(framesPerShot);
-	}
-
-	public void update() {
-		// remove
-		for (Sprite toRemove : removals) {
-			toRemove.remove();
-		}
-		removals.clear();
-		// add
-		for (Sprite toAdd : adds) {
-			this.sprites.add(toAdd);
-		}
-		adds.clear();
-		// System.out.println(getSpaceShip().getMiddlePoint().getX() + "\t" +
-		// getSpaceShip().getMiddlePoint().getY());
-		// update
-		for (Sprite sprite : sprites) {
-			// System.out.println(sprite.centerPoint.getX() + "\t" +
-			// sprite.centerPoint.getY());
-			sprite.update();
-		}
-		for (Sprite spriteA : sprites) {
-			for (Sprite spriteB : sprites) {
-				if (spriteA != spriteB)
-				spriteA.radiusCollison(spriteB);
-			}
-		}
 	}
 
 	public void pause() {

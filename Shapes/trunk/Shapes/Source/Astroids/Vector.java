@@ -46,22 +46,25 @@ public class Vector extends Shapes.Point {
 		// FIXME angel collision
 	}
 
+	@Override
 	public Vector move(Point point) {
 		super.move(point);
 		setVector(this);
 		return this;
 	}
 
+	@Override
 	public Vector move(double dX, double dY) {
 		super.move(dX, dY);
 		setVector(this);
 		return this;
 	}
-//	public Vector invert() {
-//		super.invert();
-//		setVector(this);
-//		return this;
-//	}
+
+	// public Vector invert() {
+	// super.invert();
+	// setVector(this);
+	// return this;
+	// }
 
 	/**
 	 * Set this Vector by a Point
