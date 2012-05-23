@@ -15,6 +15,7 @@ import Shapes.Point;
 import Shapes.Polygon;
 
 public class PolygonTest extends TestCase {
+	// TODO PolygonTest
 	Polygon x, y, z;
 	ArrayList<Point> A1, A2, A3;
 
@@ -59,19 +60,16 @@ public class PolygonTest extends TestCase {
 
 	@Test
 	public void testDraw() {
-		// TODO implement Polygon testDraw
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testPolygon() {
-		// TODO implement Polygon testPolygon
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetPoints() {
-		// TODO implement Polygon testGetPoints
 		fail("Not yet implemented");
 	}
 
@@ -92,7 +90,6 @@ public class PolygonTest extends TestCase {
 
 	@Test
 	public void testSetPoints() {
-		// TODO implement Polygon testSetPoints
 		fail("Not yet implemented");
 	}
 
@@ -109,14 +106,13 @@ public class PolygonTest extends TestCase {
 		try {
 			z.setPoints(A4);
 		} catch (PolygoneShapeException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e);
 		}
 		z.setSolid(true);
 		z.setColor(Color.BLUE);
 		assertFalse("Die equals Methode testet nicht auf Konsistenz",
 				x.equals(z));
 		assertFalse(x.equals(null));
-		System.out.println(z.getPoints().size());
 
 	}
 
