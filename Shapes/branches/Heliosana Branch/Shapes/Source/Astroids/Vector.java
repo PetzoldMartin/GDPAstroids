@@ -57,6 +57,11 @@ public class Vector extends Shapes.Point {
 		setVector(this);
 		return this;
 	}
+//	public Vector invert() {
+//		super.invert();
+//		setVector(this);
+//		return this;
+//	}
 
 	/**
 	 * Set this Vector by a Point
