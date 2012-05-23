@@ -18,6 +18,7 @@ import Shapes.Shape;
  * 
  */
 public abstract class Sprite extends Figure {
+	// TODO CollisionDetector from gamcontroller
 	private CollisionDetector collisionDetector = new CollisionDetector();
 	protected int radius = 0;
 	private Vector vector;
@@ -110,6 +111,7 @@ public abstract class Sprite extends Figure {
 	 * destroy the Object
 	 */
 	public abstract void destroy(Sprite collider);
+
 	// TODO implemts effects
 
 	/**

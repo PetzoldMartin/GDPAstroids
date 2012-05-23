@@ -33,7 +33,7 @@ public class SpaceShip extends Sprite {
 		super.update();
 		fireCounter--;
 	}
-
+	
 	public void changeVector(double amount, double phi, double maxSpeed) {
 		if (this.getAmount() < maxSpeed && amount > 0) {
 			this.changeSpeed(amount);
