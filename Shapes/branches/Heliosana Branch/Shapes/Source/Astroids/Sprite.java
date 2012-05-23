@@ -2,10 +2,12 @@ package Astroids;
 
 import java.awt.Color;
 
+import Collision.CollisionDetector;
 import Shapes.Circle;
 import Shapes.Drawable;
 import Shapes.Figure;
 import Shapes.Point;
+import Shapes.Shape;
 
 /**
  * abstract class that manage moveable objects with a Vector & a CenterPoint
@@ -16,6 +18,7 @@ import Shapes.Point;
  * 
  */
 public abstract class Sprite extends Figure {
+	private CollisionDetector collisionDetector = new CollisionDetector();
 	protected int radius = 0;
 	private Vector vector;
 	private Point centerPoint;
@@ -52,13 +55,28 @@ public abstract class Sprite extends Figure {
 		}
 		this.draw();
 	}
+
 	public void radiusCollison(Sprite otherSprite) {
-		double distance =new Vector(this.getCenterPoint().invert().move(otherSprite.getCenterPoint())).getAmount();
+		double distance = new Vector(this.getCenterPoint().invert()
+				.move(otherSprite.getCenterPoint())).getAmount();
 		if (distance < (this.radius + otherSprite.radius)) {
-			otherSprite.destroy(this);
-//			this.destroy(otherSprite);
+			if(realCollision(otherSprite)){
+				otherSprite.destroy(this);
+			}
 		}
 	}
+	// TODO make it Threaded
+	public boolean realCollision(Sprite otherSprite) {
+		for (Drawable s1 : this.getShapes()) {
+			for (Drawable s2 : otherSprite.getShapes()) {
+				if (collisionDetector.collide((Shape) s1, (Shape) s2)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * move the Sprite by the Vector around the drawboard
 	 * 

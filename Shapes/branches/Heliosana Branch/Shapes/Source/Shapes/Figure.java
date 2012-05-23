@@ -70,4 +70,8 @@ public class Figure extends Drawable {
 		}
 		return this;
 	}
+
+	public ArrayList<Drawable> getShapes() {
+		return shapes;
+	}
 }

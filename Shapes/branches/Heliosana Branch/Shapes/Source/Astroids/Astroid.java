@@ -17,8 +17,8 @@ public class Astroid extends Sprite {
 		super();
 		this.edge = (int) (edge+edge/2-Math.random()*edge);
 		this.radius = this.edge-edge+radius;
-		this.addShape(new Circle(radius, this.getCenterPoint(), Color.RED,
-				false));
+//		this.addShape(new Circle(radius, this.getCenterPoint(), Color.RED,
+//				false));
 		ArrayList<Point> astroList = new ArrayList<Point>();
 		for (int phi = 0; phi < 360; phi += 360 / edge) {
 			astroList.add(new Vector(radius - radius / (radius / 6)
