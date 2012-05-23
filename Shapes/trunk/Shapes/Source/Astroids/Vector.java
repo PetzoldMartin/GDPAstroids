@@ -3,8 +3,8 @@ package Astroids;
 import Shapes.Point;
 
 /**
- * class that manage a Vector with x and y and also with amount as lenght and
- * phi as angel
+ * class that manage a Vector with x and y and also with amount as lenght & phi
+ * as angel
  * 
  * @author Markus Krummnacker
  * @version (0.1)
@@ -42,10 +42,26 @@ public class Vector extends Shapes.Point {
 	 */
 	public Vector(Point vector) {
 		super(vector.getX(), vector.getY());
-		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
-				+ Math.pow(this.getY(), 2.0));
-		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
+		setVector(vector);
+		// FIXME angel collision
 	}
+
+	public Vector move(Point point) {
+		super.move(point);
+		setVector(this);
+		return this;
+	}
+
+	public Vector move(double dX, double dY) {
+		super.move(dX, dY);
+		setVector(this);
+		return this;
+	}
+//	public Vector invert() {
+//		super.invert();
+//		setVector(this);
+//		return this;
+//	}
 
 	/**
 	 * Set this Vector by a Point
@@ -58,6 +74,9 @@ public class Vector extends Shapes.Point {
 		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
 				+ Math.pow(this.getY(), 2.0));
 		this.phi = Math.toDegrees(Math.atan(vector.getY() / vector.getX()));
+		if (Double.isNaN(phi)) {
+			phi = 0;
+		}
 	}
 
 	/**
@@ -96,7 +115,7 @@ public class Vector extends Shapes.Point {
 	 * @return this
 	 */
 	public Vector changeVector(Point vector) {
-		setVector(this.move(vector));
+		this.move(vector);
 		return this;
 	}
 
@@ -118,7 +137,6 @@ public class Vector extends Shapes.Point {
 	 *            lenght of the vector
 	 * @return this
 	 */
-	// TODO implement a max speed
 	public Vector changeSpeed(double amount) {
 		return changeVector(amount, 0);
 	}
@@ -133,15 +151,19 @@ public class Vector extends Shapes.Point {
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof Vector) {
-			Point otherVector = (Vector) obj;
-			if (this.getX() == (otherVector.getX())
-					& this.getY() == (otherVector.getY())) {
-				return true;
-			} else
-				return false;
-		} else
-			return false;
+		if (obj instanceof Point) {
+			Point otherVector = (Point) obj;
+			if (otherVector.equals(this)) {
+				if (obj instanceof Vector) {
+					otherVector = (Vector) obj;
+					if (this.getX() == (otherVector.getX())
+							& this.getY() == (otherVector.getY())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public double getAmount() {

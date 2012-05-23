@@ -2,7 +2,7 @@ package Shapes;
 
 import java.awt.Color;
 
-import teaching.WhiteBoard;
+import Teaching.WhiteBoard;
 
 /**
  * class that manage shapes color's and solid's and allocate whiteboard subclass
@@ -20,9 +20,19 @@ public abstract class Shape extends Drawable {
 	protected Color color = Color.GRAY;
 	protected boolean solid = false;
 	private static WhiteBoard whiteBoard = new WhiteBoard();
+
+	@Override
+	public void remove() {
+		getWhiteBoard().removeShape(representation);
+	}
+
 	protected Object representation;
 
-	public WhiteBoard getWhiteBoard() {
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+	}
+
+	public static WhiteBoard getWhiteBoard() {
 		return whiteBoard;
 	}
 
@@ -36,9 +46,5 @@ public abstract class Shape extends Drawable {
 
 	public void setColor(Color color) {
 		this.color = color;
-	}
-
-	public void setSolid(boolean solid) {
-		this.solid = solid;
 	}
 }
