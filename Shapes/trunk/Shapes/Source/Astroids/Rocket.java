@@ -6,24 +6,26 @@ import Shapes.Line;
 
 public class Rocket extends Sprite {
 	// TODO commenting
-	// FIXME collide warp!
+	// TODO redo weapons
+	
 	private int lifeTimeFrame;
 
 	public Rocket(SpaceShip spaceShip) {
-		double speed = (spaceShip.getAmount() + gameController.getMaxSpeed()
-				/ 2 + 1);
-		lifeTimeFrame = (int) (gameController.getGameScreenX() /gameController.getMaxSpeed());
+		radius = 3;
+		lifeTimeFrame = (int) (gameController.getGameScreenX() / gameController
+				.getMaxSpeed());
 		this.setVector(new Vector(spaceShip.getAmount()
 				+ gameController.getMaxSpeed() / 2 + 1, spaceShip.getPhi()));
-		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(new Vector(gameController.getMaxSpeed(),
-				this.getVector().getPhi())), Color.BLUE));
+		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(
+				new Vector(gameController.getMaxSpeed(), this.getVector()
+						.getPhi()).invert()), Color.CYAN));
 		this.move(spaceShip.getCenterPoint());
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		if (this.getAmount() < gameController.getMaxSpeed()) {
+		if (this.getAmount() < gameController.getMaxSpeed() * 2) {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
 		if (lifeTimeFrame <= 0) {
