@@ -82,10 +82,6 @@ public class GameController extends Thread implements Runnable {
 				spaceShip.changeVector(inputController.getKeyAmount(),
 						inputController.getKeyPhi(), maxSpeed);
 				update();
-				inputController.Interfacerefresh();
-				if (testFlag == true) {
-					makeTest();
-				}
 				// System.out.println((double)(System.nanoTime() - runTime)
 				// /1000000);
 			}
@@ -107,15 +103,20 @@ public class GameController extends Thread implements Runnable {
 	public void update() {
 		// check
 		checkObjects(astroCount);
-		// add
-		for (Sprite toAdd : adds) {
-			this.sprites.add(toAdd);
+		// testing
+		if (testFlag == true) {
+			makeTest();
 		}
-		adds.clear();
 		// update
 		for (Sprite sprite : sprites) {
 			sprite.update();
 		}
+		// add
+		// TODO check for collision
+		for (Sprite toAdd : adds) {
+			this.sprites.add(toAdd);
+		}
+		adds.clear();
 		// collision
 		for (Sprite spriteA : sprites) {
 			for (Sprite spriteB : sprites) {
@@ -132,12 +133,14 @@ public class GameController extends Thread implements Runnable {
 		for (Sprite sprite : sprites) {
 			sprite.draw();
 		}
+		inputController.Interfacerefresh();
 	}
 
 	/**
 	 * check how many Astroids @ drawboard and generating new Astroids
 	 */
 	public void checkObjects(int astroCount) {
+		//TODO reduce count by rockets!
 		if (sprites.size() < (astroCount+1)) {
 			new Astroid(astroEdge, astroSize);
 		}
@@ -166,7 +169,7 @@ public class GameController extends Thread implements Runnable {
 		this.removals.add(sprite);
 	}
 
-	public void deleteSprite(Sprite sprite) {
+	public synchronized void deleteSprite(Sprite sprite) {
 		this.sprites.remove(sprite);
 	}
 
