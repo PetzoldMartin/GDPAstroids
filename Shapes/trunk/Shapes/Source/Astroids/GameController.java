@@ -22,8 +22,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 400; // std 800
-	private int windowY = 300; // std 600
+	private int windowX = 600; //  std 600
+	private int windowY = 400; //  std 400
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
@@ -53,7 +53,7 @@ public class GameController extends Thread implements Runnable {
 	// private Sprite test;
 
 	/**
-	 * generates ab window with a drawboard starts itself as Thread
+	 * generates a window with a drawboard starts itself as Thread
 	 */
 	public GameController() {
 		System.out.println("GameController initialisiert:\t" + this.getId());
