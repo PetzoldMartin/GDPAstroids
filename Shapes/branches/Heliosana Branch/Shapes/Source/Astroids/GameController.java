@@ -22,9 +22,9 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 400; // max std 389
-	private int windowY = 300; // max std 278
-	private int frames = 30;
+	private int windowX = 400; //  std 800
+	private int windowY = 300; //  std 600
+	private int frames = 10;
 	// Ship
 	private double keyAcelleration = 0.2;
 	private double keyRotationAngel = 6;
@@ -150,11 +150,11 @@ public class GameController extends Thread implements Runnable {
 			this.pause = false;
 	}
 
-	public void addSprites(Sprite sprite) {
+	public synchronized void addSprites(Sprite sprite) {
 		this.adds.add(sprite);
 	}
 
-	public void removeSprites(Sprite sprite) {
+	public synchronized void removeSprites(Sprite sprite) {
 		this.removals.add(sprite);
 	}
 

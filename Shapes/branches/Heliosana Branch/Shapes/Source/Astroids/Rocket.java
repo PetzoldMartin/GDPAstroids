@@ -6,6 +6,7 @@ import Shapes.Line;
 
 public class Rocket extends Sprite {
 	// TODO commenting
+	// FIXME collide warp!
 	private int lifeTimeFrame;
 
 	public Rocket(SpaceShip spaceShip) {
@@ -14,15 +15,15 @@ public class Rocket extends Sprite {
 		lifeTimeFrame = (int) (gameController.getGameScreenX() /gameController.getMaxSpeed());
 		this.setVector(new Vector(spaceShip.getAmount()
 				+ gameController.getMaxSpeed() / 2 + 1, spaceShip.getPhi()));
-		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(
-				this.getVector().invert()), Color.PINK));
+		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(new Vector(gameController.getMaxSpeed(),
+				this.getVector().getPhi())), Color.BLUE));
 		this.move(spaceShip.getCenterPoint());
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		if (this.getAmount() < gameController.getMaxSpeed()*2) {
+		if (this.getAmount() < gameController.getMaxSpeed()) {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
 		if (lifeTimeFrame <= 0) {

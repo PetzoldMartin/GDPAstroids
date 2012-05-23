@@ -48,12 +48,12 @@ public abstract class Sprite extends Figure {
 	 * collision and warp to the other corner then draw the changes
 	 */
 	public void update() {
+		this.draw();
 		this.move(vector);
 		Point cornerWarp = getEdgeWarp();
 		if (!cornerWarp.equals(new Point(0, 0))) {
 			move(cornerWarp);
 		}
-		this.draw();
 	}
 
 	public void radiusCollison(Sprite otherSprite) {

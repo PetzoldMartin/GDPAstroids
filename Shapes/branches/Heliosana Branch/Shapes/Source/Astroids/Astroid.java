@@ -15,6 +15,7 @@ public class Astroid extends Sprite {
 
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
+		// FIXME radius calc
 		this.edge = (int) (edge+edge/2-Math.random()*edge);
 		this.radius = this.edge-edge+radius;
 //		this.addShape(new Circle(radius, this.getCenterPoint(), Color.RED,
@@ -64,7 +65,7 @@ public class Astroid extends Sprite {
 								new Vector(this.getVector().getAmount() / -2, 90
 										* i + vector.getPhi()))), this
 						.getCenterPoint().move(
-								new Vector(radius * 2/3, vector.getPhi() + 90
+								new Vector(radius * 2/3, vector.getPhi() - 90
 										* i)));
 			}
 		}
