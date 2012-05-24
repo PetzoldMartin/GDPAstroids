@@ -2,6 +2,7 @@ package Astroids;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import Input.InputController;
 import Shapes.Drawable;
@@ -14,6 +15,10 @@ import Shapes.Rectangle;
  * @author (Martin Petzold , Markus Krummnacker)
  * @version (0.3)
  */
+/**
+ * @author heliosana
+ * 
+ */
 public class GameController extends Thread implements Runnable {
 	// TODO commenting
 	public static void main(String[] args) {
@@ -22,8 +27,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 600; //  std 600
-	private int windowY = 400; //  std 400
+	private int windowX = 600; // std 600
+	private int windowY = 400; // std 400
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
@@ -46,8 +51,9 @@ public class GameController extends Thread implements Runnable {
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
-	public boolean cheat= true;
+	public boolean cheat = true;
 	public boolean testFlag;
+	private int rockets;
 
 	// testing
 	// private Sprite test;
@@ -102,7 +108,7 @@ public class GameController extends Thread implements Runnable {
 	 */
 	public void update() {
 		// check
-		checkObjects(astroCount);
+		checkObjects();
 		// testing
 		if (testFlag == true) {
 			makeTest();
@@ -118,12 +124,7 @@ public class GameController extends Thread implements Runnable {
 		}
 		adds.clear();
 		// collision
-		for (Sprite spriteA : sprites) {
-			for (Sprite spriteB : sprites) {
-				if (spriteA != spriteB)
-					spriteA.collision(spriteB);
-			}
-		}
+		collisionCheck(sprites);
 		// remove
 		for (Sprite toRemove : removals) {
 			toRemove.remove();
@@ -137,12 +138,36 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	/**
-	 * check how many Astroids @ drawboard and generating new Astroids
+	 * check how many objects @ drawboard and generating new objects
 	 */
-	public void checkObjects(int astroCount) {
-		//TODO reduce count by rockets!
-		if (sprites.size() < (astroCount+1)) {
+	public void checkObjects() {
+		//astroids
+		if (Astroid.getCounter() < astroCount) {
 			new Astroid(astroEdge, astroSize);
+		}
+	}
+
+	/**
+	 * check collision of for all sprites in ArrayList
+	 * 
+	 * @param sprites
+	 *            ArrayList to check
+	 * 
+	 */
+	public void collisionCheck(ArrayList<Sprite> sprites) {
+		// while (sprites.size()>=2) {
+		// ArrayList<Sprite> subSprites = (ArrayList<Sprite>) sprites.clone();
+		// subSprites.remove(0);
+		// collisionCheck(subSprites);
+		// for (Sprite sprite : subSprites) {
+		// sprites.get(0).collision(sprite);
+		// }
+		// }
+		for (Sprite spriteA : sprites) {
+			for (Sprite spriteB : sprites) {
+				if (spriteA != spriteB)
+					spriteA.collision(spriteB);
+			}
 		}
 	}
 
