@@ -10,7 +10,7 @@ public class Astroid extends Sprite {
 	// TODO commenting
 	// FIXME astroid generation scaling!!!
 	private int edge;
-	private static int count;
+	private static int count=0;
 
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
