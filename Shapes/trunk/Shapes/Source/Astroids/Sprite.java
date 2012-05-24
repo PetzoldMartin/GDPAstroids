@@ -66,6 +66,7 @@ public abstract class Sprite extends Figure {
 		if (radiusCollision(otherSprite)) {
 			if (realCollision(otherSprite)) {
 				otherSprite.destroy(this);
+//				this.destroy(otherSprite);
 			}
 		}
 	}

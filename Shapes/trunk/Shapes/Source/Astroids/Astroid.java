@@ -10,9 +10,11 @@ public class Astroid extends Sprite {
 	// TODO commenting
 	// FIXME astroid generation scaling!!!
 	private int edge;
+	private static int count;
 
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
+		count++;
 		// FIXME radius calc
 		this.edge = (int) (edge + edge / 2 - Math.random() * edge);
 		this.radius = this.edge - edge + radius;
@@ -52,6 +54,7 @@ public class Astroid extends Sprite {
 	public void destroy(Sprite collider) {
 		split(collider.getVector());
 		gameController.removeSprites(this);
+		count--;
 	}
 
 	public void split(Vector vector) {
@@ -67,5 +70,9 @@ public class Astroid extends Sprite {
 										* i)));
 			}
 		}
+	}
+
+	public static int getCounter() {
+		return count;
 	}
 }
