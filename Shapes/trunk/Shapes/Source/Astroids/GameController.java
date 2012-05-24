@@ -142,6 +142,7 @@ public class GameController extends Thread implements Runnable {
 	 */
 	public void checkObjects() {
 		//astroids
+		System.out.println(Astroid.getCounter());
 		if (Astroid.getCounter() < astroCount) {
 			new Astroid(astroEdge, astroSize);
 		}
