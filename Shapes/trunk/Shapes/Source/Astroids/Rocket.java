@@ -18,8 +18,9 @@ public class Rocket extends Sprite {
 				+ gameController.getMaxSpeed() / 2 + 1, spaceShip.getPhi()));
 		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(
 				new Vector(gameController.getMaxSpeed(), this.getVector()
-						.getPhi()).invert()), Color.CYAN));
+						.getPhi())), Color.CYAN));
 		this.move(spaceShip.getCenterPoint());
+		this.update();
 	}
 
 	@Override
@@ -29,8 +30,8 @@ public class Rocket extends Sprite {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
 		if (lifeTimeFrame <= 0) {
-			gameController.removeSprites(this);
-		}
+			destroy(this);
+			}
 		lifeTimeFrame--;
 	}
 

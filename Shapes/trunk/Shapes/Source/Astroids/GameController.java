@@ -2,8 +2,6 @@ package Astroids;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Stack;
-
 import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
@@ -53,8 +51,6 @@ public class GameController extends Thread implements Runnable {
 	private boolean windowActivated = true;
 	public boolean cheat = true;
 	public boolean testFlag;
-	private int rockets;
-
 	// testing
 	// private Sprite test;
 

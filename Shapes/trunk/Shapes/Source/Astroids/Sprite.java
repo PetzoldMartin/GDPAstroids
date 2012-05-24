@@ -1,6 +1,7 @@
 package Astroids;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import Collision.CollisionDetector;
 import Shapes.Circle;
@@ -20,11 +21,12 @@ import Shapes.Shape;
 public abstract class Sprite extends Figure {
 	// TODO CollisionDetector from gamcontroller
 	private CollisionDetector collisionDetector = new CollisionDetector();
-	protected int radius = 0;
+	protected double radius = 0;
 	private Vector vector;
 	private Point centerPoint;
 	protected double rotationPhi;
 	protected static GameController gameController;
+//	protected ArrayList<Drawable> overlay = new ArrayList<Drawable>();
 
 	/**
 	 * Constructor for objects of class Sprite - overloaded
@@ -41,7 +43,7 @@ public abstract class Sprite extends Figure {
 		this.centerPoint = new Point(0, 0);
 		this.vector = new Vector(0, 90);
 		this.rotationPhi = 0;
-		this.addShape(new Circle(radius, this.centerPoint, Color.RED, false));
+		this.addShape(new Circle((int) radius, this.centerPoint, Color.RED, false));
 	}
 
 	/**
@@ -66,7 +68,7 @@ public abstract class Sprite extends Figure {
 		if (radiusCollision(otherSprite)) {
 			if (realCollision(otherSprite)) {
 				otherSprite.destroy(this);
-//				this.destroy(otherSprite);
+				// this.destroy(otherSprite);
 			}
 		}
 	}
@@ -109,7 +111,10 @@ public abstract class Sprite extends Figure {
 	}
 
 	/**
-	 * destroy the Object
+	 * destroy the Object by an collider
+	 * 
+	 * @param collider
+	 *            sprite that destroy the object
 	 */
 	public abstract void destroy(Sprite collider);
 
@@ -191,7 +196,10 @@ public abstract class Sprite extends Figure {
 	public Point getCenterPoint() {
 		return this.centerPoint.copy();
 	}
-
+//	public Sprite addOverlayShape(Drawable aDrawable) {
+//		overlay.add(aDrawable);
+//		return this;
+//	}
 	/**
 	 * @param gameController
 	 *            GameController to set
