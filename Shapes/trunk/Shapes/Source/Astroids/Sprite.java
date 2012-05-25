@@ -2,7 +2,6 @@ package Astroids;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import Collision.CollisionDetector;
 import Shapes.Circle;
 import Shapes.Drawable;
@@ -27,7 +26,7 @@ public abstract class Sprite extends Figure {
 	protected double rotationPhi;
 	protected static GameController gameController;
 //	protected ArrayList<Drawable> overlay = new ArrayList<Drawable>();
-
+	//TODO overlay implementation
 	/**
 	 * Constructor for objects of class Sprite - overloaded
 	 * 
@@ -48,7 +47,7 @@ public abstract class Sprite extends Figure {
 
 	/**
 	 * Update the Sprite by one tact (frame) move the Sprite, checks corner
-	 * collision and warp to the other corner then draw the changes
+	 * collision and warp to the other corner
 	 */
 	public void update() {
 		this.move(vector);

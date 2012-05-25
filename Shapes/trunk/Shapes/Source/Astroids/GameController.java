@@ -11,14 +11,9 @@ import Shapes.Rectangle;
  * class that manage the program
  * 
  * @author (Martin Petzold , Markus Krummnacker)
- * @version (0.3)
- */
-/**
- * @author heliosana
- * 
+ * @version (0.4)
  */
 public class GameController extends Thread implements Runnable {
-	// TODO commenting
 	public static void main(String[] args) {
 		new GameController();
 	}
@@ -137,6 +132,7 @@ public class GameController extends Thread implements Runnable {
 	 * check how many objects @ drawboard and generating new objects
 	 */
 	public void checkObjects() {
+		// FIXME counter not synchronized
 		//astroids
 		System.out.println(Astroid.getCounter());
 		if (Astroid.getCounter() < astroCount) {

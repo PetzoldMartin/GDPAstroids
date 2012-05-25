@@ -6,12 +6,29 @@ import java.util.ArrayList;
 import Shapes.Point;
 import Shapes.Polygon;
 
+/**
+ * class that manage a Astroid
+ * 
+ * @author (Martin Petzold , Markus Krummnacker)
+ * @version (0.4)
+ */
 public class Astroid extends Sprite {
-	// TODO commenting
 	// FIXME astroid generation scaling!!!
 	private int edge;
-	private static int count=0;
+	private static int count = 0;
 
+	/**
+	 * create new Astroid
+	 * 
+	 * @param edge
+	 *            of the new one
+	 * @param radius
+	 *            size of the new one
+	 * @param vector
+	 *            vector of the new one
+	 * @param centerPoint
+	 *            centerpoint of the new one
+	 */
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
 		count++;
@@ -30,6 +47,14 @@ public class Astroid extends Sprite {
 		this.move(centerPoint);
 	}
 
+	/**
+	 * create new Astroid
+	 * 
+	 * @param edge
+	 *            of the new one
+	 * @param radius
+	 *            size of the new one
+	 */
 	public Astroid(int edge, int radius) {
 		this(edge, radius, new Vector(Math.random() * 3, Math.random() * 360),
 				new Point(Math.random() * gameController.getGameScreenX() * 2
@@ -38,16 +63,22 @@ public class Astroid extends Sprite {
 						- gameController.getGameScreenY()));
 	}
 
-	public Astroid() {
-		this(24, 30);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Astroids.Sprite#update()
+	 */
 	@Override
 	public void update() {
 		this.rotate(this.rotationPhi);
 		super.update();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
+	 */
 	@Override
 	public void destroy(Sprite collider) {
 		count--;
@@ -55,11 +86,17 @@ public class Astroid extends Sprite {
 		gameController.removeSprites(this);
 	}
 
+	/**
+	 * create 2 new astroids @ position of this
+	 * 
+	 * @param vector
+	 *            orthogonal split vector
+	 */
 	public void split(Vector vector) {
 		// TODO redo vector of new Astroids!!!
 		if (this.edge > 12) {
 			for (int i = -1; i <= 1; i += 2) {
-				new Astroid(edge * 2 / 4, (int )radius * 2 / 3, new Vector(this
+				new Astroid(edge * 2 / 4, (int) radius * 2 / 3, new Vector(this
 						.getVector().move(
 								new Vector(this.getVector().getAmount() / -2,
 										90 * i + vector.getPhi()))), this

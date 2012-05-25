@@ -38,11 +38,11 @@ public class Vector extends Shapes.Point {
 	/**
 	 * Create Vector
 	 * 
-	 * @param vector
+	 * @param point
 	 */
-	public Vector(Point vector) {
-		super(vector.getX(), vector.getY());
-		setVector(vector);
+	public Vector(Point point) {
+		super(point.getX(), point.getY());
+		setVector(point);
 		// FIXME angel collision
 	}
 
@@ -70,6 +70,7 @@ public class Vector extends Shapes.Point {
 	 * Set this Vector by a Point
 	 * 
 	 * @param vector
+	 *            new vector to set
 	 */
 	private void setVector(Point vector) {
 		this.setX(vector.getX());
@@ -90,7 +91,7 @@ public class Vector extends Shapes.Point {
 	 * @param phi
 	 *            angel of the vector
 	 */
-	public void setVector(double amount, double phi) {
+	private void setVector(double amount, double phi) {
 		this.amount = amount;
 		this.phi = phi;
 		this.x = amount * Math.cos(Math.toRadians(phi));

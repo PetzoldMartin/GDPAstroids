@@ -1,15 +1,25 @@
 package Astroids;
 
 import java.awt.Color;
-
 import Shapes.Line;
 
+/**
+ * class that manage a rocket
+ * 
+ * @author (Martin Petzold , Markus Krummnacker)
+ * @version (0.4)
+ */
 public class Rocket extends Sprite {
-	// TODO commenting
 	// TODO redo weapons
-	
+
 	private int lifeTimeFrame;
 
+	/**
+	 * create a spaceship
+	 * 
+	 * @param spaceShip
+	 *            that generates the rocket
+	 */
 	public Rocket(SpaceShip spaceShip) {
 		radius = 3;
 		lifeTimeFrame = (int) (gameController.getGameScreenX() / gameController
@@ -23,6 +33,9 @@ public class Rocket extends Sprite {
 		this.update();
 	}
 
+	/* (non-Javadoc)
+	 * @see Astroids.Sprite#update()
+	 */
 	@Override
 	public void update() {
 		super.update();
@@ -31,10 +44,13 @@ public class Rocket extends Sprite {
 		}
 		if (lifeTimeFrame <= 0) {
 			destroy(this);
-			}
+		}
 		lifeTimeFrame--;
 	}
 
+	/* (non-Javadoc)
+	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
+	 */
 	@Override
 	public void destroy(Sprite collider) {
 		if (!(collider instanceof SpaceShip)) {
