@@ -33,11 +33,11 @@ public class Astroid extends Sprite {
 		super();
 		count++;
 		// FIXME radius calc
-		this.edge = (int) (edge + edge / 2 - Math.random() * edge);
-		this.radius = this.edge - edge + radius;
+		this.edge = edge;
+		this.radius =radius;
 		ArrayList<Point> astroList = new ArrayList<Point>();
 		for (int phi = 0; phi < 360; phi += 360 / edge) {
-			astroList.add(new Vector(radius - radius / (radius / 6)
+			astroList.add(new Vector(radius - radius / (radius / 5)
 					* Math.random(), phi));
 		}
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
@@ -82,6 +82,7 @@ public class Astroid extends Sprite {
 	@Override
 	public void destroy(Sprite collider) {
 		count--;
+		System.out.println(count);
 		split(collider.getVector());
 		gameController.removeSprites(this);
 	}
@@ -96,7 +97,7 @@ public class Astroid extends Sprite {
 		// TODO redo vector of new Astroids!!!
 		if (this.edge > 12) {
 			for (int i = -1; i <= 1; i += 2) {
-				new Astroid(edge * 2 / 4, (int) radius * 2 / 3, new Vector(this
+				new Astroid((int) (edge + edge / 2 - Math.random() * edge) * 2 / 4, (int) radius * 2 / 3, new Vector(this
 						.getVector().move(
 								new Vector(this.getVector().getAmount() / -2,
 										90 * i + vector.getPhi()))), this

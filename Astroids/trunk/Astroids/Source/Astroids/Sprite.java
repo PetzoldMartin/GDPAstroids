@@ -36,7 +36,6 @@ public abstract class Sprite extends Figure {
 	 * @param vector
 	 *            The movement-speed and movement-direction of the Sprite
 	 */
-	// TODO multiple Constructor!
 	public Sprite() {
 		gameController.addSprites(this);
 		this.centerPoint = new Point(0, 0);

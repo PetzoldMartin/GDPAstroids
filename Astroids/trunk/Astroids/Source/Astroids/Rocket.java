@@ -21,7 +21,7 @@ public class Rocket extends Sprite {
 	 *            that generates the rocket
 	 */
 	public Rocket(SpaceShip spaceShip) {
-		radius = 3;
+		radius = gameController.getMaxSpeed();
 		lifeTimeFrame = (int) (gameController.getGameScreenX() / gameController
 				.getMaxSpeed());
 		this.setVector(new Vector(spaceShip.getAmount()
@@ -29,8 +29,7 @@ public class Rocket extends Sprite {
 		this.addShape(new Line(getCenterPoint(), getCenterPoint().move(
 				new Vector(gameController.getMaxSpeed(), this.getVector()
 						.getPhi())), Color.CYAN));
-		this.move(spaceShip.getCenterPoint());
-		this.update();
+		this.move(spaceShip.getCenterPoint().move(new Vector(radius, getPhi())));
 	}
 
 	/*
