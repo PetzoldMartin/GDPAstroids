@@ -135,7 +135,7 @@ public class GameController extends Thread implements Runnable {
 	public void checkObjects() {
 		// FIXME counter not synchronized
 		// astroids
-		System.out.println(Astroid.getCounter());
+//		System.out.println(Astroid.getCounter());
 		if (Astroid.getCounter() < astroCount) {
 			new Astroid(astroEdge, astroSize);
 		}
@@ -161,6 +161,8 @@ public class GameController extends Thread implements Runnable {
 			for (Sprite spriteB : sprites) {
 				if (spriteA != spriteB)
 					spriteA.collision(spriteB);
+				// TODO redo collision
+				// FIXME astroid multiple destroy of one astroid!!!
 			}
 		}
 	}
