@@ -786,4 +786,8 @@ public class WhiteBoard {
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
+
+	public Container getContainer() {
+		return container;
+	}
 }

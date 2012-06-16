@@ -25,8 +25,8 @@ public abstract class Sprite extends Figure {
 	protected double rotationPhi;
 	protected static GameController gameController;
 
-	// protected ArrayList<Drawable> overlay = new ArrayList<Drawable>();
 	// TODO overlay implementation
+	// protected ArrayList<Drawable> overlay = new ArrayList<Drawable>();
 	/**
 	 * Constructor for objects of class Sprite - overloaded
 	 * 
