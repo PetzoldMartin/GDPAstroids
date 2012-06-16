@@ -15,14 +15,19 @@ import java.awt.event.WindowListener;
 import Astroids.GameController;
 import Astroids.Vector;
 import Shapes.Point;
-
+/**
+ * 
+ * @author Aismael
+ * Die Listener Klasse die die Tastatureingabe und den Mausinput Entgegenimmt und Auswertet
+ *
+ */
 public class InputController extends Thread implements KeyListener,
 		WindowListener, MouseWheelListener, MouseListener, MouseMotionListener {
 	InputWindow inputWindow;
 	private double keyAmount = 0;
 	private double keyPhi = 0;
 	private GameController gameController;
-	private Whiteboardinput whiteboardinput;
+	private WhiteboardInAndOutPut whiteboardInAndOutPut;
 	boolean output = false;
 
 	public InputController(GameController gameController) {
@@ -30,15 +35,11 @@ public class InputController extends Thread implements KeyListener,
 		this.gameController = gameController;
 		System.out.println("InputController started:\t" + this.getId());
 		inputWindow = new InputWindow("TastenInput", gameController);
-		whiteboardinput = new Whiteboardinput(gameController, this);
+		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this,inputWindow);
 		Font l = new Font("Arial", Font.BOLD, 25);
 		inputWindow.setSize(300, 300);
-		inputWindow
-				.setLocation(this.gameController.getWindowX() * 2 + 140, 100);
-
 		inputWindow.requestFocus();
 		inputWindow.addKeyListener(this);
-		inputWindow.addWindowListener(this);
 		inputWindow.addMouseWheelListener(this);
 		inputWindow.addMouseListener(this);
 		inputWindow.addMouseMotionListener(this);
@@ -46,38 +47,27 @@ public class InputController extends Thread implements KeyListener,
 		inputWindow.setFont(l);
 
 	}
+	
 
 	private Vector MouseControl(MouseEvent arg0) {
 
 		Vector silence = new Vector(new Point(arg0.getX() - 150,
 				arg0.getY() - 150));
-		Vector s2 = new Vector(new Point(0, 0));
+		Vector s2 = new Vector(0, 0);
 		if (silence.getAmount() < 80) {
-			if (arg0.getX() > 150) {
-				s2 = new Vector(silence.getAmount() / 8, -silence.getPhi());
-			}
-			if (arg0.getX() < 150) {
-				s2 = new Vector(silence.getAmount() / 8,
-						(180 - silence.getPhi()));
-			}
+			s2 = new Vector(silence.getAmount() / 8, -silence.getPhi());
 		} else {
-			if (arg0.getX() > 150) {
+			
 				s2 = new Vector(10, -silence.getPhi());
-			}
-			if (arg0.getX() < 150) {
-				s2 = new Vector(10, (180 - silence.getPhi()));
-			}
-
+			
 		}
 		return s2;
 	}
 
 	public void OutPutVisible() {
 		if (output) {
-			inputWindow.setVisible(false);
 			output = false;
 		} else {
-			inputWindow.setVisible(true);
 			output = true;
 		}
 	}
