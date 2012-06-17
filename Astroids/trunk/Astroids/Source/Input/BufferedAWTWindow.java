@@ -19,8 +19,6 @@ public class BufferedAWTWindow extends Panel {
 	protected GameController gameController;
 	Image bufImage;//
 	Graphics bufG;//
-//	Image offscreenImage;
-//	Graphics offscreenGraphics;
 	private Font l;
 	private int fontSize=20;
 	protected String name;
