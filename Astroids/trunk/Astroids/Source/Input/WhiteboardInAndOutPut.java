@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -66,6 +68,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		inputWindow.setCursor(new Cursor(12));
 
 		JspinnerContainer = new JPanel(new GridLayout(4, 1));
+		buildJspinnerContainer();
 		WhiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
 
 		AWTOutputContainer = new JPanel(new GridLayout(6, 1));
@@ -73,26 +76,54 @@ public class WhiteboardInAndOutPut extends Thread implements
 		AWTandJframeMergecontainer.add(AWTOutputContainer, BorderLayout.NORTH);
 		AWTOutputContainer.setPreferredSize(new Dimension(300, 240));
 
-		JFrameButtonContainer = new JPanel(new GridLayout(1, 3));
+		JFrameButtonContainer = new JPanel(new GridLayout(2, 0));
+		buildJFrameButtonContainer();
 		AWTandJframeMergecontainer.add(JFrameButtonContainer,
 				BorderLayout.SOUTH);
 
 	}
 
+	private void buildJspinnerContainer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void buildJFrameButtonContainer() {
+		JButton ControllChange= new JButton("Alternative Controll activate");
+		JButton test = new JButton("test");
+		ControllChange.addActionListener(new EffectActionListener(ControllChange) {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (inputController.getOutput()) {
+					inputController.setOutput(false);
+					 getButton().setText("Alternative Controll activate");
+				} else {
+					inputController.setOutput(true);
+					getButton().setText("Alternative Controll deactivate");
+				}
+
+			};});
+		JFrameButtonContainer.add(ControllChange);
+		JFrameButtonContainer.add(test);
+		
+	}
+
 	private void buildAWTOutputContainer() {
 		AWTOutputContainer.add(new PointsOutput("Points", this.gameController));
-		AWTOutputContainer.add(new BufferedAWTWindow("Coord", this.gameController){
+		AWTOutputContainer.add(new BufferedAWTWindow("Coord",
+				this.gameController) {
 
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
 				g.setColor(new Color(255, 255, 255));
 				g.drawString(super.name, LabelX, LabelY);
 			}
-			
-		}
-		);
+
+		});
 		AWTOutputContainer.add(new XOutput("Xcoord", this.gameController));
 		AWTOutputContainer.add(new YOutput("Ycoord", this.gameController));
 		AWTOutputContainer.add(new speedOutPut("Speed", this.gameController));
@@ -151,6 +182,24 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	}
 
+	    abstract class EffectActionListener implements ActionListener{
+		private JButton button;
+
+		public JButton getButton() {
+			return button;
+		}
+
+		public EffectActionListener(JButton button){
+			this.button=button;
+			
+		}
+
+		@Override
+		public abstract void actionPerformed(ActionEvent e) ;
+
+		
+	}
+	
 	class speedOutPut extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -251,6 +300,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 		}
 	}
+
 	class PointsOutput extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -266,9 +316,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 
 		private String PointsToString() {
-			//TODO Gamepoints in Gamecotroller or whereever
+			// TODO Gamepoints in Gamecotroller or whereever
 			Integer points = (int) 0;
-			String pointsString = "Y:" + points.toString();
+			String pointsString = "Points:" + points.toString();
 			return pointsString;
 
 		}
