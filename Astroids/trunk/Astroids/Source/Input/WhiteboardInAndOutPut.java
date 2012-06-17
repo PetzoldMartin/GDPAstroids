@@ -33,7 +33,7 @@ import Shapes.Point;
 import Shapes.Shape;
 
 /**
- * Das Whiteboard Controllpanel Vers.1.9
+ * Das Whiteboard Controllpanel Vers.2.0
  * 
  * @author Aismael
  * 
@@ -166,7 +166,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 			public void stateChanged(ChangeEvent e) {
 				gameController.getSpaceShip().setVector(
 						new Vector(gameController.getSpaceShip().getVector().getAmount(),
-								(Integer) angle.getValue()+90));
+								(Integer) angle.getValue()+180));
 
 			}
 		});
@@ -398,7 +398,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 
 		private String accelerationToString() {
-			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 90;
+			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi()-180;
 			Integer acceleration = Math.abs(ac2 % 360);
 			String accelerationString = "Angle: " + acceleration.toString();
 			return accelerationString;
