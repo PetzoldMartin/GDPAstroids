@@ -13,13 +13,14 @@ public class BufferedAWTWindow extends Panel {
 
 	/**
 	 * Ein Gepuffertes AWT-Panel für eine Einfache Grafische Ausgabe
+	 * mit Voreinstellungen für die Textausgabe
 	 */
 	private static final long serialVersionUID = 1L;
 	protected GameController gameController;
-	Image bufImage;
-	Graphics bufG;
-	Image offscreenImage;
-	Graphics offscreenGraphics;
+	Image bufImage;//
+	Graphics bufG;//
+//	Image offscreenImage;
+//	Graphics offscreenGraphics;
 	private Font l;
 	private int fontSize=20;
 	protected String name;
@@ -34,7 +35,11 @@ public class BufferedAWTWindow extends Panel {
 		this.name=name;
 
 	}
+	
 	@Override
+	/**
+	 * der Puffer für die Grafische AWT Ausgabe
+	 */
 	public void update(Graphics g) {
 
 		int w = this.getSize().width;

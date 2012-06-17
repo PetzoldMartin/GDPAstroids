@@ -15,37 +15,54 @@ import java.awt.event.WindowListener;
 import Astroids.GameController;
 import Astroids.Vector;
 import Shapes.Point;
+
 /**
  * 
- * @author Aismael
- * Die Listener Klasse die die Tastatureingabe und den Mausinput Entgegenimmt und Auswertet
- *
+ * @author Aismael Die Listener Klasse die die Tastatureingabe und den Mausinput
+ *         Entgegenimmt und Auswertet
+ * 
  */
 public class InputController extends Thread implements KeyListener,
 		WindowListener, MouseWheelListener, MouseListener, MouseMotionListener {
-	InputWindow inputWindow;
-	private double keyAmount = 0;
-	private double keyPhi = 0;
-	private GameController gameController;
-	private WhiteboardInAndOutPut whiteboardInAndOutPut;
-	boolean output = false;
+	InputControllPanelWindow inputControllPanelWindow;
+	private double keyAmount = 0;// der Interne Speicher für KeyAmount
+	private double keyPhi = 0;// der Interne Speicher für KeyPhi
+	private GameController gameController;// der intern benutzte Gamecontroller
+	private WhiteboardInAndOutPut whiteboardInAndOutPut;// der intern benutzte
+														// WhiteboardInAndOutPut
+	boolean alternativeControll = false;// boolean für einschalten und
+										// ausschalten der Alternativen
+										// Steuerung
 
+	/**
+	 * Der Konstruktor des InputControllers
+	 * 
+	 * @param gameController
+	 */
 	public InputController(GameController gameController) {
 
 		this.gameController = gameController;
 		System.out.println("InputController started:\t" + this.getId());
-		inputWindow = new InputWindow("TastenInput", gameController);
-		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this,inputWindow);
-		
-		inputWindow.setSize(300, 300);
-		inputWindow.requestFocus();
-		inputWindow.addKeyListener(this);
-		inputWindow.addMouseWheelListener(this);
-		inputWindow.addMouseListener(this);
-		inputWindow.addMouseMotionListener(this);
+		inputControllPanelWindow = new InputControllPanelWindow("TastenInput",
+				gameController);
+		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this,
+				inputControllPanelWindow);
+
+		inputControllPanelWindow.setSize(300, 300);
+		inputControllPanelWindow.addMouseWheelListener(this);
+		inputControllPanelWindow.addMouseListener(this);
+		inputControllPanelWindow.addMouseMotionListener(this);
+		inputControllPanelWindow.addKeyListener(this);
+		inputControllPanelWindow.requestFocus();
 
 	}
 
+	/**
+	 * Die Steurungsübergabe des ControllPanels
+	 * 
+	 * @param arg0
+	 * @return Vector
+	 */
 	private Vector MouseControl(MouseEvent arg0) {
 
 		Vector silence = new Vector(new Point(arg0.getX() - 150,
@@ -54,23 +71,18 @@ public class InputController extends Thread implements KeyListener,
 		if (silence.getAmount() < 80) {
 			s2 = new Vector(silence.getAmount() / 8, -silence.getPhi());
 		} else {
-			
-				s2 = new Vector(10, -silence.getPhi());
-			
+
+			s2 = new Vector(10, -silence.getPhi());
+
 		}
 		return s2;
 	}
 
-	public void OutPutVisible() {
-		if (output) {
-			output = false;
-		} else {
-			output = true;
-		}
-	}
-
+	/**
+	 * Die Methode die die AWT OUTputKomponenten neu Zeichnet
+	 */
 	public void Interfacerefresh() {
-		inputWindow.repaint();
+		inputControllPanelWindow.repaint();
 		whiteboardInAndOutPut.Outputrefresh();
 	}
 
@@ -78,7 +90,7 @@ public class InputController extends Thread implements KeyListener,
 	public void keyTyped(KeyEvent e) {
 	}
 
-	// events wenn eine taste Gedrï¿½ckt wird
+	// events wenn eine taste Gedrueckt wird
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Doubblekeysfail
@@ -163,14 +175,25 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
+	/**
+	 * 
+	 * @return den KeyAmount
+	 */
 	public double getKeyAmount() {
 		return keyAmount;
 	}
 
+	/**
+	 * 
+	 * @return den KeyPhi
+	 */
 	public double getKeyPhi() {
 		return keyPhi;
 	}
 
+	/**
+	 * Die Methode die Astroids ausführt wenn das Fenster Aktiviert ist
+	 */
 	@Override
 	public synchronized void windowActivated(WindowEvent e) {
 		gameController.setWindowActivated(true);
@@ -182,12 +205,18 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
+	/**
+	 * Die Methode die Astroids beendet wenn das Fenster geschlossen wird
+	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
 
 	}
 
+	/**
+	 * Die Methode die Astroids anhält wenn das Fenster deaktiviert ist
+	 */
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 		gameController.setWindowActivated(false);
@@ -204,6 +233,10 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
+	/**
+	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung
+	 * ausführt
+	 */
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 
@@ -211,12 +244,19 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
+	/**
+	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung und
+	 * gedrückter Maustaste ausführt
+	 */
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		gameController.getSpaceShip().setVector(MouseControl(arg0));
 
 	}
 
+	/**
+	 * Die Methode die Bei Mausclick das spaceKeyevent auslöst
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		gameController.spaceKey();
@@ -233,6 +273,9 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
+	/**
+	 * Die Methode die bei gepresster Maus das spaceKeyevent auslöst
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		gameController.spaceKey();
@@ -254,15 +297,28 @@ public class InputController extends Thread implements KeyListener,
 
 	}
 
-	public boolean isOutput() {
-		return output;
+	/**
+	 * 
+	 * @return AlternativeControll
+	 */
+	public boolean isAlternativeControll() {
+		return alternativeControll;
 	}
 
-	public void setOutput(boolean output) {
-		this.output = output;
+	/**
+	 * 
+	 * @param AlternativeControll
+	 */
+	public void setAlternativeControll(boolean AlternativeControll) {
+		this.alternativeControll = AlternativeControll;
 	}
-	public boolean getOutput() {
-		return output;
+
+	/**
+	 * 
+	 * @return AlternativeControll
+	 */
+	public boolean getAlternativeControll() {
+		return alternativeControll;
 	}
 
 }

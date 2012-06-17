@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import Astroids.GameController;
+import Astroids.SpaceShip;
 import Astroids.Vector;
 import Shapes.Point;
 import Shapes.Shape;
@@ -28,54 +30,80 @@ import Shapes.Shape;
 public class WhiteboardInAndOutPut extends Thread implements
 		MouseMotionListener {
 
-	private JFrame WhiteBoard;
-	private JScrollPane WhiteboardInlet;
-	private GameController gameController;
-	private InputController inputController;
-	private JPanel AWTandJframeMergecontainer;
-	private JPanel JFrameButtonContainer;
-	private JPanel AWTOutputContainer;
-	private JPanel JspinnerContainer;
-	private int LabelX = 10;
-	private int LabelY = 25;
+	protected static final int LabelX = 10;
+	protected static final int LabelY = 25;
+	private JFrame whiteBoard;//das Interne Whiteboard
+	private JScrollPane whiteBoardInlet;//das Interne ScrollPane des Whiteboards
+	private GameController gameController;// der Interne Gamecontroller
+	private InputController inputController;//der Interne InputController
+	private JPanel AWTandJframeMergecontainer;//Der Container der das Interface auf das Whiteboard bringt und die Jframe und AWT Container Plaziert
+	private JPanel JFrameButtonContainer;//der Container für die JButtons
+	private JPanel AWTOutputContainer;//der Container für die AWT Outputs
+	private JPanel JspinnerContainer;//der Container für die Jspinner
+	
 
+	/**
+	 * Der Konstruktor für das {@link WhiteboardInAndOutPut} der alle Componenten Initialisiert
+	 * @param gameController der dem {@link WhiteboardInAndOutPut} übergebene {@link GameController}
+	 * @param inputController der dem {@link WhiteboardInAndOutPut} übergebene {@link InputController}
+	 * @param inputControllPanelWindow das dem {@link WhiteboardInAndOutPut} übergebene {@link InputControllPanelWindow}
+	 */
 	public WhiteboardInAndOutPut(GameController gameController,
-			InputController inputController, InputWindow inputWindow) {
+			InputController inputController,
+			InputControllPanelWindow inputControllPanelWindow) {
 		this.gameController = gameController;
 		this.inputController = inputController;
 
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 
-		WhiteBoard = Shape.getWhiteBoard().getFrame();
-		WhiteBoard.addKeyListener(inputController);
-		WhiteBoard.addWindowListener(inputController);
-		WhiteBoard.setSize(
+		/**
+		 * die Initialisierung des Whiteboards
+		 */
+		whiteBoard = Shape.getWhiteBoard().getFrame();
+		whiteBoard.addKeyListener(inputController);
+		whiteBoard.addWindowListener(inputController);
+		whiteBoard.setSize(
 				gameController.getWindowX() * 2 + gameController.getAstroSize()
 						* 2 - 16 + 300, gameController.getWindowY() * 2
 						+ gameController.getAstroSize() * 2 + 4);
 
-		WhiteboardInlet = Shape.getWhiteBoard().getScrollPane();
-		WhiteboardInlet.setCursor(new Cursor(1));
-		WhiteboardInlet.addMouseWheelListener(inputController);
-		WhiteboardInlet.addMouseListener(inputController);
-		WhiteboardInlet.addMouseMotionListener(this);
+		/**
+		 * die Initialisierung des Whiteboardpanels
+		 */
+		whiteBoardInlet = Shape.getWhiteBoard().getScrollPane();
+		whiteBoardInlet.setCursor(new Cursor(1));
+		whiteBoardInlet.addMouseWheelListener(inputController);
+		whiteBoardInlet.addMouseListener(inputController);
+		whiteBoardInlet.addMouseMotionListener(this);
 
+		/**
+		 * die Initialisierung des AWTandJframeMergecontainers
+		 */
 		AWTandJframeMergecontainer = new JPanel(new BorderLayout());
-		WhiteBoard.add(BorderLayout.EAST, AWTandJframeMergecontainer);
+		AWTandJframeMergecontainer.addKeyListener(inputController);
+		whiteBoard.add(BorderLayout.EAST, AWTandJframeMergecontainer);
 		AWTandJframeMergecontainer.setPreferredSize(new Dimension(300, 800));
-		AWTandJframeMergecontainer.add(inputWindow, BorderLayout.CENTER);
-		inputWindow.setPreferredSize(new Dimension(300, 300));
-		inputWindow.setCursor(new Cursor(12));
+		AWTandJframeMergecontainer.add(inputControllPanelWindow,
+				BorderLayout.CENTER);
+		inputControllPanelWindow.setPreferredSize(new Dimension(300, 300));
+		inputControllPanelWindow.setCursor(new Cursor(12));
 
+		/**
+		 * die Initialisierung des JspinnerContainers
+		 */
 		JspinnerContainer = new JPanel(new GridLayout(4, 1));
 		buildJspinnerContainer();
-		WhiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
-
+		whiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
+		/**
+		 * die Initialisierung des AWTOutputContainers
+		 */
 		AWTOutputContainer = new JPanel(new GridLayout(6, 1));
 		buildAWTOutputContainer();
 		AWTandJframeMergecontainer.add(AWTOutputContainer, BorderLayout.NORTH);
 		AWTOutputContainer.setPreferredSize(new Dimension(300, 240));
-
+		/**
+		 * die Initialisierung des JFrameButtonContainers
+		 */
 		JFrameButtonContainer = new JPanel(new GridLayout(2, 0));
 		buildJFrameButtonContainer();
 		AWTandJframeMergecontainer.add(JFrameButtonContainer,
@@ -85,30 +113,39 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	private void buildJspinnerContainer() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	/**
+	 * Methode für das adden der JFrameButtonContainerKomponenten
+	 */
 	private void buildJFrameButtonContainer() {
-		JButton ControllChange= new JButton("Alternative Controll activate");
+		JButton ControllChange = new JButton("Alternative Controll activate");
 		JButton test = new JButton("test");
-		ControllChange.addActionListener(new EffectActionListener(ControllChange) {
+		ControllChange.addActionListener(new EffectActionListener(
+				ControllChange) {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (inputController.getOutput()) {
-					inputController.setOutput(false);
-					 getButton().setText("Alternative Controll activate");
+				if (inputController.getAlternativeControll()) {
+					inputController.setAlternativeControll(false);
+					((AbstractButton) getComponent()).setText("Alternative Controll activate");
+					whiteBoard.requestFocus();
 				} else {
-					inputController.setOutput(true);
-					getButton().setText("Alternative Controll deactivate");
+					inputController.setAlternativeControll(true);
+					((AbstractButton) getComponent()).setText("Alternative Controll deactivate");
 				}
 
-			};});
+			};
+		});
 		JFrameButtonContainer.add(ControllChange);
 		JFrameButtonContainer.add(test);
-		
+
 	}
 
+	/**
+	 * Methode für das adden der AWTOutputContainerKomponenten
+	 */
 	private void buildAWTOutputContainer() {
 		AWTOutputContainer.add(new PointsOutput("Points", this.gameController));
 		AWTOutputContainer.add(new BufferedAWTWindow("Coord",
@@ -131,6 +168,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 				this.gameController));
 	}
 
+	/**
+	 * die Methode zum Neuzeichnen der AWTOutputContainerKomponenten
+	 */
 	public void Outputrefresh() {
 		for (Component AWTComponent : AWTOutputContainer.getComponents()) {
 			AWTComponent.repaint();
@@ -138,24 +178,36 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	}
 
+	/**
+	 * Die Methode wenn die Maus gedrückt ist und Bewegt wird in der Alternativen Steuerung
+	 */
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		if (this.inputController.isOutput()) {
+		if (this.inputController.isAlternativeControll()) {
 			gameController.getSpaceShip().setVector(
 					MouseControlWhiteboard(arg0));
 		}
 
 	}
 
+	/**
+	 * Die Methode wenn die Maus Bewegt wird in der Alternativen Steuerung
+	 */
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		if (this.inputController.isOutput()) {
+		if (this.inputController.isAlternativeControll()) {
 			gameController.getSpaceShip().setVector(
 					MouseControlWhiteboard(arg0));
 		}
 
 	}
 
+	/**
+	 * die Methode zur Berechnung des Raumschiffbewegungsvectors
+	 * bei der Alternativeb Steuerung
+	 * @param arg0 die Mausdaten
+	 * @return der Bewegungsvector für das {@link SpaceShip}
+	 */
 	private Vector MouseControlWhiteboard(MouseEvent arg0) {
 
 		Vector silence = new Vector(new Point(arg0.getX()
@@ -177,29 +229,34 @@ public class WhiteboardInAndOutPut extends Thread implements
 		return s2;
 	}
 
-	public void Interfacerefresh() {
-		inputController.Interfacerefresh();
 
-	}
+	/**
+	 * Die Innere Klasse für einen ActionListener der die AWT oder Jframe Komponente veränden kann
+	 * @author Aismael
+	 *
+	 */
+	abstract class EffectActionListener implements ActionListener {
+		private Component component;
 
-	    abstract class EffectActionListener implements ActionListener{
-		private JButton button;
-
-		public JButton getButton() {
-			return button;
+		public Component getComponent() {
+			return component;
 		}
 
-		public EffectActionListener(JButton button){
-			this.button=button;
-			
+		public EffectActionListener(Component component) {
+			this.component = component;
+
 		}
 
 		@Override
-		public abstract void actionPerformed(ActionEvent e) ;
+		public abstract void actionPerformed(ActionEvent e);
 
-		
 	}
-	
+
+	/**
+	 * Die Innere Klasse für Das SpeedOutput Fenster
+	 * @author Aismael
+	 *
+	 */
 	class speedOutPut extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -232,6 +289,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	}
 
+	/**
+	 * Die Innere Klasse für Das accelerationOutput Fenster
+	 * @author Aismael
+	 *
+	 */
 	class accelerationOutput extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -255,6 +317,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	}
 
+	/**
+	 * Die Innere Klasse für Das XcoordinatenOutput Fenster
+	 * @author Aismael
+	 *
+	 */
 	class XOutput extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -278,6 +345,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 	}
 
+	/**
+	 * Die Innere Klasse für Das YcoordinatenOutput Fenster
+	 * @author Aismael
+	 *
+	 */
 	class YOutput extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;
@@ -301,6 +373,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 	}
 
+	/**
+	 * Die Innere Klasse für Das SpielpunkteOutput Fenster
+	 * @author Aismael
+	 *
+	 */
 	class PointsOutput extends BufferedAWTWindow {
 
 		private static final long serialVersionUID = 1L;

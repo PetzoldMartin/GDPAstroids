@@ -1,24 +1,28 @@
 package Input;
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Panel;
-
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import Astroids.GameController;
 
-public class InputWindow extends BufferedAWTWindow {
+/**
+ * 
+ * @author Aismael
+ * Das Fenster für die Eingabe im Panel
+ *
+ */
+public class InputControllPanelWindow extends BufferedAWTWindow {
 
-	public InputWindow(String name, GameController gameController) {
+	private static final long serialVersionUID = 1L;
+
+	public InputControllPanelWindow(String name, GameController gameController) {
 		super(name, gameController);
 	}
 	
 	@Override
+	/**
+	 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+	 */
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(new Color(0, 0, 255));
