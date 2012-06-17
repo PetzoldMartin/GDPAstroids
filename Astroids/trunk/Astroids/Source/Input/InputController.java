@@ -116,9 +116,6 @@ public class InputController extends Thread implements KeyListener,
 		case KeyEvent.VK_PAUSE:
 			gameController.pause();
 			break;
-		case KeyEvent.VK_F1:
-			OutPutVisible();
-			break;
 		case KeyEvent.VK_SPACE:
 			gameController.spaceKey();
 		default:
@@ -258,6 +255,13 @@ public class InputController extends Thread implements KeyListener,
 	}
 
 	public boolean isOutput() {
+		return output;
+	}
+
+	public void setOutput(boolean output) {
+		this.output = output;
+	}
+	public boolean getOutput() {
 		return output;
 	}
 
