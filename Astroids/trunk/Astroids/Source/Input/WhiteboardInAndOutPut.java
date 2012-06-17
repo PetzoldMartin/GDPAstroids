@@ -1,9 +1,13 @@
 package Input;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -19,7 +23,8 @@ import Astroids.Vector;
 import Shapes.Point;
 import Shapes.Shape;
 
-public class WhiteboardInAndOutPut extends Thread implements MouseMotionListener {
+public class WhiteboardInAndOutPut extends Thread implements
+		MouseMotionListener {
 
 	private JFrame WhiteBoard;
 	private JScrollPane WhiteboardInlet;
@@ -29,45 +34,76 @@ public class WhiteboardInAndOutPut extends Thread implements MouseMotionListener
 	private JPanel JFrameButtonContainer;
 	private JPanel AWTOutputContainer;
 	private JPanel JspinnerContainer;
+	private int LabelX = 10;
+	private int LabelY = 25;
 
 	public WhiteboardInAndOutPut(GameController gameController,
 			InputController inputController, InputWindow inputWindow) {
 		this.gameController = gameController;
 		this.inputController = inputController;
-		
+
 		System.out.println("Whiteboardinput started:\t" + this.getId());
-		
+
 		WhiteBoard = Shape.getWhiteBoard().getFrame();
 		WhiteBoard.addKeyListener(inputController);
 		WhiteBoard.addWindowListener(inputController);
 		WhiteBoard.setSize(
 				gameController.getWindowX() * 2 + gameController.getAstroSize()
-				* 2 - 16 + 300, gameController.getWindowY() * 2
-				+ gameController.getAstroSize() * 2 + 4);
-		
+						* 2 - 16 + 300, gameController.getWindowY() * 2
+						+ gameController.getAstroSize() * 2 + 4);
+
 		WhiteboardInlet = Shape.getWhiteBoard().getScrollPane();
 		WhiteboardInlet.setCursor(new Cursor(1));
 		WhiteboardInlet.addMouseWheelListener(inputController);
 		WhiteboardInlet.addMouseListener(inputController);
 		WhiteboardInlet.addMouseMotionListener(this);
-		
+
 		AWTandJframeMergecontainer = new JPanel(new BorderLayout());
 		WhiteBoard.add(BorderLayout.EAST, AWTandJframeMergecontainer);
 		AWTandJframeMergecontainer.setPreferredSize(new Dimension(300, 800));
 		AWTandJframeMergecontainer.add(inputWindow, BorderLayout.CENTER);
 		inputWindow.setPreferredSize(new Dimension(300, 300));
 		inputWindow.setCursor(new Cursor(12));
-		
-		JspinnerContainer=new JPanel(new GridLayout(4, 1));
-		WhiteBoard.add(BorderLayout.SOUTH,JspinnerContainer);
-		
-		AWTOutputContainer = new JPanel(new GridLayout(1, 6));
-		AWTandJframeMergecontainer.add(AWTOutputContainer,
-				BorderLayout.NORTH);
-		
+
+		JspinnerContainer = new JPanel(new GridLayout(4, 1));
+		WhiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
+
+		AWTOutputContainer = new JPanel(new GridLayout(6, 1));
+		buildAWTOutputContainer();
+		AWTandJframeMergecontainer.add(AWTOutputContainer, BorderLayout.NORTH);
+		AWTOutputContainer.setPreferredSize(new Dimension(300, 240));
+
 		JFrameButtonContainer = new JPanel(new GridLayout(1, 3));
 		AWTandJframeMergecontainer.add(JFrameButtonContainer,
 				BorderLayout.SOUTH);
+
+	}
+
+	private void buildAWTOutputContainer() {
+		AWTOutputContainer.add(new PointsOutput("Points", this.gameController));
+		AWTOutputContainer.add(new BufferedAWTWindow("Coord", this.gameController){
+
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void paint(Graphics g) {
+				super.paint(g);
+				g.setColor(new Color(255, 255, 255));
+				g.drawString(super.name, LabelX, LabelY);
+			}
+			
+		}
+		);
+		AWTOutputContainer.add(new XOutput("Xcoord", this.gameController));
+		AWTOutputContainer.add(new YOutput("Ycoord", this.gameController));
+		AWTOutputContainer.add(new speedOutPut("Speed", this.gameController));
+		AWTOutputContainer.add(new accelerationOutput("acceleration",
+				this.gameController));
+	}
+
+	public void Outputrefresh() {
+		for (Component AWTComponent : AWTOutputContainer.getComponents()) {
+			AWTComponent.repaint();
+		}
 
 	}
 
@@ -108,6 +144,134 @@ public class WhiteboardInAndOutPut extends Thread implements MouseMotionListener
 
 		}
 		return s2;
+	}
+
+	public void Interfacerefresh() {
+		inputController.Interfacerefresh();
+
+	}
+
+	class speedOutPut extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public speedOutPut(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString(speedToString(), LabelX, LabelY);
+		}
+
+		private String speedToString() {
+			Double speed = gameController.getSpaceShip().getVector()
+					.getAmount();
+			String speedString = "0";
+			if (speed < 0) {
+				String speedString0 = "Speed: " + speed.toString();
+				speedString = speedString0.substring(0, 11);
+			}
+			if (speed >= 0) {
+				String speedString0 = "Speed: " + speed.toString();
+				speedString = speedString0.substring(0, 10);
+
+			}
+			return speedString;
+		}
+
+	}
+
+	class accelerationOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public accelerationOutput(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString(accelerationToString(), LabelX, LabelY);
+		}
+
+		private String accelerationToString() {
+			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 90;
+			Integer acceleration = Math.abs(ac2 % 360);
+			String accelerationString = "Angle: " + acceleration.toString();
+			return accelerationString;
+		}
+
+	}
+
+	class XOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public XOutput(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString(xToString(), LabelX, LabelY);
+		}
+
+		private String xToString() {
+			Integer xcoord = (int) gameController.getSpaceShip()
+					.getCenterPoint().getX();
+			String xString = "X:" + xcoord.toString();
+			return xString;
+
+		}
+	}
+
+	class YOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public YOutput(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString(yToString(), LabelX, LabelY);
+		}
+
+		private String yToString() {
+			Integer ycoord = (int) gameController.getSpaceShip()
+					.getCenterPoint().getY();
+			String yString = "Y:" + ycoord.toString();
+			return yString;
+
+		}
+	}
+	class PointsOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public PointsOutput(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString(PointsToString(), LabelX, LabelY);
+		}
+
+		private String PointsToString() {
+			//TODO Gamepoints in Gamecotroller or whereever
+			Integer points = (int) 0;
+			String pointsString = "Y:" + points.toString();
+			return pointsString;
+
+		}
 	}
 
 }

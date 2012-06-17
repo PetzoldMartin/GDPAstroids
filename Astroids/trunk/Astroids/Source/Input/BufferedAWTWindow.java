@@ -1,5 +1,8 @@
 package Input;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Panel;
@@ -17,9 +20,18 @@ public class BufferedAWTWindow extends Panel {
 	Graphics bufG;
 	Image offscreenImage;
 	Graphics offscreenGraphics;
+	private Font l;
+	private int fontSize=20;
+	protected String name;
+	
 
 	public BufferedAWTWindow(String name, GameController gameController) {
 		this.gameController = gameController;
+		this.setBackground(Color.BLACK);
+		l = new Font("Arial", Font.BOLD, fontSize);
+		this.setPreferredSize(new Dimension(300, fontSize+20));
+		this.setFont(l);
+		this.name=name;
 
 	}
 	@Override

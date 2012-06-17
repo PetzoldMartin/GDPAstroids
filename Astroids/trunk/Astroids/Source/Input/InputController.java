@@ -36,18 +36,15 @@ public class InputController extends Thread implements KeyListener,
 		System.out.println("InputController started:\t" + this.getId());
 		inputWindow = new InputWindow("TastenInput", gameController);
 		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this,inputWindow);
-		Font l = new Font("Arial", Font.BOLD, 25);
+		
 		inputWindow.setSize(300, 300);
 		inputWindow.requestFocus();
 		inputWindow.addKeyListener(this);
 		inputWindow.addMouseWheelListener(this);
 		inputWindow.addMouseListener(this);
 		inputWindow.addMouseMotionListener(this);
-		inputWindow.setBackground(Color.BLACK);
-		inputWindow.setFont(l);
 
 	}
-	
 
 	private Vector MouseControl(MouseEvent arg0) {
 
@@ -74,6 +71,7 @@ public class InputController extends Thread implements KeyListener,
 
 	public void Interfacerefresh() {
 		inputWindow.repaint();
+		whiteboardInAndOutPut.Outputrefresh();
 	}
 
 	@Override
