@@ -18,8 +18,10 @@ import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 
 import Astroids.GameController;
 import Astroids.SpaceShip;
@@ -27,11 +29,18 @@ import Astroids.Vector;
 import Shapes.Point;
 import Shapes.Shape;
 
+/**
+ * Das Whiteboard Controllpanel
+ * Vers.1.9
+ * @author Aismael
+ *
+ */
 public class WhiteboardInAndOutPut extends Thread implements
 		MouseMotionListener {
 
-	protected static final int LabelX = 10;
-	protected static final int LabelY = 25;
+	protected int LabelX = 10;
+	protected int LabelY = 25;
+	protected boolean JspinnerActivate = false;
 	private JFrame whiteBoard;//das Interne Whiteboard
 	private JScrollPane whiteBoardInlet;//das Interne ScrollPane des Whiteboards
 	private GameController gameController;// der Interne Gamecontroller
@@ -40,6 +49,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private JPanel JFrameButtonContainer;//der Container für die JButtons
 	private JPanel AWTOutputContainer;//der Container für die AWT Outputs
 	private JPanel JspinnerContainer;//der Container für die Jspinner
+	private InputControllPanelWindow inputControllPanelWindow;
+	private JSpinner one;
+	private JSpinner two;
 	
 
 	/**
@@ -53,6 +65,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 			InputControllPanelWindow inputControllPanelWindow) {
 		this.gameController = gameController;
 		this.inputController = inputController;
+		this.inputControllPanelWindow =inputControllPanelWindow;
 
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 
@@ -82,18 +95,12 @@ public class WhiteboardInAndOutPut extends Thread implements
 		AWTandJframeMergecontainer = new JPanel(new BorderLayout());
 		AWTandJframeMergecontainer.addKeyListener(inputController);
 		whiteBoard.add(BorderLayout.EAST, AWTandJframeMergecontainer);
-		AWTandJframeMergecontainer.setPreferredSize(new Dimension(300, 800));
+		AWTandJframeMergecontainer.setPreferredSize(new Dimension(300, 600));
 		AWTandJframeMergecontainer.add(inputControllPanelWindow,
 				BorderLayout.CENTER);
 		inputControllPanelWindow.setPreferredSize(new Dimension(300, 300));
 		inputControllPanelWindow.setCursor(new Cursor(12));
 
-		/**
-		 * die Initialisierung des JspinnerContainers
-		 */
-		JspinnerContainer = new JPanel(new GridLayout(4, 1));
-		buildJspinnerContainer();
-		whiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
 		/**
 		 * die Initialisierung des AWTOutputContainers
 		 */
@@ -108,11 +115,27 @@ public class WhiteboardInAndOutPut extends Thread implements
 		buildJFrameButtonContainer();
 		AWTandJframeMergecontainer.add(JFrameButtonContainer,
 				BorderLayout.SOUTH);
+		AWTandJframeMergecontainer.setBackground(Color.black);
+		/**
+		 * die Initialisierung des JspinnerContainers
+		 */
+		JspinnerContainer = new JPanel(new GridLayout(1, 5));
+		buildJspinnerContainer();
+		whiteBoard.add(BorderLayout.SOUTH, JspinnerContainer);
+		
 
 	}
 
 	private void buildJspinnerContainer() {
-		// TODO Auto-generated method stub
+		one =new JSpinner();
+		two =new JSpinner();
+		JspinnerContainer.add(new JLabel("Velocity"));
+		JspinnerContainer.add(one);
+		JspinnerContainer.add(new JLabel("Angle"));
+		JspinnerContainer.add(two);
+
+		
+		
 
 	}
 
@@ -121,7 +144,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 */
 	private void buildJFrameButtonContainer() {
 		JButton ControllChange = new JButton("Alternative Controll activate");
-		JButton test = new JButton("test");
+		JButton test = new JButton("Jspinner Activate");
 		ControllChange.addActionListener(new EffectActionListener(
 				ControllChange) {
 
@@ -140,7 +163,30 @@ public class WhiteboardInAndOutPut extends Thread implements
 		});
 		JFrameButtonContainer.add(ControllChange);
 		JFrameButtonContainer.add(test);
+		test.addActionListener(new EffectActionListener(
+				test) {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (JspinnerActivate){
+					JspinnerActivate=false;
+					((AbstractButton) getComponent()).setText("Jspinner Activate");
+					JspinnerContainer.setVisible(false);
+					one.setFocusable(false);
+					two.setFocusable(false);
+					inputControllPanelWindow.requestFocus();
+					
+				}else{
+					JspinnerActivate=true;
+					((AbstractButton) getComponent()).setText("Jspinner deActivate");
+					JspinnerContainer.setVisible(true);
+					one.setFocusable(true);
+					two.setFocusable(true);
+				}
+				
+
+			};
+		});
 	}
 
 	/**
