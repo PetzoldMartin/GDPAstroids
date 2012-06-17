@@ -21,11 +21,6 @@ public class InputWindow extends BufferedAWTWindow {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.setColor(new Color(255, 255, 255));
-//		g.drawString(speedToString(), 160, 50);
-//		g.drawString(accelerationToString(), 10, 50);
-//		g.drawString(xToString(), 10, 280);
-//		g.drawString(yToString(), 160, 280);
 		g.setColor(new Color(0, 0, 255));
 		g.fillOval(70, 70, 160, 160);
 		g.setColor(new Color(255, 0, 0));
@@ -34,62 +29,5 @@ public class InputWindow extends BufferedAWTWindow {
 
 	}
 
-	@Override
-	public void update(Graphics g) {
 
-		int w = this.getSize().width;
-		int h = this.getSize().height;
-
-		if (bufImage == null) {
-			bufImage = this.createImage(w, h);
-			bufG = bufImage.getGraphics();
-		}
-
-		bufG.setColor(this.getBackground());
-		bufG.fillRect(0, 0, w, h);
-
-		bufG.setColor(this.getForeground());
-
-		paint(bufG);
-
-		g.drawImage(bufImage, 0, 0, this);
-
-	}
-
-//	private String speedToString() {
-//		Double speed = gameController.getSpaceShip().getVector().getAmount();
-//		String speedString = "0";
-//		if (speed < 0) {
-//			String speedString0 = "Speed: " + speed.toString();
-//			speedString = speedString0.substring(0, 11);
-//		}
-//		if (speed >= 0) {
-//			String speedString0 = "Speed: " + speed.toString();
-//			speedString = speedString0.substring(0, 10);
-//
-//		}
-//		return speedString;
-//	}
-//
-//	private String accelerationToString() {
-//		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 90;
-//		Integer acceleration = Math.abs(ac2 % 360);
-//		String accelerationString = "Angle: " + acceleration.toString();
-//		return accelerationString;
-//	}
-//
-//	private String xToString() {
-//		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
-//				.getX();
-//		String xString = "X:" + xcoord.toString();
-//		return xString;
-//
-//	}
-//
-//	private String yToString() {
-//		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
-//				.getY();
-//		String yString = "Y:" + ycoord.toString();
-//		return yString;
-//	}
 }
