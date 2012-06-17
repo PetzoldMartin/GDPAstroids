@@ -41,8 +41,8 @@ import Shapes.Shape;
 public class WhiteboardInAndOutPut extends Thread implements
 		MouseMotionListener {
 
-	protected int LabelX = 10;
-	protected int LabelY = 25;
+	protected int LabelX = 10;// XPosition für Schriftausgabe
+	protected int LabelY = 25;// YPoasition für Schriftausgabe
 	protected boolean JspinnerActivate = false;
 	private JFrame whiteBoard;// das Interne Whiteboard
 	private JScrollPane whiteBoardInlet;// das Interne ScrollPane des
@@ -56,7 +56,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private JPanel JFrameButtonContainer;// der Container für die JButtons
 	private JPanel AWTOutputContainer;// der Container für die AWT Outputs
 	private JPanel JspinnerContainer;// der Container für die Jspinner
-	private InputControllPanelWindow inputControllPanelWindow;
+	private InputControllPanelWindow inputControllPanelWindow;// das Interne
+																// InputControllPanelWindow
 	private JSpinner velocity;
 	private JSpinner angle;
 
@@ -142,6 +143,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 	}
 
+	/**
+	 * Methode für das adden der JspinnerContainerKomponenten
+	 */
 	private void buildJspinnerContainer() {
 		velocity = new JSpinner();
 		angle = new JSpinner();
@@ -164,9 +168,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				gameController.getSpaceShip().setVector(
-						new Vector(gameController.getSpaceShip().getVector().getAmount(),
-								(Integer) angle.getValue()+180));
+				gameController.getSpaceShip()
+						.setVector(
+								new Vector(gameController.getSpaceShip()
+										.getVector().getAmount(),
+										(Integer) angle.getValue() + 180));
 
 			}
 		});
@@ -384,7 +390,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 */
 	class accelerationOutput extends BufferedAWTWindow {
 
-		//TODO from 270 to 360 degrees right output
+		// TODO from 270 to 360 degrees right output
 		private static final long serialVersionUID = 1L;
 
 		public accelerationOutput(String name, GameController gameController) {
@@ -398,7 +404,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 
 		private String accelerationToString() {
-			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi()-180;
+			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 180;
 			Integer acceleration = Math.abs(ac2 % 360);
 			String accelerationString = "Angle: " + acceleration.toString();
 			return accelerationString;
