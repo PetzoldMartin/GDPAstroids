@@ -93,7 +93,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		whiteBoard.setSize(
 				gameController.getWindowX() * 2 + gameController.getAstroSize()
 						* 2 - 16 + 300, gameController.getWindowY() * 2
-						+ gameController.getAstroSize() * 2 + 14);
+						+ gameController.getAstroSize() * 2 + 4);
 
 		/**
 		 * die Initialisierung des Whiteboardpanels
@@ -216,7 +216,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 					JspinnerContainer.setVisible(false);
 					velocity.setFocusable(false);
 					angle.setFocusable(false);
-					inputControllPanelWindow.requestFocus();
+					whiteBoard.requestFocus();
 
 				} else {
 					JspinnerActivate = true;
