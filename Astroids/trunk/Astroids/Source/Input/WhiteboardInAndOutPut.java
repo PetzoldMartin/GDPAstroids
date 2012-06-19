@@ -192,7 +192,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 * Methode f�r das adden der JFrameButtonContainerKomponenten
 	 */
 	private void buildJFrameButtonContainer() {
-		JButton ControllChange = new JButton("Alternative Controll activate");
+		JButton ControllChange = new JButton("Alternative Controll deactivate");
 		JButton test = new JButton("Jspinner Activate");
 		JButton cheat = new JButton("cheat Activate");
 		ControllChange.addActionListener(new EffectActionListener(

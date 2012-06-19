@@ -30,7 +30,7 @@ public class InputController extends Thread implements KeyListener,
 	private GameController gameController;// der intern benutzte Gamecontroller
 	private WhiteboardInAndOutPut whiteboardInAndOutPut;// der intern benutzte
 														// WhiteboardInAndOutPut
-	boolean alternativeControll = false;// boolean für einschalten und
+	boolean alternativeControll = true;// boolean für einschalten und
 										// ausschalten der Alternativen
 										// Steuerung
 
