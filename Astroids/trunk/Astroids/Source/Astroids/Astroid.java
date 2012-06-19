@@ -85,7 +85,6 @@ public class Astroid extends Sprite {
 	}
 
 	public void delete() {
-		System.out.println(count);
 		gameController.removeSprites(this);
 	}
 

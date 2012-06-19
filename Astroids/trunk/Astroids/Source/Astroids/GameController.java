@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import Collision.CollisionDetector;
 import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
@@ -44,6 +45,7 @@ public class GameController extends Thread implements Runnable {
 	private Set<Sprite> adds = new HashSet<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
+	private CollisionDetector collisionDetector;
 	private int health = 100;
 	// flags
 	private boolean pause = false;
@@ -74,6 +76,7 @@ public class GameController extends Thread implements Runnable {
 				gameScreenY, Color.BLACK, true);
 		backgroundFrame.draw();
 		background.draw();
+		collisionDetector = new CollisionDetector();
 		inputController = new InputController(this);
 		inputController.start();
 		new SpaceShip();
@@ -88,7 +91,9 @@ public class GameController extends Thread implements Runnable {
 		System.out.println("GameController started:\t" + this.getId());
 		for (;;) {
 			Long runTime = System.nanoTime();
-			if (!pause && windowActivated && (health > 0)) {
+			if (health == 0) {
+				playerDieEvent();
+			} else if (!pause && windowActivated) {
 				spaceShip.changeVector(inputController.getKeyAmount(),
 						inputController.getKeyPhi(), maxSpeed);
 				update();
@@ -110,6 +115,10 @@ public class GameController extends Thread implements Runnable {
 
 	}
 
+	private void playerDieEvent() {
+		// TODO Game Over Screen
+	}
+
 	/**
 	 * updates all Sprites in sprites
 	 */
@@ -125,7 +134,6 @@ public class GameController extends Thread implements Runnable {
 			sprite.update();
 		}
 		// add
-		// TODO check for collision
 		for (Sprite toAdd : adds) {
 			this.sprites.add(toAdd);
 		}
@@ -212,6 +220,10 @@ public class GameController extends Thread implements Runnable {
 		this.testFlag = testFlag;
 	}
 
+	public void setCheat(boolean change) {
+		cheat = change;
+	}
+
 	public void healthChange(int change) {
 		health += change;
 		if (health < 0) {
@@ -255,6 +267,10 @@ public class GameController extends Thread implements Runnable {
 		return inputController;
 	}
 
+	public CollisionDetector getCollisionDetector() {
+		return collisionDetector;
+	}
+
 	public int getAstroSize() {
 		return astroSize;
 	}
@@ -265,10 +281,6 @@ public class GameController extends Thread implements Runnable {
 
 	public int getGameScreenY() {
 		return gameScreenY;
-	}
-
-	public void setCheat(boolean change) {
-		cheat = change;
 	}
 
 	public int getHealth() {
