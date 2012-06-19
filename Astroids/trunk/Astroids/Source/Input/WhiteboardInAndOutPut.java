@@ -60,6 +60,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 																// InputControllPanelWindow
 	private JSpinner velocity;
 	private JSpinner angle;
+	private double xsize;
+	private double ysize;
 
 	/**
 	 * Der Konstruktor für das {@link WhiteboardInAndOutPut} der alle
@@ -99,7 +101,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		 * die Initialisierung des Whiteboardpanels
 		 */
 		whiteBoardInlet = Shape.getWhiteBoard().getScrollPane();
-		whiteBoardInlet.setCursor(new Cursor(1));
+		whiteBoardInlet.setCursor(new Cursor(0));
 		whiteBoardInlet.addMouseWheelListener(inputController);
 		whiteBoardInlet.addMouseListener(inputController);
 		whiteBoardInlet.addMouseMotionListener(this);
@@ -140,7 +142,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 		JFrameButtonContainer.add(JspinnerContainer);
 		JspinnerContainer.setVisible(true);
 		JspinnerContainer.setVisible(false);
-
+		xsize = Shape.getWhiteBoard().getScrollPane().getSize().getWidth() / 2;
+		ysize = Shape.getWhiteBoard().getScrollPane().getSize().getHeight() / 2;
 	}
 
 	/**
@@ -157,11 +160,18 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				gameController.getSpaceShip().setVector(
-						new Vector((Integer) velocity.getValue(),
-								gameController.getSpaceShip().getVector()
-										.getPhi()));
-
+				if ((Integer) velocity.getValue() <= 10) {
+					gameController.getSpaceShip().setVector(
+							new Vector((Integer) velocity.getValue(),
+									gameController.getSpaceShip().getVector()
+											.getPhi()));
+				} else {
+					gameController.getSpaceShip().setVector(
+							new Vector(10,
+									gameController.getSpaceShip().getVector()
+											.getPhi()));
+					
+				}
 			}
 		});
 		angle.addChangeListener(new ChangeListener() {
@@ -198,7 +208,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 				} else {
 					inputController.setAlternativeControll(true);
 					((AbstractButton) getComponent())
-							.setText("Alternative Controll deactivate");
+							.setText("Alternative Controll deActivate");
 				}
 
 			};
@@ -301,12 +311,11 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 */
 	private Vector MouseControlWhiteboard(MouseEvent arg0) {
 
-		Vector silence = new Vector(new Point(arg0.getX()
-				- gameController.getWindowX()
+		Vector silence = new Vector(new Point(arg0.getX() - (xsize)
 				- gameController.getSpaceShip().getCenterPoint().getX(),
 				arg0.getY()
-						+ (-gameController.getWindowY() + gameController
-								.getSpaceShip().getCenterPoint().getY())));
+						+ (-(ysize) + gameController.getSpaceShip()
+								.getCenterPoint().getY())));
 		Vector s2 = new Vector(0, 0);
 		if (silence.getAmount() < 160) {
 
