@@ -128,7 +128,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		/**
 		 * die Initialisierung des JFrameButtonContainers
 		 */
-		JFrameButtonContainer = new JPanel(new GridLayout(3, 0));
+		JFrameButtonContainer = new JPanel(new GridLayout(4, 0));
 		buildJFrameButtonContainer();
 		JFrameButtonContainer.setBackground(Color.black);
 		AWTandJframeMergecontainer.add(JFrameButtonContainer,
@@ -195,6 +195,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private void buildJFrameButtonContainer() {
 		JButton ControllChange = new JButton("Alternative Controll activate");
 		JButton test = new JButton("Jspinner Activate");
+		JButton cheat = new JButton("cheat Activate");
 		ControllChange.addActionListener(new EffectActionListener(
 				ControllChange) {
 
@@ -213,8 +214,6 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			};
 		});
-		JFrameButtonContainer.add(ControllChange);
-		JFrameButtonContainer.add(test);
 		test.addActionListener(new EffectActionListener(test) {
 
 			@Override
@@ -239,6 +238,27 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			};
 		});
+		cheat.addActionListener(new EffectActionListener(cheat) {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(gameController.cheat){
+					((AbstractButton) getComponent())
+					.setText("cheat Activate");
+					gameController.setCheat(false);
+				}else{
+					gameController.setCheat(true);
+					((AbstractButton) getComponent())
+					.setText("cheat deActivate");
+				}
+				
+			}
+		});
+		JFrameButtonContainer.add(ControllChange);
+		JFrameButtonContainer.add(test);
+		JFrameButtonContainer.add(cheat);
+		cheat.setBackground(Color.black);
+		
 	}
 
 	/**
@@ -323,7 +343,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 		} else {
 
-			s2 = new Vector(10, -silence.getPhi());
+			s2 = new Vector(gameController.getMaxSpeed(), -silence.getPhi());
 
 		}
 		return s2;
