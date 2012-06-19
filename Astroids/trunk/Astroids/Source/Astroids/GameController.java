@@ -2,6 +2,10 @@ package Astroids;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import Input.InputController;
 import Shapes.Drawable;
 import Shapes.Point;
@@ -37,8 +41,8 @@ public class GameController extends Thread implements Runnable {
 	private int gameScreenY = windowY - astroSize;
 	private long frameTime = 1000 / frames; // time of a Frame in millis
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-	private ArrayList<Sprite> removals = new ArrayList<Sprite>();
-	private ArrayList<Sprite> adds = new ArrayList<Sprite>();
+	private Set<Sprite> removals = new HashSet<Sprite>();
+	private Set<Sprite> adds = new HashSet<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
 	// flags
@@ -126,6 +130,7 @@ public class GameController extends Thread implements Runnable {
 		for (Sprite sprite : sprites) {
 			sprite.draw();
 		}
+		// interface frame refresh
 		inputController.Interfacerefresh();
 	}
 
@@ -135,10 +140,11 @@ public class GameController extends Thread implements Runnable {
 	public void checkObjects() {
 		// FIXME counter not synchronized
 		// astroids
-//		System.out.println(Astroid.getCounter());
+		// System.out.println(Astroid.getCounter());
+
 		if (Astroid.getCounter() < astroCount) {
-			new Astroid(astroEdge, astroSize);
-		}
+			Astroid newOne = new Astroid(astroEdge, astroSize);
+			}
 	}
 
 	/**

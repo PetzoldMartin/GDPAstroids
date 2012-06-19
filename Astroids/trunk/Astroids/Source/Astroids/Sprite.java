@@ -63,13 +63,15 @@ public abstract class Sprite extends Figure {
 	 * @param otherSprite
 	 *            sprite to check
 	 */
-	public void collision(Sprite otherSprite) {
+	public boolean collision(Sprite otherSprite) {
 		if (radiusCollision(otherSprite)) {
 			if (realCollision(otherSprite)) {
 				otherSprite.destroy(this);
 				// this.destroy(otherSprite);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**
