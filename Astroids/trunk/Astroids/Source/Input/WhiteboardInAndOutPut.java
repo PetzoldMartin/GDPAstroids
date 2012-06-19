@@ -521,7 +521,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 		private String PointsToString() {
 			// TODO Gamepoints in Gamecotroller or whereever
-			Integer points = (int) 0;
+			Integer points = (int) gameController.getHealth();
 			String pointsString = "Points:" + points.toString();
 			return pointsString;
 
