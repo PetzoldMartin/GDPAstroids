@@ -18,12 +18,13 @@ import Shapes.Shape;
  */
 public abstract class Sprite extends Figure {
 	// TODO CollisionDetector from gamcontroller
-	private CollisionDetector collisionDetector = new CollisionDetector();
+	protected static GameController gameController;
+	private CollisionDetector collisionDetector = gameController
+			.getCollisionDetector();
 	protected double radius = 0;
 	private Vector vector;
 	private Point centerPoint;
 	protected double rotationPhi;
-	protected static GameController gameController;
 
 	// TODO overlay implementation
 	// protected ArrayList<Drawable> overlay = new ArrayList<Drawable>();
