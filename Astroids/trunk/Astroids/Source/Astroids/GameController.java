@@ -45,14 +45,23 @@ public class GameController extends Thread implements Runnable {
 	private Set<Sprite> adds = new HashSet<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
+	private int health;
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
-	public boolean cheat = true;
+	public boolean cheat = false;
 	public boolean testFlag;
 
 	// testing
 	// private Sprite test;
+
+	public boolean isTestFlag() {
+		return testFlag;
+	}
+
+	public void setTestFlag(boolean testFlag) {
+		this.testFlag = testFlag;
+	}
 
 	/**
 	 * generates a window with a drawboard starts itself as Thread
@@ -138,13 +147,9 @@ public class GameController extends Thread implements Runnable {
 	 * check how many objects @ drawboard and generating new objects
 	 */
 	public void checkObjects() {
-		// FIXME counter not synchronized
-		// astroids
-		// System.out.println(Astroid.getCounter());
-
 		if (Astroid.getCounter() < astroCount) {
-			Astroid newOne = new Astroid(astroEdge, astroSize);
-			}
+			new Astroid(astroEdge, astroSize);
+		}
 	}
 
 	/**
@@ -155,20 +160,11 @@ public class GameController extends Thread implements Runnable {
 	 * 
 	 */
 	public void collisionCheck(ArrayList<Sprite> sprites) {
-		// while (sprites.size()>=2) {
-		// ArrayList<Sprite> subSprites = (ArrayList<Sprite>) sprites.clone();
-		// subSprites.remove(0);
-		// collisionCheck(subSprites);
-		// for (Sprite sprite : subSprites) {
-		// sprites.get(0).collision(sprite);
-		// }
-		// }
 		for (Sprite spriteA : sprites) {
 			for (Sprite spriteB : sprites) {
 				if (spriteA != spriteB)
 					spriteA.collision(spriteB);
 				// TODO redo collision
-				// FIXME astroid multiple destroy of one astroid!!!
 			}
 		}
 	}
@@ -214,6 +210,13 @@ public class GameController extends Thread implements Runnable {
 
 	public void setTestflag(boolean testFlag) {
 		this.testFlag = testFlag;
+	}
+
+	public void healthChange(int decrease) {
+		health -= decrease;
+		if (health < 0) {
+			health = 0;
+		}
 	}
 
 	public int getWindowX() {
@@ -262,5 +265,9 @@ public class GameController extends Thread implements Runnable {
 
 	public int getGameScreenY() {
 		return gameScreenY;
+	}
+
+	public int getHealth() {
+		return health;
 	}
 }
