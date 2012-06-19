@@ -32,7 +32,6 @@ public class Astroid extends Sprite {
 	public Astroid(int edge, int radius, Vector vector, Point centerPoint) {
 		super();
 		count++;
-		// FIXME radius calc
 		this.edge = edge;
 		this.radius = radius;
 		ArrayList<Point> astroList = new ArrayList<Point>();
