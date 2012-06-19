@@ -7,9 +7,8 @@ import Astroids.GameController;
 
 /**
  * 
- * @author Aismael
- * Das Fenster für die Eingabe im Panel
- *
+ * @author Aismael Das Fenster fï¿½r die Eingabe im Panel
+ * 
  */
 public class InputControllPanelWindow extends BufferedAWTWindow {
 
@@ -18,7 +17,7 @@ public class InputControllPanelWindow extends BufferedAWTWindow {
 	public InputControllPanelWindow(String name, GameController gameController) {
 		super(name, gameController);
 	}
-	
+
 	@Override
 	/**
 	 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
@@ -32,6 +31,5 @@ public class InputControllPanelWindow extends BufferedAWTWindow {
 		g.drawLine(150, 0, 150, 300);
 
 	}
-
 
 }

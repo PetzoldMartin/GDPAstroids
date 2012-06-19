@@ -3,7 +3,6 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import Input.InputController;
@@ -45,7 +44,7 @@ public class GameController extends Thread implements Runnable {
 	private Set<Sprite> adds = new HashSet<Sprite>();
 	private SpaceShip spaceShip;
 	private InputController inputController;
-	private int health;
+	private int health = 100;
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
@@ -89,13 +88,15 @@ public class GameController extends Thread implements Runnable {
 		System.out.println("GameController started:\t" + this.getId());
 		for (;;) {
 			Long runTime = System.nanoTime();
-			if (!pause && windowActivated) {
+			if (!pause && windowActivated && (health > 0)) {
 				spaceShip.changeVector(inputController.getKeyAmount(),
 						inputController.getKeyPhi(), maxSpeed);
 				update();
 				// System.out.println((double)(System.nanoTime() - runTime)
 				// /1000000);
 			}
+			// interface frame refresh
+			inputController.Interfacerefresh();
 			try {
 				Thread.sleep(runTime = frameTime
 						- (System.nanoTime() - runTime) / 1000000);
@@ -106,6 +107,7 @@ public class GameController extends Thread implements Runnable {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	/**
@@ -139,8 +141,6 @@ public class GameController extends Thread implements Runnable {
 		for (Sprite sprite : sprites) {
 			sprite.draw();
 		}
-		// interface frame refresh
-		inputController.Interfacerefresh();
 	}
 
 	/**
@@ -212,8 +212,8 @@ public class GameController extends Thread implements Runnable {
 		this.testFlag = testFlag;
 	}
 
-	public void healthChange(int decrease) {
-		health -= decrease;
+	public void healthChange(int change) {
+		health += change;
 		if (health < 0) {
 			health = 0;
 		}
@@ -268,8 +268,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void setCheat(boolean change) {
-		cheat=change;
-		
+		cheat = change;
 	}
 
 	public int getHealth() {

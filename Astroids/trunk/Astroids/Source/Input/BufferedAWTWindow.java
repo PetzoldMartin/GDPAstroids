@@ -12,31 +12,30 @@ import Astroids.GameController;
 public class BufferedAWTWindow extends Panel {
 
 	/**
-	 * Ein Gepuffertes AWT-Panel für eine Einfache Grafische Ausgabe
-	 * mit Voreinstellungen für die Textausgabe
+	 * Ein Gepuffertes AWT-Panel fï¿½r eine Einfache Grafische Ausgabe mit
+	 * Voreinstellungen fï¿½r die Textausgabe
 	 */
 	private static final long serialVersionUID = 1L;
 	protected GameController gameController;
 	Image bufImage;//
 	Graphics bufG;//
 	private Font l;
-	private int fontSize=20;
+	private int fontSize = 20;
 	protected String name;
-	
 
 	public BufferedAWTWindow(String name, GameController gameController) {
 		this.gameController = gameController;
 		this.setBackground(Color.BLACK);
 		l = new Font("Arial", Font.BOLD, fontSize);
-		this.setPreferredSize(new Dimension(300, fontSize+20));
+		this.setPreferredSize(new Dimension(300, fontSize + 20));
 		this.setFont(l);
-		this.name=name;
+		this.name = name;
 
 	}
-	
+
 	@Override
 	/**
-	 * der Puffer für die Grafische AWT Ausgabe
+	 * der Puffer fï¿½r die Grafische AWT Ausgabe
 	 */
 	public void update(Graphics g) {
 
