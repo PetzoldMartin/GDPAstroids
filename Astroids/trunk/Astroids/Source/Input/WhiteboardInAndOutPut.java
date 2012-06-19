@@ -41,8 +41,8 @@ import Shapes.Shape;
 public class WhiteboardInAndOutPut extends Thread implements
 		MouseMotionListener {
 
-	protected int LabelX = 10;// XPosition für Schriftausgabe
-	protected int LabelY = 25;// YPoasition für Schriftausgabe
+	protected int LabelX = 10;// XPosition fï¿½r Schriftausgabe
+	protected int LabelY = 25;// YPoasition fï¿½r Schriftausgabe
 	protected boolean JspinnerActivate = false;
 	private JFrame whiteBoard;// das Interne Whiteboard
 	private JScrollPane whiteBoardInlet;// das Interne ScrollPane des
@@ -53,9 +53,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 												// auf das Whiteboard bringt und
 												// die Jframe und AWT Container
 												// Plaziert
-	private JPanel JFrameButtonContainer;// der Container für die JButtons
-	private JPanel AWTOutputContainer;// der Container für die AWT Outputs
-	private JPanel JspinnerContainer;// der Container für die Jspinner
+	private JPanel JFrameButtonContainer;// der Container fï¿½r die JButtons
+	private JPanel AWTOutputContainer;// der Container fï¿½r die AWT Outputs
+	private JPanel JspinnerContainer;// der Container fï¿½r die Jspinner
 	private InputControllPanelWindow inputControllPanelWindow;// das Interne
 																// InputControllPanelWindow
 	private JSpinner velocity;
@@ -64,17 +64,17 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private double ysize;
 
 	/**
-	 * Der Konstruktor für das {@link WhiteboardInAndOutPut} der alle
+	 * Der Konstruktor fï¿½r das {@link WhiteboardInAndOutPut} der alle
 	 * Componenten Initialisiert
 	 * 
 	 * @param gameController
-	 *            der dem {@link WhiteboardInAndOutPut} übergebene
+	 *            der dem {@link WhiteboardInAndOutPut} ï¿½bergebene
 	 *            {@link GameController}
 	 * @param inputController
-	 *            der dem {@link WhiteboardInAndOutPut} übergebene
+	 *            der dem {@link WhiteboardInAndOutPut} ï¿½bergebene
 	 *            {@link InputController}
 	 * @param inputControllPanelWindow
-	 *            das dem {@link WhiteboardInAndOutPut} übergebene
+	 *            das dem {@link WhiteboardInAndOutPut} ï¿½bergebene
 	 *            {@link InputControllPanelWindow}
 	 */
 	public WhiteboardInAndOutPut(GameController gameController,
@@ -147,7 +147,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Methode für das adden der JspinnerContainerKomponenten
+	 * Methode fï¿½r das adden der JspinnerContainerKomponenten
 	 */
 	private void buildJspinnerContainer() {
 		velocity = new JSpinner();
@@ -167,10 +167,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 											.getPhi()));
 				} else {
 					gameController.getSpaceShip().setVector(
-							new Vector(10,
-									gameController.getSpaceShip().getVector()
-											.getPhi()));
-					
+							new Vector(10, gameController.getSpaceShip()
+									.getVector().getPhi()));
+
 				}
 			}
 		});
@@ -190,7 +189,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Methode für das adden der JFrameButtonContainerKomponenten
+	 * Methode fï¿½r das adden der JFrameButtonContainerKomponenten
 	 */
 	private void buildJFrameButtonContainer() {
 		JButton ControllChange = new JButton("Alternative Controll activate");
@@ -239,30 +238,29 @@ public class WhiteboardInAndOutPut extends Thread implements
 			};
 		});
 		cheat.addActionListener(new EffectActionListener(cheat) {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(gameController.cheat){
-					((AbstractButton) getComponent())
-					.setText("cheat Activate");
+				if (gameController.cheat) {
+					((AbstractButton) getComponent()).setText("cheat Activate");
 					gameController.setCheat(false);
-				}else{
+				} else {
 					gameController.setCheat(true);
 					((AbstractButton) getComponent())
-					.setText("cheat deActivate");
+							.setText("cheat deActivate");
 				}
-				
+
 			}
 		});
 		JFrameButtonContainer.add(ControllChange);
 		JFrameButtonContainer.add(test);
 		JFrameButtonContainer.add(cheat);
 		cheat.setBackground(Color.black);
-		
+
 	}
 
 	/**
-	 * Methode für das adden der AWTOutputContainerKomponenten
+	 * Methode fï¿½r das adden der AWTOutputContainerKomponenten
 	 */
 	private void buildAWTOutputContainer() {
 		AWTOutputContainer.add(new PointsOutput("Points", this.gameController));
@@ -297,7 +295,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Methode wenn die Maus gedrückt ist und Bewegt wird in der
+	 * Die Methode wenn die Maus gedrï¿½ckt ist und Bewegt wird in der
 	 * Alternativen Steuerung
 	 */
 	@Override
@@ -327,7 +325,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 * 
 	 * @param arg0
 	 *            die Mausdaten
-	 * @return der Bewegungsvector für das {@link SpaceShip}
+	 * @return der Bewegungsvector fï¿½r das {@link SpaceShip}
 	 */
 	private Vector MouseControlWhiteboard(MouseEvent arg0) {
 
@@ -350,8 +348,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für einen ActionListener der die AWT oder Jframe
-	 * Komponente veränden kann
+	 * Die Innere Klasse fï¿½r einen ActionListener der die AWT oder Jframe
+	 * Komponente verï¿½nden kann
 	 * 
 	 * @author Aismael
 	 * 
@@ -374,7 +372,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für Das SpeedOutput Fenster
+	 * Die Innere Klasse fï¿½r Das SpeedOutput Fenster
 	 * 
 	 * @author Aismael
 	 * 
@@ -412,7 +410,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für Das accelerationOutput Fenster
+	 * Die Innere Klasse fï¿½r Das accelerationOutput Fenster
 	 * 
 	 * @author Aismael
 	 * 
@@ -442,7 +440,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für Das XcoordinatenOutput Fenster
+	 * Die Innere Klasse fï¿½r Das XcoordinatenOutput Fenster
 	 * 
 	 * @author Aismael
 	 * 
@@ -471,7 +469,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für Das YcoordinatenOutput Fenster
+	 * Die Innere Klasse fï¿½r Das YcoordinatenOutput Fenster
 	 * 
 	 * @author Aismael
 	 * 
@@ -500,7 +498,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	}
 
 	/**
-	 * Die Innere Klasse für Das SpielpunkteOutput Fenster
+	 * Die Innere Klasse fï¿½r Das SpielpunkteOutput Fenster
 	 * 
 	 * @author Aismael
 	 * 

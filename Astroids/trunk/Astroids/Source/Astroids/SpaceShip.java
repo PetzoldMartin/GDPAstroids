@@ -98,6 +98,7 @@ public class SpaceShip extends Sprite {
 		}
 		this.changeDirection(phi);
 	}
+
 	/**
 	 * create a rocket @ position & with the vector of this SpaceShip
 	 * 
@@ -121,7 +122,7 @@ public class SpaceShip extends Sprite {
 	 */
 	@Override
 	public void destroy(Sprite collider) {
-		if (!gameController.cheat) {
+		if (!gameController.cheat && !(collider instanceof Rocket)) {
 			gameController.healthChange(-25);
 		}
 	}
