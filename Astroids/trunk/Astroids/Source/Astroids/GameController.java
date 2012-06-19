@@ -77,9 +77,8 @@ public class GameController extends Thread implements Runnable {
 		backgroundFrame.draw();
 		background.draw();
 		collisionDetector = new CollisionDetector();
-		inputController = new InputController(this);
-		inputController.start();
 		new SpaceShip();
+		inputController = new InputController(this);
 		this.start();
 	}
 
