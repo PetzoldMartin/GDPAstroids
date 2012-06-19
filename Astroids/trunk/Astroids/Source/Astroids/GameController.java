@@ -267,6 +267,11 @@ public class GameController extends Thread implements Runnable {
 		return gameScreenY;
 	}
 
+	public void setCheat(boolean change) {
+		cheat=change;
+		
+	}
+
 	public int getHealth() {
 		return health;
 	}
