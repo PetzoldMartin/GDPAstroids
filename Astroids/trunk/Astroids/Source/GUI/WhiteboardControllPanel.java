@@ -296,6 +296,16 @@ import Shapes.Shape;
 		gamoverContainer.add(BorderLayout.PAGE_END,restart);
 		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*3, 100));
 		gamoverContainer.setBackground(Color.black);
+		restart.addActionListener(new EffectActionListener(restart) {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gUIController.restart();
+				whiteBoard.remove(gamoverContainer);
+				whiteBoardInlet.setVisible(true);
+				AWTandJframeMergecontainer.setVisible(true);
+			}
+		});
 		whiteBoardInlet.requestFocus();
 	}
 

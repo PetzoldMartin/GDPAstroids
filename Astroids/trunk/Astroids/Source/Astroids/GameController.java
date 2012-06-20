@@ -289,7 +289,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void restart() {
-		// TODO Auto-generated method stub
+		health=100;
 		
 	}
 }
