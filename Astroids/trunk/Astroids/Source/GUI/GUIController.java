@@ -196,4 +196,9 @@ public class GUIController extends Thread {
 	protected void restart(){
 		gameController.restart();
 	}
+
+	public String levelToString() {
+		Integer level = (int) gameController.getLevel();
+		return level.toString();
+	}
 }

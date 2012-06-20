@@ -24,8 +24,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 450; // std 600
-	private int windowY = 300; // std 400
+	private int windowX = 600; // std 600
+	private int windowY = 400; // std 400
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
@@ -33,7 +33,7 @@ public class GameController extends Thread implements Runnable {
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
-	private int astroCount = 100;
+	private int astroCount = 5;
 	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
@@ -291,5 +291,9 @@ public class GameController extends Thread implements Runnable {
 	public void restart() {
 		health=100;
 		
+	}
+
+	public int getLevel() {
+		return 0;
 	}
 }

@@ -27,6 +27,8 @@ import javax.swing.event.ChangeListener;
 
 import Astroids.GameController;
 import Astroids.Vector;
+import GUI.WhiteboardControllPanel.EndScreenlevelOutput;
+import GUI.WhiteboardControllPanel.GameoverScreen;
 import Shapes.Shape;
 
 /**
@@ -56,8 +58,8 @@ import Shapes.Shape;
 	private JSpinner velocity;
 	private JSpinner angle;
 	private JPanel gameoverContainer;
-	private GameoverScreen gameoverScreen;
 	private BigListener bigListener;
+	private boolean gameOver=false;
 
 	/**
 	 * Der Konstruktor f�r das {@link WhiteboardControllPanel} der alle
@@ -116,10 +118,10 @@ import Shapes.Shape;
 		/**
 		 * die Initialisierung des AWTOutputContainers
 		 */
-		AWTOutputContainer = new JPanel(new GridLayout(6, 1));
+		AWTOutputContainer = new JPanel(new GridLayout(7, 0));
 		buildAWTOutputContainer();
 		AWTandJframeMergecontainer.add(AWTOutputContainer, BorderLayout.NORTH);
-		AWTOutputContainer.setPreferredSize(new Dimension(300, 240));
+		AWTOutputContainer.setPreferredSize(new Dimension(300, 280));
 		/**
 		 * die Initialisierung des JFrameButtonContainers
 		 */
@@ -137,6 +139,10 @@ import Shapes.Shape;
 		JFrameButtonContainer.add(JspinnerContainer);
 		JspinnerContainer.setVisible(true);
 		JspinnerContainer.setVisible(false);
+		
+		
+		gameoverContainer=new JPanel(new BorderLayout());
+		buildGameoverContainer();
 	}
 
 	/**
@@ -221,12 +227,14 @@ import Shapes.Shape;
 			public void actionPerformed(ActionEvent e) {
 				if (gUIController.getCheat()) {
 					((AbstractButton) getComponent()).setText("cheat Activate");
+					((AbstractButton) getComponent()).setForeground(Color.black);
 					gUIController.setCheat(false);
 				} else {
 
 					gUIController.setCheat(true);
 					((AbstractButton) getComponent())
 							.setText("cheat deActivate");
+					((AbstractButton) getComponent()).setForeground(Color.RED);
 				}
 				whiteBoard.requestFocus();
 
@@ -236,6 +244,8 @@ import Shapes.Shape;
 		JFrameButtonContainer.add(JspinnerControll);
 		JFrameButtonContainer.add(cheat);
 		cheat.setBackground(Color.black);
+		cheat.setForeground(Color.black);
+		cheat.setBorderPainted(false);
 
 	}
 
@@ -243,6 +253,7 @@ import Shapes.Shape;
 	 * Methode f�r das adden der AWTOutputContainerKomponenten
 	 */
 	private void buildAWTOutputContainer() {
+		AWTOutputContainer.add(new LevelOutput("Level"));
 		AWTOutputContainer.add(new PointsOutput("Points"));
 		AWTOutputContainer.add(new BufferedAWTWindow("Coords") {
 
@@ -262,13 +273,52 @@ import Shapes.Shape;
 		AWTOutputContainer.add(new accelerationOutput("acceleration"));
 	}
 
+	private void buildGameoverContainer(){
+		JButton restart = new JButton("Restart");
+		EndScreenlevelOutput endScreenlevelOutput = new EndScreenlevelOutput("EndScreenLevel");
+		GameoverScreen gameoverScreen = new GameoverScreen("Gameover");
+		gameoverScreen.setSize(gUIController.getWindowX()*2+300, gUIController.getWindowY()*2-200);
+		gameoverContainer.add(gameoverScreen,
+				BorderLayout.CENTER);
+		restart.setFont(new Font("Serif", Font.PLAIN, 100));
+		gameoverContainer.add(BorderLayout.PAGE_END,restart);
+		gameoverContainer.add(BorderLayout.PAGE_START,endScreenlevelOutput);
+		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*2+300, 100));
+		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController.getWindowX()*2+300, 100));
+		gameoverContainer.addKeyListener(bigListener);
+		gameoverContainer.setBackground(Color.black);
+		gameoverContainer.requestFocus();
+		restart.addActionListener(new EffectActionListener(restart) {
+			
+			
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gUIController.restart();
+				whiteBoard.remove(gameoverContainer);
+				whiteBoardInlet.setVisible(true);
+				AWTandJframeMergecontainer.setVisible(true);
+				whiteBoardInlet.requestFocus();
+				gameOver=false;
+	
+			}
+		});
+	}
+
 	/**
 	 * die Methode zum Neuzeichnen der AWTOutputContainerKomponenten
 	 */
 	protected  void Outputrefresh() {
 		
 		if(gUIController.playerDieEvent()){
+			if(!gameOver){
 			gameoverSight();
+			gameOver=true;
+			}else{
+				for (Component AWTComponent : gameoverContainer.getComponents()) {
+					AWTComponent.repaint();
+				}
+			}
 		}else{
 			for (Component AWTComponent : AWTOutputContainer.getComponents()) {
 				AWTComponent.repaint();
@@ -286,36 +336,9 @@ import Shapes.Shape;
 	private void gameoverSight() {
 		whiteBoardInlet.setVisible(false);
 		AWTandJframeMergecontainer.setVisible(false);
-		gameoverScreen = new GameoverScreen("Gameover");
-		gameoverScreen.setSize(gUIController.getWindowX()*2, gUIController.getWindowY()*2-100);
-		gameoverContainer=new JPanel(new BorderLayout());
-		gameoverContainer.addKeyListener(bigListener);
-		gameoverContainer.add(gameoverScreen);
 		whiteBoard.add(BorderLayout.WEST,gameoverContainer);
-		gameoverContainer.add(gameoverScreen,
-				BorderLayout.CENTER);
-		JButton restart = new JButton("Restart");
-		restart.setFont(new Font("Serif", Font.PLAIN, 100));
-		gameoverContainer.add(BorderLayout.PAGE_END,restart);
-		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*3, 100));
-		gameoverContainer.setBackground(Color.black);
-		gameoverContainer.requestFocus();
-		restart.addActionListener(new EffectActionListener(restart) {
-			
-			
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gUIController.restart();
-				whiteBoard.remove(gameoverContainer);
-				whiteBoardInlet.setVisible(true);
-				AWTandJframeMergecontainer.setVisible(true);
-				whiteBoardInlet.requestFocus();
-
-			}
-		});
+		
 	}
-
 	/**
 	 * Die Innere Klasse f�r einen ActionListener der die AWT oder Jframe
 	 * Komponente ver�nden kann
@@ -489,15 +512,58 @@ import Shapes.Shape;
 		 */
 		public void paint(Graphics g) {
 			super.paint(g);
-			this.setFont(new Font("Serif", Font.PLAIN, 200));
+			this.setFont(new Font("Serif", Font.PLAIN, (int) (gUIController.getWindowX()/2.5)));
 			g.setColor(new Color(255, 0, 0));
-			g.drawString("GAMEOVER", 20, gUIController.getWindowY());
+			g.drawString("GAMEOVER", gUIController.getWindowX()/7, gUIController.getWindowY());
+			
+
+		}
+
+	}
+	class LevelOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 12L;
+
+		public LevelOutput(String name) {
+			super(name);
+		}
+
+		@Override
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(0, 255, 0));
+			g.drawString("Level "+ gUIController.levelToString(), LabelX, LabelY);
 			
 
 		}
 
 	}
 	
+	class EndScreenlevelOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 12L;
+
+		public EndScreenlevelOutput(String name) {
+			super(name);
+		}
+
+		@Override
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			this.setFont(new Font("Serif", Font.PLAIN, gUIController.getWindowX()/6));
+			g.setColor(new Color(0, 255, 0));
+			g.drawString("Ihr erreichtes Level ist: "+ gUIController.levelToString(), LabelX, 90);
+			
+
+		}
+
+	}
 	class MouseMotionListenerForAltenativeControll implements MouseMotionListener {
 		
 		/**
