@@ -55,7 +55,7 @@ import Shapes.Shape;
 																// InputControllPanelWindow
 	private JSpinner velocity;
 	private JSpinner angle;
-	private JPanel gamoverContainer;
+	private JPanel gameoverContainer;
 	private GameoverScreen gameoverScreen;
 	private BigListener bigListener;
 
@@ -266,17 +266,19 @@ import Shapes.Shape;
 	 * die Methode zum Neuzeichnen der AWTOutputContainerKomponenten
 	 */
 	protected  void Outputrefresh() {
-		for (Component AWTComponent : AWTOutputContainer.getComponents()) {
-			AWTComponent.repaint();
-		}
-		JFormattedTextField textFieldAngle = ((JSpinner.DefaultEditor) angle
-				.getEditor()).getTextField();
-		JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
-				.getEditor()).getTextField();
-		textFieldAngle.setText(gUIController.accelerationToString());
-		textFieldVelocity.setText(gUIController.speedToString());
+		
 		if(gUIController.playerDieEvent()){
 			gameoverSight();
+		}else{
+			for (Component AWTComponent : AWTOutputContainer.getComponents()) {
+				AWTComponent.repaint();
+			}
+			JFormattedTextField textFieldAngle = ((JSpinner.DefaultEditor) angle
+					.getEditor()).getTextField();
+			JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
+					.getEditor()).getTextField();
+			textFieldAngle.setText(gUIController.accelerationToString());
+			textFieldVelocity.setText(gUIController.speedToString());
 		}
 	
 	}
@@ -285,28 +287,33 @@ import Shapes.Shape;
 		whiteBoardInlet.setVisible(false);
 		AWTandJframeMergecontainer.setVisible(false);
 		gameoverScreen = new GameoverScreen("Gameover");
-		gameoverScreen.setSize(gUIController.getWindowX()*3, gUIController.getWindowY()*2-100);
-		gamoverContainer=new JPanel(new BorderLayout());
-		gamoverContainer.add(gameoverScreen);
-		whiteBoard.add(BorderLayout.WEST,gamoverContainer);
-		gamoverContainer.add(gameoverScreen,
+		gameoverScreen.setSize(gUIController.getWindowX()*2, gUIController.getWindowY()*2-100);
+		gameoverContainer=new JPanel(new BorderLayout());
+		gameoverContainer.addKeyListener(bigListener);
+		gameoverContainer.add(gameoverScreen);
+		whiteBoard.add(BorderLayout.WEST,gameoverContainer);
+		gameoverContainer.add(gameoverScreen,
 				BorderLayout.CENTER);
 		JButton restart = new JButton("Restart");
 		restart.setFont(new Font("Serif", Font.PLAIN, 100));
-		gamoverContainer.add(BorderLayout.PAGE_END,restart);
+		gameoverContainer.add(BorderLayout.PAGE_END,restart);
 		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*3, 100));
-		gamoverContainer.setBackground(Color.black);
+		gameoverContainer.setBackground(Color.black);
+		gameoverContainer.requestFocus();
 		restart.addActionListener(new EffectActionListener(restart) {
 			
+			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gUIController.restart();
-				whiteBoard.remove(gamoverContainer);
+				whiteBoard.remove(gameoverContainer);
 				whiteBoardInlet.setVisible(true);
 				AWTandJframeMergecontainer.setVisible(true);
+				whiteBoardInlet.requestFocus();
+
 			}
 		});
-		whiteBoardInlet.requestFocus();
 	}
 
 	/**
@@ -482,9 +489,9 @@ import Shapes.Shape;
 		 */
 		public void paint(Graphics g) {
 			super.paint(g);
-			this.setFont(new Font("Serif", Font.PLAIN, 240));
+			this.setFont(new Font("Serif", Font.PLAIN, 200));
 			g.setColor(new Color(255, 0, 0));
-			g.drawString("GAMOVER", 20, gUIController.getWindowY());
+			g.drawString("GAMEOVER", 20, gUIController.getWindowY());
 			
 
 		}
