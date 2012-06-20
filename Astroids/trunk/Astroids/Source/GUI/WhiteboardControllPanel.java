@@ -1,4 +1,4 @@
-package Input;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -26,10 +26,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Astroids.GameController;
-import Astroids.SpaceShip;
 import Astroids.Vector;
-import Input.WhiteboardInAndOutPut.GameoverScreen;
-import Shapes.Point;
 import Shapes.Shape;
 
 /**
@@ -38,8 +35,7 @@ import Shapes.Shape;
  * @author Aismael
  * 
  */
-public class WhiteboardInAndOutPut extends Thread implements
-		MouseMotionListener {
+public class WhiteboardControllPanel {
 
 	protected int LabelX = 10;// XPosition f�r Schriftausgabe
 	protected int LabelY = 25;// YPoasition f�r Schriftausgabe
@@ -47,8 +43,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private JFrame whiteBoard;// das Interne Whiteboard
 	private JScrollPane whiteBoardInlet;// das Interne ScrollPane des
 										// Whiteboards
-	private GameController gameController;// der Interne Gamecontroller
-	private InputController inputController;// der Interne InputController
+	private GUIController gUIController;// der Interne InputController
 	private JPanel AWTandJframeMergecontainer;// Der Container der das Interface
 												// auf das Whiteboard bringt und
 												// die Jframe und AWT Container
@@ -62,60 +57,55 @@ public class WhiteboardInAndOutPut extends Thread implements
 	private JSpinner angle;
 	private JPanel gamoverContainer;
 	private GameoverScreen gameoverScreen;
+	private BigListener bigListener;
 
 	/**
-	 * Der Konstruktor f�r das {@link WhiteboardInAndOutPut} der alle
+	 * Der Konstruktor f�r das {@link WhiteboardControllPanel} der alle
 	 * Componenten Initialisiert
 	 * 
 	 * @param gameController
-	 *            der dem {@link WhiteboardInAndOutPut} �bergebene
+	 *            der dem {@link WhiteboardControllPanel} �bergebene
 	 *            {@link GameController}
-	 * @param inputController
-	 *            der dem {@link WhiteboardInAndOutPut} �bergebene
-	 *            {@link InputController}
+	 * @param gUIController
+	 *            der dem {@link WhiteboardControllPanel} �bergebene
+	 *            {@link GUIController}
+	 * @param bigListener 
 	 */
-	public WhiteboardInAndOutPut(GameController gameController,
-			InputController inputController) {
-		this.gameController = gameController;
-		this.inputController = inputController;
-
-		System.out.println("Whiteboardinput started:\t" + this.getId());
+	public WhiteboardControllPanel(GUIController gUIController, BigListener bigListener) {
+		this.gUIController = gUIController;
+		this.bigListener=bigListener;
 
 		velocity = new JSpinner();
 		angle = new JSpinner();
 
 		inputControllPanelWindow = new InputControllPanelWindow("TastenInput");
 		inputControllPanelWindow.setSize(300, 300);
-		inputControllPanelWindow.addMouseWheelListener(inputController);
-		inputControllPanelWindow.addMouseListener(inputController);
-		inputControllPanelWindow.addMouseMotionListener(inputController);
-		inputControllPanelWindow.addKeyListener(inputController);
+		inputControllPanelWindow.addMouseWheelListener(bigListener);
+		inputControllPanelWindow.addMouseListener(bigListener);
+		inputControllPanelWindow.addMouseMotionListener(bigListener);
+		inputControllPanelWindow.addKeyListener(bigListener);
 		inputControllPanelWindow.requestFocus();
 		/**
 		 * die Initialisierung des Whiteboards
 		 */
 		whiteBoard = Shape.getWhiteBoard().getFrame();
-		whiteBoard.addKeyListener(inputController);
-		whiteBoard.addWindowListener(inputController);
-		whiteBoard.setSize(
-				gameController.getWindowX() * 2 + gameController.getAstroSize()
-						* 2 - 16 + 300, gameController.getWindowY() * 2
-						+ gameController.getAstroSize() * 2 + 4);
-
+		whiteBoard.addKeyListener(bigListener);
+		whiteBoard.addWindowListener(bigListener);
+		whiteBoard.setSize(gUIController.playFieldSizeX(), gUIController.playFieldSizeY());
 		/**
 		 * die Initialisierung des Whiteboardpanels
 		 */
 		whiteBoardInlet = Shape.getWhiteBoard().getScrollPane();
 		whiteBoardInlet.setCursor(new Cursor(0));
-		whiteBoardInlet.addMouseWheelListener(inputController);
-		whiteBoardInlet.addMouseListener(inputController);
-		whiteBoardInlet.addMouseMotionListener(this);
+		whiteBoardInlet.addMouseWheelListener(bigListener);
+		whiteBoardInlet.addMouseListener(bigListener);
+		whiteBoardInlet.addMouseMotionListener(new MouseMotionListenerForAltenativeControll());
 
 		/**
 		 * die Initialisierung des AWTandJframeMergecontainers
 		 */
 		AWTandJframeMergecontainer = new JPanel(new BorderLayout());
-		AWTandJframeMergecontainer.addKeyListener(inputController);
+		AWTandJframeMergecontainer.addKeyListener(bigListener);
 		whiteBoard.add(BorderLayout.EAST, AWTandJframeMergecontainer);
 		AWTandJframeMergecontainer.setPreferredSize(new Dimension(300, 600));
 		AWTandJframeMergecontainer.add(inputControllPanelWindow,
@@ -161,32 +151,14 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if ((Integer) velocity.getValue() <= gameController
-						.getMaxSpeed()
-						&& (Integer) velocity.getValue() >= -gameController
-								.getMaxSpeed() / 2) {
-					gameController.getSpaceShip().setVector(
-							new Vector((Integer) velocity.getValue(),
-									gameController.getSpaceShip().getVector()
-											.getPhi()));
-				} else {
-					gameController.getSpaceShip().setVector(
-							new Vector(gameController.getSpaceShip()
-									.getVector().getAmount(), gameController
-									.getSpaceShip().getVector().getPhi()));
-
-				}
+				gUIController.velocityChangePerInt((Integer) velocity.getValue());
 			}
 		});
 		angle.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				gameController.getSpaceShip()
-						.setVector(
-								new Vector(gameController.getSpaceShip()
-										.getVector().getAmount(),
-										(Integer) angle.getValue() + 180));
+				gUIController.angleChangePerInt((Integer) angle.getValue());
 
 			}
 		});
@@ -205,13 +177,13 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (inputController.getAlternativeControll()) {
-					inputController.setAlternativeControll(false);
+				if (bigListener.getAlternativeControll()) {
+					bigListener.setAlternativeControll(false);
 					((AbstractButton) getComponent())
 							.setText("Alternative Controll activate");
 
 				} else {
-					inputController.setAlternativeControll(true);
+					bigListener.setAlternativeControll(true);
 					((AbstractButton) getComponent())
 							.setText("Alternative Controll deactivate");
 
@@ -247,12 +219,12 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (gameController.cheat) {
+				if (gUIController.getCheat()) {
 					((AbstractButton) getComponent()).setText("cheat Activate");
-					gameController.setCheat(false);
+					gUIController.setCheat(false);
 				} else {
 
-					gameController.setCheat(true);
+					gUIController.setCheat(true);
 					((AbstractButton) getComponent())
 							.setText("cheat deActivate");
 				}
@@ -301,9 +273,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 				.getEditor()).getTextField();
 		JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
 				.getEditor()).getTextField();
-		textFieldAngle.setText(accelerationToString());
-		textFieldVelocity.setText(speedToString());
-		if(gameController.playerDieEvent()){
+		textFieldAngle.setText(gUIController.accelerationToString());
+		textFieldVelocity.setText(gUIController.speedToString());
+		if(gUIController.playerDieEvent()){
 			gameoverSight();
 		}
 	
@@ -313,7 +285,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		whiteBoardInlet.setVisible(false);
 		AWTandJframeMergecontainer.setVisible(false);
 		gameoverScreen = new GameoverScreen("Gameover");
-		gameoverScreen.setSize(gameController.getWindowX()*3, gameController.getWindowY()*2-100);
+		gameoverScreen.setSize(gUIController.getWindowX()*3, gUIController.getWindowY()*2-100);
 		gamoverContainer=new JPanel(new BorderLayout());
 		gamoverContainer.add(gameoverScreen);
 		whiteBoard.add(BorderLayout.WEST,gamoverContainer);
@@ -322,66 +294,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 		JButton restart = new JButton("Restart");
 		restart.setFont(new Font("Serif", Font.PLAIN, 100));
 		gamoverContainer.add(BorderLayout.PAGE_END,restart);
-		restart.setPreferredSize(new Dimension(gameController.getWindowX()*3, 100));
+		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*3, 100));
 		gamoverContainer.setBackground(Color.black);
 		whiteBoardInlet.requestFocus();
-	}
-
-	/**
-	 * Die Methode wenn die Maus gedr�ckt ist und Bewegt wird in der
-	 * Alternativen Steuerung
-	 */
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		if (this.inputController.isAlternativeControll()) {
-			mouseControlWhiteboard(arg0);
-		}
-
-	}
-
-	/**
-	 * Die Methode wenn die Maus Bewegt wird in der Alternativen Steuerung
-	 */
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		if (this.inputController.isAlternativeControll()) {
-			mouseControlWhiteboard(arg0);
-		}
-
-	}
-
-	/**
-	 * die Methode zur Berechnung des Raumschiffbewegungsvectors bei der
-	 * Alternativeb Steuerung
-	 * 
-	 * @param arg0
-	 *            {@link MouseEvent}
-	 * 
-	 * @return der Bewegungsvector f�r das {@link SpaceShip}
-	 */
-	private void mouseControlWhiteboard(MouseEvent arg0) {
-
-		Vector tempVector = new Vector(new Point(arg0.getX()
-				- (gameController.getWindowX())
-				- gameController.getSpaceShip().getCenterPoint().getX(),
-				arg0.getY()
-						+ (-(gameController.getWindowY()) + gameController
-								.getSpaceShip().getCenterPoint().getY())));
-		Vector outPutVector = new Vector(0, 0);
-		if (tempVector.getAmount() < 160) {
-
-			outPutVector = new Vector(tempVector.getAmount()
-					/ (160 / gameController.getMaxSpeed()),
-					-tempVector.getPhi());
-
-		} else {
-
-			outPutVector = new Vector(gameController.getMaxSpeed(),
-					-tempVector.getPhi());
-
-		}
-		gameController.getSpaceShip().setVector(outPutVector);
-		;
 	}
 
 	/**
@@ -425,7 +340,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Speed: " + speedToString(), LabelX, LabelY);
+			g.drawString("Speed: " + gUIController.speedToString(), LabelX, LabelY);
 		}
 
 	}
@@ -448,7 +363,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Angle: " + accelerationToString(), LabelX, LabelY);
+			g.drawString("Angle: " + gUIController.accelerationToString(), LabelX, LabelY);
 		}
 
 	}
@@ -470,7 +385,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("X:" + xToString(), LabelX, LabelY);
+			g.drawString("X:" + gUIController.xToString(), LabelX, LabelY);
 		}
 
 	}
@@ -492,7 +407,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Y:" + yToString(), LabelX, LabelY);
+			g.drawString("Y:" + gUIController.yToString(), LabelX, LabelY);
 		}
 
 	}
@@ -514,7 +429,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Points:" + PointsToString(), LabelX, LabelY);
+			g.drawString("Points:" + gUIController.PointsToString(), LabelX, LabelY);
 		}
 
 	}
@@ -559,51 +474,36 @@ public class WhiteboardInAndOutPut extends Thread implements
 			super.paint(g);
 			this.setFont(new Font("Serif", Font.PLAIN, 240));
 			g.setColor(new Color(255, 0, 0));
-			g.drawString("GAMOVER", 20, gameController.getWindowY());
+			g.drawString("GAMOVER", 20, gUIController.getWindowY());
 			
 
 		}
 
 	}
-	private String accelerationToString() {
-		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
-		Integer acceleration = ac2;
-
-		return acceleration.toString();
-	}
-
-	private String PointsToString() {
-		Integer points = (int) gameController.getHealth();
-		return points.toString();
-
-	}
-
-	private String yToString() {
-		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
-				.getY();
-		return ycoord.toString();
-
-	}
-
-	private String xToString() {
-		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
-				.getX();
-		return xcoord.toString();
-
-	}
-
-	private String speedToString() {
-		Double speed = gameController.getSpaceShip().getVector().getAmount();
-		String speedString = "0";
-		if (speed < 0) {
-			String speedString0 = speed.toString();
-			speedString = speedString0.substring(0, 3);
-		}
-		if (speed >= 0) {
-			String speedString0 = speed.toString();
-			speedString = speedString0.substring(0, 2);
+	
+	class MouseMotionListenerForAltenativeControll implements MouseMotionListener {
+		
+		/**
+		 * Die Methode wenn die Maus gedr�ckt ist und Bewegt wird in der
+		 * Alternativen Steuerung
+		 */
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			if (bigListener.isAlternativeControll()) {
+				gUIController.mouseControlWhiteboard(arg0);
+			}
 
 		}
-		return speedString;
+
+		/**
+		 * Die Methode wenn die Maus Bewegt wird in der Alternativen Steuerung
+		 */
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			if (bigListener.isAlternativeControll()) {
+				gUIController.mouseControlWhiteboard(arg0);
+			}
+
+		}
 	}
 }
