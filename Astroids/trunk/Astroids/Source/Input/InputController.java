@@ -1,7 +1,5 @@
 package Input;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -24,7 +22,7 @@ import Shapes.Point;
  */
 public class InputController extends Thread implements KeyListener,
 		WindowListener, MouseWheelListener, MouseListener, MouseMotionListener {
-	InputControllPanelWindow inputControllPanelWindow;
+	
 	private double keyAmount = 0;// der Interne Speicher für KeyAmount
 	private double keyPhi = 0;// der Interne Speicher für KeyPhi
 	private GameController gameController;// der intern benutzte Gamecontroller
@@ -43,17 +41,10 @@ public class InputController extends Thread implements KeyListener,
 
 		this.gameController = gameController;
 		System.out.println("InputController started:\t" + this.getId());
-		inputControllPanelWindow = new InputControllPanelWindow("TastenInput",
-				gameController);
-		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this,
-				inputControllPanelWindow);
+		
+		whiteboardInAndOutPut = new WhiteboardInAndOutPut(gameController, this);
 
-		inputControllPanelWindow.setSize(300, 300);
-		inputControllPanelWindow.addMouseWheelListener(this);
-		inputControllPanelWindow.addMouseListener(this);
-		inputControllPanelWindow.addMouseMotionListener(this);
-		inputControllPanelWindow.addKeyListener(this);
-		inputControllPanelWindow.requestFocus();
+		
 
 	}
 
@@ -82,7 +73,6 @@ public class InputController extends Thread implements KeyListener,
 	 * Die Methode die die AWT OUTputKomponenten neu Zeichnet
 	 */
 	public void Interfacerefresh() {
-		inputControllPanelWindow.repaint();
 		whiteboardInAndOutPut.Outputrefresh();
 	}
 

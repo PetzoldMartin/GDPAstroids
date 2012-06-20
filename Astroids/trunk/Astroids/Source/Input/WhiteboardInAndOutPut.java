@@ -3,11 +3,9 @@ package Input;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +15,6 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -73,19 +70,22 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 * @param inputController
 	 *            der dem {@link WhiteboardInAndOutPut} �bergebene
 	 *            {@link InputController}
-	 * @param inputControllPanelWindow
-	 *            das dem {@link WhiteboardInAndOutPut} �bergebene
-	 *            {@link InputControllPanelWindow}
 	 */
 	public WhiteboardInAndOutPut(GameController gameController,
-			InputController inputController,
-			InputControllPanelWindow inputControllPanelWindow) {
+			InputController inputController) {
 		this.gameController = gameController;
 		this.inputController = inputController;
-		this.inputControllPanelWindow = inputControllPanelWindow;
 
 		System.out.println("Whiteboardinput started:\t" + this.getId());
 
+		inputControllPanelWindow = new InputControllPanelWindow("TastenInput",
+				gameController);
+		inputControllPanelWindow.setSize(300, 300);
+		inputControllPanelWindow.addMouseWheelListener(inputController);
+		inputControllPanelWindow.addMouseListener(inputController);
+		inputControllPanelWindow.addMouseMotionListener(inputController);
+		inputControllPanelWindow.addKeyListener(inputController);
+		inputControllPanelWindow.requestFocus();
 		/**
 		 * die Initialisierung des Whiteboards
 		 */
@@ -204,13 +204,14 @@ public class WhiteboardInAndOutPut extends Thread implements
 					inputController.setAlternativeControll(false);
 					((AbstractButton) getComponent())
 							.setText("Alternative Controll activate");
-					whiteBoard.requestFocus();
+					
 				} else {
 					inputController.setAlternativeControll(true);
 					((AbstractButton) getComponent())
 							.setText("Alternative Controll deActivate");
+					
 				}
-
+				whiteBoard.requestFocus();
 			};
 		});
 		test.addActionListener(new EffectActionListener(test) {
@@ -224,7 +225,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 					JspinnerContainer.setVisible(false);
 					velocity.setFocusable(false);
 					angle.setFocusable(false);
-					whiteBoard.requestFocus();
+					
 
 				} else {
 					JspinnerActivate = true;
@@ -233,8 +234,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 					JspinnerContainer.setVisible(true);
 					velocity.setFocusable(true);
 					angle.setFocusable(true);
+					
 				}
-
+				whiteBoard.requestFocus();
 			};
 		});
 		cheat.addActionListener(new EffectActionListener(cheat) {
@@ -244,11 +246,13 @@ public class WhiteboardInAndOutPut extends Thread implements
 				if (gameController.cheat) {
 					((AbstractButton) getComponent()).setText("cheat Activate");
 					gameController.setCheat(false);
-				} else {
+				}else{
+
 					gameController.setCheat(true);
 					((AbstractButton) getComponent())
 							.setText("cheat deActivate");
 				}
+				whiteBoard.requestFocus();
 
 			}
 		});
@@ -323,8 +327,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 * die Methode zur Berechnung des Raumschiffbewegungsvectors bei der
 	 * Alternativeb Steuerung
 	 * 
-	 * @param arg0
-	 *            die Mausdaten
+	 * @param arg0 {@link MouseEvent}
+	 *            
 	 * @return der Bewegungsvector f�r das {@link SpaceShip}
 	 */
 	private Vector MouseControlWhiteboard(MouseEvent arg0) {
@@ -525,5 +529,32 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 		}
 	}
+	
+	class InputControllPanelWindow extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1L;
+
+		public InputControllPanelWindow(String name, GameController gameController) {
+			super(name, gameController);
+		}
+
+		@Override
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(0, 0, 255));
+			g.fillOval(70, 70, 160, 160);
+			g.setColor(new Color(255, 0, 0));
+			g.drawLine(0, 150, 300, 150);
+			g.drawLine(150, 0, 150, 300);
+
+		}
+
+
+		
+			
+		}
 
 }
