@@ -32,6 +32,7 @@ public class BufferedAWTWindow extends Panel {
 		this.name = name;
 
 	}
+	
 
 	@Override
 	/**
