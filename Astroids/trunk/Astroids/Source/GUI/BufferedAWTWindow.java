@@ -7,8 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Panel;
 
-import Astroids.GameController;
-
 public class BufferedAWTWindow extends Panel {
 
 	/**
