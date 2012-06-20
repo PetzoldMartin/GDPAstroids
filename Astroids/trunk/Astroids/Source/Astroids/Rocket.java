@@ -10,7 +10,7 @@ import Shapes.Line;
  * @version (0.4)
  */
 public class Rocket extends Sprite {
-	// TODO redo weapons
+	// FIXME redo weapons livetime
 
 	private int lifeTimeFrame;
 

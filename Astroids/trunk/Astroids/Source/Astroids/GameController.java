@@ -33,7 +33,7 @@ public class GameController extends Thread implements Runnable {
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
-	private int astroCount = 20;
+	private int astroCount = 1;
 	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
@@ -100,7 +100,7 @@ public class GameController extends Thread implements Runnable {
 				// /1000000);
 			}
 			// interface frame refresh
-			inputController.Interfacerefresh();
+			inputController.interfacerefresh();
 			try {
 				Thread.sleep(runTime = frameTime
 						- (System.nanoTime() - runTime) / 1000000);
