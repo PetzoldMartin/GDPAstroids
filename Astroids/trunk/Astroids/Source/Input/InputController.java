@@ -54,25 +54,25 @@ public class InputController extends Thread implements KeyListener,
 	 * @param arg0
 	 * @return Vector
 	 */
-	private Vector MouseControl(MouseEvent arg0) {
+	private void mouseControl(MouseEvent arg0) {
 
-		Vector silence = new Vector(new Point(arg0.getX() - 150,
+		Vector tempVector = new Vector(new Point(arg0.getX() - 150,
 				arg0.getY() - 150));
-		Vector s2 = new Vector(0, 0);
-		if (silence.getAmount() < 80) {
-			s2 = new Vector(silence.getAmount() / 8, -silence.getPhi());
+		Vector outPutVector = new Vector(0, 0);
+		if (tempVector.getAmount() < 80) {
+			outPutVector = new Vector(tempVector.getAmount() / (80/gameController.getMaxSpeed()), -tempVector.getPhi());
 		} else {
 
-			s2 = new Vector(10, -silence.getPhi());
+			outPutVector = new Vector(gameController.getMaxSpeed(), -tempVector.getPhi());
 
 		}
-		return s2;
+		gameController.getSpaceShip().setVector(outPutVector);
 	}
 
 	/**
 	 * Die Methode die die AWT OUTputKomponenten neu Zeichnet
 	 */
-	public void Interfacerefresh() {
+	public void interfacerefresh() {
 		whiteboardInAndOutPut.Outputrefresh();
 	}
 
@@ -230,7 +230,7 @@ public class InputController extends Thread implements KeyListener,
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 
-		gameController.getSpaceShip().setVector(MouseControl(arg0));
+		mouseControl(arg0);
 
 	}
 
@@ -240,7 +240,7 @@ public class InputController extends Thread implements KeyListener,
 	 */
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		gameController.getSpaceShip().setVector(MouseControl(arg0));
+		mouseControl(arg0);
 
 	}
 

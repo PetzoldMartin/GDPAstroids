@@ -15,6 +15,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -57,8 +58,6 @@ public class WhiteboardInAndOutPut extends Thread implements
 																// InputControllPanelWindow
 	private JSpinner velocity;
 	private JSpinner angle;
-	private double xsize;
-	private double ysize;
 
 	/**
 	 * Der Konstruktor f�r das {@link WhiteboardInAndOutPut} der alle
@@ -77,6 +76,9 @@ public class WhiteboardInAndOutPut extends Thread implements
 		this.inputController = inputController;
 
 		System.out.println("Whiteboardinput started:\t" + this.getId());
+		
+		velocity = new JSpinner();
+		angle = new JSpinner();
 
 		inputControllPanelWindow = new InputControllPanelWindow("TastenInput",
 				gameController);
@@ -142,16 +144,12 @@ public class WhiteboardInAndOutPut extends Thread implements
 		JFrameButtonContainer.add(JspinnerContainer);
 		JspinnerContainer.setVisible(true);
 		JspinnerContainer.setVisible(false);
-		xsize = Shape.getWhiteBoard().getScrollPane().getSize().getWidth() / 2;
-		ysize = Shape.getWhiteBoard().getScrollPane().getSize().getHeight() / 2;
 	}
 
 	/**
 	 * Methode f�r das adden der JspinnerContainerKomponenten
 	 */
 	private void buildJspinnerContainer() {
-		velocity = new JSpinner();
-		angle = new JSpinner();
 		JspinnerContainer.add(new JLabel("Velocity"));
 		JspinnerContainer.add(velocity);
 		JspinnerContainer.add(new JLabel("Angle"));
@@ -160,14 +158,14 @@ public class WhiteboardInAndOutPut extends Thread implements
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if ((Integer) velocity.getValue() <= 10) {
+				if ((Integer) velocity.getValue() <= gameController.getMaxSpeed()&&(Integer) velocity.getValue()>=-gameController.getMaxSpeed()/2) {
 					gameController.getSpaceShip().setVector(
 							new Vector((Integer) velocity.getValue(),
 									gameController.getSpaceShip().getVector()
 											.getPhi()));
 				} else {
 					gameController.getSpaceShip().setVector(
-							new Vector(10, gameController.getSpaceShip()
+							new Vector(gameController.getSpaceShip().getVector().getAmount(), gameController.getSpaceShip()
 									.getVector().getPhi()));
 
 				}
@@ -208,7 +206,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 				} else {
 					inputController.setAlternativeControll(true);
 					((AbstractButton) getComponent())
-							.setText("Alternative Controll deActivate");
+							.setText("Alternative Controll deactivate");
 					
 				}
 				whiteBoard.requestFocus();
@@ -295,7 +293,16 @@ public class WhiteboardInAndOutPut extends Thread implements
 		for (Component AWTComponent : AWTOutputContainer.getComponents()) {
 			AWTComponent.repaint();
 		}
-
+		JFormattedTextField tf = 
+				((JSpinner.DefaultEditor)angle.getEditor()).getTextField();
+		JFormattedTextField tf2 = 
+				((JSpinner.DefaultEditor)velocity.getEditor()).getTextField();
+		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
+		Integer acceleration = ac2 ;
+		tf.setText(acceleration.toString());
+		Integer speed = (int) gameController.getSpaceShip().getVector()
+				.getAmount();
+		tf2.setText(speed.toString());
 	}
 
 	/**
@@ -305,8 +312,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		if (this.inputController.isAlternativeControll()) {
-			gameController.getSpaceShip().setVector(
-					MouseControlWhiteboard(arg0));
+					mouseControlWhiteboard(arg0);
 		}
 
 	}
@@ -317,8 +323,7 @@ public class WhiteboardInAndOutPut extends Thread implements
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		if (this.inputController.isAlternativeControll()) {
-			gameController.getSpaceShip().setVector(
-					MouseControlWhiteboard(arg0));
+					mouseControlWhiteboard(arg0);
 		}
 
 	}
@@ -331,24 +336,24 @@ public class WhiteboardInAndOutPut extends Thread implements
 	 *            
 	 * @return der Bewegungsvector f�r das {@link SpaceShip}
 	 */
-	private Vector MouseControlWhiteboard(MouseEvent arg0) {
+	private void mouseControlWhiteboard(MouseEvent arg0) {
 
-		Vector silence = new Vector(new Point(arg0.getX() - (xsize)
+		Vector tempVector = new Vector(new Point(arg0.getX() - (gameController.getWindowX())
 				- gameController.getSpaceShip().getCenterPoint().getX(),
 				arg0.getY()
-						+ (-(ysize) + gameController.getSpaceShip()
+						+ (-(gameController.getWindowY()) + gameController.getSpaceShip()
 								.getCenterPoint().getY())));
-		Vector s2 = new Vector(0, 0);
-		if (silence.getAmount() < 160) {
+		Vector outPutVector = new Vector(0, 0);
+		if (tempVector.getAmount() < 160) {
 
-			s2 = new Vector(silence.getAmount() / 16, -silence.getPhi());
+			outPutVector = new Vector(tempVector.getAmount() / (160/gameController.getMaxSpeed()), -tempVector.getPhi());
 
 		} else {
 
-			s2 = new Vector(gameController.getMaxSpeed(), -silence.getPhi());
+			outPutVector = new Vector(gameController.getMaxSpeed(), -tempVector.getPhi());
 
 		}
-		return s2;
+		gameController.getSpaceShip().setVector(outPutVector);;
 	}
 
 	/**
@@ -435,8 +440,8 @@ public class WhiteboardInAndOutPut extends Thread implements
 		}
 
 		private String accelerationToString() {
-			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi() - 180;
-			Integer acceleration = Math.abs(ac2 % 360);
+			int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
+			Integer acceleration = ac2;
 			String accelerationString = "Angle: " + acceleration.toString();
 			return accelerationString;
 		}
