@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Collision.CollisionDetector;
-import Input.InputController;
+import GUI.GUIController;
 import Shapes.Drawable;
 import Shapes.Point;
 import Shapes.Rectangle;
@@ -44,7 +44,7 @@ public class GameController extends Thread implements Runnable {
 	private Set<Sprite> removals = new HashSet<Sprite>();
 	private Set<Sprite> adds = new HashSet<Sprite>();
 	private SpaceShip spaceShip;
-	private InputController inputController;
+	private GUIController gUIController;
 	private CollisionDetector collisionDetector;
 	private int health = 100;
 	// flags
@@ -78,7 +78,7 @@ public class GameController extends Thread implements Runnable {
 		background.draw();
 		collisionDetector = new CollisionDetector();
 		new SpaceShip();
-		inputController = new InputController(this);
+		gUIController = new GUIController(this);
 		this.start();
 	}
 
@@ -93,14 +93,12 @@ public class GameController extends Thread implements Runnable {
 			if (health == 0) {
 				playerDieEvent();
 			} else if (!pause && windowActivated) {
-				spaceShip.changeVector(inputController.getKeyAmount(),
-						inputController.getKeyPhi(), maxSpeed);
 				update();
 				// System.out.println((double)(System.nanoTime() - runTime)
 				// /1000000);
 			}
 			// interface frame refresh
-			inputController.interfacerefresh();
+			gUIController.interfacerefresh();
 			try {
 				Thread.sleep(runTime = frameTime
 						- (System.nanoTime() - runTime) / 1000000);
@@ -207,8 +205,8 @@ public class GameController extends Thread implements Runnable {
 		this.sprites.remove(sprite);
 	}
 
-	public void setInputController(InputController inputController) {
-		this.inputController = inputController;
+	public void setInputController(GUIController gUIController) {
+		this.gUIController = gUIController;
 	}
 
 	public void setWindowActivated(boolean windowActivated) {
@@ -266,8 +264,8 @@ public class GameController extends Thread implements Runnable {
 		return spaceShip;
 	}
 
-	public InputController getInputController() {
-		return inputController;
+	public GUIController getInputController() {
+		return gUIController;
 	}
 
 	public CollisionDetector getCollisionDetector() {
