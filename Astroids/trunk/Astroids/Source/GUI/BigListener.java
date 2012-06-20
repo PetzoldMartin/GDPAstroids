@@ -45,7 +45,7 @@ private GUIController gUIController;
 
 
 @Override
-public void keyTyped(KeyEvent e) {
+public  void keyTyped(KeyEvent e) {
 }
 
 // events wenn eine taste Gedrueckt wird
@@ -259,7 +259,7 @@ public void windowOpened(WindowEvent arg0) {
  * 
  * @return AlternativeControll
  */
-public boolean isAlternativeControll() {
+protected  boolean isAlternativeControll() {
 	return alternativeControll;
 }
 
@@ -267,7 +267,7 @@ public boolean isAlternativeControll() {
  * 
  * @param AlternativeControll
  */
-public void setAlternativeControll(boolean AlternativeControll) {
+protected  void setAlternativeControll(boolean AlternativeControll) {
 	this.alternativeControll = AlternativeControll;
 }
 
@@ -275,7 +275,7 @@ public void setAlternativeControll(boolean AlternativeControll) {
  * 
  * @return AlternativeControll
  */
-public boolean getAlternativeControll() {
+protected  boolean getAlternativeControll() {
 	return alternativeControll;
 }
 

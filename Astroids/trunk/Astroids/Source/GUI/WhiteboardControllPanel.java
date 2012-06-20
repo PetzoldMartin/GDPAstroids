@@ -35,7 +35,7 @@ import Shapes.Shape;
  * @author Aismael
  * 
  */
-public class WhiteboardControllPanel {
+    public class WhiteboardControllPanel {
 
 	protected int LabelX = 10;// XPosition f�r Schriftausgabe
 	protected int LabelY = 25;// YPoasition f�r Schriftausgabe
@@ -71,7 +71,7 @@ public class WhiteboardControllPanel {
 	 *            {@link GUIController}
 	 * @param bigListener 
 	 */
-	public WhiteboardControllPanel(GUIController gUIController, BigListener bigListener) {
+	protected  WhiteboardControllPanel(GUIController gUIController, BigListener bigListener) {
 		this.gUIController = gUIController;
 		this.bigListener=bigListener;
 
@@ -265,7 +265,7 @@ public class WhiteboardControllPanel {
 	/**
 	 * die Methode zum Neuzeichnen der AWTOutputContainerKomponenten
 	 */
-	public void Outputrefresh() {
+	protected  void Outputrefresh() {
 		for (Component AWTComponent : AWTOutputContainer.getComponents()) {
 			AWTComponent.repaint();
 		}

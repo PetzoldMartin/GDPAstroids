@@ -287,4 +287,9 @@ public class GameController extends Thread implements Runnable {
 	public int getHealth() {
 		return health;
 	}
+
+	public void restart() {
+		// TODO Auto-generated method stub
+		
+	}
 }
