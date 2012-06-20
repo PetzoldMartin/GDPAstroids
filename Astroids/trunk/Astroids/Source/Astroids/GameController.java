@@ -33,7 +33,7 @@ public class GameController extends Thread implements Runnable {
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
-	private int astroCount = 1;
+	private int astroCount = 100;
 	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
@@ -114,8 +114,12 @@ public class GameController extends Thread implements Runnable {
 
 	}
 
-	private void playerDieEvent() {
-		// TODO Game Over Screen
+	public boolean playerDieEvent() {
+		if (health > 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	/**
