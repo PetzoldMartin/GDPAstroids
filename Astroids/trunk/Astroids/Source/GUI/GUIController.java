@@ -40,12 +40,19 @@ public class GUIController extends Thread {
 	}
 
 	/**
+	 * Die Methode die die AWT OUTputKomponenten neu Zeichnet
+	 */
+	public void interfacerefresh() {
+		whiteboardControllPanel.Outputrefresh();
+	}
+
+	/**
 	 * Die Steurungsübergabe des ControllPanels
 	 * 
 	 * @param arg0
 	 * @return Vector
 	 */
-	void mouseControl(MouseEvent arg0) {
+	protected void mouseControl(MouseEvent arg0) {
 
 		Vector tempVector = new Vector(new Point(arg0.getX() - 150,
 				arg0.getY() - 150));
@@ -61,40 +68,67 @@ public class GUIController extends Thread {
 	}
 
 	/**
-	 * Die Methode die die AWT OUTputKomponenten neu Zeichnet
+	 * die Methode zur Berechnung des Raumschiffbewegungsvectors bei der
+	 * Alternativeb Steuerung
+	 * 
+	 * @param arg0
+	 *            {@link MouseEvent}
+	 * 
+	 * @return der Bewegungsvector fï¿½r das {@link SpaceShip}
 	 */
-	public void interfacerefresh() {
-		whiteboardControllPanel.Outputrefresh();
+	protected void mouseControlWhiteboard(MouseEvent arg0) {
+	
+		Vector tempVector = new Vector(new Point(arg0.getX()
+				- (gameController.getWindowX())
+				- gameController.getSpaceShip().getCenterPoint().getX(),
+				arg0.getY()
+						+ (-(gameController.getWindowY()) + gameController
+								.getSpaceShip().getCenterPoint().getY())));
+		Vector outPutVector = new Vector(0, 0);
+		if (tempVector.getAmount() < 160) {
+	
+			outPutVector = new Vector(tempVector.getAmount()
+					/ (160 / gameController.getMaxSpeed()),
+					-tempVector.getPhi());
+	
+		} else {
+	
+			outPutVector = new Vector(gameController.getMaxSpeed(),
+					-tempVector.getPhi());
+	
+		}
+		gameController.getSpaceShip().setVector(outPutVector);
+		;
 	}
 
-	String accelerationToString() {
+	protected String accelerationToString() {
 		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
 		Integer acceleration = ac2;
 
 		return acceleration.toString();
 	}
 
-	String PointsToString() {
+	protected String PointsToString() {
 		Integer points = (int) gameController.getHealth();
 		return points.toString();
 
 	}
 
-	String yToString() {
+	protected String yToString() {
 		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
 				.getY();
 		return ycoord.toString();
 
 	}
 
-	String xToString() {
+	protected String xToString() {
 		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
 				.getX();
 		return xcoord.toString();
 
 	}
 
-	String speedToString() {
+	protected String speedToString() {
 		Double speed = gameController.getSpaceShip().getVector().getAmount();
 		String speedString = "0";
 		if (speed < 0) {
@@ -108,48 +142,15 @@ public class GUIController extends Thread {
 		}
 		return speedString;
 	}
-	/**
-	 * die Methode zur Berechnung des Raumschiffbewegungsvectors bei der
-	 * Alternativeb Steuerung
-	 * 
-	 * @param arg0
-	 *            {@link MouseEvent}
-	 * 
-	 * @return der Bewegungsvector fï¿½r das {@link SpaceShip}
-	 */
-	void mouseControlWhiteboard(MouseEvent arg0) {
-
-		Vector tempVector = new Vector(new Point(arg0.getX()
-				- (gameController.getWindowX())
-				- gameController.getSpaceShip().getCenterPoint().getX(),
-				arg0.getY()
-						+ (-(gameController.getWindowY()) + gameController
-								.getSpaceShip().getCenterPoint().getY())));
-		Vector outPutVector = new Vector(0, 0);
-		if (tempVector.getAmount() < 160) {
-
-			outPutVector = new Vector(tempVector.getAmount()
-					/ (160 / gameController.getMaxSpeed()),
-					-tempVector.getPhi());
-
-		} else {
-
-			outPutVector = new Vector(gameController.getMaxSpeed(),
-					-tempVector.getPhi());
-
-		}
-		gameController.getSpaceShip().setVector(outPutVector);
-		;
-	}
-	int playFieldSizeX(){
+	protected int playFieldSizeX(){
 		return gameController.getWindowX() * 2 + gameController.getAstroSize()
 		* 2 - 16 + 300;
 	}
-	int playFieldSizeY(){
+	protected int playFieldSizeY(){
 		return gameController.getWindowY() * 2
 				+ gameController.getAstroSize() * 2 + 4;
 	}
-	void velocityChangePerInt(int velocity){
+	protected void velocityChangePerInt(int velocity){
 		if (velocity <= gameController
 				.getMaxSpeed()
 				&&  velocity >= -gameController
@@ -167,7 +168,7 @@ public class GUIController extends Thread {
 		}
 	
 	}
-	void angleChangePerInt(int angle){
+	protected void angleChangePerInt(int angle){
 		gameController.getSpaceShip()
 		.setVector(
 				new Vector(gameController.getSpaceShip()
@@ -175,21 +176,24 @@ public class GUIController extends Thread {
 						angle + 180));
 	}
 
-	void setCheat(boolean cheat){
+	protected void setCheat(boolean cheat){
 		gameController.setCheat(cheat);
 	}
-	boolean getCheat(){
+	protected boolean getCheat(){
 		return gameController.cheat;
 	}
-	boolean playerDieEvent(){
+	protected boolean playerDieEvent(){
 		return gameController.playerDieEvent();
 	}
 
-	public int getWindowX() {
+	protected  int getWindowX() {
 		return gameController.getWindowX();
 	}
 
-	public int getWindowY() {
+	protected  int getWindowY() {
 		return gameController.getWindowY();
+	}
+	protected void restart(){
+		gameController.restart();
 	}
 }
