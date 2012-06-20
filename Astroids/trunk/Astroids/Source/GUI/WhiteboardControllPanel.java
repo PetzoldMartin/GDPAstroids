@@ -26,9 +26,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Astroids.GameController;
-import Astroids.Vector;
-import GUI.WhiteboardControllPanel.EndScreenlevelOutput;
-import GUI.WhiteboardControllPanel.GameoverScreen;
 import Shapes.Shape;
 
 /**
@@ -37,7 +34,7 @@ import Shapes.Shape;
  * @author Aismael
  * 
  */
-    public class WhiteboardControllPanel {
+public class WhiteboardControllPanel {
 
 	protected int LabelX = 10;// XPosition f�r Schriftausgabe
 	protected int LabelY = 25;// YPoasition f�r Schriftausgabe
@@ -59,8 +56,9 @@ import Shapes.Shape;
 	private JSpinner angle;
 	private JPanel gameoverContainer;
 	private BigListener bigListener;
-	private boolean gameOver=false;
-
+	private boolean gameOver = false;
+	private JButton restart;
+	private EndScreenlevelOutput endScreenlevelOutput;
 	/**
 	 * Der Konstruktor f�r das {@link WhiteboardControllPanel} der alle
 	 * Componenten Initialisiert
@@ -71,11 +69,12 @@ import Shapes.Shape;
 	 * @param gUIController
 	 *            der dem {@link WhiteboardControllPanel} �bergebene
 	 *            {@link GUIController}
-	 * @param bigListener 
+	 * @param bigListener
 	 */
-	protected  WhiteboardControllPanel(GUIController gUIController, BigListener bigListener) {
+	protected WhiteboardControllPanel(GUIController gUIController,
+			BigListener bigListener) {
 		this.gUIController = gUIController;
-		this.bigListener=bigListener;
+		this.bigListener = bigListener;
 
 		velocity = new JSpinner();
 		angle = new JSpinner();
@@ -93,7 +92,8 @@ import Shapes.Shape;
 		whiteBoard = Shape.getWhiteBoard().getFrame();
 		whiteBoard.addKeyListener(bigListener);
 		whiteBoard.addWindowListener(bigListener);
-		whiteBoard.setSize(gUIController.playFieldSizeX(), gUIController.playFieldSizeY());
+		whiteBoard.setSize(gUIController.playFieldSizeX(),
+				gUIController.playFieldSizeY());
 		/**
 		 * die Initialisierung des Whiteboardpanels
 		 */
@@ -101,7 +101,8 @@ import Shapes.Shape;
 		whiteBoardInlet.setCursor(new Cursor(0));
 		whiteBoardInlet.addMouseWheelListener(bigListener);
 		whiteBoardInlet.addMouseListener(bigListener);
-		whiteBoardInlet.addMouseMotionListener(new MouseMotionListenerForAltenativeControll());
+		whiteBoardInlet
+				.addMouseMotionListener(new MouseMotionListenerForAltenativeControll());
 
 		/**
 		 * die Initialisierung des AWTandJframeMergecontainers
@@ -139,9 +140,8 @@ import Shapes.Shape;
 		JFrameButtonContainer.add(JspinnerContainer);
 		JspinnerContainer.setVisible(true);
 		JspinnerContainer.setVisible(false);
-		
-		
-		gameoverContainer=new JPanel(new BorderLayout());
+
+		gameoverContainer = new JPanel(new BorderLayout());
 		buildGameoverContainer();
 	}
 
@@ -157,7 +157,8 @@ import Shapes.Shape;
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				gUIController.velocityChangePerInt((Integer) velocity.getValue());
+				gUIController.velocityChangePerInt((Integer) velocity
+						.getValue());
 			}
 		});
 		angle.addChangeListener(new ChangeListener() {
@@ -197,7 +198,8 @@ import Shapes.Shape;
 				whiteBoard.requestFocus();
 			};
 		});
-		JspinnerControll.addActionListener(new EffectActionListener(JspinnerControll) {
+		JspinnerControll.addActionListener(new EffectActionListener(
+				JspinnerControll) {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -227,7 +229,8 @@ import Shapes.Shape;
 			public void actionPerformed(ActionEvent e) {
 				if (gUIController.getCheat()) {
 					((AbstractButton) getComponent()).setText("cheat Activate");
-					((AbstractButton) getComponent()).setForeground(Color.black);
+					((AbstractButton) getComponent())
+							.setForeground(Color.black);
 					gUIController.setCheat(false);
 				} else {
 
@@ -273,25 +276,23 @@ import Shapes.Shape;
 		AWTOutputContainer.add(new accelerationOutput("acceleration"));
 	}
 
-	private void buildGameoverContainer(){
-		JButton restart = new JButton("Restart");
-		EndScreenlevelOutput endScreenlevelOutput = new EndScreenlevelOutput("EndScreenLevel");
-		GameoverScreen gameoverScreen = new GameoverScreen("Gameover");
-		gameoverScreen.setSize(gUIController.getWindowX()*2+300, gUIController.getWindowY()*2-200);
-		gameoverContainer.add(gameoverScreen,
+	private void buildGameoverContainer() {
+		restart = new JButton("Restart");
+		endScreenlevelOutput = new EndScreenlevelOutput("EndScreenLevel");
+		gameoverContainer.add(new GameoverScreen("Gameover"),
 				BorderLayout.CENTER);
 		restart.setFont(new Font("Serif", Font.PLAIN, 100));
-		gameoverContainer.add(BorderLayout.PAGE_END,restart);
-		gameoverContainer.add(BorderLayout.PAGE_START,endScreenlevelOutput);
-		restart.setPreferredSize(new Dimension(gUIController.getWindowX()*2+300, 100));
-		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController.getWindowX()*2+300, 100));
+		gameoverContainer.add(BorderLayout.SOUTH, restart);
+		gameoverContainer.add(BorderLayout.NORTH, endScreenlevelOutput);
+		restart.setPreferredSize(new Dimension(
+				gUIController.getWindowX() * 2 + 350, 100));
 		gameoverContainer.addKeyListener(bigListener);
 		gameoverContainer.setBackground(Color.black);
 		gameoverContainer.requestFocus();
+		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController
+				.getWindowX() * 2 + 350, 100));
 		restart.addActionListener(new EffectActionListener(restart) {
-			
-			
-	
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gUIController.restart();
@@ -299,8 +300,8 @@ import Shapes.Shape;
 				whiteBoardInlet.setVisible(true);
 				AWTandJframeMergecontainer.setVisible(true);
 				whiteBoardInlet.requestFocus();
-				gameOver=false;
-	
+				gameOver = false;
+
 			}
 		});
 	}
@@ -308,18 +309,19 @@ import Shapes.Shape;
 	/**
 	 * die Methode zum Neuzeichnen der AWTOutputContainerKomponenten
 	 */
-	protected  void Outputrefresh() {
-		
-		if(gUIController.playerDieEvent()){
-			if(!gameOver){
-			gameoverSight();
-			gameOver=true;
-			}else{
+	protected void Outputrefresh() {
+
+		if (gUIController.playerDieEvent()) {
+			if (!gameOver) {
+				gameoverSight();
+				gameOver = true;
+			} 
+			else {
 				for (Component AWTComponent : gameoverContainer.getComponents()) {
 					AWTComponent.repaint();
 				}
 			}
-		}else{
+		} else {
 			for (Component AWTComponent : AWTOutputContainer.getComponents()) {
 				AWTComponent.repaint();
 			}
@@ -330,36 +332,35 @@ import Shapes.Shape;
 			textFieldAngle.setText(gUIController.accelerationToString());
 			textFieldVelocity.setText(gUIController.speedToString());
 		}
-	
+
 	}
 
 	private void gameoverSight() {
 		whiteBoardInlet.setVisible(false);
 		AWTandJframeMergecontainer.setVisible(false);
-		whiteBoard.add(BorderLayout.WEST,gameoverContainer);
-		
+		whiteBoard.add(BorderLayout.WEST, gameoverContainer);
+
 	}
-	/**
-	 * Die Innere Klasse f�r einen ActionListener der die AWT oder Jframe
-	 * Komponente ver�nden kann
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	abstract class EffectActionListener implements ActionListener {
-		private Component component;
 
-		public Component getComponent() {
-			return component;
-		}
+	class LevelOutput extends BufferedAWTWindow {
 
-		public EffectActionListener(Component component) {
-			this.component = component;
+		private static final long serialVersionUID = 12L;
 
+		public LevelOutput(String name) {
+			super(name);
 		}
 
 		@Override
-		public abstract void actionPerformed(ActionEvent e);
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(0, 255, 0));
+			g.drawString("Level " + gUIController.levelToString(), LabelX,
+					LabelY);
+
+		}
 
 	}
 
@@ -380,7 +381,8 @@ import Shapes.Shape;
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Speed: " + gUIController.speedToString(), LabelX, LabelY);
+			g.drawString("Speed: " + gUIController.speedToString(), LabelX,
+					LabelY);
 		}
 
 	}
@@ -393,7 +395,6 @@ import Shapes.Shape;
 	 */
 	class accelerationOutput extends BufferedAWTWindow {
 
-		// TODO from 270 to 360 degrees right output
 		private static final long serialVersionUID = 1L;
 
 		public accelerationOutput(String name) {
@@ -403,7 +404,8 @@ import Shapes.Shape;
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Angle: " + gUIController.accelerationToString(), LabelX, LabelY);
+			g.drawString("Angle: " + gUIController.accelerationToString(),
+					LabelX, LabelY);
 		}
 
 	}
@@ -469,7 +471,8 @@ import Shapes.Shape;
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString("Points:" + gUIController.PointsToString(), LabelX, LabelY);
+			g.drawString("Points:" + gUIController.PointsToString(), LabelX,
+					LabelY);
 		}
 
 	}
@@ -498,56 +501,14 @@ import Shapes.Shape;
 
 	}
 
-	class GameoverScreen extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 12L;
-
-		public GameoverScreen(String name) {
-			super(name);
-		}
-
-		@Override
-		/**
-		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
-		 */
-		public void paint(Graphics g) {
-			super.paint(g);
-			this.setFont(new Font("Serif", Font.PLAIN, (int) (gUIController.getWindowX()/2.5)));
-			g.setColor(new Color(255, 0, 0));
-			g.drawString("GAMEOVER", gUIController.getWindowX()/7, gUIController.getWindowY());
-			
-
-		}
-
-	}
-	class LevelOutput extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 12L;
-
-		public LevelOutput(String name) {
-			super(name);
-		}
-
-		@Override
-		/**
-		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
-		 */
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(0, 255, 0));
-			g.drawString("Level "+ gUIController.levelToString(), LabelX, LabelY);
-			
-
-		}
-
-	}
-	
 	class EndScreenlevelOutput extends BufferedAWTWindow {
 
-		private static final long serialVersionUID = 12L;
+		private static final long serialVersionUID = 124L;
 
 		public EndScreenlevelOutput(String name) {
 			super(name);
+			this.setFont(new Font("Serif", Font.PLAIN, gUIController
+					.getWindowX() / 6));
 		}
 
 		@Override
@@ -556,16 +517,68 @@ import Shapes.Shape;
 		 */
 		public void paint(Graphics g) {
 			super.paint(g);
-			this.setFont(new Font("Serif", Font.PLAIN, gUIController.getWindowX()/6));
 			g.setColor(new Color(0, 255, 0));
-			g.drawString("Ihr erreichtes Level ist: "+ gUIController.levelToString(), LabelX, 90);
-			
+			g.drawString(
+					"Ihr erreichtes Level ist: "
+							+ gUIController.levelToString(), LabelX, 90);
 
 		}
 
 	}
-	class MouseMotionListenerForAltenativeControll implements MouseMotionListener {
-		
+
+	class GameoverScreen extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 122L;
+
+		public GameoverScreen(String name) {
+			super(name);
+			this.setSize(gUIController.getWindowX() * 2 + 300,
+					gUIController.getWindowY() * 2 - 200);
+			this.setFont(new Font("Serif", Font.PLAIN, (int) (gUIController
+					.getWindowX() / 2.5)));
+		}
+
+		@Override
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 0, 0));
+			g.drawString("GAMEOVER", gUIController.getWindowX() / 7,
+					gUIController.getWindowY());
+
+		}
+
+	}
+
+	/**
+	 * Die Innere Klasse f�r einen ActionListener der die AWT oder Jframe
+	 * Komponente ver�nden kann
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	abstract class EffectActionListener implements ActionListener {
+		private Component component;
+
+		public Component getComponent() {
+			return component;
+		}
+
+		public EffectActionListener(Component component) {
+			this.component = component;
+
+		}
+
+		@Override
+		public abstract void actionPerformed(ActionEvent e);
+
+	}
+
+	class MouseMotionListenerForAltenativeControll implements
+			MouseMotionListener {
+
 		/**
 		 * Die Methode wenn die Maus gedr�ckt ist und Bewegt wird in der
 		 * Alternativen Steuerung
