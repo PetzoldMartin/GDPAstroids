@@ -10,16 +10,20 @@ import java.awt.Panel;
 public class BufferedAWTWindow extends Panel {
 
 	/**
-	 * Ein Gepuffertes AWT-Panel fï¿½r eine Einfache Grafische Ausgabe mit
-	 * Voreinstellungen fï¿½r die Textausgabe
+	 * Ein Gepuffertes AWT-Panel fuer eine einfache grafische Ausgabe mit
+	 * Voreinstellungen fuerr die Textausgabe
 	 */
 	private static final long serialVersionUID = 1L;
-	Image bufImage;//
-	Graphics bufG;//
-	private Font l;
-	private int fontSize = 20;
-	protected String name;
+	Image bufImage;//Das Image zum puffern
+	Graphics bufG;//die Grafiken die in den Puffer geschrieben werden
+	private Font l;//die Schrift für die Voreinstellung
+	private int fontSize = 20;//die Schriftgroesse fuer die Voreinstellung
+	protected String name;//der intern gespeicherte Name des Panels
 
+	/**
+	 * der Konstruktor des {@link BufferedAWTWindow}
+	 * @param name  der name des Panels der Als String übergeben werden muss
+	 */
 	public BufferedAWTWindow(String name) {
 		this.setBackground(Color.BLACK);
 		l = new Font("Arial", Font.BOLD, fontSize);
@@ -32,7 +36,7 @@ public class BufferedAWTWindow extends Panel {
 
 	@Override
 	/**
-	 * der Puffer fï¿½r die Grafische AWT Ausgabe
+	 * der Puffer fuer die Grafische AWT Ausgabe
 	 */
 	public void update(Graphics g) {
 
