@@ -16,15 +16,13 @@ public class BufferedAWTWindow extends Panel {
 	 * Voreinstellungen f�r die Textausgabe
 	 */
 	private static final long serialVersionUID = 1L;
-	protected GameController gameController;
 	Image bufImage;//
 	Graphics bufG;//
 	private Font l;
 	private int fontSize = 20;
 	protected String name;
 
-	public BufferedAWTWindow(String name, GameController gameController) {
-		this.gameController = gameController;
+	public BufferedAWTWindow(String name) {
 		this.setBackground(Color.BLACK);
 		l = new Font("Arial", Font.BOLD, fontSize);
 		this.setPreferredSize(new Dimension(300, fontSize + 20));
