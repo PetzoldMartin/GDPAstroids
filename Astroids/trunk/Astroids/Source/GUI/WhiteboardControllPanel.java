@@ -144,6 +144,7 @@ public class WhiteboardControllPanel {
 		 */
 		gameOverContainer = new JPanel(new BorderLayout());
 		buildGameoverContainer();
+		whiteBoard.requestFocus();
 	}
 
 	/**
@@ -182,6 +183,7 @@ public class WhiteboardControllPanel {
 		whiteBoardInlet.setVisible(false);
 		aWTandJframeMergecontainer.setVisible(false);
 		whiteBoard.add(BorderLayout.WEST, gameOverContainer);
+		whiteBoardInlet.requestFocus();
 	
 	}
 
@@ -329,9 +331,7 @@ public class WhiteboardControllPanel {
 		gameOverContainer.add(BorderLayout.NORTH, endScreenlevelOutput);
 		restart.setPreferredSize(new Dimension(
 				gUIController.getWindowX() * 2 + 350, 100));
-		gameOverContainer.addKeyListener(bigListener);
 		gameOverContainer.setBackground(Color.black);
-		gameOverContainer.requestFocus();
 		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController
 				.getWindowX() * 2 + 350, 100));
 		restart.addActionListener(new EffectActionListener(restart) {
@@ -342,8 +342,8 @@ public class WhiteboardControllPanel {
 				whiteBoard.remove(gameOverContainer);
 				whiteBoardInlet.setVisible(true);
 				aWTandJframeMergecontainer.setVisible(true);
-				whiteBoardInlet.requestFocus();
 				gameOver = false;
+				inputControllPanelWindow.requestFocus();
 
 			}
 		});
@@ -616,6 +616,7 @@ public class WhiteboardControllPanel {
 		public void mouseDragged(MouseEvent arg0) {
 			if (bigListener.isAlternativeControll()) {
 				gUIController.mouseControlWhiteboard(arg0);
+				
 			}
 
 		}
@@ -627,6 +628,7 @@ public class WhiteboardControllPanel {
 		public void mouseMoved(MouseEvent arg0) {
 			if (bigListener.isAlternativeControll()) {
 				gUIController.mouseControlWhiteboard(arg0);
+				
 			}
 
 		}
