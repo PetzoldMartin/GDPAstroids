@@ -3,6 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import Shapes.Circle;
 import Shapes.Point;
 import Shapes.Polygon;
 
@@ -39,6 +40,7 @@ public class Astroid extends Sprite {
 			astroList.add(new Vector(radius - radius / (radius / 5)
 					* Math.random(), phi));
 		}
+		this.addShape(new Circle(radius/2, this.getCenterPoint(),Color.BLACK,true));
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
 		this.setVector(vector);
 		this.rotationPhi = Math.random() * 12 - 6;
