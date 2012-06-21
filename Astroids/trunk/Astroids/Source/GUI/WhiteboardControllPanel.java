@@ -596,7 +596,7 @@ public class WhiteboardControllPanel {
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
-			g.setColor(new Color(100, 100, 100));
+			g.setColor(new Color(200, 0, 0));
 			g.drawString(gUIController.getOutPutString(), LabelX,
 					LabelY);
 
