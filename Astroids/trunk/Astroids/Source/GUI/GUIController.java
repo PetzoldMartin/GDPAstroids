@@ -247,7 +247,8 @@ public class GUIController extends Thread {
 	 * @return der Zustand des Playerstatuses
 	 */
 	public void gameOverScreen() {
-		whiteboardControllPanel.gameoverSight();
+		if(!whiteboardControllPanel.isGameOver()){
+		whiteboardControllPanel.gameoverSight();}
 	}
 
 	/**
