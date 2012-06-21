@@ -262,4 +262,12 @@ public class GUIController extends Thread {
 		Integer level = (int) gameController.getLevel();
 		return level.toString();
 	}
+
+	public double getKeyAmount() {
+		return bigListener.getKeyAmount();
+	}
+
+	public double getKeyPhi() {
+		return bigListener.getKeyPhi();
+	}
 }
