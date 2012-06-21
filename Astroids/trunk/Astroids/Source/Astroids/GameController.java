@@ -24,8 +24,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 600; // std 600
-	private int windowY = 400; // std 400
+	private int windowX = 1366/2-200; // std 600
+	private int windowY = 768/2-25; // std 400
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
@@ -94,6 +94,8 @@ public class GameController extends Thread implements Runnable {
 				playerDieEvent();
 			} else if (!pause && windowActivated) {
 				update();
+				spaceShip.changeVector(gUIController.getKeyAmount(),
+						gUIController.getKeyPhi(), maxSpeed);
 				// System.out.println((double)(System.nanoTime() - runTime)
 				// /1000000);
 			}
