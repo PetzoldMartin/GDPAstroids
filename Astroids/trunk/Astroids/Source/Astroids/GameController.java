@@ -31,7 +31,7 @@ public class GameController extends Thread implements Runnable {
 	private double keyAcelleration = 0.2;
 	private double keyRotationAngel = 6;
 	private double maxSpeed = 10;
-	private int framesPerShot = 10; // how many frames between the shots!
+	private int framesPerShot = frames/2; // how many frames between the shots!
 	// Astro
 	private int astroSize = 30;
 	private int astroEdge = 24;
@@ -314,7 +314,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void guiOutPut(String string) {
-		gUIController.outPutString(string,3);
+		gUIController.outPutString(string,framesPerShot);
 	}
 
 }
