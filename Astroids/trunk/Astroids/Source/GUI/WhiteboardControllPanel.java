@@ -118,10 +118,10 @@ public class WhiteboardControllPanel {
 		/**
 		 * die Initialisierung des AWTOutputContainers
 		 */
-		aWTOutputContainer = new JPanel(new GridLayout(7, 0));
+		aWTOutputContainer = new JPanel(new GridLayout(8, 0));
 		buildAWTOutputContainer();
 		aWTandJframeMergecontainer.add(aWTOutputContainer, BorderLayout.NORTH);
-		aWTOutputContainer.setPreferredSize(new Dimension(300, 280));
+		aWTOutputContainer.setPreferredSize(new Dimension(300, 320));
 		/**
 		 * die Initialisierung des JFrameButtonContainers
 		 */
@@ -304,7 +304,6 @@ public class WhiteboardControllPanel {
 		aWTOutputContainer.add(new LevelOutput("Level"));
 		aWTOutputContainer.add(new PointsOutput("Points"));
 		aWTOutputContainer.add(new BufferedAWTWindow("Coords") {
-
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -319,6 +318,7 @@ public class WhiteboardControllPanel {
 		aWTOutputContainer.add(new YOutput("Ycoord"));
 		aWTOutputContainer.add(new speedOutPut("Speed"));
 		aWTOutputContainer.add(new accelerationOutput("acceleration"));
+		aWTOutputContainer.add(new OutputString("OutputString"));
 	}
 
 	/**
@@ -359,7 +359,7 @@ public class WhiteboardControllPanel {
 	 */
 	class LevelOutput extends BufferedAWTWindow {
 
-		private static final long serialVersionUID = 12L;
+		private static final long serialVersionUID = 1244L;
 
 		public LevelOutput(String name) {
 			super(name);
@@ -388,7 +388,7 @@ public class WhiteboardControllPanel {
 	 */
 	class PointsOutput extends BufferedAWTWindow {
 	
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 176L;
 	
 		public PointsOutput(String name) {
 			super(name);
@@ -411,7 +411,7 @@ public class WhiteboardControllPanel {
 	 */
 	class XOutput extends BufferedAWTWindow {
 	
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 199L;
 	
 		public XOutput(String name) {
 			super(name);
@@ -433,7 +433,7 @@ public class WhiteboardControllPanel {
 	 */
 	class YOutput extends BufferedAWTWindow {
 	
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 188L;
 	
 		public YOutput(String name) {
 			super(name);
@@ -455,7 +455,7 @@ public class WhiteboardControllPanel {
 	 */
 	class speedOutPut extends BufferedAWTWindow {
 	
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 139L;
 	
 		public speedOutPut(String name) {
 			super(name);
@@ -478,7 +478,7 @@ public class WhiteboardControllPanel {
 	 */
 	class accelerationOutput extends BufferedAWTWindow {
 
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1453L;
 
 		public accelerationOutput(String name) {
 			super(name);
@@ -501,7 +501,7 @@ public class WhiteboardControllPanel {
 	 */
 	class InputControllPanelWindow extends BufferedAWTWindow {
 
-		private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1654L;
 
 		public InputControllPanelWindow(String name) {
 			super(name);
@@ -579,7 +579,30 @@ public class WhiteboardControllPanel {
 		}
 
 	}
+	/**
+	 * Die Innere Klasse fuer Das OutputString Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class OutputString extends BufferedAWTWindow {
 
+		private static final long serialVersionUID = 127L;
+
+		public OutputString(String name) {
+			super(name);
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(100, 100, 100));
+			g.drawString(gUIController.getOutPutString(), LabelX,
+					LabelY);
+
+		}
+
+	}
 	/**
 	 * Die Innere Klasse fuer einen ActionListener der die AWT oder Jframe
 	 * Komponente verwenden kann
