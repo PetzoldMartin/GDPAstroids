@@ -23,6 +23,8 @@ public class GUIController extends Thread {
 										// ausschalten der Alternativen
 										// Steuerung
 	private BigListener bigListener;//der Interne Biglistener der mit dem Gamecontroller bekannt gemacht wird
+										private String outputString="";//der OutputString
+										private int counterInt;//der Counter für die zeit der outputzeile
 
 	/**
 	 * Der Konstruktor des InputControllers
@@ -43,6 +45,10 @@ public class GUIController extends Thread {
 	 */
 	public void interfacerefresh() {
 		whiteboardControllPanel.Outputrefresh();
+		counterInt--;
+		if (counterInt<=0){
+			outputString="";
+		}
 	}
 
 	public double getKeyAmount() {
@@ -283,12 +289,25 @@ public class GUIController extends Thread {
 		return level.toString();
 	}
 	
+	/**
+	 * die Methode die den Outputstring zurückgibt
+	 * @return
+	 */
 	protected String astrocountToString() {
 		Integer astroid = Astroid.getCounter();
 		return astroid.toString();
 	}
-	
-	public void OutPutString(String output) {
-	
+	/**
+	 * 
+	 * @param output der OutputString
+	 * @param counterTime die Maximale Zeit der Outputanzeige in Frames
+	 */
+	public void outPutString(String output,int counterTime) {
+		outputString=output;
+		counterInt=counterTime;
+	}
+	protected String getOutPutString(){
+		return outputString;
+		
 	}
 }

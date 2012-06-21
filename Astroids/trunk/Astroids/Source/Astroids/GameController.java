@@ -309,7 +309,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void guiOutPut(String string) {
-		//TODO implemet the Gui output
+		gUIController.outPutString(string,frames/3);
 	}
 	
 }
