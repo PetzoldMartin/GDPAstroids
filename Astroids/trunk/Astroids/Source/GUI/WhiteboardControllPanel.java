@@ -57,6 +57,11 @@ public class WhiteboardControllPanel {
 	private JPanel gameOverContainer;// der Container fuer den Gameoverbildschirm
 	private BigListener bigListener;// der interne bigListener
 	private boolean gameOver = false;//das Boolean das ausgelöst wird wenn der Gamoverbildschirm angezeigt wird
+	
+	protected boolean isGameOver() {
+		return gameOver;
+	}
+
 	private JButton restart;//der Button für den Spielrestart
 	/**
 	 * Der Konstruktor fuer das {@link WhiteboardControllPanel} der alle
@@ -152,7 +157,7 @@ public class WhiteboardControllPanel {
 	 */
 	protected void Outputrefresh() {
 	
-		if (!gameOver) {
+		if (gameOver) {
 			
 			for (Component AWTComponent : gameOverContainer.getComponents()) {
 					AWTComponent.repaint();
