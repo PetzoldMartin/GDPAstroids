@@ -156,6 +156,10 @@ public class GameController extends Thread implements Runnable {
 	 * check how many objects @ drawboard and generating new objects
 	 */
 	public void checkObjects() {
+		if (health >= 150) {
+			health-=50;
+			astroCount++;
+		}
 		if (Astroid.getCounter() < astroCount) {
 			new Astroid(astroEdge, astroSize);
 		}
