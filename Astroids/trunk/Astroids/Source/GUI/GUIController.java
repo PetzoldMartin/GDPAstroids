@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.MouseEvent;
 
+import Astroids.Astroid;
 import Astroids.GameController;
 import Astroids.SpaceShip;
 import Astroids.Vector;
@@ -280,5 +281,14 @@ public class GUIController extends Thread {
 	protected String levelToString() {
 		Integer level = (int) gameController.getLevel();
 		return level.toString();
+	}
+	
+	protected String astrocountToString() {
+		Integer astroid = Astroid.getCounter();
+		return astroid.toString();
+	}
+	
+	public void OutPutString(String output) {
+	
 	}
 }

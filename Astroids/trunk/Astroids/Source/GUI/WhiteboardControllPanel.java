@@ -58,10 +58,6 @@ public class WhiteboardControllPanel {
 	private BigListener bigListener;// der interne bigListener
 	private boolean gameOver = false;//das Boolean das ausgelöst wird wenn der Gamoverbildschirm angezeigt wird
 	
-	protected boolean isGameOver() {
-		return gameOver;
-	}
-
 	private JButton restart;//der Button für den Spielrestart
 	/**
 	 * Der Konstruktor fuer das {@link WhiteboardControllPanel} der alle
@@ -150,6 +146,10 @@ public class WhiteboardControllPanel {
 		gameOverContainer = new JPanel(new BorderLayout());
 		buildGameoverContainer();
 		whiteBoard.requestFocus();
+	}
+
+	protected boolean isGameOver() {
+		return gameOver;
 	}
 
 	/**
@@ -372,6 +372,9 @@ public class WhiteboardControllPanel {
 			g.setColor(new Color(0, 255, 0));
 			g.drawString("Level " + gUIController.levelToString(), LabelX,
 					LabelY);
+			g.setColor(new Color(100, 100, 100));
+			g.drawString("Astrocount: " + gUIController.astrocountToString(), LabelX+140,
+					LabelY);
 
 		}
 
@@ -510,9 +513,9 @@ public class WhiteboardControllPanel {
 		 */
 		public void paint(Graphics g) {
 			super.paint(g);
-			g.setColor(new Color(0, 0, 255));
+			g.setColor(new Color(100, 100, 100));
 			g.fillOval(70, 70, 160, 160);
-			g.setColor(new Color(255, 0, 0));
+			g.setColor(new Color(50, 50, 50));
 			g.drawLine(0, 150, 300, 150);
 			g.drawLine(150, 0, 150, 300);
 
