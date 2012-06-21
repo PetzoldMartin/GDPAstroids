@@ -152,15 +152,11 @@ public class WhiteboardControllPanel {
 	 */
 	protected void Outputrefresh() {
 	
-		if (gUIController.playerDieEvent()) {
-			if (!gameOver) {
-				gameoverSight();
-				gameOver = true;
-			} 
-			else {
-				for (Component AWTComponent : gameOverContainer.getComponents()) {
+		if (!gameOver) {
+			
+			for (Component AWTComponent : gameOverContainer.getComponents()) {
 					AWTComponent.repaint();
-				}
+				
 			}
 		} else {
 			for (Component AWTComponent : aWTOutputContainer.getComponents()) {
@@ -179,7 +175,8 @@ public class WhiteboardControllPanel {
 	/**
 	 * die Methode die das Spielfeld Verbirgt und den Gamoverbildschirm anzeigt
 	 */
-	private void gameoverSight() {
+	protected void gameoverSight() {
+		gameOver = true;
 		whiteBoardInlet.setVisible(false);
 		aWTandJframeMergecontainer.setVisible(false);
 		whiteBoard.add(BorderLayout.WEST, gameOverContainer);
