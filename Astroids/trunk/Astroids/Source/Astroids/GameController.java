@@ -24,8 +24,8 @@ public class GameController extends Thread implements Runnable {
 
 	// [setup]
 	// Window
-	private int windowX = 1366/2-200; // std 600
-	private int windowY = 768/2-25; // std 400
+	private int windowX = 1366 / 2 - 200; // std 600
+	private int windowY = 768 / 2 - 25; // std 400
 	private int frames = 30;
 	// Ship
 	private double keyAcelleration = 0.2;
@@ -33,7 +33,6 @@ public class GameController extends Thread implements Runnable {
 	private double maxSpeed = 10;
 	private int framesPerShot = 10; // how many frames between the shots!
 	// Astro
-	private int astroCount = 5;
 	private int astroSize = 30;
 	private int astroEdge = 24;
 	// [setup/]
@@ -46,7 +45,10 @@ public class GameController extends Thread implements Runnable {
 	private SpaceShip spaceShip;
 	private GUIController gUIController;
 	private CollisionDetector collisionDetector;
-	private int health = 100;
+	private int startHealth = 100;
+	private int health = startHealth;
+	private int astroStart = 5;
+	private int astroCount = astroStart;
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
@@ -114,12 +116,8 @@ public class GameController extends Thread implements Runnable {
 
 	}
 
-	public boolean playerDieEvent() {
-		if (health > 0) {
-			return false;
-		} else {
-			return true;
-		}
+	public void playerDieEvent() {
+		gUIController.gameOverScreen();
 	}
 
 	/**
@@ -200,7 +198,9 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public synchronized void removeSprites(Sprite sprite) {
-		this.removals.add(sprite);
+		if (!(sprite instanceof SpaceShip)) {
+			this.removals.add(sprite);
+		}
 	}
 
 	public synchronized void deleteSprite(Sprite sprite) {
@@ -291,11 +291,16 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void restart() {
-		health=100;
-		
+		for (Sprite sprite : sprites) {
+			removeSprites(sprite);
+		}
+		spaceShip.setVector(new Vector(0, 90));
+		spaceShip.setCenterPoint(new Point(0, 0));
+		health = startHealth;
+		astroCount = astroStart;
 	}
 
 	public int getLevel() {
-		return 0;
+		return astroCount - astroStart;
 	}
 }

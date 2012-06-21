@@ -10,7 +10,6 @@ import Shapes.Line;
  * @version (0.4)
  */
 public class Rocket extends Sprite {
-	// FIXME redo weapons livetime
 
 	private int lifeTimeFrame;
 
@@ -43,7 +42,7 @@ public class Rocket extends Sprite {
 		if (this.getAmount() < gameController.getMaxSpeed() * 2) {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
-		if (lifeTimeFrame <= 0) {
+		if ((lifeTimeFrame <= 0) && !gameController.cheat) {
 			destroy(this);
 		}
 		lifeTimeFrame--;
@@ -56,12 +55,11 @@ public class Rocket extends Sprite {
 	 */
 	@Override
 	public void destroy(Sprite collider) {
-		if (!(collider instanceof SpaceShip || collider instanceof Rocket)) {
+		if (!(collider instanceof SpaceShip)) {
 			gameController.removeSprites(this);
 			if (!(collider.equals(this))) {
 				gameController.healthChange(1);
 			}
-
 		}
 	}
 }

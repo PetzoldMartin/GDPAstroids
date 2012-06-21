@@ -246,8 +246,8 @@ public class GUIController extends Thread {
 	 * reicht den Zustand des Playerstatuses weiter
 	 * @return der Zustand des Playerstatuses
 	 */
-	protected boolean playerDieEvent() {
-		return gameController.playerDieEvent();
+	public void gameOverScreen() {
+		
 	}
 
 	/**
