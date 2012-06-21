@@ -170,7 +170,7 @@ public class WhiteboardControllPanel {
 					.getEditor()).getTextField();
 			JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
 					.getEditor()).getTextField();
-			textFieldAngle.setText(gUIController.accelerationToString());
+			textFieldAngle.setText(gUIController.accelerationToStringForJSpinner());
 			textFieldVelocity.setText(gUIController.speedToString());
 		}
 	
@@ -201,6 +201,7 @@ public class WhiteboardControllPanel {
 			public void stateChanged(ChangeEvent e) {
 				gUIController.velocityChangePerInt((Integer) velocity
 						.getValue());
+				inputControllPanelWindow.requestFocus();
 			}
 		});
 		angle.addChangeListener(new ChangeListener() {
@@ -208,7 +209,7 @@ public class WhiteboardControllPanel {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				gUIController.angleChangePerInt((Integer) angle.getValue());
-
+				inputControllPanelWindow.requestFocus();
 			}
 		});
 

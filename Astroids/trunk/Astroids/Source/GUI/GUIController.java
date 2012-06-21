@@ -44,6 +44,14 @@ public class GUIController extends Thread {
 		whiteboardControllPanel.Outputrefresh();
 	}
 
+	public double getKeyAmount() {
+		return bigListener.getKeyAmount();
+	}
+
+	public double getKeyPhi() {
+		return bigListener.getKeyPhi();
+	}
+
 	/**
 	 * Die Berechnungsmethode die die Mausposition auf einem AWT Objekt entgegenimmt
 	 * und diese in einen BewegungsveKtor {@link Vector} umrechnet mit dem das {@link SpaceShip} gesteuert wird
@@ -109,6 +117,16 @@ public class GUIController extends Thread {
 		return acceleration.toString();
 	}
 
+	/**
+	 * Die Methode die den Winkel des  {@link SpaceShip} entgenimmt und als String zurueckgibt
+	 * @return der Winkel des {@link SpaceShip} als String
+	 */
+	protected String accelerationToStringForJSpinner() {
+		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
+		Integer acceleration = ac2;
+
+		return acceleration.toString();
+	}
 	/**
 	 * Die Methode die die Punkte des  Spiels entgenimmt und als String zurueckgibt
 	 * @return die Points als String
@@ -205,7 +223,7 @@ public class GUIController extends Thread {
 	protected void angleChangePerInt(int angle) {
 		gameController.getSpaceShip().setVector(
 				new Vector(gameController.getSpaceShip().getVector()
-						.getAmount(), angle + 180));
+						.getAmount(), angle));
 	}
 
 	/**
@@ -261,13 +279,5 @@ public class GUIController extends Thread {
 	protected String levelToString() {
 		Integer level = (int) gameController.getLevel();
 		return level.toString();
-	}
-
-	public double getKeyAmount() {
-		return bigListener.getKeyAmount();
-	}
-
-	public double getKeyPhi() {
-		return bigListener.getKeyPhi();
 	}
 }
