@@ -42,7 +42,7 @@ public abstract class Sprite extends Figure {
 		this.centerPoint = new Point(0, 0);
 		this.vector = new Vector(0, 90);
 		this.rotationPhi = 0;
-		this.addShape(new Circle((int) radius, this.centerPoint, Color.RED,
+		this.addShape(new Circle((int) radius, this.centerPoint, Color.BLACK,
 				false));
 	}
 

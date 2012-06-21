@@ -110,7 +110,7 @@ public class SpaceShip extends Sprite {
 			new Rocket(this);
 			fireCounter = framesPerShot;
 		} else {
-			System.out.println("Gun not ready!!! " + fireCounter);
+			gameController.guiOutPut("Gun reloaded in " + fireCounter);
 		}
 
 	}

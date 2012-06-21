@@ -307,4 +307,9 @@ public class GameController extends Thread implements Runnable {
 	public int getLevel() {
 		return astroCount - astroStart;
 	}
+
+	public void guiOutPut(String string) {
+		//TODO implemet the Gui output
+	}
+	
 }
