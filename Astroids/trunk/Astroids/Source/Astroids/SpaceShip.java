@@ -76,8 +76,8 @@ public class SpaceShip extends Sprite {
 		}
 		rotationPhi = this.getPhi();
 		super.update();
-		if (fireCounter>0) {
-			gameController.guiOutPut("Gun Reloading: " + fireCounter--);
+		if (fireCounter>0 && fireCounter--%3==0) {
+			gameController.guiOutPut("Gun Reloading: " + fireCounter/3);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class SpaceShip extends Sprite {
 	 * create a rocket @ position & with the vector of this SpaceShip
 	 * 
 	 * @param framesPerShot
-	 *            how mandy frames wait after a shot to fire again
+	 *            how many frames wait after a shot to fire again
 	 */
 	public void fire(int framesPerShot) {
 		if ((fireCounter <= 0) || gameController.cheat) {
