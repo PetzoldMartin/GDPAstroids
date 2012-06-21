@@ -40,8 +40,8 @@ public class Astroid extends Sprite {
 			astroList.add(new Vector(radius - radius / (radius / 5)
 					* Math.random(), phi));
 		}
-		this.addShape(new Circle(radius/2, this.getCenterPoint(),Color.BLACK,true));
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
+//		this.addShape(new Circle(radius/2, this.getCenterPoint(),Color.BLACK,true));
 		this.setVector(vector);
 		this.rotationPhi = Math.random() * 12 - 6;
 		// TODO places Astroids only at the corners!

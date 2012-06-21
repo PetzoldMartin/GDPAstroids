@@ -76,7 +76,9 @@ public class SpaceShip extends Sprite {
 		}
 		rotationPhi = this.getPhi();
 		super.update();
-		fireCounter--;
+		if (fireCounter>0) {
+			gameController.guiOutPut("Gun Reloading: " + fireCounter--);
+		}
 	}
 
 	/**
@@ -109,10 +111,7 @@ public class SpaceShip extends Sprite {
 		if ((fireCounter <= 0) || gameController.cheat) {
 			new Rocket(this);
 			fireCounter = framesPerShot;
-		} else {
-			gameController.guiOutPut("Gun reloaded in " + fireCounter);
 		}
-
 	}
 
 	/*

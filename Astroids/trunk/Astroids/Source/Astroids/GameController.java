@@ -156,8 +156,8 @@ public class GameController extends Thread implements Runnable {
 	 * check how many objects @ drawboard and generating new objects
 	 */
 	public void checkObjects() {
-		if (health >= 150) {
-			health-=50;
+		if (health >= 120) {
+			health -= 20;
 			astroCount++;
 		}
 		if (Astroid.getCounter() < astroCount) {
@@ -183,7 +183,12 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
-		new Astroid(astroEdge, astroSize);
+		if (cheat) {
+			System.out.println("RocketSpam!!!");
+			for (int i = 0; i <1; i++) {
+				new Rocket(spaceShip).changeDirection(i);
+			}
+		}
 	}
 
 	public void spaceKey() {
@@ -309,7 +314,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void guiOutPut(String string) {
-		gUIController.outPutString(string,frames/3);
+		gUIController.outPutString(string,3);
 	}
-	
+
 }
