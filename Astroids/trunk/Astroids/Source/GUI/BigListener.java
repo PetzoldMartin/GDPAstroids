@@ -24,7 +24,7 @@ public class BigListener implements KeyListener, WindowListener,
 	private double keyAmount = 0;// der Interne Speicher für KeyAmount
 	private double keyPhi = 0;// der Interne Speicher für KeyPhi
 	private GameController gameController;// der intern benutzte Gamecontroller
-	boolean alternativeControll = true;// boolean für einschalten und
+	boolean alternativeControll = false;// boolean für einschalten und
 	// ausschalten der Alternativen
 	// Steuerung
 	private GUIController gUIController;//der interne GUIController

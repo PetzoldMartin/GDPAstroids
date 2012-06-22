@@ -221,7 +221,7 @@ public class WhiteboardControllPanel {
 	 * Methode fuer das adden der JFrameButtonContainerKomponenten
 	 */
 	private void buildJFrameButtonContainer() {
-		JButton ControllChange = new JButton("Alternative Controll deactivate");
+		JButton ControllChange = new JButton("Alternative Controll activate");
 		JButton JspinnerControll = new JButton("Jspinner Activate");
 		JButton cheat = new JButton("cheat Activate");
 		ControllChange.addActionListener(new EffectActionListener(
