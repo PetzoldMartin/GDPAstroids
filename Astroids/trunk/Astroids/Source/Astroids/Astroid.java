@@ -14,7 +14,6 @@ import Shapes.Polygon;
  * @version (0.4)
  */
 public class Astroid extends Sprite {
-	// FIXME astroid generation
 	private int edge;
 	private static int count = 0;
 
@@ -45,6 +44,7 @@ public class Astroid extends Sprite {
 		this.rotationPhi = Math.random() * 12 - 6;
 		this.move(centerPoint);
 	}
+
 	/**
 	 * create new Astroid
 	 * 
@@ -94,18 +94,12 @@ public class Astroid extends Sprite {
 	 *            orthogonal split vector
 	 */
 	public void split(Vector vector) {
-		// TODO redo vector of new Astroids!!!
-		if (this.edge > 12) {
+		if (this.radius > 15) {
 			for (int i = -1; i <= 1; i += 2) {
-				new Astroid(
-						//FIXME radius / edge scaling
-						(int) (edge + edge / 2 - Math.random() * edge) * 2 / 4,
-						(int) radius * 2 / 3, new Vector(this.getVector().move(
-								new Vector(this.getVector().getAmount() / -2,
-										90 * i + vector.getPhi()))), this
-								.getCenterPoint().move(
-										new Vector(radius * 2 / 3, vector
-												.getPhi() - 90 * i)));
+				new Astroid(	(int) (edge * 4 / 5),
+								(int) radius * 2 / 3,
+								new Vector((+this.getAmount()/2),this.getPhi()- i *90).move(new Vector(Math.sqrt(vector.getAmount()),vector.getPhi()+45 * i)),
+								this.getCenterPoint().move(new Vector(radius * 2 / 3, vector.getPhi() + 90 * i)));
 			}
 		}
 	}

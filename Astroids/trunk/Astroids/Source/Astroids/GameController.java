@@ -231,9 +231,10 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
-		if (cheat) {
+		if (cheat && spawnCooldown<=0) {
 			System.out.println("RocketSpam!!!");
-			for (int i = 0; i < 360; i++) {
+			for (int i = 0; i < 360; i+=2) {
+				spawnCooldown=frames/2;
 				Rocket spamed = new Rocket(spaceShip);
 				spamed.rotate(i);
 				spamed.changeDirection(i);
