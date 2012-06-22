@@ -35,6 +35,21 @@ public class Rocket extends Sprite {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
+	 */
+	@Override
+	public void destroy(Sprite collider) {
+		if (!(collider instanceof SpaceShip) && !(collider instanceof Rocket)) {
+			gameController.removeSprites(this);
+			if ((collider!=(null))) {
+				gameController.healthChange(1);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see Astroids.Sprite#update()
 	 */
 	@Override
@@ -47,20 +62,5 @@ public class Rocket extends Sprite {
 			destroy(null);
 		}
 		lifeTimeFrame--;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
-	 */
-	@Override
-	public void destroy(Sprite collider) {
-		if (!(collider instanceof SpaceShip) && !(collider instanceof Rocket)) {
-			gameController.removeSprites(this);
-			if ((collider!=(null))) {
-				gameController.healthChange(1);
-			}
-		}
 	}
 }

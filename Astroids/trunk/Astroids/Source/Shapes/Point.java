@@ -23,6 +23,50 @@ public class Point {
 	}
 
 	/**
+	 * @return a new point that is a copy of this one
+	 */
+
+	public Point copy() {
+		return new Point(getX(), getY());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof Point) {
+			Point otherPoint = (Point) obj;
+			if (this.getX() == (otherPoint.getX())
+					& this.getY() == (otherPoint.getY())) {
+				return true;
+			} else
+				return false;
+		} else
+			return false;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	/**
+	 * @return an inverted Point of this Point
+	 */
+	public Point invert() {
+		return new Point(-getX(), -getY());
+	}
+
+	/**
 	 * move the point by dx & dy on Whiteboard
 	 * 
 	 * @param dX
@@ -64,50 +108,6 @@ public class Point {
 					* Math.cos(phi);
 			this.move(center);
 		}
-	}
-
-	/**
-	 * @return an inverted Point of this Point
-	 */
-	public Point invert() {
-		return new Point(-getX(), -getY());
-	}
-
-	/**
-	 * @return a new point that is a copy of this one
-	 */
-
-	public Point copy() {
-		return new Point(getX(), getY());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof Point) {
-			Point otherPoint = (Point) obj;
-			if (this.getX() == (otherPoint.getX())
-					& this.getY() == (otherPoint.getY())) {
-				return true;
-			} else
-				return false;
-		} else
-			return false;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
 	}
 
 	public void setX(double x) {

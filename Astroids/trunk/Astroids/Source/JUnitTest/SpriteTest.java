@@ -26,6 +26,46 @@ public class SpriteTest extends TestCase {
 	}
 
 	@Test
+	public void testAddShape() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testDraw() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetMiddlePoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testMove() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testMovePoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testRotateDouble() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testRotatePointDouble() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSetMiddlePoint() {
+		fail("Not yet implemented");
+	}
+
+	@Test
 	public void testSprite() {
 		test.move(new Point(0, 100));
 		System.out.println(test.getCenterPoint().getX() + "  "
@@ -49,46 +89,6 @@ public class SpriteTest extends TestCase {
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMove() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRotateDouble() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMiddlePoint() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetMiddlePoint() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDraw() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMovePoint() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRotatePointDouble() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddShape() {
 		fail("Not yet implemented");
 	}
 

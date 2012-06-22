@@ -13,66 +13,49 @@ import Shapes.Point;
 public class CollisionDetectorTests {
 	private CollisionDetector collisionDetector;
 
-	@Before
-	public void setUp() {
-		collisionDetector = new CollisionDetector();
-	}
-
 	@Test
-	public void linesCollideTests() {
+	public void circlesCollideTests() {
 		{
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(1, 3), new Point(3, 1));
-
-			Assert.assertTrue(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(1, new Point(1, 1));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			// special case (identical lines)
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(1, 1), new Point(3, 3));
-
-			Assert.assertTrue(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(2, new Point(2, 2));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			// special case (line l2 is a point)
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(2, 2), new Point(2, 2));
-
-			Assert.assertTrue(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(1, new Point(0, 2));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			// special case (lines are both points and coincidental
-			// (overlapping))
-			Line l1 = new Line(new Point(1, 1), new Point(1, 1));
-			Line l2 = new Line(new Point(1, 1), new Point(1, 1));
-
-			Assert.assertTrue(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(1, new Point(2, 0));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			// special case (parallel lines)
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(1, 1.1), new Point(3, 3.1));
-
-			Assert.assertFalse(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(0.9, new Point(2, 0));
+			Assert.assertFalse(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			// special case (coincidental (overlapping) lines)
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(0, 0), new Point(4, 4));
-
-			Assert.assertTrue(collisionDetector.collide(l1, l2));
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(1.1, new Point(1, 1));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
 		}
-
 		{
-			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
-			Line l2 = new Line(new Point(3.01, 3), new Point(4, 4));
-
-			Assert.assertFalse(collisionDetector.collide(l1, l2));
+			// special case (identical circles)
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(1, new Point(0, 0));
+			Assert.assertTrue(collisionDetector.collide(c1, c2));
+		}
+		{
+			// special case (circle within circle)
+			Circle c1 = new Circle(1, new Point(0, 0));
+			Circle c2 = new Circle(0.5, new Point(0, 0));
+			Assert.assertFalse(collisionDetector.collide(c1, c2));
 		}
 	}
 
@@ -147,48 +130,65 @@ public class CollisionDetectorTests {
 	}
 
 	@Test
-	public void circlesCollideTests() {
+	public void linesCollideTests() {
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(1, new Point(1, 1));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(1, 3), new Point(3, 1));
+
+			Assert.assertTrue(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(2, new Point(2, 2));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			// special case (identical lines)
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(1, 1), new Point(3, 3));
+
+			Assert.assertTrue(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(1, new Point(0, 2));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			// special case (line l2 is a point)
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(2, 2), new Point(2, 2));
+
+			Assert.assertTrue(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(1, new Point(2, 0));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			// special case (lines are both points and coincidental
+			// (overlapping))
+			Line l1 = new Line(new Point(1, 1), new Point(1, 1));
+			Line l2 = new Line(new Point(1, 1), new Point(1, 1));
+
+			Assert.assertTrue(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(0.9, new Point(2, 0));
-			Assert.assertFalse(collisionDetector.collide(c1, c2));
+			// special case (parallel lines)
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(1, 1.1), new Point(3, 3.1));
+
+			Assert.assertFalse(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(1.1, new Point(1, 1));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			// special case (coincidental (overlapping) lines)
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(0, 0), new Point(4, 4));
+
+			Assert.assertTrue(collisionDetector.collide(l1, l2));
 		}
+
 		{
-			// special case (identical circles)
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(1, new Point(0, 0));
-			Assert.assertTrue(collisionDetector.collide(c1, c2));
+			Line l1 = new Line(new Point(1, 1), new Point(3, 3));
+			Line l2 = new Line(new Point(3.01, 3), new Point(4, 4));
+
+			Assert.assertFalse(collisionDetector.collide(l1, l2));
 		}
-		{
-			// special case (circle within circle)
-			Circle c1 = new Circle(1, new Point(0, 0));
-			Circle c2 = new Circle(0.5, new Point(0, 0));
-			Assert.assertFalse(collisionDetector.collide(c1, c2));
-		}
+	}
+
+	@Before
+	public void setUp() {
+		collisionDetector = new CollisionDetector();
 	}
 }

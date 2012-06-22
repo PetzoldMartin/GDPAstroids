@@ -18,9 +18,17 @@ import Shapes.Shape;
  */
 public abstract class Sprite extends Figure {
 	protected static GameController gameController;
+	/**
+	 * @param gameController
+	 *            GameController to set
+	 */
+	public static void setGameController(GameController gameController) {
+		Sprite.gameController = gameController;
+	}
 	protected double radius = 0;
 	private Vector vector;
 	private Point centerPoint;
+
 	protected double rotationPhi;
 
 	// TODO overlay implementation
@@ -43,16 +51,12 @@ public abstract class Sprite extends Figure {
 				false));
 	}
 
-	/**
-	 * Update the Sprite by one tact (frame) move the Sprite, checks corner
-	 * collision and warp to the other corner
-	 */
-	public void update() {
-		this.move(vector);
-		Point cornerWarp = getEdgeWarp();
-		if (!cornerWarp.equals(new Point(0, 0))) {
-			move(cornerWarp);
-		}
+	protected void changeDirection(double phi) {
+		vector.changeDirection(phi);
+	}
+
+	protected void changeSpeed(double amount) {
+		vector.changeSpeed(amount);
 	}
 
 	/**
@@ -70,6 +74,77 @@ public abstract class Sprite extends Figure {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * destroy the Object by an collider
+	 * 
+	 * @param collider
+	 *            sprite that destroy the object
+	 */
+	public abstract void destroy(Sprite collider);
+
+	// TODO implemts effects
+
+	protected double getAmount() {
+		return vector.getAmount();
+	}
+
+	/**
+	 * @return a copy of the CenterPoint of this Sprite
+	 */
+	public Point getCenterPoint() {
+		return this.centerPoint.copy();
+	}
+
+	/**
+	 * check the Sprite position and if it is out of GameScreen return the right
+	 * warping point to move
+	 * 
+	 * @return Point to move to the other corner
+	 */
+	protected Point getEdgeWarp() {
+		Point returnPoint = new Point(0, 0);
+		if (Math.abs(this.centerPoint.getX()) >= gameController
+				.getGameScreenX()) {
+			if (this.centerPoint.getX() >= gameController.getGameScreenX()
+					- gameController.getAstroSize()) {
+				returnPoint.move(-gameController.getGameScreenX() * 2, 0); // right
+			} else {
+				returnPoint.move(gameController.getGameScreenX() * 2, 0); // left
+			}
+		}
+		if (Math.abs(this.centerPoint.getY()) >= gameController
+				.getGameScreenY()) {
+			if (this.centerPoint.getY() >= gameController.getGameScreenY()) {
+				returnPoint.move(0, -gameController.getGameScreenY() * 2); // upper
+			} else {
+				returnPoint.move(0, gameController.getGameScreenY() * 2); // bottom
+			}
+		}
+		return returnPoint;
+	}
+
+	protected double getPhi() {
+		return vector.getPhi();
+	}
+
+	public Vector getVector() {
+		return vector;
+	}
+
+	// public Sprite addOverlayShape(Drawable aDrawable) {
+	// overlay.add(aDrawable);
+	// return this;
+	// }
+
+	/**
+	 * move the Sprite by the Vector around the drawboard
+	 * 
+	 * @return this Sprite
+	 */
+	public Sprite move() {
+		return (Sprite) super.move(vector);
 	}
 
 	/**
@@ -111,25 +186,6 @@ public abstract class Sprite extends Figure {
 	}
 
 	/**
-	 * destroy the Object by an collider
-	 * 
-	 * @param collider
-	 *            sprite that destroy the object
-	 */
-	public abstract void destroy(Sprite collider);
-
-	// TODO implemts effects
-
-	/**
-	 * move the Sprite by the Vector around the drawboard
-	 * 
-	 * @return this Sprite
-	 */
-	public Sprite move() {
-		return (Sprite) super.move(vector);
-	}
-
-	/**
 	 * rotate the Sprite around his CenterPoint
 	 * 
 	 * @param phi
@@ -138,34 +194,6 @@ public abstract class Sprite extends Figure {
 	 */
 	protected Drawable rotate(double phi) {
 		return this.rotate(centerPoint, phi);
-	}
-
-	/**
-	 * check the Sprite position and if it is out of GameScreen return the right
-	 * warping point to move
-	 * 
-	 * @return Point to move to the other corner
-	 */
-	protected Point getEdgeWarp() {
-		Point returnPoint = new Point(0, 0);
-		if (Math.abs(this.centerPoint.getX()) >= gameController
-				.getGameScreenX()) {
-			if (this.centerPoint.getX() >= gameController.getGameScreenX()
-					- gameController.getAstroSize()) {
-				returnPoint.move(-gameController.getGameScreenX() * 2, 0); // right
-			} else {
-				returnPoint.move(gameController.getGameScreenX() * 2, 0); // left
-			}
-		}
-		if (Math.abs(this.centerPoint.getY()) >= gameController
-				.getGameScreenY()) {
-			if (this.centerPoint.getY() >= gameController.getGameScreenY()) {
-				returnPoint.move(0, -gameController.getGameScreenY() * 2); // upper
-			} else {
-				returnPoint.move(0, gameController.getGameScreenY() * 2); // bottom
-			}
-		}
-		return returnPoint;
 	}
 
 	/**
@@ -179,47 +207,19 @@ public abstract class Sprite extends Figure {
 		this.move(centerPoint);
 	}
 
-	/**
-	 * @return a copy of the CenterPoint of this Sprite
-	 */
-	public Point getCenterPoint() {
-		return this.centerPoint.copy();
-	}
-
-	// public Sprite addOverlayShape(Drawable aDrawable) {
-	// overlay.add(aDrawable);
-	// return this;
-	// }
-
-	/**
-	 * @param gameController
-	 *            GameController to set
-	 */
-	public static void setGameController(GameController gameController) {
-		Sprite.gameController = gameController;
-	}
-
-	public Vector getVector() {
-		return vector;
-	}
-
-	protected double getAmount() {
-		return vector.getAmount();
-	}
-
-	protected double getPhi() {
-		return vector.getPhi();
-	}
-
-	protected void changeDirection(double phi) {
-		vector.changeDirection(phi);
-	}
-
-	protected void changeSpeed(double amount) {
-		vector.changeSpeed(amount);
-	}
-
 	public void setVector(Vector vector) {
 		this.vector = vector;
+	}
+
+	/**
+	 * Update the Sprite by one tact (frame) move the Sprite, checks corner
+	 * collision and warp to the other corner
+	 */
+	public void update() {
+		this.move(vector);
+		Point cornerWarp = getEdgeWarp();
+		if (!cornerWarp.equals(new Point(0, 0))) {
+			move(cornerWarp);
+		}
 	}
 }

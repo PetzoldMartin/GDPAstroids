@@ -45,64 +45,26 @@ public class Vector extends Shapes.Point {
 		setVector(point);
 	}
 
-	@Override
-	public Vector move(Point point) {
-		super.move(point);
-		setVector(this);
-		return this;
-	}
-
-	@Override
-	public Vector move(double dX, double dY) {
-		super.move(dX, dY);
-		setVector(this);
-		return this;
-	}
-
-	@Override
-	public Vector invert() {
-		super.invert();
-		setVector(this);
-		return this;
-	}
-
 	/**
-	 * Set this Vector by a Point phi : -180 <-> 180
+	 * Change only the phi of this vector
 	 * 
-	 * @param point
-	 *            new vector to set
+	 * @param phi
+	 *            angel of the vector
+	 * @return this
 	 */
-	private void setVector(Point point) {
-		this.setX(point.getX());
-		this.setY(point.getY());
-		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
-				+ Math.pow(this.getY(), 2.0));
-		this.phi = (Math.toDegrees(Math.atan(point.getY() / point.getX())));
-		if (Double.isNaN(phi)) {
-			phi = 0;
-		}
-		if (x < 0) {
-			if (y < 0) {
-				this.phi -= 180;
-			} else {
-				this.phi += 180;
-			}
-		}
+	public Vector changeDirection(double phi) {
+		return changeVector(0, phi);
 	}
 
 	/**
-	 * Set this Vector by amount and phi
+	 * Change only the amount of this vector
 	 * 
 	 * @param amount
 	 *            lenght of the vector
-	 * @param phi
-	 *            angel of the vector
+	 * @return this
 	 */
-	private void setVector(double amount, double phi) {
-		this.amount = amount;
-		this.phi = phi;
-		this.x = amount * Math.cos(Math.toRadians(phi));
-		this.y = amount * Math.sin(Math.toRadians(phi));
+	public Vector changeSpeed(double amount) {
+		return changeVector(amount, 0);
 	}
 
 	/**
@@ -128,28 +90,6 @@ public class Vector extends Shapes.Point {
 	public Vector changeVector(Point vector) {
 		this.move(vector);
 		return this;
-	}
-
-	/**
-	 * Change only the phi of this vector
-	 * 
-	 * @param phi
-	 *            angel of the vector
-	 * @return this
-	 */
-	public Vector changeDirection(double phi) {
-		return changeVector(0, phi);
-	}
-
-	/**
-	 * Change only the amount of this vector
-	 * 
-	 * @param amount
-	 *            lenght of the vector
-	 * @return this
-	 */
-	public Vector changeSpeed(double amount) {
-		return changeVector(amount, 0);
 	}
 
 	/*
@@ -178,5 +118,65 @@ public class Vector extends Shapes.Point {
 
 	public double getPhi() {
 		return phi;
+	}
+
+	@Override
+	public Vector invert() {
+		super.invert();
+		setVector(this);
+		return this;
+	}
+
+	@Override
+	public Vector move(double dX, double dY) {
+		super.move(dX, dY);
+		setVector(this);
+		return this;
+	}
+
+	@Override
+	public Vector move(Point point) {
+		super.move(point);
+		setVector(this);
+		return this;
+	}
+
+	/**
+	 * Set this Vector by amount and phi
+	 * 
+	 * @param amount
+	 *            lenght of the vector
+	 * @param phi
+	 *            angel of the vector
+	 */
+	private void setVector(double amount, double phi) {
+		this.amount = amount;
+		this.phi = phi;
+		this.x = amount * Math.cos(Math.toRadians(phi));
+		this.y = amount * Math.sin(Math.toRadians(phi));
+	}
+
+	/**
+	 * Set this Vector by a Point phi : -180 <-> 180
+	 * 
+	 * @param point
+	 *            new vector to set
+	 */
+	private void setVector(Point point) {
+		this.setX(point.getX());
+		this.setY(point.getY());
+		this.amount = Math.sqrt(Math.pow(this.getX(), 2.0)
+				+ Math.pow(this.getY(), 2.0));
+		this.phi = (Math.toDegrees(Math.atan(point.getY() / point.getX())));
+		if (Double.isNaN(phi)) {
+			phi = 0;
+		}
+		if (x < 0) {
+			if (y < 0) {
+				this.phi -= 180;
+			} else {
+				this.phi += 180;
+			}
+		}
 	}
 }

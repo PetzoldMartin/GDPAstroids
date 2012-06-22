@@ -40,21 +40,6 @@ public class Rectangle extends Polygon {
 	}
 
 	/**
-	 * rotate the Rectangle on the whiteboard around center
-	 * 
-	 * @param center
-	 *            point to rotate around
-	 * @param phi
-	 *            angel to rotate return itself as object
-	 */
-	@Override
-	public Rectangle rotate(Point center, double phi) {
-		super.rotate(center, phi);
-		this.phi -= Math.toRadians(phi) % (Math.PI * 2);
-		return this;
-	}
-
-	/**
 	 * draw the shape rectangle on the whiteboard
 	 */
 	@Override
@@ -86,5 +71,20 @@ public class Rectangle extends Polygon {
 				return false;
 		} else
 			return false;
+	}
+
+	/**
+	 * rotate the Rectangle on the whiteboard around center
+	 * 
+	 * @param center
+	 *            point to rotate around
+	 * @param phi
+	 *            angel to rotate return itself as object
+	 */
+	@Override
+	public Rectangle rotate(Point center, double phi) {
+		super.rotate(center, phi);
+		this.phi -= Math.toRadians(phi) % (Math.PI * 2);
+		return this;
 	}
 }
