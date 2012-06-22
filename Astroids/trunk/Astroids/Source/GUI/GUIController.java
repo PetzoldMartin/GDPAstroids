@@ -246,7 +246,7 @@ public class GUIController extends Thread {
 	 * @return der Zustand des Cheatmodus
 	 */
 	protected boolean getCheat() {
-		return gameController.cheat;
+		return gameController.isCheat();
 	}
 
 	/**

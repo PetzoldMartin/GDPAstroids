@@ -65,15 +65,15 @@ public class VectorTest {
 
 	@Test
 	public void testChangeVectorDoubleDouble() {
-		// s1.changeVector(1, 1);
-		// assertEquals(
-		// "der Vector wurde bei Positiven Werten mit Amount und Phi nicht wie erwartet ver�ndert",
-		// new Vector(1, 1), s1); //<--
-		// s1.changeVector(-2, -2);
-		// assertEquals(
-		// "der Vector wurde bei Negativen Werten mit Amount und Phi nicht wie erwartet ver�ndert",
-		// new Vector(-1, -1), s1); //<--
-		// FIXME amount & phi not a point!!!
+		 s1.changeVector(1, 1);
+		 System.out.println(s1.getPhi());
+		 assertEquals(
+		 "der Vector wurde bei Positiven Werten mit Amount und Phi nicht wie erwartet ver�ndert",
+		 new Vector(1, -1), s1); //<--
+		 s1.changeVector(-2, -2);
+		 assertEquals(
+		 "der Vector wurde bei Negativen Werten mit Amount und Phi nicht wie erwartet ver�ndert",
+		 new Vector(-1, 1), s1); //<--
 	}
 
 	@Test

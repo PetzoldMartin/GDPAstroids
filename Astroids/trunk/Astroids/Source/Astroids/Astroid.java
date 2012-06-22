@@ -3,7 +3,6 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import Shapes.Circle;
 import Shapes.Point;
 import Shapes.Polygon;
 
@@ -11,7 +10,7 @@ import Shapes.Polygon;
  * class that manage a Astroid
  * 
  * @author (Martin Petzold , Markus Krummnacker)
- * @version (0.4)
+ * @version (0.5)
  */
 public class Astroid extends Sprite {
 	private int edge;
@@ -91,13 +90,13 @@ public class Astroid extends Sprite {
 	 * create 2 new astroids @ position of this
 	 * 
 	 * @param vector
-	 *            orthogonal split vector
+	 *            split vector from collider sprite
 	 */
 	public void split(Vector vector) {
 		if (this.radius > 15) {
 			for (int i = -1; i <= 1; i += 2) {
-				new Astroid(	(int) (edge * 4 / 5),
-								(int) radius * 2 / 3,
+				new Astroid(	(edge * 4 / 5),
+								(int) (radius * 2/3) ,
 								new Vector((+this.getAmount()/2),this.getPhi()- i *90).move(new Vector(Math.sqrt(vector.getAmount()),vector.getPhi()+45 * i)),
 								this.getCenterPoint().move(new Vector(radius * 2 / 3, vector.getPhi() + 90 * i)));
 			}
@@ -108,6 +107,7 @@ public class Astroid extends Sprite {
 		return count;
 	}
 
+	@Override
 	public void remove() {
 		super.remove();
 		count--;

@@ -80,7 +80,7 @@ public class BigListener implements KeyListener, WindowListener,
 			keyAmount = -gameController.getKeyAcelleration();
 			break;
 		case KeyEvent.VK_ENTER:
-			gameController.setTestflag(true);
+			gameController.setTestFlag(true);
 			break;
 		case KeyEvent.VK_PAUSE:
 			gameController.pause();
@@ -127,7 +127,7 @@ public class BigListener implements KeyListener, WindowListener,
 			keyAmount = 0;
 			break;
 		case KeyEvent.VK_ENTER:
-			gameController.setTestflag(false);
+			gameController.setTestFlag(false);
 			break;
 		default:
 			break;
