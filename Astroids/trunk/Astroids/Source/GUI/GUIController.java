@@ -19,7 +19,7 @@ import Teaching.WhiteBoard;
 public class GUIController extends Thread {
 	private GameController gameController;// der intern benutzte Gamecontroller
 	private WhiteboardControllPanel whiteboardControllPanel;//das WhiteboardControllPanel
-	boolean alternativeControll = true;// boolean fuer einschalten und
+	boolean alternativeControll = false;// boolean fuer einschalten und
 										// ausschalten der Alternativen
 										// Steuerung
 	private BigListener bigListener;//der Interne Biglistener der mit dem Gamecontroller bekannt gemacht wird
