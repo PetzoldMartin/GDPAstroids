@@ -36,29 +36,347 @@ import Shapes.Shape;
  */
 public class WhiteboardControllPanel {
 
+	/**
+	 * Die Innere Klasse fuer Das accelerationOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class accelerationOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1453L;
+
+		public accelerationOutput(String name) {
+			super(name);
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("Angle: " + gUIController.accelerationToString(),
+					LabelX, LabelY);
+		}
+
+	}
+	/**
+	 * Die Innere Klasse fuer einen ActionListener der die AWT oder Jframe
+	 * Komponente verwenden kann
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	abstract class EffectActionListener implements ActionListener {
+		private Component component;
+
+		public EffectActionListener(Component component) {
+			this.component = component;
+
+		}
+
+		@Override
+		public abstract void actionPerformed(ActionEvent e);
+
+		public Component getComponent() {
+			return component;
+		}
+
+	}
+	/**
+	 * Die Innere Klasse fuer Das EndScreenlevelOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class EndScreenlevelOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 124L;
+
+		public EndScreenlevelOutput(String name) {
+			super(name);
+			this.setFont(new Font("Serif", Font.PLAIN, gUIController
+					.getWindowX() / 6));
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(0, 255, 0));
+			g.drawString(
+					"Ihr erreichtes Level ist: "
+							+ gUIController.levelToString(), LabelX, 90);
+
+		}
+
+	}
+	/**
+	 * Die Innere Klasse fuer Das GameoverScreen Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class GameoverScreen extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 122L;
+
+		public GameoverScreen(String name) {
+			super(name);
+			this.setSize(gUIController.getWindowX() * 2 + 300,
+					gUIController.getWindowY() * 2 - 200);
+			this.setFont(new Font("Serif", Font.PLAIN, (int) (gUIController
+					.getWindowX() / 2.5)));
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 0, 0));
+			g.drawString("GAMEOVER", gUIController.getWindowX() / 7,
+					gUIController.getWindowY());
+
+		}
+
+	}
+	/**
+	 * Die Innere Klasse fuer Das InputControllPanelWindow Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class InputControllPanelWindow extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1654L;
+
+		public InputControllPanelWindow(String name) {
+			super(name);
+		}
+
+		@Override
+		/**
+		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
+		 */
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(100, 100, 100));
+			g.fillOval(70, 70, 160, 160);
+			g.setColor(new Color(50, 50, 50));
+			g.drawLine(0, 150, 300, 150);
+			g.drawLine(150, 0, 150, 300);
+
+		}
+
+	}
+										/**
+	 * Die Innere Klasse fuer Das LevelOutput Fenster
+	 * @author Aismael
+	 * 
+	 */
+	class LevelOutput extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 1244L;
+
+		public LevelOutput(String name) {
+			super(name);
+		}
+
+		@Override
+		
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(0, 255, 0));
+			g.drawString("Level " + gUIController.levelToString(), LabelX,
+					LabelY);
+			g.setColor(new Color(100, 100, 100));
+			g.drawString("Astrocount: " + gUIController.astrocountToString(), LabelX+140,
+					LabelY);
+
+		}
+
+	}
+	/**
+	 * Die Innere Klasse eines Mouselistener der die Mausparameter nur weitergibt wenn die 
+	 * Alternative eingabe Aktiviert ist
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class MouseMotionListenerForAltenativeControll implements
+			MouseMotionListener {
+
+		/**
+		 * Die Methode wenn die Maus gedrueckt ist und Bewegt wird in der
+		 * Alternativen Steuerung
+		 */
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			if (bigListener.isAlternativeControll()) {
+				gUIController.mouseControlWhiteboard(arg0);
+				
+			}
+
+		}
+
+		/**
+		 * Die Methode wenn die Maus Bewegt wird in der Alternativen Steuerung
+		 */
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			if (bigListener.isAlternativeControll()) {
+				gUIController.mouseControlWhiteboard(arg0);
+				
+			}
+
+		}
+	}
+												/**
+	 * Die Innere Klasse fuer Das OutputString Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class OutputString extends BufferedAWTWindow {
+
+		private static final long serialVersionUID = 127L;
+
+		public OutputString(String name) {
+			super(name);
+		}
+
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(200, 0, 0));
+			g.drawString(gUIController.getOutPutString(), LabelX,
+					LabelY);
+
+		}
+
+	}
+	/**
+	 * Die Innere Klasse fuer Das SpielpunkteOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class PointsOutput extends BufferedAWTWindow {
+	
+		private static final long serialVersionUID = 176L;
+	
+		public PointsOutput(String name) {
+			super(name);
+		}
+	
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("Points:" + gUIController.pointsToString(), LabelX,
+					LabelY);
+		}
+	
+	}
+	/**
+	 * Die Innere Klasse fuer Das SpeedOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class speedOutPut extends BufferedAWTWindow {
+	
+		private static final long serialVersionUID = 139L;
+	
+		public speedOutPut(String name) {
+			super(name);
+		}
+	
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("Speed: " + gUIController.speedToString(), LabelX,
+					LabelY);
+		}
+	
+	}
+	/**
+	 * Die Innere Klasse fuer Das XcoordinatenOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class XOutput extends BufferedAWTWindow {
+	
+		private static final long serialVersionUID = 199L;
+	
+		public XOutput(String name) {
+			super(name);
+		}
+	
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("X:" + gUIController.xToString(), LabelX, LabelY);
+		}
+	
+	}
+																/**
+	 * Die Innere Klasse fuer Das YcoordinatenOutput Fenster
+	 * 
+	 * @author Aismael
+	 * 
+	 */
+	class YOutput extends BufferedAWTWindow {
+	
+		private static final long serialVersionUID = 188L;
+	
+		public YOutput(String name) {
+			super(name);
+		}
+	
+		@Override
+		public void paint(Graphics g) {
+			super.paint(g);
+			g.setColor(new Color(255, 255, 255));
+			g.drawString("Y:" + gUIController.yToString(), LabelX, LabelY);
+		}
+	
+	}
 	protected int LabelX = 10;// XPosition fuer Schriftausgabe
 	protected int LabelY = 25;// YPoasition fuer Schriftausgabe
 	protected boolean jSpinnerActivate = false;
 	private JFrame whiteBoard;// das Interne Whiteboard
+	
 	private JScrollPane whiteBoardInlet;// das Interne ScrollPane des
-										// Whiteboards
+	// Whiteboards
 	private GUIController gUIController;// der Interne InputController
+
 	private JPanel aWTandJframeMergecontainer;// Der Container der das Interface
-												// auf das Whiteboard bringt und
+
+	// auf das Whiteboard bringt und
 												// die Jframe und AWT Container
 												// Plaziert
 	private JPanel jFrameButtonContainer;// der Container fuer die JButtons
+
 	private JPanel aWTOutputContainer;// der Container fuer die AWT Outputs
+
 	private JPanel jSpinnerContainer;// der Container fuer die Jspinner
+
 	private InputControllPanelWindow inputControllPanelWindow;// das Interne
-																// InputControllPanelWindow
+
+	// InputControllPanelWindow
 	private JSpinner velocity;//der JSpinner f�r die Geschwindigkeit
+
 	private JSpinner angle;//der JSpinner f�r den Winkel
+
 	private JPanel gameOverContainer;// der Container fuer den Gameoverbildschirm
+
 	private BigListener bigListener;// der interne bigListener
+
 	private boolean gameOver = false;//das Boolean das ausgel�st wird wenn der Gamoverbildschirm angezeigt wird
-	
+
 	private JButton restart;//der Button f�r den Spielrestart
+
 	/**
 	 * Der Konstruktor fuer das {@link WhiteboardControllPanel} der alle
 	 * Componenten Initialisiert
@@ -148,73 +466,59 @@ public class WhiteboardControllPanel {
 		whiteBoard.requestFocus();
 	}
 
-	protected boolean isGameOver() {
-		return gameOver;
-	}
-
 	/**
-	 * die Methode zum Neuzeichnen der der GUIAnzeigen
+	 * Methode fuer das adden der AWTOutputContainerKomponenten
 	 */
-	protected void Outputrefresh() {
-	
-		if (gameOver) {
-			
-			for (Component AWTComponent : gameOverContainer.getComponents()) {
-					AWTComponent.repaint();
-				
-			}
-		} else {
-			for (Component AWTComponent : aWTOutputContainer.getComponents()) {
-				AWTComponent.repaint();
-			}
-			JFormattedTextField textFieldAngle = ((JSpinner.DefaultEditor) angle
-					.getEditor()).getTextField();
-			JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
-					.getEditor()).getTextField();
-			textFieldAngle.setText(gUIController.accelerationToStringForJSpinner());
-			textFieldVelocity.setText(gUIController.speedToString());
-		}
-	
-	}
-
-	/**
-	 * die Methode die das Spielfeld Verbirgt und den Gamoverbildschirm anzeigt
-	 */
-	protected void gameoverSight() {
-		gameOver = true;
-		whiteBoardInlet.setVisible(false);
-		aWTandJframeMergecontainer.setVisible(false);
-		whiteBoard.add(BorderLayout.WEST, gameOverContainer);
-		whiteBoardInlet.requestFocus();
-	
-	}
-
-	/**
-	 * Methode fuer das adden der JspinnerContainerKomponenten
-	 */
-	private void buildJspinnerContainer() {
-		jSpinnerContainer.add(new JLabel("Velocity"));
-		jSpinnerContainer.add(velocity);
-		jSpinnerContainer.add(new JLabel("Angle"));
-		jSpinnerContainer.add(angle);
-		velocity.addChangeListener(new ChangeListener() {
+	private void buildAWTOutputContainer() {
+		aWTOutputContainer.add(new LevelOutput("Level"));
+		aWTOutputContainer.add(new PointsOutput("Points"));
+		aWTOutputContainer.add(new BufferedAWTWindow("Coords") {
+			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				gUIController.velocityChangePerInt((Integer) velocity
-						.getValue());
-				inputControllPanelWindow.requestFocus();
+			public void paint(Graphics g) {
+				super.paint(g);
+				g.setColor(new Color(255, 255, 255));
+				g.drawString(super.name, LabelX, LabelY);
 			}
+
 		});
-		angle.addChangeListener(new ChangeListener() {
+		aWTOutputContainer.add(new XOutput("Xcoord"));
+		aWTOutputContainer.add(new YOutput("Ycoord"));
+		aWTOutputContainer.add(new speedOutPut("Speed"));
+		aWTOutputContainer.add(new accelerationOutput("acceleration"));
+		aWTOutputContainer.add(new OutputString("OutputString"));
+	}
+
+	/**
+	 * Methode fuer das adden der GameoverContainerKomponenten
+	 */
+	private void buildGameoverContainer() {
+		restart = new JButton("Restart");
+		EndScreenlevelOutput endScreenlevelOutput = new EndScreenlevelOutput("EndScreenLevel");
+		gameOverContainer.add(new GameoverScreen("Gameover"),
+				BorderLayout.CENTER);
+		restart.setFont(new Font("Serif", Font.PLAIN, 100));
+		gameOverContainer.add(BorderLayout.SOUTH, restart);
+		gameOverContainer.add(BorderLayout.NORTH, endScreenlevelOutput);
+		restart.setPreferredSize(new Dimension(
+				gUIController.getWindowX() * 2 + 350, 100));
+		gameOverContainer.setBackground(Color.black);
+		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController
+				.getWindowX() * 2 + 350, 100));
+		restart.addActionListener(new EffectActionListener(restart) {
 
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				gUIController.angleChangePerInt((Integer) angle.getValue());
+			public void actionPerformed(ActionEvent e) {
+				gUIController.restart();
+				whiteBoard.remove(gameOverContainer);
+				whiteBoardInlet.setVisible(true);
+				aWTandJframeMergecontainer.setVisible(true);
+				gameOver = false;
 				inputControllPanelWindow.requestFocus();
+
 			}
 		});
-
 	}
 
 	/**
@@ -298,373 +602,69 @@ public class WhiteboardControllPanel {
 	}
 
 	/**
-	 * Methode fuer das adden der AWTOutputContainerKomponenten
+	 * Methode fuer das adden der JspinnerContainerKomponenten
 	 */
-	private void buildAWTOutputContainer() {
-		aWTOutputContainer.add(new LevelOutput("Level"));
-		aWTOutputContainer.add(new PointsOutput("Points"));
-		aWTOutputContainer.add(new BufferedAWTWindow("Coords") {
-			private static final long serialVersionUID = 1L;
+	private void buildJspinnerContainer() {
+		jSpinnerContainer.add(new JLabel("Velocity"));
+		jSpinnerContainer.add(velocity);
+		jSpinnerContainer.add(new JLabel("Angle"));
+		jSpinnerContainer.add(angle);
+		velocity.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void paint(Graphics g) {
-				super.paint(g);
-				g.setColor(new Color(255, 255, 255));
-				g.drawString(super.name, LabelX, LabelY);
-			}
-
-		});
-		aWTOutputContainer.add(new XOutput("Xcoord"));
-		aWTOutputContainer.add(new YOutput("Ycoord"));
-		aWTOutputContainer.add(new speedOutPut("Speed"));
-		aWTOutputContainer.add(new accelerationOutput("acceleration"));
-		aWTOutputContainer.add(new OutputString("OutputString"));
-	}
-
-	/**
-	 * Methode fuer das adden der GameoverContainerKomponenten
-	 */
-	private void buildGameoverContainer() {
-		restart = new JButton("Restart");
-		EndScreenlevelOutput endScreenlevelOutput = new EndScreenlevelOutput("EndScreenLevel");
-		gameOverContainer.add(new GameoverScreen("Gameover"),
-				BorderLayout.CENTER);
-		restart.setFont(new Font("Serif", Font.PLAIN, 100));
-		gameOverContainer.add(BorderLayout.SOUTH, restart);
-		gameOverContainer.add(BorderLayout.NORTH, endScreenlevelOutput);
-		restart.setPreferredSize(new Dimension(
-				gUIController.getWindowX() * 2 + 350, 100));
-		gameOverContainer.setBackground(Color.black);
-		endScreenlevelOutput.setPreferredSize(new Dimension(gUIController
-				.getWindowX() * 2 + 350, 100));
-		restart.addActionListener(new EffectActionListener(restart) {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gUIController.restart();
-				whiteBoard.remove(gameOverContainer);
-				whiteBoardInlet.setVisible(true);
-				aWTandJframeMergecontainer.setVisible(true);
-				gameOver = false;
+			public void stateChanged(ChangeEvent e) {
+				gUIController.velocityChangePerInt((Integer) velocity
+						.getValue());
 				inputControllPanelWindow.requestFocus();
-
 			}
 		});
-	}
+		angle.addChangeListener(new ChangeListener() {
 
-	/**
-	 * Die Innere Klasse fuer Das LevelOutput Fenster
-	 * @author Aismael
-	 * 
-	 */
-	class LevelOutput extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 1244L;
-
-		public LevelOutput(String name) {
-			super(name);
-		}
-
-		@Override
-		
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(0, 255, 0));
-			g.drawString("Level " + gUIController.levelToString(), LabelX,
-					LabelY);
-			g.setColor(new Color(100, 100, 100));
-			g.drawString("Astrocount: " + gUIController.astrocountToString(), LabelX+140,
-					LabelY);
-
-		}
-
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das SpielpunkteOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class PointsOutput extends BufferedAWTWindow {
-	
-		private static final long serialVersionUID = 176L;
-	
-		public PointsOutput(String name) {
-			super(name);
-		}
-	
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("Points:" + gUIController.pointsToString(), LabelX,
-					LabelY);
-		}
-	
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das XcoordinatenOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class XOutput extends BufferedAWTWindow {
-	
-		private static final long serialVersionUID = 199L;
-	
-		public XOutput(String name) {
-			super(name);
-		}
-	
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("X:" + gUIController.xToString(), LabelX, LabelY);
-		}
-	
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das YcoordinatenOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class YOutput extends BufferedAWTWindow {
-	
-		private static final long serialVersionUID = 188L;
-	
-		public YOutput(String name) {
-			super(name);
-		}
-	
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("Y:" + gUIController.yToString(), LabelX, LabelY);
-		}
-	
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das SpeedOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class speedOutPut extends BufferedAWTWindow {
-	
-		private static final long serialVersionUID = 139L;
-	
-		public speedOutPut(String name) {
-			super(name);
-		}
-	
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("Speed: " + gUIController.speedToString(), LabelX,
-					LabelY);
-		}
-	
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das accelerationOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class accelerationOutput extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 1453L;
-
-		public accelerationOutput(String name) {
-			super(name);
-		}
-
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 255, 255));
-			g.drawString("Angle: " + gUIController.accelerationToString(),
-					LabelX, LabelY);
-		}
-
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das InputControllPanelWindow Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class InputControllPanelWindow extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 1654L;
-
-		public InputControllPanelWindow(String name) {
-			super(name);
-		}
-
-		@Override
-		/**
-		 * Die Paintmethode von InputControllPanelWindow  die einen Kreis und die Orientierungslinien zeichnet
-		 */
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(100, 100, 100));
-			g.fillOval(70, 70, 160, 160);
-			g.setColor(new Color(50, 50, 50));
-			g.drawLine(0, 150, 300, 150);
-			g.drawLine(150, 0, 150, 300);
-
-		}
-
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das EndScreenlevelOutput Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class EndScreenlevelOutput extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 124L;
-
-		public EndScreenlevelOutput(String name) {
-			super(name);
-			this.setFont(new Font("Serif", Font.PLAIN, gUIController
-					.getWindowX() / 6));
-		}
-
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(0, 255, 0));
-			g.drawString(
-					"Ihr erreichtes Level ist: "
-							+ gUIController.levelToString(), LabelX, 90);
-
-		}
-
-	}
-
-	/**
-	 * Die Innere Klasse fuer Das GameoverScreen Fenster
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	class GameoverScreen extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 122L;
-
-		public GameoverScreen(String name) {
-			super(name);
-			this.setSize(gUIController.getWindowX() * 2 + 300,
-					gUIController.getWindowY() * 2 - 200);
-			this.setFont(new Font("Serif", Font.PLAIN, (int) (gUIController
-					.getWindowX() / 2.5)));
-		}
-
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(255, 0, 0));
-			g.drawString("GAMEOVER", gUIController.getWindowX() / 7,
-					gUIController.getWindowY());
-
-		}
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				gUIController.angleChangePerInt((Integer) angle.getValue());
+				inputControllPanelWindow.requestFocus();
+			}
+		});
 
 	}
 	/**
-	 * Die Innere Klasse fuer Das OutputString Fenster
-	 * 
-	 * @author Aismael
-	 * 
+	 * die Methode die das Spielfeld Verbirgt und den Gamoverbildschirm anzeigt
 	 */
-	class OutputString extends BufferedAWTWindow {
-
-		private static final long serialVersionUID = 127L;
-
-		public OutputString(String name) {
-			super(name);
-		}
-
-		@Override
-		public void paint(Graphics g) {
-			super.paint(g);
-			g.setColor(new Color(200, 0, 0));
-			g.drawString(gUIController.getOutPutString(), LabelX,
-					LabelY);
-
-		}
-
+	protected void gameoverSight() {
+		gameOver = true;
+		whiteBoardInlet.setVisible(false);
+		aWTandJframeMergecontainer.setVisible(false);
+		whiteBoard.add(BorderLayout.WEST, gameOverContainer);
+		whiteBoardInlet.requestFocus();
+	
 	}
-	/**
-	 * Die Innere Klasse fuer einen ActionListener der die AWT oder Jframe
-	 * Komponente verwenden kann
-	 * 
-	 * @author Aismael
-	 * 
-	 */
-	abstract class EffectActionListener implements ActionListener {
-		private Component component;
-
-		public Component getComponent() {
-			return component;
-		}
-
-		public EffectActionListener(Component component) {
-			this.component = component;
-
-		}
-
-		@Override
-		public abstract void actionPerformed(ActionEvent e);
-
+	protected boolean isGameOver() {
+		return gameOver;
 	}
 
 	/**
-	 * Die Innere Klasse eines Mouselistener der die Mausparameter nur weitergibt wenn die 
-	 * Alternative eingabe Aktiviert ist
-	 * 
-	 * @author Aismael
-	 * 
+	 * die Methode zum Neuzeichnen der der GUIAnzeigen
 	 */
-	class MouseMotionListenerForAltenativeControll implements
-			MouseMotionListener {
-
-		/**
-		 * Die Methode wenn die Maus gedrueckt ist und Bewegt wird in der
-		 * Alternativen Steuerung
-		 */
-		@Override
-		public void mouseDragged(MouseEvent arg0) {
-			if (bigListener.isAlternativeControll()) {
-				gUIController.mouseControlWhiteboard(arg0);
+	protected void Outputrefresh() {
+	
+		if (gameOver) {
+			
+			for (Component AWTComponent : gameOverContainer.getComponents()) {
+					AWTComponent.repaint();
 				
 			}
-
-		}
-
-		/**
-		 * Die Methode wenn die Maus Bewegt wird in der Alternativen Steuerung
-		 */
-		@Override
-		public void mouseMoved(MouseEvent arg0) {
-			if (bigListener.isAlternativeControll()) {
-				gUIController.mouseControlWhiteboard(arg0);
-				
+		} else {
+			for (Component AWTComponent : aWTOutputContainer.getComponents()) {
+				AWTComponent.repaint();
 			}
-
+			JFormattedTextField textFieldAngle = ((JSpinner.DefaultEditor) angle
+					.getEditor()).getTextField();
+			JFormattedTextField textFieldVelocity = ((JSpinner.DefaultEditor) velocity
+					.getEditor()).getTextField();
+			textFieldAngle.setText(gUIController.accelerationToStringForJSpinner());
+			textFieldVelocity.setText(gUIController.speedToString());
 		}
+	
 	}
 }

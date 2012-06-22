@@ -41,6 +41,93 @@ public class GUIController extends Thread {
 	}
 
 	/**
+	 * Die Methode die den Winkel des  {@link SpaceShip} entgenimmt und als String zurueckgibt
+	 * @return der Winkel des {@link SpaceShip} als String
+	 */
+	protected String accelerationToString() {
+		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
+		Integer acceleration = ac2;
+
+		return acceleration.toString();
+	}
+
+	/**
+	 * Die Methode die den Winkel des  {@link SpaceShip} entgenimmt und als String zurueckgibt
+	 * @return der Winkel des {@link SpaceShip} als String
+	 */
+	protected String accelerationToStringForJSpinner() {
+		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
+		Integer acceleration = ac2;
+
+		return acceleration.toString();
+	}
+
+	/**
+	 * Methode die einen Integer Wert entgegenimmt und in einen Vector mit der {@link SpaceShip} Geschwindigkeit und der neuen Winkel
+	 * zur�ckgibt
+	 * @param velocity der {@link Vector} der das Raumschiff bewegt
+	 */
+	protected void angleChangePerInt(int angle) {
+		gameController.getSpaceShip().setVector(
+				new Vector(gameController.getSpaceShip().getVector()
+						.getAmount(), angle));
+	}
+
+	/**
+	 * die Methode die den Outputstring zur�ckgibt
+	 * @return
+	 */
+	protected String astrocountToString() {
+		Integer astroid = Astroid.getCounter();
+		return astroid.toString();
+	}
+
+	/**
+	 * reicht den Zustand des Playerstatuses weiter
+	 * @return der Zustand des Playerstatuses
+	 */
+	public void gameOverScreen() {
+		if(!whiteboardControllPanel.isGameOver()){
+		whiteboardControllPanel.gameoverSight();}
+	}
+
+	/**
+	 * reicht den Zustand des Cheatmoduses weiter
+	 * @return der Zustand des Cheatmodus
+	 */
+	protected boolean getCheat() {
+		return gameController.isCheat();
+	}
+
+	public double getKeyAmount() {
+		return bigListener.getKeyAmount();
+	}
+	public double getKeyPhi() {
+		return bigListener.getKeyPhi();
+	}
+
+	protected String getOutPutString(){
+		return outputString;
+		
+	}
+
+	/**
+	 * reicht die X-Groesse des Spielfeldes Weiter
+	 * @return die X-Groesse des Spielfeldes
+	 */
+	protected int getWindowX() {
+		return gameController.getWindowX();
+	}
+
+	/**
+	 * reicht die Y-Groesse des Spielfeldes Weiter
+	 * @return die Y-Groesse des Spielfeldes
+	 */
+	protected int getWindowY() {
+		return gameController.getWindowY();
+	}
+
+	/**
 	 * Die Methode  die den Ausgaberefresh des {@link WhiteboardControllPanel} ausloest
 	 */
 	public void interfacerefresh() {
@@ -50,13 +137,13 @@ public class GUIController extends Thread {
 			outputString="";
 		}
 	}
-
-	public double getKeyAmount() {
-		return bigListener.getKeyAmount();
-	}
-
-	public double getKeyPhi() {
-		return bigListener.getKeyPhi();
+	/**
+	 * Die Methode die das aktuelle Spielelevel entgenimmt und als String zurueckgibt
+	 * @return das aktuelle Spielelevel
+	 */
+	protected String levelToString() {
+		Integer level = (int) gameController.getLevel();
+		return level.toString();
 	}
 
 	/**
@@ -81,7 +168,6 @@ public class GUIController extends Thread {
 		}
 		gameController.getSpaceShip().setVector(outPutVector);
 	}
-
 	/**
 	 * Die Berechnungsmethode die die Mausposition auf dem {@link WhiteBoard} Objekt entgegenimmt
 	 * und diese in einen BewegungsveKtor {@link Vector} umrechnet mit dem das {@link SpaceShip} gesteuert wird
@@ -114,26 +200,33 @@ public class GUIController extends Thread {
 	}
 
 	/**
-	 * Die Methode die den Winkel des  {@link SpaceShip} entgenimmt und als String zurueckgibt
-	 * @return der Winkel des {@link SpaceShip} als String
+	 * 
+	 * @param output der OutputString
+	 * @param counterTime die Maximale Zeit der Outputanzeige in Frames
 	 */
-	protected String accelerationToString() {
-		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
-		Integer acceleration = ac2;
-
-		return acceleration.toString();
+	public void outPutString(String output,int counterTime) {
+		outputString=output;
+		counterInt=counterTime;
 	}
 
 	/**
-	 * Die Methode die den Winkel des  {@link SpaceShip} entgenimmt und als String zurueckgibt
-	 * @return der Winkel des {@link SpaceShip} als String
+	 * greift die im Spiel gegebene X-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse f�r Spiel + Gui Anpasst
+	 * @return die Angepasste X-Groesse
 	 */
-	protected String accelerationToStringForJSpinner() {
-		int ac2 = (int) gameController.getSpaceShip().getVector().getPhi();
-		Integer acceleration = ac2;
-
-		return acceleration.toString();
+	protected int playFieldSizeX() {
+		return gameController.getWindowX() * 2 + gameController.getAstroSize()
+				* 2 - 16 + 300;
 	}
+
+	/**
+	 * greift die im Spiel gegebene Y-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse f�r Spiel + Gui Anpasst
+	 * @return die Angepasste Y-Groesse
+	 */
+	protected int playFieldSizeY() {
+		return gameController.getWindowY() * 2 + gameController.getAstroSize()
+				* 2 + 4;
+	}
+
 	/**
 	 * Die Methode die die Punkte des  Spiels entgenimmt und als String zurueckgibt
 	 * @return die Points als String
@@ -145,25 +238,17 @@ public class GUIController extends Thread {
 	}
 
 	/**
-	 * Die Methode die die Y-Position des  {@link SpaceShip} entgenimmt und als String zurueckgibt
-	 * @return die Y-Position des {@link SpaceShip} als String
+	 * l�st das Restart event des Spiels aus
 	 */
-	protected String yToString() {
-		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
-				.getY();
-		return ycoord.toString();
-
+	protected void restart() {
+		gameController.restart();
 	}
-
 	/**
-	 * Die Methode die die X-Position des  {@link SpaceShip} entgenimmt und als String zurueckgibt
-	 * @return die X-Position des {@link SpaceShip} als String
+	 * nimmt ein boolean entgegen und setzt den Cheatmodus des Spiels
+	 * @param cheat das Boolean das den cheat Modus ver�ndert
 	 */
-	protected String xToString() {
-		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
-				.getX();
-		return xcoord.toString();
-
+	protected void setCheat(boolean cheat) {
+		gameController.setCheat(cheat);
 	}
 
 	/**
@@ -184,24 +269,7 @@ public class GUIController extends Thread {
 		}
 		return speedString;
 	}
-
-	/**
-	 * greift die im Spiel gegebene X-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse f�r Spiel + Gui Anpasst
-	 * @return die Angepasste X-Groesse
-	 */
-	protected int playFieldSizeX() {
-		return gameController.getWindowX() * 2 + gameController.getAstroSize()
-				* 2 - 16 + 300;
-	}
-	/**
-	 * greift die im Spiel gegebene Y-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse f�r Spiel + Gui Anpasst
-	 * @return die Angepasste Y-Groesse
-	 */
-	protected int playFieldSizeY() {
-		return gameController.getWindowY() * 2 + gameController.getAstroSize()
-				* 2 + 4;
-	}
-
+	
 	/**
 	 * Methode die einen Integer Wert entgegenimmt und in einen Vector mit dem {@link SpaceShip} Winkel und der neuen Geschwindigkeit
 	 * zur�ckgibt
@@ -223,91 +291,23 @@ public class GUIController extends Thread {
 
 	}
 	/**
-	 * Methode die einen Integer Wert entgegenimmt und in einen Vector mit der {@link SpaceShip} Geschwindigkeit und der neuen Winkel
-	 * zur�ckgibt
-	 * @param velocity der {@link Vector} der das Raumschiff bewegt
+	 * Die Methode die die X-Position des  {@link SpaceShip} entgenimmt und als String zurueckgibt
+	 * @return die X-Position des {@link SpaceShip} als String
 	 */
-	protected void angleChangePerInt(int angle) {
-		gameController.getSpaceShip().setVector(
-				new Vector(gameController.getSpaceShip().getVector()
-						.getAmount(), angle));
-	}
+	protected String xToString() {
+		Integer xcoord = (int) gameController.getSpaceShip().getCenterPoint()
+				.getX();
+		return xcoord.toString();
 
-	/**
-	 * nimmt ein boolean entgegen und setzt den Cheatmodus des Spiels
-	 * @param cheat das Boolean das den cheat Modus ver�ndert
-	 */
-	protected void setCheat(boolean cheat) {
-		gameController.setCheat(cheat);
 	}
+	/**
+	 * Die Methode die die Y-Position des  {@link SpaceShip} entgenimmt und als String zurueckgibt
+	 * @return die Y-Position des {@link SpaceShip} als String
+	 */
+	protected String yToString() {
+		Integer ycoord = (int) gameController.getSpaceShip().getCenterPoint()
+				.getY();
+		return ycoord.toString();
 
-	/**
-	 * reicht den Zustand des Cheatmoduses weiter
-	 * @return der Zustand des Cheatmodus
-	 */
-	protected boolean getCheat() {
-		return gameController.isCheat();
-	}
-
-	/**
-	 * reicht den Zustand des Playerstatuses weiter
-	 * @return der Zustand des Playerstatuses
-	 */
-	public void gameOverScreen() {
-		if(!whiteboardControllPanel.isGameOver()){
-		whiteboardControllPanel.gameoverSight();}
-	}
-
-	/**
-	 * reicht die X-Groesse des Spielfeldes Weiter
-	 * @return die X-Groesse des Spielfeldes
-	 */
-	protected int getWindowX() {
-		return gameController.getWindowX();
-	}
-
-	/**
-	 * reicht die Y-Groesse des Spielfeldes Weiter
-	 * @return die Y-Groesse des Spielfeldes
-	 */
-	protected int getWindowY() {
-		return gameController.getWindowY();
-	}
-	/**
-	 * l�st das Restart event des Spiels aus
-	 */
-	protected void restart() {
-		gameController.restart();
-	}
-
-	/**
-	 * Die Methode die das aktuelle Spielelevel entgenimmt und als String zurueckgibt
-	 * @return das aktuelle Spielelevel
-	 */
-	protected String levelToString() {
-		Integer level = (int) gameController.getLevel();
-		return level.toString();
-	}
-	
-	/**
-	 * die Methode die den Outputstring zur�ckgibt
-	 * @return
-	 */
-	protected String astrocountToString() {
-		Integer astroid = Astroid.getCounter();
-		return astroid.toString();
-	}
-	/**
-	 * 
-	 * @param output der OutputString
-	 * @param counterTime die Maximale Zeit der Outputanzeige in Frames
-	 */
-	public void outPutString(String output,int counterTime) {
-		outputString=output;
-		counterInt=counterTime;
-	}
-	protected String getOutPutString(){
-		return outputString;
-		
 	}
 }

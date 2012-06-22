@@ -21,6 +21,21 @@ public class PointTest extends TestCase {
 	private Point y;
 	private Point z, u, center;
 
+	/**
+	 * 
+	 */
+	@Test
+	public void rotate() {
+		u.rotate(center, 45);
+		assertEquals(u.getX(), 1414, 0.4);
+		assertEquals(u.getY(), 0, 0.4);
+		for (int i = 1; i <= 15; i++) {
+			u.rotate(center, 15);
+		}
+		assertEquals(u.getX(), -1000, 0.4);
+		assertEquals(u.getY(), 1000, 0.4);
+	}
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -37,31 +52,6 @@ public class PointTest extends TestCase {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link Shapes.Point#Point(int, int)}.
-	 */
-	@Test
-	public void testPoint() {
-		fail("Not yet implemented");
-		// TODO Test construktor of point
-	}
-
-	/**
-	 * Test method for {@link Shapes.Point#move(int, int)}.
-	 */
-	@Test
-	public void testMove() {
-		assertTrue("Vortest vor move Fehlgeschlagen", x.equals(z));
-		assertEquals("Die X Koordinate wird falsch �bergeben", z.getX(), 1, 0);
-		assertEquals("Die Y Koordinate wird falsch �bergeben", z.getY(), 1, 0);
-		z.move(new Point(10, 10));
-		assertEquals("Die X Koordinate wird falsch verschoben", z.getX(), 11, 0);
-		assertEquals("Die Y Koordinate wird falsch verschoben", z.getY(), 11, 0);
-		assertEquals("der punkt wird falsch verschoben", z, new Point(11, 11));
-		assertFalse("Die punkte sind nicht unabh�ngig", x.equals(z));
-
 	}
 
 	/**
@@ -82,18 +72,28 @@ public class PointTest extends TestCase {
 	}
 
 	/**
-	 * 
+	 * Test method for {@link Shapes.Point#move(int, int)}.
 	 */
 	@Test
-	public void rotate() {
-		u.rotate(center, 45);
-		assertEquals(u.getX(), 1414, 0.4);
-		assertEquals(u.getY(), 0, 0.4);
-		for (int i = 1; i <= 15; i++) {
-			u.rotate(center, 15);
-		}
-		assertEquals(u.getX(), -1000, 0.4);
-		assertEquals(u.getY(), 1000, 0.4);
+	public void testMove() {
+		assertTrue("Vortest vor move Fehlgeschlagen", x.equals(z));
+		assertEquals("Die X Koordinate wird falsch �bergeben", z.getX(), 1, 0);
+		assertEquals("Die Y Koordinate wird falsch �bergeben", z.getY(), 1, 0);
+		z.move(new Point(10, 10));
+		assertEquals("Die X Koordinate wird falsch verschoben", z.getX(), 11, 0);
+		assertEquals("Die Y Koordinate wird falsch verschoben", z.getY(), 11, 0);
+		assertEquals("der punkt wird falsch verschoben", z, new Point(11, 11));
+		assertFalse("Die punkte sind nicht unabh�ngig", x.equals(z));
+
+	}
+
+	/**
+	 * Test method for {@link Shapes.Point#Point(int, int)}.
+	 */
+	@Test
+	public void testPoint() {
+		fail("Not yet implemented");
+		// TODO Test construktor of point
 	}
 
 }

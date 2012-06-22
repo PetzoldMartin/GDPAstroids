@@ -32,12 +32,8 @@ public class Figure extends Drawable {
 		}
 	}
 
-	@Override
-	public void remove() {
-		for (Drawable aDrawable : shapes) {
-			aDrawable.remove();
-		}
-		shapes.clear();
+	public ArrayList<Drawable> getShapes() {
+		return shapes;
 	}
 
 	/**
@@ -52,6 +48,14 @@ public class Figure extends Drawable {
 			aDrawable.move(trans);
 		}
 		return this;
+	}
+
+	@Override
+	public void remove() {
+		for (Drawable aDrawable : shapes) {
+			aDrawable.remove();
+		}
+		shapes.clear();
 	}
 
 	/**
@@ -69,9 +73,5 @@ public class Figure extends Drawable {
 			aDrawable.rotate(center, phi);
 		}
 		return this;
-	}
-
-	public ArrayList<Drawable> getShapes() {
-		return shapes;
 	}
 }

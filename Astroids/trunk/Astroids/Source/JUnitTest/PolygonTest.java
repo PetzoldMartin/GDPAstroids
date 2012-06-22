@@ -65,8 +65,26 @@ public class PolygonTest extends TestCase {
 	}
 
 	@Test
-	public void testPolygon() {
-		fail("Not yet implemented");
+	public void testEqualsPolygon() {
+		assertTrue("Die equals Methode testet nicht auf Reflexivit�t",
+				x.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Symetrie", x.equals(y)
+				&& y.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Transitivit�t",
+				x.equals(y) && y.equals(z) && x.equals(z));
+		ArrayList<Point> A4 = new ArrayList<Point>();
+		A4.add(new Point(0, 0));
+		try {
+			z.setPoints(A4);
+		} catch (PolygoneShapeException e) {
+			System.out.println(e);
+		}
+		z.setSolid(true);
+		z.setColor(Color.BLUE);
+		assertFalse("Die equals Methode testet nicht auf Konsistenz",
+				x.equals(z));
+		assertFalse(x.equals(null));
+
 	}
 
 	@Test
@@ -90,31 +108,13 @@ public class PolygonTest extends TestCase {
 	}
 
 	@Test
-	public void testSetPoints() {
+	public void testPolygon() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testEqualsPolygon() {
-		assertTrue("Die equals Methode testet nicht auf Reflexivit�t",
-				x.equals(x));
-		assertTrue("Die equals Methode testet nicht auf Symetrie", x.equals(y)
-				&& y.equals(x));
-		assertTrue("Die equals Methode testet nicht auf Transitivit�t",
-				x.equals(y) && y.equals(z) && x.equals(z));
-		ArrayList<Point> A4 = new ArrayList<Point>();
-		A4.add(new Point(0, 0));
-		try {
-			z.setPoints(A4);
-		} catch (PolygoneShapeException e) {
-			System.out.println(e);
-		}
-		z.setSolid(true);
-		z.setColor(Color.BLUE);
-		assertFalse("Die equals Methode testet nicht auf Konsistenz",
-				x.equals(z));
-		assertFalse(x.equals(null));
-
+	public void testSetPoints() {
+		fail("Not yet implemented");
 	}
 
 }

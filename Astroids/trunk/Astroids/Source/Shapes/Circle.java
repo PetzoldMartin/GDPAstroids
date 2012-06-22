@@ -57,34 +57,6 @@ public class Circle extends Shape {
 				center.getY(), radius, color, solid);
 	}
 
-	/**
-	 * move the circle on the whiteboard
-	 * 
-	 * @param dx
-	 *            x var to move by the x scale
-	 * @param dy
-	 *            x var to move by the y scale return itself as object
-	 */
-	@Override
-	public Drawable move(Point trans) {
-		center.move(trans.copy());
-		return this;
-	}
-
-	/**
-	 * rotate the point around a center point
-	 * 
-	 * @param center
-	 *            point to rotate around
-	 * @param phi
-	 *            angel to rotate
-	 */
-	@Override
-	public Drawable rotate(Point center, double phi) {
-		this.center.rotate(center, phi);
-		return this;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -112,5 +84,33 @@ public class Circle extends Shape {
 
 	public double getRadius() {
 		return radius;
+	}
+
+	/**
+	 * move the circle on the whiteboard
+	 * 
+	 * @param dx
+	 *            x var to move by the x scale
+	 * @param dy
+	 *            x var to move by the y scale return itself as object
+	 */
+	@Override
+	public Drawable move(Point trans) {
+		center.move(trans.copy());
+		return this;
+	}
+
+	/**
+	 * rotate the point around a center point
+	 * 
+	 * @param center
+	 *            point to rotate around
+	 * @param phi
+	 *            angel to rotate
+	 */
+	@Override
+	public Drawable rotate(Point center, double phi) {
+		this.center.rotate(center, phi);
+		return this;
 	}
 }

@@ -2,7 +2,6 @@ package Astroids;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import Shapes.Point;
 import Shapes.Polygon;
 
@@ -15,6 +14,26 @@ import Shapes.Polygon;
 public class Astroid extends Sprite {
 	private int edge;
 	private static int count = 0;
+
+	public static int getCounter() {
+		return count;
+	}
+
+	/**
+	 * create new Astroid
+	 * 
+	 * @param edge
+	 *            of the new one
+	 * @param radius
+	 *            size of the new one
+	 */
+	public Astroid(int edge, int radius) {
+		this(edge, radius, new Vector(Math.random() * 3, Math.random() * 360),
+				new Point(Math.random() * gameController.getGameScreenX() * 2
+						- gameController.getGameScreenX(), Math.random()
+						* gameController.getGameScreenY() * 2
+						- gameController.getGameScreenY()));
+	}
 
 	/**
 	 * create new Astroid
@@ -44,31 +63,8 @@ public class Astroid extends Sprite {
 		this.move(centerPoint);
 	}
 
-	/**
-	 * create new Astroid
-	 * 
-	 * @param edge
-	 *            of the new one
-	 * @param radius
-	 *            size of the new one
-	 */
-	public Astroid(int edge, int radius) {
-		this(edge, radius, new Vector(Math.random() * 3, Math.random() * 360),
-				new Point(Math.random() * gameController.getGameScreenX() * 2
-						- gameController.getGameScreenX(), Math.random()
-						* gameController.getGameScreenY() * 2
-						- gameController.getGameScreenY()));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Astroids.Sprite#update()
-	 */
-	@Override
-	public void update() {
-		this.rotate(this.rotationPhi);
-		super.update();
+	public void delete() {
+		gameController.removeSprites(this);
 	}
 
 	/*
@@ -82,8 +78,10 @@ public class Astroid extends Sprite {
 		delete();
 	}
 
-	public void delete() {
-		gameController.removeSprites(this);
+	@Override
+	public void remove() {
+		super.remove();
+		count--;
 	}
 
 	/**
@@ -103,13 +101,14 @@ public class Astroid extends Sprite {
 		}
 	}
 
-	public static int getCounter() {
-		return count;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Astroids.Sprite#update()
+	 */
 	@Override
-	public void remove() {
-		super.remove();
-		count--;
+	public void update() {
+		this.rotate(this.rotationPhi);
+		super.update();
 	}
 }

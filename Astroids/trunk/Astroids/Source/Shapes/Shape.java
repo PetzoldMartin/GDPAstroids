@@ -17,24 +17,15 @@ import Teaching.WhiteBoard;
  * @version (0.3)
  */
 public abstract class Shape extends Drawable {
-	protected Color color = Color.GRAY;
-	protected boolean solid = false;
-	private static WhiteBoard whiteBoard = new WhiteBoard();
-
-	@Override
-	public void remove() {
-		getWhiteBoard().removeShape(representation);
-	}
-
-	protected Object representation;
-
-	public void setSolid(boolean solid) {
-		this.solid = solid;
-	}
-
 	public static WhiteBoard getWhiteBoard() {
 		return whiteBoard;
 	}
+	protected Color color = Color.GRAY;
+	protected boolean solid = false;
+
+	private static WhiteBoard whiteBoard = new WhiteBoard();
+
+	protected Object representation;
 
 	public Color getColor() {
 		return color; // returns black if not setted
@@ -44,7 +35,16 @@ public abstract class Shape extends Drawable {
 		return solid; // return false if not setted
 	}
 
+	@Override
+	public void remove() {
+		getWhiteBoard().removeShape(representation);
+	}
+
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public void setSolid(boolean solid) {
+		this.solid = solid;
 	}
 }

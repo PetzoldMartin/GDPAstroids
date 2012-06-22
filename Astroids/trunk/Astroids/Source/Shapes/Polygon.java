@@ -49,6 +49,25 @@ public class Polygon extends Shape {
 				this.isSolid(), 0);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof Polygon) {
+			Polygon otherPolygon = (Polygon) obj;
+			if (points.equals(otherPolygon.getPoints())) {
+				return true;
+			} else
+				return false;
+		} else
+			return false;
+	}
+
+	public ArrayList<Point> getPoints() {
+		return points;
+	}
+
 	/**
 	 * move the polygon on the whiteboard
 	 * 
@@ -79,25 +98,6 @@ public class Polygon extends Shape {
 			point.rotate(center, phi);
 		}
 		return this;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof Polygon) {
-			Polygon otherPolygon = (Polygon) obj;
-			if (points.equals(otherPolygon.getPoints())) {
-				return true;
-			} else
-				return false;
-		} else
-			return false;
-	}
-
-	public ArrayList<Point> getPoints() {
-		return points;
 	}
 
 	/**

@@ -57,7 +57,7 @@ public class GameController extends Thread implements Runnable {
 	// working vars
 	private int astroCount = astroStart;
 	private int health = healthStart;
-	private int spawnCooldown;
+	private int spawnCooldown = 0;
 
 	/**
 	 * generates a window with a drawboard starts itself as Thread
@@ -75,6 +75,213 @@ public class GameController extends Thread implements Runnable {
 		new SpaceShip();
 		gUIController = new GUIController(this);
 		this.start();
+	}
+
+	public synchronized void addSprites(Sprite sprite) {
+		this.adds.add(sprite);
+	}
+
+	/**
+	 * check how many objects @ drawboard and generating new objects
+	 */
+	private void checkObjects() {
+		spawnCooldown--;
+		if (health >= 120) {
+			health -= 20;
+			astroCount++;
+		}
+		if (Astroid.getCounter() < astroCount && spawnCooldown <= 0) {
+			edgeCreationWarp(new Astroid(astroEdge, astroSize));
+			spawnCooldown = frames / 2;
+		}
+	}
+
+	/**
+	 * check collision of for all sprites in ArrayList
+	 * 
+	 * @param sprites
+	 *            ArrayList to check
+	 * 
+	 */
+	private void collisionCheck(ArrayList<Sprite> sprites) {
+		for (Sprite spriteA : sprites) {
+			for (Sprite spriteB : sprites) {
+				if (spriteA != spriteB)
+					spriteA.collision(spriteB);
+			}
+		}
+	}
+
+	private void edgeCreationWarp(Astroid astroid) {
+
+		double phi = astroid.getPhi();
+		if (phi > 0) {
+			if (Math.abs(phi) < 90) {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), -(gameScreenY-1)));
+				} else {
+					astroid.setCenterPoint(new Point(-(gameScreenX-1), astroid
+							.getCenterPoint().getY()));
+				}
+			} else {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), -(gameScreenY-1)));
+				} else {
+					astroid.setCenterPoint(new Point((gameScreenX-1), astroid
+							.getCenterPoint().getY()));
+				}
+			}
+		} else {
+			if (Math.abs(phi) < 90) {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), (gameScreenY-1)));
+				} else {
+					astroid.setCenterPoint(new Point(-(gameScreenX-1), astroid
+							.getCenterPoint().getY()));
+				}
+			} else {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), (gameScreenY-1)));
+				} else {
+					astroid.setCenterPoint(new Point((gameScreenX-1), astroid
+							.getCenterPoint().getY()));
+				}
+			}
+		}
+		if (astroid.collision(spaceShip)) {
+			removeSprites(astroid);
+			edgeCreationWarp(new Astroid(astroEdge, astroSize));
+		}
+	}
+
+	public int getAstroSize() {
+		return astroSize;
+	}
+
+	public CollisionDetector getCollisionDetector() {
+		return collisionDetector;
+	}
+
+	public int getGameScreenX() {
+		return gameScreenX;
+	}
+
+	public int getGameScreenY() {
+		return gameScreenY;
+	}
+
+	public long getGlobalFrameTime() {
+		return frameTime;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public GUIController getInputController() {
+		return gUIController;
+	}
+
+	public double getKeyAcelleration() {
+		return keyAcelleration;
+	}
+
+	public double getKeyRotationAngel() {
+		return keyRotationAngel;
+	}
+
+	public int getLevel() {
+		return astroCount - astroStart;
+	}
+
+	public double getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public SpaceShip getSpaceShip() {
+		return spaceShip;
+	}
+
+	public ArrayList<Sprite> getSprites() {
+		return sprites;
+	}
+
+	public int getWindowX() {
+		return windowX;
+	}
+
+	public int getWindowY() {
+		return windowY;
+	}
+
+	/**
+	 * put out an string for weapon control over the GUI
+	 * 
+	 * @param string
+	 *            to put out at the GUI
+	 */
+	public void guiOutPut(String string) {
+		gUIController.outPutString(string, framesPerShot);
+	}
+
+	public void healthChange(int change) {
+		if (health > 0) {
+			health += change;
+		}
+	}
+
+	public boolean isCheat() {
+		return cheat;
+	}
+
+	public boolean isTestFlag() {
+		return testFlag;
+	}
+
+	public void makeTest() {
+		if (cheat && spawnCooldown <= 0) {
+			System.out.println("RocketSpam!!!");
+			for (int i = 0; i < 360; i += 2) {
+				spawnCooldown = frames / 2;
+				Rocket spamed = new Rocket(spaceShip);
+				spamed.rotate(i);
+				spamed.changeDirection(i);
+			}
+		}
+	}
+
+	public void pause() {
+		if (this.pause == false) {
+			this.pause = true;
+		} else
+			this.pause = false;
+	}
+
+	private void playerDieEvent() {
+		gUIController.gameOverScreen();
+	}
+
+	public synchronized void removeSprites(Sprite sprite) {
+		if (!(sprite instanceof SpaceShip)) {
+			this.removals.add(sprite);
+		}
+	}
+
+	/**
+	 * deletes all sprites and reinitialise the gamefield
+	 */
+	public void restart() {
+		for (Sprite sprite : sprites) {
+			removeSprites(sprite);
+		}
+		spaceShip.setVector(new Vector(0, 90));
+		spaceShip.setCenterPoint(new Point(0, 0));
+		health = healthStart;
+		astroCount = astroStart;
 	}
 
 	/*
@@ -109,27 +316,24 @@ public class GameController extends Thread implements Runnable {
 
 	}
 
-	/**
-	 * deletes all sprites and reinitialise the gamefield
-	 */
-	public void restart() {
-		for (Sprite sprite : sprites) {
-			removeSprites(sprite);
-		}
-		spaceShip.setVector(new Vector(0, 90));
-		spaceShip.setCenterPoint(new Point(0, 0));
-		health = healthStart;
-		astroCount = astroStart;
+	public void setCheat(boolean change) {
+		cheat = change;
 	}
 
-	/**
-	 * put out an string for weapon control over the GUI
-	 * 
-	 * @param string
-	 *            to put out at the GUI
-	 */
-	public void guiOutPut(String string) {
-		gUIController.outPutString(string, framesPerShot);
+	public void setSpaceShip(SpaceShip spaceShip) {
+		this.spaceShip = spaceShip;
+	}
+
+	public void setTestFlag(boolean testFlag) {
+		this.testFlag = testFlag;
+	}
+
+	public void setWindowActivated(boolean windowActivated) {
+		this.windowActivated = windowActivated;
+	}
+
+	public void spaceKey() {
+		spaceShip.fire(framesPerShot);
 	}
 
 	/**
@@ -163,210 +367,6 @@ public class GameController extends Thread implements Runnable {
 		for (Sprite sprite : sprites) {
 			sprite.draw();
 		}
-	}
-
-	/**
-	 * check how many objects @ drawboard and generating new objects
-	 */
-	private void checkObjects() {
-		spawnCooldown--;
-		if (health >= 120) {
-			health -= 20;
-			astroCount++;
-		}
-		if (Astroid.getCounter() < astroCount && spawnCooldown <= 0) {
-			edgeCreationWarp(new Astroid(astroEdge, astroSize));
-			spawnCooldown = frames / 2;
-		}
-	}
-
-	private void playerDieEvent() {
-		gUIController.gameOverScreen();
-	}
-
-	private void edgeCreationWarp(Astroid astroid) {
-
-		double phi = astroid.getPhi();
-		if (phi > 0) {
-			if (Math.abs(phi) < 90) {
-				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
-							.getX(), -gameScreenY));
-				} else {
-					astroid.setCenterPoint(new Point(-gameScreenX, astroid
-							.getCenterPoint().getY()));
-				}
-			} else {
-				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
-							.getX(), -gameScreenY));
-				} else {
-					astroid.setCenterPoint(new Point(gameScreenX, astroid
-							.getCenterPoint().getY()));
-				}
-				if (astroid.collision(spaceShip)) {
-					removeSprites(astroid);
-					edgeCreationWarp(new Astroid(astroEdge, astroSize));
-				}
-			}
-		} else {
-			if (Math.abs(phi) < 90) {
-				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
-							.getX(), gameScreenY));
-				} else {
-					astroid.setCenterPoint(new Point(-gameScreenX, astroid
-							.getCenterPoint().getY()));
-				}
-			} else {
-				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
-							.getX(), gameScreenY));
-				} else {
-					astroid.setCenterPoint(new Point(-gameScreenX, astroid
-							.getCenterPoint().getY()));
-				}
-			}
-		}
-	}
-
-	/**
-	 * check collision of for all sprites in ArrayList
-	 * 
-	 * @param sprites
-	 *            ArrayList to check
-	 * 
-	 */
-	private void collisionCheck(ArrayList<Sprite> sprites) {
-		for (Sprite spriteA : sprites) {
-			for (Sprite spriteB : sprites) {
-				if (spriteA != spriteB)
-					spriteA.collision(spriteB);
-			}
-		}
-	}
-
-	public void makeTest() {
-		if (cheat && spawnCooldown <= 0) {
-			System.out.println("RocketSpam!!!");
-			for (int i = 0; i < 360; i += 2) {
-				spawnCooldown = frames / 2;
-				Rocket spamed = new Rocket(spaceShip);
-				spamed.rotate(i);
-				spamed.changeDirection(i);
-			}
-		}
-	}
-
-	public void spaceKey() {
-		spaceShip.fire(framesPerShot);
-	}
-
-	public void pause() {
-		if (this.pause == false) {
-			this.pause = true;
-		} else
-			this.pause = false;
-	}
-
-	public synchronized void addSprites(Sprite sprite) {
-		this.adds.add(sprite);
-	}
-
-	public synchronized void removeSprites(Sprite sprite) {
-		if (!(sprite instanceof SpaceShip)) {
-			this.removals.add(sprite);
-		}
-	}
-
-	public void healthChange(int change) {
-		if (health > 0) {
-			health += change;
-		}
-	}
-
-	public void setWindowActivated(boolean windowActivated) {
-		this.windowActivated = windowActivated;
-	}
-
-	public void setSpaceShip(SpaceShip spaceShip) {
-		this.spaceShip = spaceShip;
-	}
-
-	public void setCheat(boolean change) {
-		cheat = change;
-	}
-
-	public void setTestFlag(boolean testFlag) {
-		this.testFlag = testFlag;
-	}
-
-	public int getWindowX() {
-		return windowX;
-	}
-
-	public int getWindowY() {
-		return windowY;
-	}
-
-	public double getKeyRotationAngel() {
-		return keyRotationAngel;
-	}
-
-	public double getKeyAcelleration() {
-		return keyAcelleration;
-	}
-
-	public double getMaxSpeed() {
-		return maxSpeed;
-	}
-
-	public long getGlobalFrameTime() {
-		return frameTime;
-	}
-
-	public ArrayList<Sprite> getSprites() {
-		return sprites;
-	}
-
-	public SpaceShip getSpaceShip() {
-		return spaceShip;
-	}
-
-	public GUIController getInputController() {
-		return gUIController;
-	}
-
-	public CollisionDetector getCollisionDetector() {
-		return collisionDetector;
-	}
-
-	public int getAstroSize() {
-		return astroSize;
-	}
-
-	public int getGameScreenX() {
-		return gameScreenX;
-	}
-
-	public int getGameScreenY() {
-		return gameScreenY;
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public int getLevel() {
-		return astroCount - astroStart;
-	}
-
-	public boolean isTestFlag() {
-		return testFlag;
-	}
-
-	public boolean isCheat() {
-		return cheat;
 	}
 
 }

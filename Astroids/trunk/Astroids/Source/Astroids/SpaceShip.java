@@ -64,23 +64,6 @@ public class SpaceShip extends Sprite {
 		this.addShape(new Polygon(cockPitList, Color.WHITE, true));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Astroids.Sprite#update()
-	 */
-	@Override
-	public void update() {
-		if (rotationPhi != getPhi()) {
-			this.rotate(rotationPhi - getPhi());
-		}
-		rotationPhi = this.getPhi();
-		super.update();
-		if (fireCounter>0 && fireCounter--%3==0) {
-			gameController.guiOutPut("Gun Reloading: " + fireCounter/3);
-		}
-	}
-
 	/**
 	 * change the vector
 	 * 
@@ -101,6 +84,18 @@ public class SpaceShip extends Sprite {
 		this.changeDirection(phi);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
+	 */
+	@Override
+	public void destroy(Sprite collider) {
+		if (!gameController.isCheat() && !(collider instanceof Rocket)) {
+			gameController.healthChange(-25);
+		}
+	}
+
 	/**
 	 * create a rocket @ position & with the vector of this SpaceShip
 	 * 
@@ -117,12 +112,17 @@ public class SpaceShip extends Sprite {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see Astroids.Sprite#destroy(Astroids.Sprite)
+	 * @see Astroids.Sprite#update()
 	 */
 	@Override
-	public void destroy(Sprite collider) {
-		if (!gameController.isCheat() && !(collider instanceof Rocket)) {
-			gameController.healthChange(-25);
+	public void update() {
+		if (rotationPhi != getPhi()) {
+			this.rotate(rotationPhi - getPhi());
+		}
+		rotationPhi = this.getPhi();
+		super.update();
+		if (fireCounter>0 && fireCounter--%3==0) {
+			gameController.guiOutPut("Gun Reloading: " + fireCounter/3);
 		}
 	}
 }

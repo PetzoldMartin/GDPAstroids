@@ -42,8 +42,28 @@ public class BigListener implements KeyListener, WindowListener,
 
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+	/**
+	 * 
+	 * @return den KeyAmount
+	 */
+	public double getKeyAmount() {
+		return keyAmount;
+	}
+
+	/**
+	 * 
+	 * @return den KeyPhi
+	 */
+	public double getKeyPhi() {
+		return keyPhi;
+	}
+
+	/**
+	 * gibt den Zusatnd der Alternativen Kontrolle zurück
+	 * @return AlternativeControll
+	 */
+	protected boolean isAlternativeControll() {
+		return alternativeControll;
 	}
 
 	/** events wenn eine taste Gedrueckt wird
@@ -135,20 +155,79 @@ public class BigListener implements KeyListener, WindowListener,
 
 	}
 
-	/**
-	 * 
-	 * @return den KeyAmount
-	 */
-	public double getKeyAmount() {
-		return keyAmount;
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
 	/**
-	 * 
-	 * @return den KeyPhi
+	 * Die Methode die Bei Mausclick das spaceKeyevent auslöst
+	 * @param arg0 {@link MouseEvent}
 	 */
-	public double getKeyPhi() {
-		return keyPhi;
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		gameController.spaceKey();
+
+	}
+
+	/**
+	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung und
+	 * gedrückter Maustaste ausführt
+	 * @param arg0 {@link MouseEvent}
+	 */
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		gUIController.mouseControl(arg0);
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+
+	}
+
+	/**
+	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung
+	 * ausführt
+	 * @param arg0 {@link MouseEvent}
+	 */
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+
+		gUIController.mouseControl(arg0);
+
+	}
+
+	/**
+	 * Die Methode die bei gepresster Maus das spaceKeyevent auslöst
+	 * @param arg0 {@link MouseEvent}
+	 */
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		gameController.spaceKey();
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent arg0) {
+
+	}
+
+	/**
+	 * setzt die Alternative Kontrolle
+	 * @param AlternativeControll
+	 */
+	protected void setAlternativeControll(boolean AlternativeControll) {
+		this.alternativeControll = AlternativeControll;
 	}
 
 	/**
@@ -196,88 +275,9 @@ public class BigListener implements KeyListener, WindowListener,
 
 	}
 
-	/**
-	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung
-	 * ausführt
-	 * @param arg0 {@link MouseEvent}
-	 */
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-
-		gUIController.mouseControl(arg0);
-
-	}
-
-	/**
-	 * Die Methode die die Spaceshipbewegungsberechnung bei Mausbewegung und
-	 * gedrückter Maustaste ausführt
-	 * @param arg0 {@link MouseEvent}
-	 */
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		gUIController.mouseControl(arg0);
-
-	}
-
-	/**
-	 * Die Methode die Bei Mausclick das spaceKeyevent auslöst
-	 * @param arg0 {@link MouseEvent}
-	 */
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		gameController.spaceKey();
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-
-	}
-
-	/**
-	 * Die Methode die bei gepresster Maus das spaceKeyevent auslöst
-	 * @param arg0 {@link MouseEvent}
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		gameController.spaceKey();
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent arg0) {
-
-	}
-
 	@Override
 	public void windowOpened(WindowEvent arg0) {
 
-	}
-
-	/**
-	 * gibt den Zusatnd der Alternativen Kontrolle zurück
-	 * @return AlternativeControll
-	 */
-	protected boolean isAlternativeControll() {
-		return alternativeControll;
-	}
-
-	/**
-	 * setzt die Alternative Kontrolle
-	 * @param AlternativeControll
-	 */
-	protected void setAlternativeControll(boolean AlternativeControll) {
-		this.alternativeControll = AlternativeControll;
 	}
 
 	

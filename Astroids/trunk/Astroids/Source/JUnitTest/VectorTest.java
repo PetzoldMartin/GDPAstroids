@@ -32,35 +32,27 @@ public class VectorTest {
 	}
 
 	@Test
-	public void testEqualsObject() {
-		assertTrue("Die equals Methode testet nicht auf Reflexivit�t",
-				x.equals(x));
-		assertTrue("Die equals Methode testet nicht auf Symetrie", x.equals(y)
-				&& y.equals(x));
-		assertTrue("Die equals Methode testet nicht auf Transitivit�t",
-				x.equals(y) && y.equals(z) && x.equals(z));
-		z.changeVector(new Point(10, 1));
-		z.changeSpeed(19);
-		assertFalse("Die equals Methode testet nicht auf Konsistenz",
-				x.equals(z));
-		assertFalse(x.equals(null));
+	public void testChangeDirection() {
+		s1.changeDirection(1);
+		assertEquals(
+				"der Vector wurde bei Positivem Drehsinn nicht wie erwartet ver�ndert",
+				new Vector(0, 1), s1);
+		s1.changeDirection(-2);
+		assertEquals(
+				"der Vector wurde bei Negativem Drehsinn nicht wie erwartet ver�ndert",
+				new Vector(0, -1), s1);
 	}
 
 	@Test
-	public void testVector() {
-		assertEquals("Es wurde kein vector erstellt", new Vector(), s1);
-	}
-
-	@Test
-	public void testVectorDoubleDouble() {
-		assertEquals("Es wurde kein vector aus Ammount und Phi erstellt",
-				new Vector(), new Vector(0, 0));
-	}
-
-	@Test
-	public void testVectorPoint() {
-		assertEquals("Es wurde kein vector aus einem Punkt erstellt",
-				new Vector(), new Vector(new Point(0, 0)));
+	public void testChangeSpeed() {
+		s1.changeSpeed(1);
+		assertEquals(
+				"der Vector wurde bei Positiver Geschwindigkeit nicht wie erwartet ver�ndert",
+				new Vector(1, 0), s1);
+		s1.changeSpeed(-2);
+		assertEquals(
+				"der Vector wurde bei Negativer Geschwindigkeit nicht wie erwartet ver�ndert",
+				new Vector(-1, 0), s1);
 	}
 
 	@Test
@@ -89,27 +81,18 @@ public class VectorTest {
 	}
 
 	@Test
-	public void testChangeDirection() {
-		s1.changeDirection(1);
-		assertEquals(
-				"der Vector wurde bei Positivem Drehsinn nicht wie erwartet ver�ndert",
-				new Vector(0, 1), s1);
-		s1.changeDirection(-2);
-		assertEquals(
-				"der Vector wurde bei Negativem Drehsinn nicht wie erwartet ver�ndert",
-				new Vector(0, -1), s1);
-	}
-
-	@Test
-	public void testChangeSpeed() {
-		s1.changeSpeed(1);
-		assertEquals(
-				"der Vector wurde bei Positiver Geschwindigkeit nicht wie erwartet ver�ndert",
-				new Vector(1, 0), s1);
-		s1.changeSpeed(-2);
-		assertEquals(
-				"der Vector wurde bei Negativer Geschwindigkeit nicht wie erwartet ver�ndert",
-				new Vector(-1, 0), s1);
+	public void testEqualsObject() {
+		assertTrue("Die equals Methode testet nicht auf Reflexivit�t",
+				x.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Symetrie", x.equals(y)
+				&& y.equals(x));
+		assertTrue("Die equals Methode testet nicht auf Transitivit�t",
+				x.equals(y) && y.equals(z) && x.equals(z));
+		z.changeVector(new Point(10, 1));
+		z.changeSpeed(19);
+		assertFalse("Die equals Methode testet nicht auf Konsistenz",
+				x.equals(z));
+		assertFalse(x.equals(null));
 	}
 
 	@Test
@@ -139,6 +122,23 @@ public class VectorTest {
 		assertTrue(
 				"Amount im 2. Quadranten wurde falsch berechnet " + s5.getPhi(),
 				s5.getPhi() == 90 + 45);
+	}
+
+	@Test
+	public void testVector() {
+		assertEquals("Es wurde kein vector erstellt", new Vector(), s1);
+	}
+
+	@Test
+	public void testVectorDoubleDouble() {
+		assertEquals("Es wurde kein vector aus Ammount und Phi erstellt",
+				new Vector(), new Vector(0, 0));
+	}
+
+	@Test
+	public void testVectorPoint() {
+		assertEquals("Es wurde kein vector aus einem Punkt erstellt",
+				new Vector(), new Vector(new Point(0, 0)));
 	}
 
 }
