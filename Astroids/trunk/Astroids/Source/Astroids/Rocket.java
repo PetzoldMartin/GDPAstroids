@@ -21,7 +21,7 @@ public class Rocket extends Sprite {
 	 */
 	public Rocket(SpaceShip spaceShip) {
 		radius = gameController.getMaxSpeed()*2;
-		lifeTimeFrame = (int) (gameController.getGameScreenX() / gameController
+		lifeTimeFrame = (int) (gameController.getGameScreenX()* 1.2 / gameController
 				.getMaxSpeed());
 		this.setVector(new Vector(spaceShip.getAmount()
 				+ gameController.getMaxSpeed() / 2 + 1, spaceShip.getPhi()));
@@ -43,7 +43,7 @@ public class Rocket extends Sprite {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
 		if ((lifeTimeFrame <= 0) && !gameController.cheat) {
-			destroy(this);
+			destroy(null);
 		}
 		lifeTimeFrame--;
 	}
@@ -55,10 +55,9 @@ public class Rocket extends Sprite {
 	 */
 	@Override
 	public void destroy(Sprite collider) {
-		//FIXME rocket collision 
-		if (!(collider instanceof SpaceShip)) {
+		if (!(collider instanceof SpaceShip) && !(collider instanceof Rocket)) {
 			gameController.removeSprites(this);
-			if (!(collider.equals(this))) {
+			if ((collider!=(null))) {
 				gameController.healthChange(1);
 			}
 		}

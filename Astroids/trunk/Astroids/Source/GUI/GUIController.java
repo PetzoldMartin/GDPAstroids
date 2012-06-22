@@ -24,12 +24,12 @@ public class GUIController extends Thread {
 										// Steuerung
 	private BigListener bigListener;//der Interne Biglistener der mit dem Gamecontroller bekannt gemacht wird
 										private String outputString="";//der OutputString
-										private int counterInt;//der Counter für die zeit der outputzeile
+										private int counterInt;//der Counter fï¿½r die zeit der outputzeile
 
 	/**
 	 * Der Konstruktor des InputControllers
 	 * 
-	 * @param gameController der vom Spiel übergebene {@link GameController}
+	 * @param gameController der vom Spiel ï¿½bergebene {@link GameController}
 	 */
 	public GUIController(GameController gameController) {
 		this.bigListener = new BigListener(gameController, this);
@@ -186,7 +186,7 @@ public class GUIController extends Thread {
 	}
 
 	/**
-	 * greift die im Spiel gegebene X-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse für Spiel + Gui Anpasst
+	 * greift die im Spiel gegebene X-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse fï¿½r Spiel + Gui Anpasst
 	 * @return die Angepasste X-Groesse
 	 */
 	protected int playFieldSizeX() {
@@ -194,7 +194,7 @@ public class GUIController extends Thread {
 				* 2 - 16 + 300;
 	}
 	/**
-	 * greift die im Spiel gegebene Y-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse für Spiel + Gui Anpasst
+	 * greift die im Spiel gegebene Y-Groesse des Spielfeldes entgegenimmt und die {@link WhiteBoard} Groesse fï¿½r Spiel + Gui Anpasst
 	 * @return die Angepasste Y-Groesse
 	 */
 	protected int playFieldSizeY() {
@@ -204,7 +204,7 @@ public class GUIController extends Thread {
 
 	/**
 	 * Methode die einen Integer Wert entgegenimmt und in einen Vector mit dem {@link SpaceShip} Winkel und der neuen Geschwindigkeit
-	 * zurückgibt
+	 * zurï¿½ckgibt
 	 * @param velocity der {@link Vector} der das Raumschiff bewegt
 	 */
 	protected void velocityChangePerInt(int velocity) {
@@ -224,7 +224,7 @@ public class GUIController extends Thread {
 	}
 	/**
 	 * Methode die einen Integer Wert entgegenimmt und in einen Vector mit der {@link SpaceShip} Geschwindigkeit und der neuen Winkel
-	 * zurückgibt
+	 * zurï¿½ckgibt
 	 * @param velocity der {@link Vector} der das Raumschiff bewegt
 	 */
 	protected void angleChangePerInt(int angle) {
@@ -235,7 +235,7 @@ public class GUIController extends Thread {
 
 	/**
 	 * nimmt ein boolean entgegen und setzt den Cheatmodus des Spiels
-	 * @param cheat das Boolean das den cheat Modus verändert
+	 * @param cheat das Boolean das den cheat Modus verï¿½ndert
 	 */
 	protected void setCheat(boolean cheat) {
 		gameController.setCheat(cheat);
@@ -274,7 +274,7 @@ public class GUIController extends Thread {
 		return gameController.getWindowY();
 	}
 	/**
-	 * löst das Restart event des Spiels aus
+	 * lï¿½st das Restart event des Spiels aus
 	 */
 	protected void restart() {
 		gameController.restart();
@@ -290,7 +290,7 @@ public class GUIController extends Thread {
 	}
 	
 	/**
-	 * die Methode die den Outputstring zurückgibt
+	 * die Methode die den Outputstring zurï¿½ckgibt
 	 * @return
 	 */
 	protected String astrocountToString() {
