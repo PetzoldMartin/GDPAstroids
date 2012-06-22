@@ -1,7 +1,7 @@
 package Astroids;
 
 import java.awt.Color;
-import Collision.CollisionDetector;
+
 import Shapes.Circle;
 import Shapes.Drawable;
 import Shapes.Figure;
@@ -17,10 +17,7 @@ import Shapes.Shape;
  * 
  */
 public abstract class Sprite extends Figure {
-	// TODO CollisionDetector from gamcontroller
 	protected static GameController gameController;
-	private CollisionDetector collisionDetector = gameController
-			.getCollisionDetector();
 	protected double radius = 0;
 	private Vector vector;
 	private Point centerPoint;
@@ -104,7 +101,8 @@ public abstract class Sprite extends Figure {
 		// TODO make it Threaded
 		for (Drawable s1 : this.getShapes()) {
 			for (Drawable s2 : otherSprite.getShapes()) {
-				if (collisionDetector.collide((Shape) s1, (Shape) s2)) {
+				if (gameController.getCollisionDetector().collide((Shape) s1,
+						(Shape) s2)) {
 					return true;
 				}
 			}
@@ -129,17 +127,6 @@ public abstract class Sprite extends Figure {
 	 */
 	public Sprite move() {
 		return (Sprite) super.move(vector);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Shapes.Figure#remove()
-	 */
-	@Override
-	public void remove() {
-		gameController.deleteSprite(this);
-		super.remove();
 	}
 
 	/**
@@ -203,6 +190,7 @@ public abstract class Sprite extends Figure {
 	// overlay.add(aDrawable);
 	// return this;
 	// }
+
 	/**
 	 * @param gameController
 	 *            GameController to set

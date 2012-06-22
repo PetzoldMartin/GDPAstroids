@@ -16,7 +16,7 @@ import Shapes.Rectangle;
  * class that manage the program
  * 
  * @author (Martin Petzold , Markus Krummnacker)
- * @version (0.4)
+ * @version (0.5)
  */
 public class GameController extends Thread implements Runnable {
 	public static void main(String[] args) {
@@ -47,25 +47,17 @@ public class GameController extends Thread implements Runnable {
 	private SpaceShip spaceShip;
 	private GUIController gUIController;
 	private CollisionDetector collisionDetector;
-	private int startHealth = 100;
-	private int health = startHealth;
+	private int healthStart = 100;
 	private int astroStart = 5;
-	private int astroCount = astroStart;
 	// flags
 	private boolean pause = false;
 	private boolean windowActivated = true;
-	public boolean cheat = false;
-	public boolean testFlag;
-
+	private boolean cheat = false;
+	private boolean testFlag;
+	// working vars
+	private int astroCount = astroStart;
+	private int health = healthStart;
 	private int spawnCooldown;
-	
-	public boolean isTestFlag() {
-		return testFlag;
-	}
-
-	public void setTestFlag(boolean testFlag) {
-		this.testFlag = testFlag;
-	}
 
 	/**
 	 * generates a window with a drawboard starts itself as Thread
@@ -93,7 +85,7 @@ public class GameController extends Thread implements Runnable {
 		System.out.println("GameController started:\t" + this.getId());
 		for (;;) {
 			Long runTime = System.nanoTime();
-			if (health == 0) {
+			if (health <= 0) {
 				playerDieEvent();
 			} else if (!pause && windowActivated) {
 				update();
@@ -117,14 +109,33 @@ public class GameController extends Thread implements Runnable {
 
 	}
 
-	public void playerDieEvent() {
-		gUIController.gameOverScreen();
+	/**
+	 * deletes all sprites and reinitialise the gamefield
+	 */
+	public void restart() {
+		for (Sprite sprite : sprites) {
+			removeSprites(sprite);
+		}
+		spaceShip.setVector(new Vector(0, 90));
+		spaceShip.setCenterPoint(new Point(0, 0));
+		health = healthStart;
+		astroCount = astroStart;
 	}
 
 	/**
-	 * updates all Sprites in sprites
+	 * put out an string for weapon control over the GUI
+	 * 
+	 * @param string
+	 *            to put out at the GUI
 	 */
-	public void update() {
+	public void guiOutPut(String string) {
+		gUIController.outPutString(string, framesPerShot);
+	}
+
+	/**
+	 * updates all Sprites in this GameController
+	 */
+	private void update() {
 		// check
 		checkObjects();
 		// testing
@@ -145,6 +156,7 @@ public class GameController extends Thread implements Runnable {
 		// remove
 		for (Sprite toRemove : removals) {
 			toRemove.remove();
+			this.sprites.remove(toRemove);
 		}
 		removals.clear();
 		// draw
@@ -156,39 +168,43 @@ public class GameController extends Thread implements Runnable {
 	/**
 	 * check how many objects @ drawboard and generating new objects
 	 */
-	public void checkObjects() {
+	private void checkObjects() {
 		spawnCooldown--;
 		if (health >= 120) {
 			health -= 20;
 			astroCount++;
 		}
-		if (Astroid.getCounter() < astroCount && spawnCooldown <=0) {
+		if (Astroid.getCounter() < astroCount && spawnCooldown <= 0) {
 			edgeCreationWarp(new Astroid(astroEdge, astroSize));
-			spawnCooldown=frames/2;
+			spawnCooldown = frames / 2;
 		}
 	}
 
+	private void playerDieEvent() {
+		gUIController.gameOverScreen();
+	}
+
 	private void edgeCreationWarp(Astroid astroid) {
-		
+
 		double phi = astroid.getPhi();
 		if (phi > 0) {
 			if (Math.abs(phi) < 90) {
 				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
-							-gameScreenY));
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), -gameScreenY));
 				} else {
 					astroid.setCenterPoint(new Point(-gameScreenX, astroid
 							.getCenterPoint().getY()));
 				}
 			} else {
 				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
-							-gameScreenY));
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), -gameScreenY));
 				} else {
 					astroid.setCenterPoint(new Point(gameScreenX, astroid
 							.getCenterPoint().getY()));
 				}
-				if(astroid.collision(spaceShip)) {
+				if (astroid.collision(spaceShip)) {
 					removeSprites(astroid);
 					edgeCreationWarp(new Astroid(astroEdge, astroSize));
 				}
@@ -196,16 +212,16 @@ public class GameController extends Thread implements Runnable {
 		} else {
 			if (Math.abs(phi) < 90) {
 				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
-							gameScreenY));
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), gameScreenY));
 				} else {
 					astroid.setCenterPoint(new Point(-gameScreenX, astroid
 							.getCenterPoint().getY()));
 				}
 			} else {
 				if (new Random().nextBoolean()) {
-					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
-							gameScreenY));
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint()
+							.getX(), gameScreenY));
 				} else {
 					astroid.setCenterPoint(new Point(-gameScreenX, astroid
 							.getCenterPoint().getY()));
@@ -221,7 +237,7 @@ public class GameController extends Thread implements Runnable {
 	 *            ArrayList to check
 	 * 
 	 */
-	public void collisionCheck(ArrayList<Sprite> sprites) {
+	private void collisionCheck(ArrayList<Sprite> sprites) {
 		for (Sprite spriteA : sprites) {
 			for (Sprite spriteB : sprites) {
 				if (spriteA != spriteB)
@@ -231,10 +247,10 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void makeTest() {
-		if (cheat && spawnCooldown<=0) {
+		if (cheat && spawnCooldown <= 0) {
 			System.out.println("RocketSpam!!!");
-			for (int i = 0; i < 360; i+=2) {
-				spawnCooldown=frames/2;
+			for (int i = 0; i < 360; i += 2) {
+				spawnCooldown = frames / 2;
 				Rocket spamed = new Rocket(spaceShip);
 				spamed.rotate(i);
 				spamed.changeDirection(i);
@@ -263,12 +279,10 @@ public class GameController extends Thread implements Runnable {
 		}
 	}
 
-	public synchronized void deleteSprite(Sprite sprite) {
-		this.sprites.remove(sprite);
-	}
-
-	public void setInputController(GUIController gUIController) {
-		this.gUIController = gUIController;
+	public void healthChange(int change) {
+		if (health > 0) {
+			health += change;
+		}
 	}
 
 	public void setWindowActivated(boolean windowActivated) {
@@ -279,19 +293,12 @@ public class GameController extends Thread implements Runnable {
 		this.spaceShip = spaceShip;
 	}
 
-	public void setTestflag(boolean testFlag) {
-		this.testFlag = testFlag;
-	}
-
 	public void setCheat(boolean change) {
 		cheat = change;
 	}
 
-	public void healthChange(int change) {
-		health += change;
-		if (health < 0) {
-			health = 0;
-		}
+	public void setTestFlag(boolean testFlag) {
+		this.testFlag = testFlag;
 	}
 
 	public int getWindowX() {
@@ -350,22 +357,16 @@ public class GameController extends Thread implements Runnable {
 		return health;
 	}
 
-	public void restart() {
-		for (Sprite sprite : sprites) {
-			removeSprites(sprite);
-		}
-		spaceShip.setVector(new Vector(0, 90));
-		spaceShip.setCenterPoint(new Point(0, 0));
-		health = startHealth;
-		astroCount = astroStart;
-	}
-
 	public int getLevel() {
 		return astroCount - astroStart;
 	}
 
-	public void guiOutPut(String string) {
-		gUIController.outPutString(string, framesPerShot);
+	public boolean isTestFlag() {
+		return testFlag;
+	}
+
+	public boolean isCheat() {
+		return cheat;
 	}
 
 }

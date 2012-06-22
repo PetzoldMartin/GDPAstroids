@@ -108,7 +108,7 @@ public class SpaceShip extends Sprite {
 	 *            how many frames wait after a shot to fire again
 	 */
 	public void fire(int framesPerShot) {
-		if ((fireCounter <= 0) || gameController.cheat) {
+		if ((fireCounter <= 0) || gameController.isCheat()) {
 			new Rocket(this);
 			fireCounter = framesPerShot;
 		}
@@ -121,7 +121,7 @@ public class SpaceShip extends Sprite {
 	 */
 	@Override
 	public void destroy(Sprite collider) {
-		if (!gameController.cheat && !(collider instanceof Rocket)) {
+		if (!gameController.isCheat() && !(collider instanceof Rocket)) {
 			gameController.healthChange(-25);
 		}
 	}

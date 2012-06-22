@@ -1,13 +1,14 @@
 package Astroids;
 
 import java.awt.Color;
+
 import Shapes.Line;
 
 /**
  * class that manage a rocket
  * 
  * @author (Martin Petzold , Markus Krummnacker)
- * @version (0.4)
+ * @version (0.5)
  */
 public class Rocket extends Sprite {
 
@@ -42,7 +43,7 @@ public class Rocket extends Sprite {
 		if (this.getAmount() < gameController.getMaxSpeed() * 2) {
 			this.changeSpeed(gameController.getKeyAcelleration());
 		}
-		if ((lifeTimeFrame <= 0) && !gameController.cheat) {
+		if ((lifeTimeFrame <= 0) && !gameController.isCheat()) {
 			destroy(null);
 		}
 		lifeTimeFrame--;

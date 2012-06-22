@@ -394,6 +394,7 @@ public class WhiteboardControllPanel {
 			super(name);
 		}
 	
+		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
@@ -417,6 +418,7 @@ public class WhiteboardControllPanel {
 			super(name);
 		}
 	
+		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
@@ -439,6 +441,7 @@ public class WhiteboardControllPanel {
 			super(name);
 		}
 	
+		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
@@ -461,6 +464,7 @@ public class WhiteboardControllPanel {
 			super(name);
 		}
 	
+		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
@@ -484,6 +488,7 @@ public class WhiteboardControllPanel {
 			super(name);
 		}
 
+		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			g.setColor(new Color(255, 255, 255));
