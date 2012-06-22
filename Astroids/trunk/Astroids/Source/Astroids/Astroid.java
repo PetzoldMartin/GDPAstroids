@@ -14,7 +14,7 @@ import Shapes.Polygon;
  * @version (0.4)
  */
 public class Astroid extends Sprite {
-	// FIXME astroid generation scaling!!!
+	// FIXME astroid generation
 	private int edge;
 	private static int count = 0;
 
@@ -41,13 +41,10 @@ public class Astroid extends Sprite {
 					* Math.random(), phi));
 		}
 		this.addShape(new Polygon(astroList, Color.WHITE, false));
-//		this.addShape(new Circle(radius/2, this.getCenterPoint(),Color.BLACK,true));
 		this.setVector(vector);
 		this.rotationPhi = Math.random() * 12 - 6;
-		// TODO places Astroids only at the corners!
 		this.move(centerPoint);
 	}
-
 	/**
 	 * create new Astroid
 	 * 
@@ -101,6 +98,7 @@ public class Astroid extends Sprite {
 		if (this.edge > 12) {
 			for (int i = -1; i <= 1; i += 2) {
 				new Astroid(
+						//FIXME radius / edge scaling
 						(int) (edge + edge / 2 - Math.random() * edge) * 2 / 4,
 						(int) radius * 2 / 3, new Vector(this.getVector().move(
 								new Vector(this.getVector().getAmount() / -2,

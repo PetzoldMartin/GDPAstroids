@@ -52,13 +52,13 @@ public class WhiteboardControllPanel {
 	private JPanel jSpinnerContainer;// der Container fuer die Jspinner
 	private InputControllPanelWindow inputControllPanelWindow;// das Interne
 																// InputControllPanelWindow
-	private JSpinner velocity;//der JSpinner für die Geschwindigkeit
-	private JSpinner angle;//der JSpinner für den Winkel
+	private JSpinner velocity;//der JSpinner fï¿½r die Geschwindigkeit
+	private JSpinner angle;//der JSpinner fï¿½r den Winkel
 	private JPanel gameOverContainer;// der Container fuer den Gameoverbildschirm
 	private BigListener bigListener;// der interne bigListener
-	private boolean gameOver = false;//das Boolean das ausgelöst wird wenn der Gamoverbildschirm angezeigt wird
+	private boolean gameOver = false;//das Boolean das ausgelï¿½st wird wenn der Gamoverbildschirm angezeigt wird
 	
-	private JButton restart;//der Button für den Spielrestart
+	private JButton restart;//der Button fï¿½r den Spielrestart
 	/**
 	 * Der Konstruktor fuer das {@link WhiteboardControllPanel} der alle
 	 * Componenten Initialisiert

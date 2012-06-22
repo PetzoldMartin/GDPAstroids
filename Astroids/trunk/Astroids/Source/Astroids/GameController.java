@@ -3,6 +3,7 @@ package Astroids;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import Collision.CollisionDetector;
@@ -31,7 +32,8 @@ public class GameController extends Thread implements Runnable {
 	private double keyAcelleration = 0.2;
 	private double keyRotationAngel = 6;
 	private double maxSpeed = 10;
-	private int framesPerShot = frames/2; // how many frames between the shots!
+	private int framesPerShot = frames / 2; // how many frames between the
+											// shots!
 	// Astro
 	private int astroSize = 30;
 	private int astroEdge = 24;
@@ -55,9 +57,8 @@ public class GameController extends Thread implements Runnable {
 	public boolean cheat = false;
 	public boolean testFlag;
 
-	// testing
-	// private Sprite test;
-
+	private int spawnCooldown;
+	
 	public boolean isTestFlag() {
 		return testFlag;
 	}
@@ -156,12 +157,60 @@ public class GameController extends Thread implements Runnable {
 	 * check how many objects @ drawboard and generating new objects
 	 */
 	public void checkObjects() {
+		spawnCooldown--;
 		if (health >= 120) {
 			health -= 20;
 			astroCount++;
 		}
-		if (Astroid.getCounter() < astroCount) {
-			new Astroid(astroEdge, astroSize);
+		if (Astroid.getCounter() < astroCount && spawnCooldown <=0) {
+			edgeCreationWarp(new Astroid(astroEdge, astroSize));
+			spawnCooldown=frames/2;
+		}
+	}
+
+	private void edgeCreationWarp(Astroid astroid) {
+		
+		double phi = astroid.getPhi();
+		if (phi > 0) {
+			if (Math.abs(phi) < 90) {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
+							-gameScreenY));
+				} else {
+					astroid.setCenterPoint(new Point(-gameScreenX, astroid
+							.getCenterPoint().getY()));
+				}
+			} else {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
+							-gameScreenY));
+				} else {
+					astroid.setCenterPoint(new Point(gameScreenX, astroid
+							.getCenterPoint().getY()));
+				}
+				if(astroid.collision(spaceShip)) {
+					removeSprites(astroid);
+					edgeCreationWarp(new Astroid(astroEdge, astroSize));
+				}
+			}
+		} else {
+			if (Math.abs(phi) < 90) {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
+							gameScreenY));
+				} else {
+					astroid.setCenterPoint(new Point(-gameScreenX, astroid
+							.getCenterPoint().getY()));
+				}
+			} else {
+				if (new Random().nextBoolean()) {
+					astroid.setCenterPoint(new Point(astroid.getCenterPoint().getX(),
+							gameScreenY));
+				} else {
+					astroid.setCenterPoint(new Point(-gameScreenX, astroid
+							.getCenterPoint().getY()));
+				}
+			}
 		}
 	}
 
@@ -177,7 +226,6 @@ public class GameController extends Thread implements Runnable {
 			for (Sprite spriteB : sprites) {
 				if (spriteA != spriteB)
 					spriteA.collision(spriteB);
-				// TODO redo collision
 			}
 		}
 	}
@@ -185,8 +233,10 @@ public class GameController extends Thread implements Runnable {
 	public void makeTest() {
 		if (cheat) {
 			System.out.println("RocketSpam!!!");
-			for (int i = 0; i <1; i++) {
-				new Rocket(spaceShip).changeDirection(i);
+			for (int i = 0; i < 360; i++) {
+				Rocket spamed = new Rocket(spaceShip);
+				spamed.rotate(i);
+				spamed.changeDirection(i);
 			}
 		}
 	}
@@ -314,7 +364,7 @@ public class GameController extends Thread implements Runnable {
 	}
 
 	public void guiOutPut(String string) {
-		gUIController.outPutString(string,framesPerShot);
+		gUIController.outPutString(string, framesPerShot);
 	}
 
 }
