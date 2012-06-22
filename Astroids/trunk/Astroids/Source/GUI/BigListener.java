@@ -121,6 +121,7 @@ public class BigListener implements KeyListener, WindowListener,
 			keyAmount = 0;
 			break;
 		case KeyEvent.VK_DOWN:
+			keyAmount = 0;
 			break;
 		case KeyEvent.VK_S:
 			keyAmount = 0;
